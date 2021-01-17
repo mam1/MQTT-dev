@@ -1,0 +1,28 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/nvme0n1p2 during installation
+# /boot/efi was on /dev/nvme0n1p1 during installation
+
+# mount root, boot, and swap
+UUID=d7369d69-0472-45b2-95e3-ba66bb5998df   /                   ext4    errors=remount-ro                               0 1
+UUID=2B1C-0998                              /boot/efi           vfat    umask=0077                                      0 1
+/swapfile                                   none                swap    sw                                              0 0
+
+#mount primary drives
+UUID=31dcb616-a08f-4d66-9056-53feeca5548b   /media/Video        ext4     auto,user,rw,suid,dev,exec,auto,nouser,async   0 0
+UUID=43717e92-a042-449a-912c-9d089cd3383b   /media/Caldera      ext4     auto,user,rw,suid,dev,exec,auto,nouser,async   0 0
+UUID=c779b7ed-751e-4927-9f44-113da54db6cd   /media/BlackHole    ext4     auto,user,rw,suid,dev,exec,auto,nouser,async   0 0
+UUID=217535ac-3164-40d5-813f-35e63d83c0af   /media/sysuts       ext4     auto,user,rw,suid,dev,exec,auto,nouser,async   0 0
+
+#define backup drives but do not mount
+UUID=5c987372-bb54-440e-8a37-7dd51c988524   /mnt/VideoBkp       ext4     noauto,user,rw,suid,dev,exec,auto,nouser,async 0 0
+UUID=48d3ba3f-65eb-4ef1-a143-246e89f1988c   /mnt/CalderaBkp     ext4     noauto,user,rw,suid,dev,exec,auto,nouser,async 0 0
+UUID=6bb923c4-6ee3-4623-bdf9-a3a9d06a6b9b   /mnt/BlackHoleBkp   ext4     noauto,user,rw,suid,dev,exec,auto,nouser,async 0 0
+UUID=f3decdd6-bd82-46fe-b990-3779ef0068dc   /mnt/sysutsBkp      ext4     noauto,user,rw,suid,dev,exec,auto,nouser,async 0 0
+UUID=f0f91a83-22e4-469f-8dc5-ba2d05043bb0   /mnt/dataBkp        ext4     noauto,user,rw,suid,dev,exec,auto,nouser,async 0 0
+
