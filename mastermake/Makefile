@@ -11,7 +11,8 @@ program_CXX_OBJS :=  ${program_CXX_SRCS:.cpp=.o}
 program_OBJS :=  $(program_C_OBJS) $(program_CXX_OBJS)
 
 # set parameters
-CPPFLAGS += $(foreach includedir,$(program_INCLUDE_DIRS),-I$(includedir))
+CPPFLAGS += $(foreach includedir,$(project_INCLUDE_DIRS),-I$(includedir))
+LDFLAGS += $(foreach librarydir,$(project_LIBRARY_DIRS),-L$(librarydir))
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
@@ -37,8 +38,8 @@ $(program_NAME): $(program_OBJS)
 	@echo ${CC}
 	@echo "\n>>>>> building $(program_NAME) "
 
-# 	$(CC) $(program_OBJS) -o $(system_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
-	$(CC) $(program_OBJS) -o $(system_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(support_LIB)
+# 	$(CC) $(program_OBJS) -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+	$(CC) $(program_OBJS) -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
 
 
 	@echo ">>>>> build of  $(program_NAME) completed"
@@ -54,20 +55,28 @@ clean:
 
 # rebuild the project ibrary from lib-sources 
 lib: 
-	cd  ~/Git/MQTT-Scheduler/lib && $(MAKE) clean
-	cd  ~/Git/MQTT-Scheduler/lib && $(MAKE)
+	export project_DIRECTORY
+	cd  $(project_DIRECTORY)/lib && $(MAKE) clean
+	cd  $(project_DIRECTORY)/lib && $(MAKE)
 
 dump:
 
+	@echo project_DIRECTORY $(project_DIRECTORY)
+	@echo project_INCLUDE_DIRS $(project_INCLUDE_DIRS)
+	@echo project_BINARIES $(project_BINARIES)
+	@echo project_LIB $(project_LIB)
+	@echo project_LIBRARY_DIRS $(project_LIBRARY_DIRS)
+	@echo program_DIRECTORY $(program_DIRECTORY)
+	@echo program_NAME $(program_NAME)
 
-	@echo project_DIRECTORY := $(project_DIRECTORY)
-	@echo include_DIRECTORY := $(include_DIRECTORY)
-	@echo support_LIB := $(support_LIB)
+	@echo project_DIRECTORY $(project_DIRECTORY)
+	@echo include_DIRECTORY $(include_DIRECTORY)
+	@echo support_LIB $(support_LIB)
 
-	@echo working_DIRECTORY := $(working_DIRECTORY)
-	@echo program_NAME := $(program_NAME)
+	@echo program_DIRECTORY $(program_DIRECTORY)
+	@echo program_NAME $(program_NAME)
 
-	@echo program_C_SRCS := $(program_C_SRCS)
+	@echo program_C_SRCS $(program_C_SRCS)
 
 	@echo CC ............... $(CC)
 	@echo cc ............... $(cc)

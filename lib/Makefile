@@ -2,11 +2,10 @@
 # File:  Makefile (for MQTT library)
 #
 
-project_DIRECTORY := ~/Git/MQTT-Scheduler
-program_INCLUDE_DIRS := $(project_DIRECTORY)/include
-support_LIBRARY_DIRS := $(project_DIRECTORY)/lib
+project_INCLUDE_DIRS := $(project_DIRECTORY)/include
+project_LIBRARY_DIRS := $(project_DIRECTORY)/lib
 
-program_C_SRCS := $(wildcard ~/Git/MQTT-Scheduler/lib_sources/*.c)
+program_C_SRCS := $(wildcard $(project_DIRECTORY)/lib_sources/*.c)
 program_CXX_SRCS := $(wildcard *.cpp)
 program_C_OBJS := ${program_C_SRCS:.c=.o}
 program_CXX_OBJS := ${program_CXX_SRCS:.cpp=.o}
@@ -14,14 +13,14 @@ program_OBJS := $(program_C_OBJS) $(program_CXX_OBJS)
 
 # set directories
 # ifeq ($(UNAME_S),Darwin)
-program_INCLUDE_DIRS := $(program_INCLUDE_DIRS)
-support_LIBRARY_DIRS := $(support_LIBRARY_DIRS)
-support_LIBRARIES := MQTT.a
+project_INCLUDE_DIRS := $(project_INCLUDE_DIRS)
+project_LIBRARY_DIRS := $(project_LIBRARY_DIRS)
+# support_LIBRARIES := MQTT.a
 
 # set parameters
-CPPFLAGS += $(foreach includedir,$(program_INCLUDE_DIRS),-I$(includedir))
-LDFLAGS += $(foreach librarydir,$(support_LIBRARY_DIRS),-L$(librarydir))
-LDFLAGS += $(foreach library,$(support_LIBRARIES),-l$(library))
+CPPFLAGS += $(foreach includedir,$(project_INCLUDE_DIRS),-I$(includedir))
+LDFLAGS += $(foreach librarydir,$(project_LIBRARY_DIRS),-L$(librarydir))
+# LDFLAGS += $(foreach library,$(support_LIBRARIES),-l$(library))
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions -fno-rtti 
@@ -36,16 +35,16 @@ AR  := $(PREFIX)ar
 OBJCOPY := $(PREFIX)objcopy
 
 # set libarary
-LIB=libMQTT.a
-LIBDEST= lib
-LIBSRC := $(wildcard ~/Git/MQTT-Scheduler/lib_sources/*.c)
-LIBOBJ=$(LIBSRC:.c=.o)
+LIB := libMQTT.a
+LIBDEST := lib
+LIBSRC := $(wildcard $(project_DIRECTORY)/lib_sources/*.c)
+LIBOBJ := $(LIBSRC:.c=.o)
 
 install: $(LIB)
 	@echo lib Makefile - LIBOBJ $(LIBOBJ)
 	@echo lib Makefile - libsrc $(LIBSRC)
 	@echo lib Makefile - installing  $(LIB)
-	@echo lib Makefile - into $(LIBDEST)
+	@echo lib Makefile - into $(project_DIRECTORY)
 	@install -m 444 $(LIB) $(LIBDEST)
 
 $(LIB): $(LIBOBJ)
@@ -57,13 +56,13 @@ $(LIB): $(LIBOBJ)
 	@$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
 clean:
-	@echo lib Makefile - cleaning up
+	@echo lib Makefile - cleaning up 
 	@- $(RM) -v $(LIBOBJ)
 
 test:
 
 	@echo $(HOLD)
-	cd /home/mam1/Git/MQTT-Scheduler/lib_sources
+	cd /home/mam1/$(project_DIRECTORY)/lib_sources
 	@echo $(ls -l)
 	@echo sources = $(wildcard *.c)
 	@echo program_C_SRCS $(program_C_SRCS)
