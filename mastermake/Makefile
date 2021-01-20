@@ -13,6 +13,7 @@ program_OBJS :=  $(program_C_OBJS) $(program_CXX_OBJS)
 # set parameters
 CPPFLAGS += $(foreach includedir,$(project_INCLUDE_DIRS),-I$(includedir))
 LDFLAGS += $(foreach librarydir,$(project_LIBRARY_DIRS),-L$(librarydir))
+LDFLAGS += $(foreach library,$(project_LIB),-l$(library))
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
@@ -39,9 +40,9 @@ $(program_NAME): $(program_OBJS)
 	@echo "\n>>>>> building $(program_NAME) "
 
 # 	$(CC) $(program_OBJS) -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
-	$(CC) $(program_OBJS) -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
+	$(CC) $(program_OBJS)  -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
 
-
+# -Xlinker --verbose
 	@echo ">>>>> build of  $(program_NAME) completed"
 
 # clean up
