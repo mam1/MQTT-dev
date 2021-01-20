@@ -2,6 +2,6 @@
 
 void hello(void){
 
-	printf("%s\n", "Hello !!!!!");
+	printf("%s\n", "Hello from library call");
 	return;
 }

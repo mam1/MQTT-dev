@@ -1,12 +1,11 @@
-#include "mysql.h"
+
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 void hello(void);
 
 int main(void)
 {
+  printf("%s\n", "main routine calling routine in library\n");
   hello();
   return;
 };
