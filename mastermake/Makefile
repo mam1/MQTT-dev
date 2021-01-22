@@ -19,8 +19,8 @@ CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
 
 # set locations for basic gnu tools
-
-ifeq ($(hostname),'MQTT-beaglebone')
+HOST=$(shell hostname)
+ifeq ($(HOST),'MQTT-beaglebone')
     PREFIX := ""
 else
     PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
@@ -67,7 +67,7 @@ lib:
 	cd  $(project_DIRECTORY)/lib && $(MAKE)
 
 dump:
-	@echo hostname $(hostname)
+	@echo hostname $(HOST)
 	@echo GNU PREFIX $(PREFIX)
 	@echo project_DIRECTORY $(project_DIRECTORY)
 	@echo project_INCLUDE_DIRS $(project_INCLUDE_DIRS)
