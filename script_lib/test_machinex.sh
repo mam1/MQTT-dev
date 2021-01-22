@@ -13,23 +13,21 @@ if [[ $(hostname) = 'MQTT-beaglebone' ]]
 fi
 
 # set locations for basic gnu tools
-if [[ '$(hostname)' =~ 'MQTT-beaglebone' ]]
+if [[ $(hostname) =~ 'MQTT-beaglebone' ]]
  	then 
  		@echo "It's a bone . . . \n"
 		PREFIX := ""
-		CC  := $(PREFIX)gcc
-		CXX := $(PREFIX)g++
-		LD  := $(PREFIX)ld
-		AS  := $(PREFIX)as
-		AR  := $(PREFIX)ar
-		OBJCOPY := $(PREFIX)objcopy
  	else 
  		@echo "It's not a bone\n"	
 		PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
-		CC  := $(PREFIX)gcc
-		CXX := $(PREFIX)g++
-		LD  := $(PREFIX)ld
-		AS  := $(PREFIX)as
-		AR  := $(PREFIX)ar
-		OBJCOPY := $(PREFIX)objcopy
 fi
+	CC  := $(PREFIX)gcc
+	CXX := $(PREFIX)g++
+	LD  := $(PREFIX)ld
+	AS  := $(PREFIX)as
+	AR  := $(PREFIX)ar
+	OBJCOPY := $(PREFIX)objcopy
+
+
+echo -e "CC = " $CC
+
