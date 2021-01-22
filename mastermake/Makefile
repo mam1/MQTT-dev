@@ -46,7 +46,7 @@ $(program_NAME): $(program_OBJS)
 	@echo "\n>>>>> building $(program_NAME) "
 
 # 	$(CC) $(program_OBJS) -Xlinker --verbose -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
-	$(CC) $(program_OBJS) -Xlinker --verbose -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
+	$(CC) $(program_OBJS)  -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
 
 # -Xlinker --verbose
 	@echo ">>>>> build of  $(program_NAME) completed"
