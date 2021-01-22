@@ -20,8 +20,8 @@ LDFLAGS += $(CFLAGS) -fno-exceptions
 
 # set locations for basic gnu tools
 
-ifeq ($(hostname),MQTT-beaglebone)
-    PREFIX := 
+ifeq ($(hostname),'MQTT-beaglebone')
+    PREFIX := ""
 else
     PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 endif
