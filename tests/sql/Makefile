@@ -13,4 +13,3 @@ export project_LIBRARY_DIRS := /home/mam1/Git/MQTT-dev/lib /usr/bin/mariadb
 program_DIRECTORY := ~/Git/MQTT-dev/tests/sql
 program_NAME := test-sql
 include $(project_DIRECTORY)/mastermake/Makefile
-/usr/include/mariadb
