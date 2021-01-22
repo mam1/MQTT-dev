@@ -4,8 +4,8 @@
 MY_HOSTNAME=MQTT-beaglebone
 TEST_HOSTNAME=$(hostname)
 
-echo -e "\nMY_HOSTNAME " $MY_HOSTNAME
-echo -e "TEST_HOSTNAME " $TEST_HOSTNAME
+@echo -e "\nMY_HOSTNAME " $MY_HOSTNAME
+@echo -e "TEST_HOSTNAME " $TEST_HOSTNAME
 
 if [[ $(hostname) = 'MQTT-beaglebone' ]]
  	then echo -e "It's a bone\n"
@@ -29,5 +29,5 @@ fi
 	OBJCOPY := $(PREFIX)objcopy
 
 
-echo -e "CC = " $CC
+@echo -e "CC = " $(CC)
 
