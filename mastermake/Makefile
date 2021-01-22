@@ -19,7 +19,13 @@ CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
 
 # set locations for basic gnu tools
-PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+
+ifeq ($(hostname),MQTT-beaglebone)
+    PREFIX := 
+else
+    PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+endif
+
 CC  := $(PREFIX)gcc
 CXX := $(PREFIX)g++
 LD  := $(PREFIX)ld
