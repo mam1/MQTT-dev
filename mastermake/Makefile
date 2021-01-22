@@ -67,7 +67,7 @@ lib:
 	cd  $(project_DIRECTORY)/lib && $(MAKE)
 
 dump:
-
+	@echo GNU PREFIX $(PREFIX)
 	@echo project_DIRECTORY $(project_DIRECTORY)
 	@echo project_INCLUDE_DIRS $(project_INCLUDE_DIRS)
 	@echo project_BINARIES $(project_BINARIES)
