@@ -77,4 +77,6 @@ int main(int argc, char *argv[])
 
   // mysql_stmt_close(stmt);
   // mysql_close(mysql);
+
+  printf("%s\n", 'made it this far!!!!\n');
 }
