@@ -18,7 +18,7 @@ CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
 
-# set locations for basic gnu tools
+# set host dependent locations for basic gnu tools and libraries
 HOST=$(shell hostname)
 ifeq ($(HOST),MQTT-beaglebone)
     PREFIX := 
