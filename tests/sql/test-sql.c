@@ -25,15 +25,15 @@ int main(int argc, char *argv[])
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
 
-  // /* Data for insert */
-  // const char *surnames[]= {"Widenius", "Axmark", "N.N."};
-  // unsigned long surnames_length[]= {8,6,4};
-  // const char *forenames[]= {"Monty", "David", "will be replaced by default value"};
-  // char forename_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
-  // char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
-  // unsigned int array_size= 3; 
+  /* Data for insert */
+  const char *surnames[]= {"Widenius", "Axmark", "N.N."};
+  unsigned long surnames_length[]= {8,6,4};
+  const char *forenames[]= {"Monty", "David", "will be replaced by default value"};
+  char forename_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
+  char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+  unsigned int array_size= 3; 
 
-  // mysql= mysql_init(NULL);
+  mysql= mysql_init(NULL);
 
   // /* connect to MariaDB server */
   // if (!mysql_real_connect(mysql, "localhost", "example", "example_pw", 
