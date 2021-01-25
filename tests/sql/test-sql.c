@@ -40,6 +40,9 @@ int main(int argc, char *argv[])
                           "example", 0, "/run/mysqld/mysqld.sock", 0))
     show_mysql_error(mysql);
 
+
+  printf("connection established ...\n");
+
   if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1"))
     show_mysql_error(mysql);
 
