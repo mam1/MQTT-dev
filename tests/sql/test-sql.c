@@ -11,13 +11,13 @@ static void show_mysql_error(MYSQL *mysql)
   exit(-1);
 }
 
-// static void show_stmt_error(MYSQL_STMT *stmt)
-// {
-//   printf("Error(%d) [%s] \"%s\"", mysql_stmt_errno(stmt),
-//                                   mysql_stmt_sqlstate(stmt),
-//                                   mysql_stmt_error(stmt));
-//   exit(-1);
-// }
+static void show_stmt_error(MYSQL_STMT *stmt)
+{
+  printf("Error(%d) [%s] \"%s\"", mysql_stmt_errno(stmt),
+                                  mysql_stmt_sqlstate(stmt),
+                                  mysql_stmt_error(stmt));
+  exit(-1);
+}
 
 int main(int argc, char *argv[])
 {
