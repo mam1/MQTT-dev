@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
   printf("connection established ...\n");
 
   if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1")){
-    then
       show_mysql_error(mysql);
     else
       printf("%s\n", "drop worked ''''\n");
