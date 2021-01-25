@@ -3,13 +3,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-// static void show_mysql_error(MYSQL *mysql)
-// {
-//   printf("Error(%d) [%s] \"%s\"", mysql_errno(mysql),
-//                                   mysql_sqlstate(mysql),
-//                                   mysql_error(mysql));
-//   exit(-1);
-// }
+static void show_mysql_error(MYSQL *mysql)
+{
+  printf("Error(%d) [%s] \"%s\"", mysql_errno(mysql),
+                                  mysql_sqlstate(mysql),
+                                  mysql_error(mysql));
+  exit(-1);
+}
 
 // static void show_stmt_error(MYSQL_STMT *stmt)
 // {
