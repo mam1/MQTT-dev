@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define SERVER      "192.168.132.180"
+#define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
 #define DATABASE    "example"
 #define USER        "test-sql"
