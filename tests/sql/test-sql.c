@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
   mysql= mysql_init(NULL);
 
   /* connect to MariaDB server */
-  if (!mysql_real_connect(mysql, "192.168.132.180", "example", "example_pw", 
+  if (!mysql_real_connect(mysql, "192.168.132.180", "mam1", "Passf1re", 
                           "example_db", 0, "/run/mysqld/mysqld.sock", 0))
     show_mysql_error(mysql);
 
