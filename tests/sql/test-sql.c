@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
   mysql= mysql_init(NULL);
 
   /* connect to MariaDB server */
-  if (!mysql_real_connect(mysql, localhost, test-sql, test-sql, 
+  if (!mysql_real_connect(mysql, "localhost", "test-sql", "test-sql", 
                           "example", 0, "/run/mysqld/mysqld.sock", 0))
     show_mysql_error(mysql);
 
