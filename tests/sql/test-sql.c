@@ -40,43 +40,43 @@ int main(int argc, char *argv[])
                           "example", 0, "/run/mysqld/mysqld.sock", 0))
     show_mysql_error(mysql);
 
-  // if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1"))
-  //   show_mysql_error(mysql);
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1"))
+    show_mysql_error(mysql);
 
-  // if (mysql_query(mysql, "CREATE TABLE bulk_example1 (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
-  //                        "forename CHAR(30) NOT NULL DEFAULT 'unknown', surname CHAR(30))"))
-  //   show_mysql_error(mysql);
+  if (mysql_query(mysql, "CREATE TABLE bulk_example1 (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
+                         "forename CHAR(30) NOT NULL DEFAULT 'unknown', surname CHAR(30))"))
+    show_mysql_error(mysql);
 
-  // stmt= mysql_stmt_init(mysql);
-  // if (mysql_stmt_prepare(stmt, "INSERT INTO bulk_example1 VALUES (?,?,?)", -1))
-  //   show_stmt_error(stmt);
+  stmt= mysql_stmt_init(mysql);
+  if (mysql_stmt_prepare(stmt, "INSERT INTO bulk_example1 VALUES (?,?,?)", -1))
+    show_stmt_error(stmt);
 
-  // memset(bind, 0, sizeof(MYSQL_BIND) * 3);
+  memset(bind, 0, sizeof(MYSQL_BIND) * 3);
 
-  // /* We autogenerate id's, so all indicators are STMT_INDICATOR_NULL */
-  // bind[0].u.indicator= id_ind;
-  // bind[0].buffer_type= MYSQL_TYPE_LONG;
+  /* We autogenerate id's, so all indicators are STMT_INDICATOR_NULL */
+  bind[0].u.indicator= id_ind;
+  bind[0].buffer_type= MYSQL_TYPE_LONG;
 
-  // bind[1].buffer= forenames;
-  // bind[1].buffer_type= MYSQL_TYPE_STRING;
-  // bind[1].u.indicator= forename_ind;
+  bind[1].buffer= forenames;
+  bind[1].buffer_type= MYSQL_TYPE_STRING;
+  bind[1].u.indicator= forename_ind;
 
-  // bind[2].buffer_type= MYSQL_TYPE_STRING;
-  // bind[2].buffer= surnames;
-  // bind[2].length= &surnames_length;
+  bind[2].buffer_type= MYSQL_TYPE_STRING;
+  bind[2].buffer= surnames;
+  bind[2].length= &surnames_length;
 
-  // /* set array size */
-  // mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
+  /* set array size */
+  mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
 
-  // /* bind parameter */
-  // mysql_stmt_bind_param(stmt, bind);
+  /* bind parameter */
+  mysql_stmt_bind_param(stmt, bind);
 
-  // /* execute */
-  // if (mysql_stmt_execute(stmt))
-  //   show_stmt_error(stmt);
+  /* execute */
+  if (mysql_stmt_execute(stmt))
+    show_stmt_error(stmt);
 
-  // mysql_stmt_close(stmt);
-  // mysql_close(mysql);
+  mysql_stmt_close(stmt);
+  mysql_close(mysql);
 
   printf("%s\n", "made it this far!!!!\n");
 }
