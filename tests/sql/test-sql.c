@@ -35,10 +35,10 @@ int main(int argc, char *argv[])
 
   mysql= mysql_init(NULL);
 
-  // /* connect to MariaDB server */
-  // if (!mysql_real_connect(mysql, "localhost", "example", "example_pw", 
-  //                         "example_db", 0, "/tmp/mysql.sock", 0))
-  //   show_mysql_error(mysql);
+  /* connect to MariaDB server */
+  if (!mysql_real_connect(mysql, "localhost", "example", "example_pw", 
+                          "example_db", 0, "/tmp/mysql.sock", 0))
+    show_mysql_error(mysql);
 
   // if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1"))
   //   show_mysql_error(mysql);
