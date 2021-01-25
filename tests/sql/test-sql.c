@@ -43,8 +43,12 @@ int main(int argc, char *argv[])
 
   printf("connection established ...\n");
 
-  if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1"))
-    show_mysql_error(mysql);
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS bulk_example1")){
+    then
+      show_mysql_error(mysql);
+    else
+      printf("%s\n", "drop worked ''''\n");
+  };
 
   if (mysql_query(mysql, "CREATE TABLE bulk_example1 (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
                          "forename CHAR(30) NOT NULL DEFAULT 'unknown', surname CHAR(30))"))
