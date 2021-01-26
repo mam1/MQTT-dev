@@ -42,8 +42,9 @@ void load_channels(void){
   printf("%s\n", "client library intialized");
 
   /* connect to MariaDB server */
-  if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
-      show_mysql_error(mysql);
+  // if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
+  //     show_mysql_error(mysql);
+    
   printf("connection to %s established\n", SERVER);
 
 
