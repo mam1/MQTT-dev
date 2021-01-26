@@ -58,7 +58,9 @@ void load_channels(void){
   stmt= mysql_stmt_init(mysql);
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
     show_stmt_error(stmt);
+
   printf("%s\n", "statement prepared");
+
   memset(bind, 0, sizeof(MYSQL_BIND) * 3);
 
   bind[0].u.indicator= id_ind;
@@ -74,9 +76,10 @@ void load_channels(void){
 
  /* set array size */
   mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
-
+  printf("%s\n", "array size set");
   /* bind parameter */
   mysql_stmt_bind_param(stmt, bind);
+  printf("%s\n", "bind");
 
   /* execute */
   if (mysql_stmt_execute(stmt))
