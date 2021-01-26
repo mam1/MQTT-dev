@@ -30,7 +30,7 @@ static void show_stmt_error(MYSQL_STMT *stmt)
 }
 
 void load_channels(void){
-  MYSQL *mysql;
+  MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
 
