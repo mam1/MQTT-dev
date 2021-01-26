@@ -34,18 +34,24 @@ void load_channels(void){
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
 
-  if (mysql_library_init(argc, argv, NULL)) {
-    fprintf(stderr, "could not initialize MySQL client library\n");
-    exit(1);
+  /* initialize client library */
+  if (mysql_library_init(0, NULL, NULL)) {
+      fprintf(stderr, "could not initialize MySQL client library\n");
+      exit(1);
   }
+  printf("%s\n", "client library intialized");
+
+  /* connect to MariaDB server */
+  if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
+      show_mysql_error(mysql);
+  printf("connection to %s established\n", SERVER);
+
 
   /* Data for insert */
-
   printf("building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
   const int *active[]= {0,0,0};
-  unsigned long active_length[]= {1,1,1};
 
   char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
   char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
@@ -54,11 +60,7 @@ void load_channels(void){
 
   mysql= mysql_init(NULL);
 
-   /* connect to MariaDB server */
-  if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
-    show_mysql_error(mysql);
-
-  printf("connection to %s established\n", SERVER);
+ 
 
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
