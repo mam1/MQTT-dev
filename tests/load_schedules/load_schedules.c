@@ -35,9 +35,14 @@ void load_channels(void){
 
 int main(int argc, char *argv[])
 {
-  MYSQL *mysql;
+  MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
+
+  if (mysql_library_init(argc, argv, NULL)) {
+    fprintf(stderr, "could not initialize MySQL client library\n");
+    exit(1);
+  }
 
   /* Data for insert */
   const char *surnames[]= {"Widenius", "Axmark", "N.N."};

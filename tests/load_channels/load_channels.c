@@ -34,6 +34,11 @@ void load_channels(void){
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
 
+  if (mysql_library_init(argc, argv, NULL)) {
+    fprintf(stderr, "could not initialize MySQL client library\n");
+    exit(1);
+  }
+
   /* Data for insert */
 
   printf("building data for insert\n");
@@ -45,7 +50,7 @@ void load_channels(void){
   char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
   char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
 
-  unsigned int array_size= 3; 
+  unsigned int array_size = 3; 
 
   mysql= mysql_init(NULL);
 
@@ -62,8 +67,6 @@ void load_channels(void){
         printf("Statement init failed: %s\n", mysql_error(mysql));
       }
 
-
-  
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
     show_stmt_error(stmt);
 
@@ -80,7 +83,6 @@ void load_channels(void){
 
   bind[2].buffer= active;
   bind[2].buffer_type= MYSQL_TYPE_BIT;
-   // bind[2].length= &active_length;
 
  /* set array size */
   mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
