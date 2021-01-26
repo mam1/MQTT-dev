@@ -37,8 +37,8 @@ void load_channels(void){
   /* Data for insert */
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
-  const int *active[]= {0,0,0}
-  unsigned long active_length[]= {1,1,1}
+  const int *active[]= {0,0,0};
+  unsigned long active_length[]= {1,1,1};
 
   char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
   char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
@@ -62,11 +62,11 @@ void load_channels(void){
   bind[0].u.indicator= id_ind;
   bind[0].buffer_type= MYSQL_TYPE_LONG;
 
-  bind[1].buffer= names;
+  bind[1].buffer= name;
   bind[1].buffer_type= MYSQL_TYPE_STRING;
   bind[1].u.indicator= name_ind;
 
-  bind[2].buffer_type= MYSQL_TYPE_BOOL;
+  bind[2].buffer_type= MYSQL_TYPE_BOOLEAN;
   bind[2].buffer= active;
   bind[2].length= &active_length;
 
