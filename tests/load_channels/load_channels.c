@@ -99,7 +99,9 @@ void load_channels(void){
     show_stmt_error(stmt);
 
   mysql_stmt_close(stmt);
+  mysql_library_end();
   mysql_close(mysql);
+  mysql_library_end();
 
   printf("%s\n", "test channel data loaded\n");
   
