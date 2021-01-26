@@ -55,7 +55,15 @@ void load_channels(void){
 
   printf("connection to %s established\n", SERVER);
 
-  stmt= mysql_stmt_init(mysql);
+  stmt = mysql_stmt_init(mysql);
+  if (stmt) {
+        puts("Statement init OK!");
+      } else {
+        printf("Statement init failed: %s\n", mysql_error(mysql));
+      }
+
+
+  
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
     show_stmt_error(stmt);
 
@@ -70,13 +78,14 @@ void load_channels(void){
   bind[1].buffer_type= MYSQL_TYPE_STRING;
   bind[1].length= &name_length;
 
-  bind[2].buffer_type= MYSQL_TYPE_BIT;
   bind[2].buffer= active;
-  bind[2].length= &active_length;
+  bind[2].buffer_type= MYSQL_TYPE_BIT;
+   // bind[2].length= &active_length;
 
  /* set array size */
   mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
   printf("%s\n", "array size set");
+
   /* bind parameter */
   mysql_stmt_bind_param(stmt, bind);
   printf("%s\n", "bind");
@@ -88,7 +97,7 @@ void load_channels(void){
   mysql_stmt_close(stmt);
   mysql_close(mysql);
 
-  printf("%s\n", "channel data loaded\n");
+  printf("%s\n", "test channel data loaded\n");
   
 }
 
