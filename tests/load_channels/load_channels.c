@@ -1,5 +1,5 @@
 /* 
-    load channel data
+    load channel test data
 */
 
 #include "mysql.h"
@@ -9,7 +9,7 @@
 
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
-#define DATABASE    "example"
+#define DATABASE    "test-schedule"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
@@ -37,7 +37,8 @@ void load_channels(void){
   /* Data for insert */
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
-  const bool *active[]= {0,0,0}
+  const int *active[]= {0,0,0}
+  unsigned long active_length[]= {1,1,1}
 
   char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
   char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
@@ -58,43 +59,18 @@ void load_channels(void){
 
   memset(bind, 0, sizeof(MYSQL_BIND) * 3);
 
-
-
   bind[0].u.indicator= id_ind;
   bind[0].buffer_type= MYSQL_TYPE_LONG;
 
-  bind[1].buffer= forenames;
+  bind[1].buffer= names;
   bind[1].buffer_type= MYSQL_TYPE_STRING;
-  bind[1].u.indicator= forename_ind;
+  bind[1].u.indicator= name_ind;
 
-  bind[2].buffer_type= MYSQL_TYPE_STRING;
-  bind[2].buffer= surnames;
-  bind[2].length= &surnames_length;
+  bind[2].buffer_type= MYSQL_TYPE_BOOL;
+  bind[2].buffer= active;
+  bind[2].length= &active_length;
 
-
-  
-
-}
-
-int main(int argc, char *argv[])
-{
-
-  printf("%s\n", "\ntest data loader\n");
-  printf("%s\n", );
-
-  printf("   SERVER   %s\n",SERVER);
-  printf("   SOCKETT  %s\n",SOCKETT);
-  printf("   DATABASE %s\n",DATABASE);
-  printf("   USER     %s\n",USER);
-  printf("   PSWD     %s\n\n",PSWD);
-  
-
-
-
-  /* We autogenerate id's, so all indicators are STMT_INDICATOR_NULL */
-
-
-  /* set array size */
+ /* set array size */
   mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
 
   /* bind parameter */
@@ -107,5 +83,20 @@ int main(int argc, char *argv[])
   mysql_stmt_close(stmt);
   mysql_close(mysql);
 
-  printf("%s\n", "made it this far!!!!\n");
+  printf("%s\n", "channel data loaded\n");
+  
+}
+
+int main(int argc, char *argv[])
+{
+
+  printf("%s\n", "\ntest data loader\n");
+  printf("   SERVER   %s\n",SERVER);
+  printf("   SOCKETT  %s\n",SOCKETT);
+  printf("   DATABASE %s\n",DATABASE);
+  printf("   USER     %s\n",USER);
+  printf("   PSWD     %s\n\n",PSWD);
+  
+  load_channels();
+
 }
