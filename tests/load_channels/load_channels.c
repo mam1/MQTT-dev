@@ -53,7 +53,7 @@ void load_channels(void){
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
     show_mysql_error(mysql);
 
-  printf("connection to %s established", SERVER);
+  printf("connection to %s established\n", SERVER);
 
   stmt= mysql_stmt_init(mysql);
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
