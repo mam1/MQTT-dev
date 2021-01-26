@@ -35,6 +35,8 @@ void load_channels(void){
   MYSQL_BIND bind[3];
 
   /* Data for insert */
+
+  printf("building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
   const int *active[]= {0,0,0};
@@ -64,8 +66,7 @@ void load_channels(void){
 
   bind[1].buffer= name;
   bind[1].buffer_type= MYSQL_TYPE_STRING;
-  bind[1].u.indicator= name_ind;
-  bind[1].length= name_length;
+  bind[1].length= &name_length;
 
   bind[2].buffer_type= MYSQL_TYPE_BIT;
   bind[2].buffer= active;
@@ -90,7 +91,7 @@ void load_channels(void){
 
 int main(int argc, char *argv[])
 {
-
+  printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
   printf("   SERVER   %s\n",SERVER);
   printf("   SOCKETT  %s\n",SOCKETT);
@@ -99,5 +100,7 @@ int main(int argc, char *argv[])
   printf("   PSWD     %s\n\n",PSWD);
   
   load_channels();
+
+  printf("%s\n", "normal termination");
 
 }
