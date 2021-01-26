@@ -65,7 +65,7 @@ void load_channels(void){
   bind[1].buffer= name;
   bind[1].buffer_type= MYSQL_TYPE_STRING;
   bind[1].u.indicator= name_ind;
-  bind[1].length= name_length
+  bind[1].length= name_length;
 
   bind[2].buffer_type= MYSQL_TYPE_BOOL;
   bind[2].buffer= active;
