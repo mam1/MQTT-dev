@@ -47,6 +47,16 @@ static void load_channels(void){
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
 
+  /* create channels table */
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
+      show_mysql_error(mysql);
+
+  if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
+                           "active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+    show_mysql_error(mysql);
+
+
+
   /* Data for insert */
   printf("  building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
@@ -107,17 +117,6 @@ static void load_channels(void){
   
 }
 
-void init_database(void){
-
-if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
-    show_mysql_error(mysql);
-
-if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
-                         "active INT NOT NULL DEFAULT 0, name CHAR(30))"))
-    show_mysql_error(mysql);
-
-}
-
 
 
 int main(int argc, char *argv[])
@@ -130,7 +129,7 @@ int main(int argc, char *argv[])
   printf("   USER     %s\n",USER);
   printf("   PSWD     %s\n\n",PSWD);
   
-  init_database();
+
   load_channels();
 
   printf("%s\n", "normal termination");
