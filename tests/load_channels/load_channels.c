@@ -9,7 +9,7 @@
 
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
-#define DATABASE    "test-schedule"
+#define DATABASE    "example"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
@@ -34,12 +34,12 @@ static void load_channels(void){
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[3];
 
-  // /* initialize client library */
-  // if (mysql_library_init(0, NULL, NULL)) {
-  //     fprintf(stderr, "could not initialize MySQL client library\n");
-  //     exit(1);
-  // }
-  // printf("%s\n", "client library intialized");
+  /* initialize client library */
+  if (mysql_library_init(0, NULL, NULL)) {
+      fprintf(stderr, "could not initialize MySQL client library\n");
+      exit(1);
+  }
+  printf("%s\n", "client library intialized");
 
   /* connect to MariaDB server */
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
