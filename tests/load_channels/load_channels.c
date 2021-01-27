@@ -13,6 +13,8 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
+#define ROWS          4
+
 static void show_mysql_error(MYSQL *mysql)
 {
   printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
@@ -65,7 +67,7 @@ static void load_channels(void){
   char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
-  unsigned int array_size = 4; 
+  unsigned int array_size = ROWS; 
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
@@ -80,7 +82,7 @@ static void load_channels(void){
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * 3);
+  memset(bind, 0, sizeof(MYSQL_BIND) * ROWS);
 
   bind[0].u.indicator= id_ind;
   bind[0].buffer_type= MYSQL_TYPE_LONG;
