@@ -119,19 +119,26 @@ static void load_channels(void){
     show_stmt_error(stmt);
 
   mysql_stmt_close(stmt);
-  mysql_library_end();
-  mysql_close(mysql);
-  mysql_library_end();
+
 
   printf("%s\n", "test channel data loaded\n");
 
 
-  // if (mysql_query(mysql, "SELECT * FROM channels"))
-  // {
-  //     finish_with_error(mysql);
-  // }
+  if (mysql_query(mysql, "SELECT * FROM channels"))
+  {
+      finish_with_error(mysql);
+  }
 
   result = mysql_store_result(mysql);
+
+
+
+
+
+
+  mysql_library_end();
+  mysql_close(mysql);
+
 
 }
 
