@@ -31,6 +31,14 @@ static void show_stmt_error(MYSQL_STMT *stmt)
   exit(-1);
 }
 
+void finish_with_error(MYSQL *con)
+{
+  fprintf(stderr, "%s\n", mysql_error(con));
+  mysql_close(con);
+  exit(1);
+}
+
+
 static void load_channels(void){
   MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
@@ -115,6 +123,12 @@ static void load_channels(void){
   mysql_library_end();
 
   printf("%s\n", "test channel data loaded\n");
+
+  MYSQL_RES *result = mysql_store_result(mysql);
+  if (mysql_query(con, "SELECT * FROM channels"))
+  {
+      finish_with_error(mysql);
+  }
   
 }
 
@@ -132,6 +146,7 @@ int main(int argc, char *argv[])
   
 
   load_channels();
+
 
   printf("%s\n", "normal termination");
 
