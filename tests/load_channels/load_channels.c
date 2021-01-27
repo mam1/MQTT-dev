@@ -58,13 +58,9 @@ static void load_channels(void){
 
   unsigned int array_size = 3; 
 
-
-
- 
-
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
-        puts("statement init OK");
+        puts("  statement init OK");
       } else {
         printf("statement init failed: %s\n", mysql_error(mysql));
       }
@@ -92,8 +88,9 @@ static void load_channels(void){
   printf("%s\n", " array size set");
 
   /* bind parameter */
-  mysql_stmt_bind_param(stmt, bind);
-  printf("%s\n", "bind");
+  if(mysql_stmt_bind_param(stmt, bind))
+    printf("%s\n", "problem binding parameters\n");
+  printf("%s\n", "  bind");
 
   /* execute */
   if (mysql_stmt_execute(stmt))
