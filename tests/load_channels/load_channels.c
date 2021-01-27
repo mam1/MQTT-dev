@@ -57,15 +57,15 @@ static void load_channels(void){
 
   /* Data for insert */
   printf("  building data for insert\n");
-  const char *name[] = {"test channel 1", "test channel 2", "test channel 3"};
-  unsigned long name_length[] = {14,14,14};
-  unsigned long active[] = {0,1,0};
+  const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
+  unsigned long name_length[] = {14,14,14,14};
+  unsigned long active[] = {0,1,0,1};
 
   char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
   char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
-  char active_ind = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
+  char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
-  unsigned int array_size = 3; 
+  unsigned int array_size = 4; 
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
