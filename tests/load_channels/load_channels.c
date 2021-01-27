@@ -36,12 +36,13 @@ static void load_channels(void){
 
   /* initialize client library */
   if (mysql_library_init(0, NULL, NULL)) {
-      fprintf(stderr, "could not initialize MySQL client library\n");
+      printf("could not initialize MySQL client library\n");
       exit(1);
   }
   printf("%s\n", "client library intialized");
 
   /* connect to MariaDB server */
+  mysql= mysql_init(NULL);
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
       show_mysql_error(mysql);
   printf("connection to %s established\n", SERVER);
@@ -57,7 +58,7 @@ static void load_channels(void){
 
   unsigned int array_size = 3; 
 
-  mysql= mysql_init(NULL);
+
 
  
 
