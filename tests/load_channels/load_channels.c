@@ -55,16 +55,16 @@ static void load_channels(void){
     show_mysql_error(mysql);
   printf("%s\n", "  table <channels> created" );
 
-
-
   /* Data for insert */
   printf("  building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
-  const int *active[]= {0,0,0};
+  const int *active[]= {0,1,0};
 
-  char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
-  char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+
+  char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+  char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
+  char active_ind = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
   unsigned int array_size = 3; 
 
@@ -91,7 +91,7 @@ static void load_channels(void){
   bind[1].length= name_length;
 
   bind[2].buffer= active;
-  bind[2].buffer_type= MYSQL_TYPE_STRING;
+  bind[2].buffer_type= MYSQL_TYPE_LONG;
 
  /* set array size */
   if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
