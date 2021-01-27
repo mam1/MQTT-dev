@@ -81,19 +81,18 @@ static void load_channels(void){
   bind[1].length= name_length;
 
   bind[2].buffer= active;
-  bind[2].buffer_type= MYSQL_TYPE_BIT;
+  bind[2].buffer_type= MYSQL_TYPE_INT;
 
  /* set array size */
   if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
-    printf("%s\n", "problem setting array size\n");
+    show_stmt_error(stmt);
   printf("%s\n", "  array size set");
 
   /* bind parameter */
   if(mysql_stmt_bind_param(stmt, bind))
     show_stmt_error(stmt);
-  
-  //   printf("%s\n", "problem binding parameters\n");
-  // printf("%s\n", "  bind");
+
+  printf("%s\n", "  bind");
 
   /* execute */
   if (mysql_stmt_execute(stmt))
