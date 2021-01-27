@@ -107,6 +107,19 @@ static void load_channels(void){
   
 }
 
+void init_databse(void){
+
+if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
+    show_mysql_error(mysql);
+
+if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"\
+                         "active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+    show_mysql_error(mysql);
+
+}
+
+
+
 int main(int argc, char *argv[])
 {
   printf("%s\n","\n*******************************************************************" );
@@ -117,6 +130,7 @@ int main(int argc, char *argv[])
   printf("   USER     %s\n",USER);
   printf("   PSWD     %s\n\n",PSWD);
   
+  init_database();
   load_channels();
 
   printf("%s\n", "normal termination");
