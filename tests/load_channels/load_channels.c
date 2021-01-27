@@ -13,7 +13,7 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-#define ROWS          4
+#define INSERT_ROWS          4
 
 static void show_mysql_error(MYSQL *mysql)
 {
@@ -34,7 +34,7 @@ static void show_stmt_error(MYSQL_STMT *stmt)
 static void load_channels(void){
   MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
-  MYSQL_BIND bind[3];
+  MYSQL_BIND bind[INSERT_ROWS];
 
   /* initialize client library */
   if (mysql_library_init(0, NULL, NULL)) {
@@ -67,7 +67,7 @@ static void load_channels(void){
   char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
-  unsigned int array_size = ROWS; 
+  unsigned int array_size = INSERT_ROWS; 
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
@@ -82,7 +82,7 @@ static void load_channels(void){
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * ROWS);
+  memset(bind, 0, sizeof(MYSQL_BIND) * INSERT_ROWS);
 
   bind[0].u.indicator= id_ind;
   bind[0].buffer_type= MYSQL_TYPE_LONG;
