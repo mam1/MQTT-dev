@@ -81,7 +81,7 @@ static void load_channels(void){
   bind[1].length= name_length;
 
   bind[2].buffer= active;
-  bind[2].buffer_type= MYSQL_TYPE_INT;
+  bind[2].buffer_type= MYSQL_TYPE_STRING;
 
  /* set array size */
   if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
