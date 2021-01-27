@@ -39,16 +39,16 @@ static void load_channels(void){
       printf("could not initialize MySQL client library\n");
       exit(1);
   }
-  printf("%s\n", "client library intialized");
+  printf("%s\n", "  client library intialized");
 
   /* connect to MariaDB server */
   mysql= mysql_init(NULL);
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
       show_mysql_error(mysql);
-  printf("connection to %s established\n", SERVER);
+  printf("  connection to %s established\n", SERVER);
 
   /* Data for insert */
-  printf("building data for insert\n");
+  printf("  building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
   const int *active[]= {0,0,0};
@@ -64,15 +64,15 @@ static void load_channels(void){
 
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
-        puts("Statement init OK");
+        puts("statement init OK");
       } else {
-        printf("Statement init failed: %s\n", mysql_error(mysql));
+        printf("statement init failed: %s\n", mysql_error(mysql));
       }
 
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
     show_stmt_error(stmt);
 
-  printf("%s\n", "statement prepared");
+  printf("%s\n", " statement prepared");
 
   memset(bind, 0, sizeof(MYSQL_BIND) * 3);
 
@@ -87,8 +87,9 @@ static void load_channels(void){
   bind[2].buffer_type= MYSQL_TYPE_BIT;
 
  /* set array size */
-  mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
-  printf("%s\n", "array size set");
+  if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
+    printf("%s\n", "problem setting array size\n");
+  printf("%s\n", " array size set");
 
   /* bind parameter */
   mysql_stmt_bind_param(stmt, bind);
