@@ -23,7 +23,7 @@ static void show_mysql_error(MYSQL *mysql)
   exit(-1);
 }
 
-static void show_stmt_error(MYSQL_STMT *stmt)
+void show_stmt_error(MYSQL_STMT *stmt)
 {
   printf("Error(%d) [%s] \"%s\"\n", mysql_stmt_errno(stmt),
                                   mysql_stmt_sqlstate(stmt),
