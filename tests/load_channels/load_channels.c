@@ -48,63 +48,63 @@ void load_channels(void){
   printf("connection to %s established\n", SERVER);
 
 
-  /* Data for insert */
-  printf("building data for insert\n");
-  const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
-  unsigned long name_length[]= {14,14,14};
-  const int *active[]= {0,0,0};
+ //  /* Data for insert */
+ //  printf("building data for insert\n");
+ //  const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
+ //  unsigned long name_length[]= {14,14,14};
+ //  const int *active[]= {0,0,0};
 
-  char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
-  char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+ //  char name_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT}; 
+ //  char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
 
-  unsigned int array_size = 3; 
+ //  unsigned int array_size = 3; 
 
-  mysql= mysql_init(NULL);
+ //  mysql= mysql_init(NULL);
 
  
 
-  stmt = mysql_stmt_init(mysql);
-  if (stmt) {
-        puts("Statement init OK!");
-      } else {
-        printf("Statement init failed: %s\n", mysql_error(mysql));
-      }
+ //  stmt = mysql_stmt_init(mysql);
+ //  if (stmt) {
+ //        puts("Statement init OK!");
+ //      } else {
+ //        printf("Statement init failed: %s\n", mysql_error(mysql));
+ //      }
 
-  if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
-    show_stmt_error(stmt);
+ //  if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
+ //    show_stmt_error(stmt);
 
-  printf("%s\n", "statement prepared");
+ //  printf("%s\n", "statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * 3);
+ //  memset(bind, 0, sizeof(MYSQL_BIND) * 3);
 
-  bind[0].u.indicator= id_ind;
-  bind[0].buffer_type= MYSQL_TYPE_LONG;
+ //  bind[0].u.indicator= id_ind;
+ //  bind[0].buffer_type= MYSQL_TYPE_LONG;
 
-  bind[1].buffer= name;
-  bind[1].buffer_type= MYSQL_TYPE_STRING;
-  bind[1].length= &name_length;
+ //  bind[1].buffer= name;
+ //  bind[1].buffer_type= MYSQL_TYPE_STRING;
+ //  bind[1].length= &name_length;
 
-  bind[2].buffer= active;
-  bind[2].buffer_type= MYSQL_TYPE_BIT;
+ //  bind[2].buffer= active;
+ //  bind[2].buffer_type= MYSQL_TYPE_BIT;
 
- /* set array size */
-  mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
-  printf("%s\n", "array size set");
+ // /* set array size */
+ //  mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size);
+ //  printf("%s\n", "array size set");
 
-  /* bind parameter */
-  mysql_stmt_bind_param(stmt, bind);
-  printf("%s\n", "bind");
+ //  /* bind parameter */
+ //  mysql_stmt_bind_param(stmt, bind);
+ //  printf("%s\n", "bind");
 
-  /* execute */
-  if (mysql_stmt_execute(stmt))
-    show_stmt_error(stmt);
+ //  /* execute */
+ //  if (mysql_stmt_execute(stmt))
+ //    show_stmt_error(stmt);
 
-  mysql_stmt_close(stmt);
-  mysql_library_end();
-  mysql_close(mysql);
-  mysql_library_end();
+ //  mysql_stmt_close(stmt);
+ //  mysql_library_end();
+ //  mysql_close(mysql);
+ //  mysql_library_end();
 
-  printf("%s\n", "test channel data loaded\n");
+ //  printf("%s\n", "test channel data loaded\n");
   
 }
 
