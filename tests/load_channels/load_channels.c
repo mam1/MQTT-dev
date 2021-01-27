@@ -129,7 +129,7 @@ static void load_channels(void){
       finish_with_error(mysql);
   }
 
-  result = mysql_store_result(mysql);
+  // result = mysql_store_result(mysql);
 
 
 
