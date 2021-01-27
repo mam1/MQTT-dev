@@ -107,7 +107,7 @@ static void load_channels(void){
   
 }
 
-void init_databse(void){
+void init_database(void){
 
 if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
     show_mysql_error(mysql);
