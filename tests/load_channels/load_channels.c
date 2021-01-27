@@ -59,8 +59,7 @@ static void load_channels(void){
   printf("  building data for insert\n");
   const char *name[]= {"test channel 1", "test channel 2", "test channel 3"};
   unsigned long name_length[]= {14,14,14};
-  const int *active[]= {0,1,0};
-
+  unsigned long *active[]= {0,1,0};
 
   char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
   char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
