@@ -9,7 +9,7 @@
 
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
-#define DATABASE    "example"
+#define DATABASE    "test-schedule"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
@@ -64,7 +64,7 @@ static void load_channels(void){
 
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
-        puts("Statement init OK!");
+        puts("Statement init OK");
       } else {
         printf("Statement init failed: %s\n", mysql_error(mysql));
       }
