@@ -58,6 +58,7 @@ static void load_channels(void){
 
   unsigned int array_size = 3; 
 
+/* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
         puts("  statement init OK");
@@ -77,7 +78,7 @@ static void load_channels(void){
 
   bind[1].buffer= name;
   bind[1].buffer_type= MYSQL_TYPE_STRING;
-  bind[1].length= &name_length;
+  bind[1].length= name_length;
 
   bind[2].buffer= active;
   bind[2].buffer_type= MYSQL_TYPE_BIT;
