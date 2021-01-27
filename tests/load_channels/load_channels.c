@@ -43,6 +43,7 @@ static void load_channels(void){
   MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[INSERT_ROWS];
+  MYSQL_RES *result;
 
   /* initialize client library */
   if (mysql_library_init(0, NULL, NULL)) {
@@ -129,8 +130,9 @@ static void load_channels(void){
   {
       finish_with_error(mysql);
   }
-  MYSQL_RES *result = mysql_store_result(mysql);
-  
+
+  result = mysql_store_result(mysql);
+
 }
 
 
