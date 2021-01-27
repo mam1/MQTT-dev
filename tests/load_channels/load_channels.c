@@ -124,11 +124,11 @@ static void load_channels(void){
 
   printf("%s\n", "test channel data loaded\n");
 
-  MYSQL_RES *result = mysql_store_result(mysql);
-  if (mysql_query(mysql, "SELECT * FROM channels"))
-  {
-      finish_with_error(mysql);
-  }
+  // MYSQL_RES *result = mysql_store_result(mysql);
+  // if (mysql_query(mysql, "SELECT * FROM channels"))
+  // {
+  //     finish_with_error(mysql);
+  // }
   
 }
 
