@@ -31,15 +31,17 @@ void show_stmt_error(MYSQL_STMT *stmt)
                                   mysql_stmt_error(stmt));
   exit(-1);
 }
-  MYSQL           place;
-  MYSQL           *mysql;
-  MYSQL_STMT      *stmt;
-  MYSQL_BIND      bind[_INSERT_ROWS];
+
   // MYSQL_RES *result[_INSERT_ROWS];
 
 int main(int argc, char *argv[])
 {
+  MYSQL           place;
+  MYSQL           *mysql;
+  MYSQL_STMT      *stmt;
+  MYSQL_BIND      bind[_INSERT_ROWS];
 
+  
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
   printf("   SERVER   %s\n",SERVER);
