@@ -143,7 +143,7 @@
 #include <string.h>
 
 /* in the sql table inode is an int unsigned and rpath is a varchar */
-#define SAMPLE_QUERY "select inode from Inodes where rpath = ?"
+#define SAMPLE_QUERY "select name from channels"
 
 int main(int argc, char* argv[]) {
   MYSQL         place;
