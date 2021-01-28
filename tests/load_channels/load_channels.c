@@ -47,15 +47,15 @@ int main(int argc, char *argv[])
   printf("   USER     %s\n",USER);
   printf("   PSWD     %s\n\n",PSWD);
 
-  /* initialize client library */
+/* initialize client library */
   if (mysql_library_init(0, NULL, NULL)) {
       printf("could not initialize MySQL client library\n");
       exit(1);
   }
   printf("%s\n", "  client library intialized");
 
-  /* connect to MariaDB server */
-  mysql= mysql_init(NULL);
+/* connect to MariaDB server */
+  mysql= mysql_init(mysql);
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
