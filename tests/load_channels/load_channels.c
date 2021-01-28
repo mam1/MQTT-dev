@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
   /* execute */
   if (mysql_stmt_execute(stmt))
     show_stmt_error(stmt);
-  mysql_stmt_close(stmt);
+  // mysql_stmt_close(stmt);
   printf("%s\n", "test channel data loaded\n");
 
   /* clean up */
