@@ -14,7 +14,7 @@
 #define PSWD        "test-sql"
 
 #define _INSERT_ROWS          4
-#define _INSERT_TABLE         "channels"
+#define channel         "channels"
 
 static void show_mysql_error(MYSQL *mysql)
 {
@@ -62,12 +62,12 @@ int main(int argc, char *argv[])
   printf("  connection to %s established\n", SERVER);
 
   /* create channels table */
-  if (mysql_query(mysql, "DROP TABLE IF EXISTS _INSERT_TABLE"))
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS channel"))
       show_mysql_error(mysql);
 
-  if (mysql_query(mysql, "CREATE TABLE _INSERT_TABLE (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+  if (mysql_query(mysql, "CREATE TABLE channel (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
     show_mysql_error(mysql);
-  printf("%s\n", "  table _INSERT_TABLE created" );
+  printf(" table %s created\n","channel" );
 
   /* Data for insert */
   printf("  building data for insert\n");
