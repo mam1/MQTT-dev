@@ -14,7 +14,6 @@
 #define PSWD        "test-sql"
 
 #define INSERT_ROWS          4
-#define INSERT_TABLE         "channels"
 
 static void show_mysql_error(MYSQL *mysql)
 {
@@ -31,16 +30,14 @@ void show_stmt_error(MYSQL_STMT *stmt)
                                   mysql_stmt_error(stmt));
   exit(-1);
 }
-
-
+  MYSQL           place;
+  MYSQL           *mysql;
+  MYSQL_STMT      *stmt;
+  MYSQL_BIND      bind[INSERT_ROWS];
   // MYSQL_RES *result[INSERT_ROWS];
 
 int main(int argc, char *argv[])
 {
-  MYSQL         place;
-  MYSQL         *mysql;
-  MYSQL_STMT    *stmt;
-  MYSQL_BIND    bind[INSERT_ROWS];
 
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
@@ -67,9 +64,9 @@ int main(int argc, char *argv[])
   if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
       show_mysql_error(mysql);
 
-  if (mysql_query(mysql, "CREATE TABLE INSERT_TABLE (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+  if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
     show_mysql_error(mysql);
-  printf("%s\n", "  table <INSERT_TABLE> created" );
+  printf("%s\n", "  table <channels> created" );
 
   /* Data for insert */
   printf("  building data for insert\n");
@@ -85,8 +82,7 @@ int main(int argc, char *argv[])
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
-  if (stmt) {rror(stmt));
-  exit(-1);
+  if (stmt) {
         puts("  statement init OK");
       } else {
         printf("statement init failed: %s\n", mysql_error(mysql));
