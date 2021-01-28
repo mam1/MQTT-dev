@@ -127,8 +127,8 @@ static void load_channels(void){
   }
 
   int       fcount;
-  fcont = mysql_field_count(mysql);
-  printf(" %int %s\n", "fields returned from query" );
+  fcount = mysql_field_count(mysql);
+  printf(" %int %s\n", fcount"fields returned from query" );
 
   mysql_store_result(mysql);
 
