@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
   if (mysql_query(mysql, "CREATE TABLE _INSERT_TABLE (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
     show_mysql_error(mysql);
-  printf("%s\n", "  table <channels> created" );
+  printf("%s\n", "  table _INSERT_TABLE created" );
 
   /* Data for insert */
   printf("  building data for insert\n");
