@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
     exit(0);
   }
   mysql_ssl_set(sql, NULL, NULL, NULL, NULL, NULL);
-  sql = mysql_real_connect(sql, "localhost", "user", "pass", "database", 0, NULL, 0);
+  sql = mysql_real_connect(sql, "102.168.132.180", "test-sql", "test-sql", "test-schedule", 0, NULL, 0);
   if (sql == NULL) {
     fprintf(stderr, "couldn't connect to database: %s\n", mysql_error(&place));
     exit(0);
