@@ -230,4 +230,5 @@ int main(int argc, char* argv[]) {
     err = mysql_stmt_fetch(stmt);
     mysql_stmt_free_result(stmt);
   }
+  printf("%s\n", "nothing failed");
 }
