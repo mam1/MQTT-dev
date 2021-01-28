@@ -26,5 +26,5 @@ export project_LIB := MQTT mariadbclient
 
 
 program_DIRECTORY := ~/Git/MQTT-dev/tests/query_channels
-program_NAME := load_channels
+program_NAME := query_channels
 include $(project_DIRECTORY)/mastermake/Makefile
