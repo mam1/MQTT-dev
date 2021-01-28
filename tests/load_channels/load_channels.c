@@ -138,16 +138,16 @@ static void load_channels(void){
 
 
 
-  mysql_library_end();
-  mysql_close(mysql);
-
-
-}
 
 
 
 int main(int argc, char *argv[])
 {
+  MYSQL *mysql = NULL;
+  MYSQL_STMT *stmt;
+  MYSQL_BIND bind[INSERT_ROWS];
+  MYSQL_RES *result;
+
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
   printf("   SERVER   %s\n",SERVER);
@@ -155,11 +155,100 @@ int main(int argc, char *argv[])
   printf("   DATABASE %s\n",DATABASE);
   printf("   USER     %s\n",USER);
   printf("   PSWD     %s\n\n",PSWD);
-  
 
-  load_channels();
+  /* initialize client library */
+  if (mysql_library_init(0, NULL, NULL)) {
+      printf("could not initialize MySQL client library\n");
+      exit(1);
+  }
+  printf("%s\n", "  client library intialized");
 
+  /* connect to MariaDB server */
+  mysql= mysql_init(NULL);
+  if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
+      show_mysql_error(mysql);
+  printf("  connection to %s established\n", SERVER);
+
+  /* create channels table */
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
+      show_mysql_error(mysql);
+
+  if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+    show_mysql_error(mysql);
+  printf("%s\n", "  table <channels> created" );
+
+  /* Data for insert */
+  printf("  building data for insert\n");
+  const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
+  unsigned long name_length[] = {14,14,14,14};
+  unsigned long active[] = {0,1,0,1};
+
+  char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+  char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
+  char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
+
+  unsigned int array_size = INSERT_ROWS; 
+
+/* get a handle to statement structure */
+  stmt = mysql_stmt_init(mysql);
+  if (stmt) {
+        puts("  statement init OK");
+      } else {
+        printf("statement init failed: %s\n", mysql_error(mysql));
+      }
+
+  if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
+    show_stmt_error(stmt);
+
+  printf("%s\n", "  statement prepared");
+
+  memset(bind, 0, sizeof(MYSQL_BIND) * INSERT_ROWS);
+
+  bind[0].u.indicator= id_ind;
+  bind[0].buffer_type= MYSQL_TYPE_LONG;
+
+  bind[2].buffer= name;
+  bind[2].buffer_type= MYSQL_TYPE_STRING;
+  bind[2].length= name_length;
+
+  bind[1].buffer= active;
+  bind[1].buffer_type= MYSQL_TYPE_LONG;
+
+ /* set array size */
+  if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
+    show_stmt_error(stmt);
+  printf("%s\n", "  array size set");
+
+  /* bind parameter */
+  if(mysql_stmt_bind_param(stmt, bind))
+    show_stmt_error(stmt);
+
+  printf("%s\n", "  bind");
+
+  /* execute */
+  if (mysql_stmt_execute(stmt))
+    show_stmt_error(stmt);
+  mysql_stmt_close(stmt);
+  printf("%s\n", "test channel data loaded\n");
+
+
+  if (mysql_query(mysql, "SELECT * FROM channels"))
+  {
+      finish_with_error(mysql);
+  }
+
+  // int       fcount = 6;
+  // fcount = mysql_field_count(mysql);
+
+  // printf(" %i %s\n", fcount, "fields returned from query" );
+
+  // mysql_store_result(mysql);
+
+  mysql_library_end();
+  mysql_close(mysql);
 
   printf("%s\n", "normal termination");
+
+}
 
 }
