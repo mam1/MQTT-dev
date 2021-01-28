@@ -120,11 +120,6 @@ static void load_channels(void){
   mysql_stmt_close(stmt);
   printf("%s\n", "test channel data loaded\n");
 
-  mysql_close(mysql);
-
-  if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
-      show_mysql_error(mysql);
-  printf("  connection to %s established\n", SERVER);
 
   if (mysql_query(mysql, "xxxxxxxxxxxxx"))
   {
@@ -132,7 +127,7 @@ static void load_channels(void){
   }
 
 
-  // result=mysql_store_result(mysql);
+  mysql_store_result(mysql);
 
 
 
