@@ -31,13 +31,13 @@ void show_stmt_error(MYSQL_STMT *stmt)
   exit(-1);
 }
 
-
-int main(int argc, char *argv[])
-{
   MYSQL *mysql = NULL;
   MYSQL_STMT *stmt;
   MYSQL_BIND bind[INSERT_ROWS];
   MYSQL_RES *result;
+
+int main(int argc, char *argv[])
+{
 
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
@@ -75,8 +75,8 @@ int main(int argc, char *argv[])
   unsigned long active[] = {0,1,0,1};
 
   char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
-  char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
-  char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
+  // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
+  // char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
   unsigned int array_size = INSERT_ROWS; 
 
@@ -113,7 +113,6 @@ int main(int argc, char *argv[])
   /* bind parameter */
   if(mysql_stmt_bind_param(stmt, bind))
     show_stmt_error(stmt);
-
   printf("%s\n", "  bind");
 
   /* execute */
@@ -125,7 +124,6 @@ int main(int argc, char *argv[])
   /* clean up */
   mysql_library_end();
   mysql_close(mysql);
-
   printf("%s\n", "normal termination");
 
 }
