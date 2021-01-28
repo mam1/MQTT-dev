@@ -118,7 +118,7 @@ static void load_channels(void){
   if (mysql_stmt_execute(stmt))
     show_stmt_error(stmt);
 
-  mysql_stmt_close(stmt);
+  
 
 
   printf("%s\n", "test channel data loaded\n");
@@ -129,12 +129,13 @@ static void load_channels(void){
       finish_with_error(mysql);
   }
 
-  mysql_store_result(mysql);
+
+  result=mysql_store_result(mysql);
 
 
 
 
-
+  mysql_stmt_close(stmt);
 
   mysql_library_end();
   mysql_close(mysql);
