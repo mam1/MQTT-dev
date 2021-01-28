@@ -71,12 +71,16 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "result bind failed: %s\n", mysql_stmt_error(stmt));
     exit(0);
   }
-  err = mysql_stmt_fetch(stmt);
-  if (err != 0) {
-    fprintf(stderr, "fetch(1) failed: %s\n", mysql_stmt_error(stmt));
-    exit(0);
-  }
+
+
+  // err = mysql_stmt_fetch(stmt);
+  // if (err != 0) {
+  //   fprintf(stderr, "fetch(1) failed: %s\n", mysql_stmt_error(stmt));
+  //   exit(0);
+  // }
   mysql_stmt_free_result(stmt);
+
+
 
   fprintf(stderr, "res = %lu,  sleeping 30 seconds, reset mysql server now\n", res);
   sleep(30);
