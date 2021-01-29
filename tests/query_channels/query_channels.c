@@ -73,11 +73,11 @@ int main(int argc, char* argv[]) {
   }
 
 
-  // err = mysql_stmt_fetch(stmt);
-  // if (err != 0) {
-  //   fprintf(stderr, "fetch(1) failed: %s\n", mysql_stmt_error(stmt));
-  //   exit(0);
-  // }
+  err = mysql_stmt_fetch(stmt);
+  if (err != 0) {
+    fprintf(stderr, "fetch(1) failed: %s\n", mysql_stmt_error(stmt));
+    exit(0);
+  }
   mysql_stmt_free_result(stmt);
 
 
