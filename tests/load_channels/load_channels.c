@@ -99,20 +99,20 @@ int main(int argc, char *argv[])
 
   memset(bind, 0, sizeof(MYSQL_BIND) * FIELD_COUNT);
 
-  bind[0].u.indicator= id_ind;
-  bind[0].buffer_type= MYSQL_TYPE_LONG;
+  bind[0].u.indicator = id_ind;
+  bind[0].buffer_type = MYSQL_TYPE_LONG;
 
-  bind[2].buffer= name;
-  bind[2].buffer_type= MYSQL_TYPE_STRING;
-  bind[2].length= name_length;
+  bind[1].buffer = active;
+  bind[1].buffer_type = MYSQL_TYPE_LONG;
 
-  bind[1].buffer= active;
-  bind[1].buffer_type= MYSQL_TYPE_LONG;
+  bind[2].buffer = name;
+  bind[2].buffer_type = MYSQL_TYPE_STRING;
+  bind[2].length = name_length;
 
  /* set array size */
   if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
     show_stmt_error(stmt);
-  printf("%s\n", "  array size set");
+  printf("  array size set to %i\n", array_size);
 
   /* bind parameter */
   if(mysql_stmt_bind_param(stmt, bind))
