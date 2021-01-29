@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
   MYSQL_STMT      *stmt;
   MYSQL_BIND      bind[_INSERT_ROWS];
 
-  
+
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
   printf("   SERVER   %s\n",SERVER);
@@ -63,13 +63,13 @@ int main(int argc, char *argv[])
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
 
-  /* create channels table */
-  if (mysql_query(mysql, "DROP TABLE IF EXISTS channel"))
+  /* create table */
+  if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
       show_mysql_error(mysql);
 
-  if (mysql_query(mysql, "CREATE TABLE channel (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
+  if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
     show_mysql_error(mysql);
-  printf(" table %s created\n","channel" );
+  printf(" table %s created\n","channels" );
 
   /* Data for insert */
   printf("  building data for insert\n");
