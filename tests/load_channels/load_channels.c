@@ -13,7 +13,8 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-#define _INSERT_ROWS          4
+#define INSERT_ROWS     4
+#define FIELD_COUNT     3
 #define channel         "channels"
 
 static void show_mysql_error(MYSQL *mysql)
@@ -32,14 +33,14 @@ void show_stmt_error(MYSQL_STMT *stmt)
   exit(-1);
 }
 
-  // MYSQL_RES *result[_INSERT_ROWS];
+  // MYSQL_RES *result[INSERT_ROWS];
 
 int main(int argc, char *argv[])
 {
   MYSQL           place;
   MYSQL           *mysql;
   MYSQL_STMT      *stmt;
-  MYSQL_BIND      bind[_INSERT_ROWS];
+  MYSQL_BIND      bind[INSERT_ROWS];
 
 
   printf("%s\n","\n*******************************************************************" );
@@ -81,7 +82,7 @@ int main(int argc, char *argv[])
   // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   // char active_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 
-  unsigned int array_size = _INSERT_ROWS; 
+  unsigned int array_size = INSERT_ROWS; 
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);
@@ -96,7 +97,7 @@ int main(int argc, char *argv[])
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * _INSERT_ROWS);
+  memset(bind, 0, sizeof(MYSQL_BIND) * FIELD_COUNT);
 
   bind[0].u.indicator= id_ind;
   bind[0].buffer_type= MYSQL_TYPE_LONG;
