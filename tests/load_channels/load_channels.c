@@ -14,8 +14,8 @@
 #define PSWD        "test-sql"
 
 #define INSERT_ROWS     4
-#define FIELD_COUNT     3
-#define channel         "channels"
+#define FIELD_COUNT     4
+#define FIELD_NAME      "channels"
 
 static void show_mysql_error(MYSQL *mysql)
 {
