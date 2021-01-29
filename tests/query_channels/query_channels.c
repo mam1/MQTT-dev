@@ -39,7 +39,8 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "couldn't initialize statement: %s\n", mysql_error(&place));
     exit(0);
   }
-  char      query[]= {"SELECT * FROM channels"}
+  char      query[]= {"SELECT * FROM channels"};
+  
   err = mysql_stmt_prepare(stmt, query, sizeof(query)-1);
   if (err != 0) {
     fprintf(stderr, "statement prepare failed: %s\n", mysql_stmt_error(stmt));
