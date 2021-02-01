@@ -42,6 +42,19 @@ int main(int argc, char *argv[])
   MYSQL_STMT      *stmt;
   MYSQL_BIND      bind[FIELD_COUNT];
 
+  /* initialize data for insert */
+  const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
+  unsigned long name_length[] = {15,15,15,15};
+  unsigned long active[] = {0,1,0,1};
+
+
+  char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
+  // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
+  char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
+
+  unsigned int array_size = 4; 
+
+
 
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
@@ -64,7 +77,7 @@ int main(int argc, char *argv[])
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
 
-  /* create table */
+/* create table */
   if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
       show_mysql_error(mysql);
 
@@ -72,17 +85,7 @@ int main(int argc, char *argv[])
     show_mysql_error(mysql);
   printf("  table %s created\n","channels" );
 
-  /* initialize data for insert */
-  printf("  building data for insert\n");
-  const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
-  unsigned long name_length[] = {15,15,15,15};
-  unsigned long active[] = {0,1,0,1};
 
-  char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
-  // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
-  char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
-
-  unsigned int array_size = FIELD_COUNT; 
 
 /* get a handle to statement structure */
   stmt = mysql_stmt_init(mysql);

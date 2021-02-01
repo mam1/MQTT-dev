@@ -11,3 +11,4 @@ UUID=f09e2bb7-0417-49dd-965b-c9fd9fe50a0e /               ext4    errors=remount
 UUID=B803-90B6  /boot/efi       vfat    umask=0077      0       1
 /swapfile                                 none            swap    sw              0       0
 192.168.132.200:/media/sysuts              /media/sysuts      nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
+192.168.132.200:/media/BlackHole           /media/BlackHole   nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
