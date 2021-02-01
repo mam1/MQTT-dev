@@ -40,12 +40,13 @@ int main(int argc, char* argv[]) {
     exit(0);
   }
   char      query[]= {"SELECT * FROM channels"};
-  
+
   err = mysql_stmt_prepare(stmt, query, sizeof(query)-1);
   if (err != 0) {
     fprintf(stderr, "statement prepare failed: %s\n", mysql_stmt_error(stmt));
     exit(0);
   }
+
   used = strlen(rpath)+1; /* want the trailing null char */
   memset(bind, 0, sizeof (bind));
   bind[0].buffer_type = MYSQL_TYPE_VAR_STRING;
@@ -63,15 +64,21 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "statement(1) execute failed: %s\n", mysql_stmt_error(stmt));
     exit(0);
   }
+
+
   result[0].buffer_type = MYSQL_TYPE_LONG;
   result[0].buffer = &res;
   result[0].length = &length[0];
   result[0].is_null = &is_null[0];
   result[0].error = &error[0];
+
+  
   err = mysql_stmt_bind_result(stmt, result);
   if (err != 0) {
     fprintf(stderr, "result bind failed: %s\n", mysql_stmt_error(stmt));
     exit(0);
+
+  printf("\n");
   }
 
 
