@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
 
   char id_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
   // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
-  char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
+  // char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
 
-  unsigned int array_size = 3;                                  /**************************************************************/
+  unsigned int array_size = 4;                                  /**************************************************************/
 
 
 
