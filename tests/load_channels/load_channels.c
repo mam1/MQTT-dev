@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
   printf("%s\n", "  client library intialized");
 
 /* connect to MariaDB server */
-  mysql= mysql_init(&place);
+  mysql= mysql_init(NULL);
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
 /* create table */
   if (mysql_query(mysql, "DROP TABLE IF EXISTS channels"))
       show_mysql_error(mysql);
-
   if (mysql_query(mysql, "CREATE TABLE channels (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,active INT NOT NULL DEFAULT 0, name CHAR(30))"))
     show_mysql_error(mysql);
   printf("  table %s created\n","channels" );
