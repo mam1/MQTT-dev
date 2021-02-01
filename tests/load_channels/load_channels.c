@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   MYSQL           place;
   MYSQL           *mysql;
   MYSQL_STMT      *stmt;
-  MYSQL_BIND      bind[4];      /********************************************************************************************/
+  MYSQL_BIND      bind[3];      /********************************************************************************************/
 
   /* initialize data for insert */
   const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
   // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   // char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
 
-  unsigned int array_size = 4;                                  /**************************************************************/
+  unsigned int array_size = sizeof(MYSQL_BIND) * 3;                                  /**************************************************************/
 
 
 
@@ -85,9 +85,7 @@ int main(int argc, char *argv[])
     show_mysql_error(mysql);
   printf("  table %s created\n","channels" );
 
-
-
-/* get a handle to statement structure */
+/* get a handle to a statement structure */
   stmt = mysql_stmt_init(mysql);
   if (stmt) {
         puts("  statement init OK");
@@ -100,7 +98,7 @@ int main(int argc, char *argv[])
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * 4);     /***************************************************************************/
+  memset(bind, 0, sizeof(MYSQL_BIND) * 3);     /***************************************************************************/
 
   bind[0].u.indicator = id_ind;
   bind[0].buffer_type = MYSQL_TYPE_LONG;
