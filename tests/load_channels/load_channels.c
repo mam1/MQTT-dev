@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
   // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
 
-  unsigned int array_size = 4; 
+  unsigned int array_size = 3;                                  /**************************************************************/
 
 
 
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
     show_stmt_error(stmt);
   printf("  array size set to %i\n", array_size);
 
-  /* bind parameter */
+/* bind parameter */
   if(mysql_stmt_bind_param(stmt, bind))
     show_stmt_error(stmt);
   printf("%s\n", "  bind");
