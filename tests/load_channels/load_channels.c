@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * 4);     /***************************************************************************/
+  memset(bind, 0, sizeof(MYSQL_BIND) * 3);     /***************************************************************************/
 
   bind[0].u.indicator = id_ind;
   bind[0].buffer_type = MYSQL_TYPE_LONG;
