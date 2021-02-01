@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
   // char name_ind[] = {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_NULL}; 
   // char active_ind[] = {STMT_INDICATOR_NULL, STMT_INDICATOR_DEFAULT, STMT_INDICATOR_NTS};
 
-  unsigned int array_size = sizeof(MYSQL_STMT) * 4;                                  /**************************************************************/
+  unsigned int array_size = 3;                                  /**************************************************************/
 
 
 
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
   printf("%s\n", "  client library intialized");
 
 /* connect to MariaDB server */
-  mysql= mysql_init(NULL);
+  mysql = mysql_init(NULL);
   if (!mysql_real_connect(mysql, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, 0))
       show_mysql_error(mysql);
   printf("  connection to %s established\n", SERVER);
@@ -91,10 +91,8 @@ int main(int argc, char *argv[])
       } else {
         printf("statement init failed: %s\n", mysql_error(mysql));
       }
-
   if (mysql_stmt_prepare(stmt, "INSERT INTO channels VALUES (?,?,?)", -1))
     show_stmt_error(stmt);
-
   printf("%s\n", "  statement prepared");
 
   memset(bind, 0, sizeof(MYSQL_BIND) * 3);     /***************************************************************************/
@@ -107,7 +105,7 @@ int main(int argc, char *argv[])
 
   bind[2].buffer = name;
   bind[2].buffer_type = MYSQL_TYPE_STRING;
-  bind[2].length = name_length;
+  bind[2].length = &name_length;
 
  /* set array size */
   if(mysql_stmt_attr_set(stmt, STMT_ATTR_ARRAY_SIZE, &array_size))
