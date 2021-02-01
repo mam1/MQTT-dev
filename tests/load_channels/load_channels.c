@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   MYSQL           place;
   MYSQL           *mysql;
   MYSQL_STMT      *stmt;
-  MYSQL_BIND      bind[FIELD_COUNT];
+  MYSQL_BIND      bind[4];      /********************************************************************************************/
 
   /* initialize data for insert */
   const char *name[] = {"test channel 1", "test channel 2", "test channel 3", "test channel 4"};
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
   printf("%s\n", "  statement prepared");
 
-  memset(bind, 0, sizeof(MYSQL_BIND) * 3);     /***************************************************************************/
+  memset(bind, 0, sizeof(MYSQL_BIND) * 4);     /***************************************************************************/
 
   bind[0].u.indicator = id_ind;
   bind[0].buffer_type = MYSQL_TYPE_LONG;
