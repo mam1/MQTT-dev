@@ -19,18 +19,13 @@ int main(int argc, char *argv[])
    char name[2][256];
    char name_ind[2];
    long name_len[2];
-
    MYSQL_TIME *regdateptr[2];
    MYSQL_TIME regdate[2];
    char regdate_ind[2];
    int numorders[2];
    char numorders_ind[2];
    MYSQL_BIND bind[4];
-
    unsigned int numrows;
-
-
-
 
   printf("%s\n","\n*******************************************************************" );
   printf("%s\n", "\ntest data loader\n");
@@ -40,10 +35,7 @@ int main(int argc, char *argv[])
   printf("   USER     %s\n",USER);
   printf("   PSWD     %s\n\n",PSWD);
 
-
-
-
-
+/* connect to server */
    conn = mysql_init(NULL);
    if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
    {
@@ -51,6 +43,7 @@ int main(int argc, char *argv[])
       return 1;
    }
 
+/* setup statement */
    stmt = mysql_stmt_init(conn);
    if (mysql_stmt_prepare(stmt, "INSERT INTO customers VALUES(?, ?, ?, ?)", -1) != 0)
    {
@@ -59,6 +52,7 @@ int main(int argc, char *argv[])
       return 1;
    }
 
+/* initialize bind array */
    memset(bind, 0, sizeof(bind));
 
    bind[0].u.indicator = id_ind;
