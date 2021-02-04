@@ -7,7 +7,7 @@
 
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
-#define DATABASE    "test-schedule"
+#define DATABASE    "tq"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
 
 /* initailze client library */
   if (mysql_library_init(argc, argv, NULL)) {
-    printf("could not initialize MySQL client library\n");
+    printf("couldn't initialize MySQL client library\n");
     exit(1);
   }
 
