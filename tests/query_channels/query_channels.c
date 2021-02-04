@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
 
   result = mysql_store_result(conn);
   printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
-  
+  printf("number of fields %i\n", (int)mysql_num_fields(result));
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
   mysql_close(conn);
