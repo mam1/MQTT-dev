@@ -69,15 +69,14 @@ int main(int argc, char* argv[]) {
 /* connect to server */
   if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
   {
-    printf ("couldn't connect to database\n",);
+    printf("couldn't connect to database\n");
     exit(1);
   }
 
 
 
 
-  if (mysql_query(mysql, "SELECT * FROM channels"))
-
+  if (mysql_query(conn, "SELECT * FROM channels"))
     show_mysql_error(conn);
   
   // mysql_stmt_free_result(stmt);
