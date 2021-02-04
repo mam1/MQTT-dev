@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
   // MYSQL         place;
   MYSQL*        conn;
   MYSQL_RES*    result;
+  MYSQL_FIELD * cname;
   // MYSQL_STMT*   stmt;
   // MYSQL_BIND    bind[1];
   // MYSQL_BIND    result[1];
