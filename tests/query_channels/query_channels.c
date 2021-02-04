@@ -11,8 +11,7 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-/* in the sql table inode is an int unsigned and rpath is a varchar */
-#define SAMPLE_QUERY "select * from channels"
+
 
 
 static void show_mysql_error(MYSQL *mysql)
@@ -76,7 +75,7 @@ int main(int argc, char* argv[]) {
 
 
 
-  if (mysql_query(conn, "SELECT * FROM channels"))
+  if (mysql_query(conn, "SELECT * FROM Channels"))
     show_mysql_error(conn);
   
   // mysql_stmt_free_result(stmt);
