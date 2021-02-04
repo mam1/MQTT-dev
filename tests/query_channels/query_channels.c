@@ -25,6 +25,7 @@ static void show_mysql_error(MYSQL *mysql)
 int main(int argc, char* argv[]) {
   // MYSQL         place;
   MYSQL*        conn;
+  MYSQL_RES*    result;
   // MYSQL_STMT*   stmt;
   // MYSQL_BIND    bind[1];
   // MYSQL_BIND    result[1];
@@ -77,6 +78,9 @@ int main(int argc, char* argv[]) {
 
   if (mysql_query(conn, "SELECT * FROM Channels"))
     show_mysql_error(conn);
+
+  result = mysql_store_result(conn);
+
   
   // mysql_stmt_free_result(stmt);
   mysql_close(conn);
