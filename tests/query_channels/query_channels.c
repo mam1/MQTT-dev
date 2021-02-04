@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
   printf("number of collumns effected %i\n", mysql_num_rows(result) );
   
   // mysql_stmt_free_result(stmt);
-  mysql_free_result(conn);
+  mysql_free_result(result);
   mysql_close(conn);
   printf("%s\n", "normal termination");
 }
