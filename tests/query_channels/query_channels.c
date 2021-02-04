@@ -15,17 +15,17 @@
 #define SAMPLE_QUERY "select * from channels"
 
 int main(int argc, char* argv[]) {
-  MYSQL         place;
+  // MYSQL         place;
   MYSQL*        mysql;
-  MYSQL_STMT*   stmt;
-  MYSQL_BIND    bind[1];
-  MYSQL_BIND    result[1];
-  unsigned long length[1];
-  my_bool       is_null[1];
-  my_bool       error[1];
-  char*         rpath = "/";
-  unsigned long used;
-  unsigned long res = 0;
+  // MYSQL_STMT*   stmt;
+  // MYSQL_BIND    bind[1];
+  // MYSQL_BIND    result[1];
+  // unsigned long length[1];
+  // my_bool       is_null[1];
+  // my_bool       error[1];
+  // char*         rpath = "/";
+  // unsigned long used;
+  // unsigned long res = 0;
   int           err;
 
 
