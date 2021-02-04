@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
     show_mysql_error(conn);
 
   result = mysql_store_result(conn);
-  printf("number of collumns effected %i\n", mysql_num_rows(result) );
+  printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
   
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
