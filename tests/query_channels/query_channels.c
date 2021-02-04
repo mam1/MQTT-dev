@@ -14,9 +14,18 @@
 /* in the sql table inode is an int unsigned and rpath is a varchar */
 #define SAMPLE_QUERY "select * from channels"
 
+
+static void show_mysql_error(MYSQL *mysql)
+{
+  printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
+                                  mysql_sqlstate(mysql),
+                                  mysql_error(mysql));
+  exit(-1);
+}
+
 int main(int argc, char* argv[]) {
   // MYSQL         place;
-  MYSQL*        mysql;
+  MYSQL*        conn;
   // MYSQL_STMT*   stmt;
   // MYSQL_BIND    bind[1];
   // MYSQL_BIND    result[1];
@@ -28,13 +37,7 @@ int main(int argc, char* argv[]) {
   // unsigned long res = 0;
   // int           err;
 
-static void show_mysql_error(MYSQL *mysql)
-{
-  printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
-                                  mysql_sqlstate(mysql),
-                                  mysql_error(mysql));
-  exit(-1);
-}
+
 
 // static void show_stmt_error(MYSQL_STMT *stmt)
 // {
