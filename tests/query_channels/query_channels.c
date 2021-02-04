@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
 
 /* get handles  */
   conn = mysql_init(NULL);
-  if (stmt == NULL) {
-    fprintf(stderr, "couldn't initialize mysql: %s\n", mysql_error(conn));
+  if (conn == NULL) {
+    printf("couldn't initialize mysql: %s\n", mysql_error(conn));
     exit(1);
   }
   // stmt = mysql_stmt_init(conn);
@@ -62,18 +62,22 @@ int main(int argc, char* argv[]) {
 
 /* initailze client library */
   if (mysql_library_init(argc, argv, NULL)) {
-    fprintf(stderr, "could not initialize MySQL client library\n");
+    printf("could not initialize MySQL client library\n");
     exit(1);
   }
 
 /* connect to server */
   if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
   {
-    fprint("couldn't connect ot database\n",);
+    printf ("couldn't connect to database\n",);
     exit(1);
   }
-  
+
+
+
+
   if (mysql_query(mysql, "SELECT * FROM channels"))
+
     show_mysql_error(conn);
   
   // mysql_stmt_free_result(stmt);
