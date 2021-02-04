@@ -26,14 +26,30 @@ int main(int argc, char* argv[]) {
   // char*         rpath = "/";
   // unsigned long used;
   // unsigned long res = 0;
-  int           err;
+  // int           err;
+
+static void show_mysql_error(MYSQL *mysql)
+{
+  printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
+                                  mysql_sqlstate(mysql),
+                                  mysql_error(mysql));
+  exit(-1);
+}
+
+// static void show_stmt_error(MYSQL_STMT *stmt)
+// {
+//   printf("Error(%d) [%s] \"%s\"\n", mysql_stmt_errno(stmt),
+//                                   mysql_stmt_sqlstate(stmt),
+//                                   mysql_stmt_error(stmt));
+//   exit(-1);
+// }
 
 
 /* get handles  */
   conn = mysql_init(NULL);
   if (stmt == NULL) {
     fprintf(stderr, "couldn't initialize mysql: %s\n", mysql_error(conn));
-    exit(0);
+    exit(1);
   }
   // stmt = mysql_stmt_init(conn);
   // if (stmt == NULL) {
@@ -51,13 +67,11 @@ int main(int argc, char* argv[]) {
   if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
   {
     fprint("couldn't connect ot database\n",);
-    fprintf(stderr, "Error: %s\n", mysql_error(conn));
-    return 1;
+    exit(1);
   }
   
-
   if (mysql_query(mysql, "SELECT * FROM channels"))
-    show_mysql_error(mysql);
+    show_mysql_error(conn);
   
   // mysql_stmt_free_result(stmt);
   mysql_close(conn);
