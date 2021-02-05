@@ -24,9 +24,11 @@ static void show_mysql_error(MYSQL *mysql)
 
 int main(int argc, char* argv[]) {
   // MYSQL         place;
-  MYSQL*        conn;
-  MYSQL_RES*    result;
-  MYSQL_FIELD * cname;
+  MYSQL               *conn;
+  MYSQL_RES           *result;
+  MYSQL_FIELD         *cname;
+  MYSQL_FIELD_OFFSET  *coffset
+
   // MYSQL_STMT*   stmt;
   // MYSQL_BIND    bind[1];
   // MYSQL_BIND    result[1];
@@ -83,6 +85,13 @@ int main(int argc, char* argv[]) {
   result = mysql_store_result(conn);
   printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
   printf("number of fields %i\n", (int)mysql_num_fields(result));
+
+/* set fiels curser to channel name  */
+  coffset =  mysql_field_tell(result);
+  mysql_field_seek(result,coffset);
+  cname = mysql_fetch_field(MYSQL_RES * result);
+
+  printf("column name <%s>\n", cname.name);
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
   mysql_close(conn);
