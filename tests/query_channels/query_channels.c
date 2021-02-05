@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 
 /* set fiels curser to channel name  */
   // field =  mysql_field_tell(result);
-  mysql_field_seek(result,3);
+  mysql_field_seek(result,2);
   field = mysql_fetch_field(result);
 
   printf("column name <%s>\n", field->name);
