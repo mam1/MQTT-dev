@@ -87,9 +87,9 @@ int main(int argc, char* argv[]) {
   printf("number of fields %i\n", (int)mysql_num_fields(result));
 
 /* set fiels curser to channel name  */
-  field =  mysql_field_tell(result);
-  mysql_field_seek(result,coffset);
-  cname = mysql_fetch_field(MYSQL_RES * result);
+  // field =  mysql_field_tell(result);
+  mysql_field_seek(result,3);
+  field = mysql_fetch_field(result);
 
   printf("column name <%s>\n", field->name);
   // mysql_stmt_free_result(stmt);
