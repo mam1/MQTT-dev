@@ -97,6 +97,7 @@ int main(int argc, char* argv[]) {
   }
  
   row = mysql_fetch_row(result);
+  printf("data <%s> \n", row[3]);
   
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
