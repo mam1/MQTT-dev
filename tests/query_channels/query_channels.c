@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-
+  int i;
 
 
   if (mysql_query(conn, "SELECT * FROM Channels"))
@@ -88,8 +88,12 @@ int main(int argc, char* argv[]) {
 
 /* set fiels curser to channel name  */
   // field =  mysql_field_tell(result);
-  mysql_field_seek(result,2);
-  field = mysql_fetch_field(result);
+
+  for(i=0;i<(int)mysql_num_fields(result);i++){
+    mysql_field_seek(result,i);
+    field = mysql_fetch_field(result);
+  }
+ 
 
   printf("column name <%s>\n", field->name);
   // mysql_stmt_free_result(stmt);
