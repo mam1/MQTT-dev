@@ -30,39 +30,12 @@ int main(int argc, char* argv[]) {
   MYSQL_FIELD_OFFSET  *coffset;
   MYSQL_ROW           row;
 
-  // MYSQL_STMT*   stmt;
-  // MYSQL_BIND    bind[1];
-  // MYSQL_BIND    result[1];
-  // unsigned long length[1];
-  // my_bool       is_null[1];
-  // my_bool       error[1];
-  // char*         rpath = "/";
-  // unsigned long used;
-  // unsigned long res = 0;
-  // int           err;
-
-
-
-// static void show_stmt_error(MYSQL_STMT *stmt)
-// {
-//   printf("Error(%d) [%s] \"%s\"\n", mysql_stmt_errno(stmt),
-//                                   mysql_stmt_sqlstate(stmt),
-//                                   mysql_stmt_error(stmt));
-//   exit(-1);
-// }
-
-
 /* get handles  */
   conn = mysql_init(NULL);
   if (conn == NULL) {
     printf("couldn't initialize mysql: %s\n", mysql_error(conn));
     exit(1);
   }
-  // stmt = mysql_stmt_init(conn);
-  // if (stmt == NULL) {
-  //   fprintf(stderr, "couldn't initialize statement: %s\n", mysql_error(conn));
-  //   exit(0);
-  // }
 
 /* initailze client library */
   if (mysql_library_init(argc, argv, NULL)) {
@@ -77,9 +50,6 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  int i;
-
-
   if (mysql_query(conn, "SELECT * FROM Channels"))
     show_mysql_error(conn);
 
@@ -87,9 +57,6 @@ int main(int argc, char* argv[]) {
   printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
   printf("number of fields %i\n", (int)mysql_num_fields(result));
 
-/* set fiels curser to channel name  */
-  // field =  mysql_field_tell(result);
- 
   row = mysql_fetch_row(result);
   for(i=0;i<(int)mysql_num_fields(result);i++){
     mysql_field_seek(result,i);
@@ -97,8 +64,6 @@ int main(int argc, char* argv[]) {
     printf("column %i <%s> \t\t%s\n",i,field->name, row[i]);
   }
 
-  
-  // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
   mysql_close(conn);
   printf("%s\n", "normal termination");
