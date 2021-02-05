@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  if (mysql_query(conn, "SELECT * FROM Channels"))
+  if (mysql_query(conn, "SELECT * FROM Channels WHERE enabled = yes"))
     show_mysql_error(conn);
 
   result = mysql_store_result(conn);
