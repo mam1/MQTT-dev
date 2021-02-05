@@ -89,15 +89,14 @@ int main(int argc, char* argv[]) {
 
 /* set fiels curser to channel name  */
   // field =  mysql_field_tell(result);
-
+ 
+  row = mysql_fetch_row(result);
   for(i=0;i<(int)mysql_num_fields(result);i++){
     mysql_field_seek(result,i);
     field = mysql_fetch_field(result);
-    printf("column %i <%s>\n",i,field->name);
+    printf("column %i <%s> \t\t%s\n",i,field->name, row[i]);
   }
- 
-  row = mysql_fetch_row(result);
-  printf("data <%s> \n", row[2]);
+
   
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
