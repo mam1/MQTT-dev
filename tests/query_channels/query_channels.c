@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
   mysql_field_seek(result,coffset);
   cname = mysql_fetch_field(MYSQL_RES * result);
 
-  printf("column name <%s>\n", field.name);
+  printf("column name <%s>\n", field->name);
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
   mysql_close(conn);
