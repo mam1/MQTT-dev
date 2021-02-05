@@ -93,11 +93,11 @@ int main(int argc, char* argv[]) {
   for(i=0;i<(int)mysql_num_fields(result);i++){
     mysql_field_seek(result,i);
     field = mysql_fetch_field(result);
-    printf("column name <%s>\n", field->name);
+    printf("column %i <%s>\n",i,field->name);
   }
  
   row = mysql_fetch_row(result);
-  printf("data <%s> \n", row[3]);
+  printf("data <%s> \n", row[2]);
   
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
