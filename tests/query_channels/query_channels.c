@@ -30,6 +30,8 @@ int main(int argc, char* argv[]) {
   MYSQL_FIELD_OFFSET  *coffset;
   MYSQL_ROW           row;
 
+  int                 i;
+
   /* get handles  */
   conn = mysql_init(NULL);
   if (conn == NULL) {
