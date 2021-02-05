@@ -28,6 +28,7 @@ int main(int argc, char* argv[]) {
   MYSQL_RES           *result;
   MYSQL_FIELD         *field;
   MYSQL_FIELD_OFFSET  *coffset;
+  MYSQL_ROW           row;
 
   // MYSQL_STMT*   stmt;
   // MYSQL_BIND    bind[1];
@@ -95,7 +96,7 @@ int main(int argc, char* argv[]) {
     printf("column name <%s>\n", field->name);
   }
  
-
+  row = mysql_fetch_row(result);
   
   // mysql_stmt_free_result(stmt);
   mysql_free_result(result);
