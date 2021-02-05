@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
 	printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
 	printf("number of fields %i\n", (int)mysql_num_fields(result));
 
-	while (row = mysql_fetch_row(result) == NULL) {		
+	while ((row = mysql_fetch_row(result)) != NULL) {		
 		for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
