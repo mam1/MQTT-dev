@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		printf("%s\n","**************************************************" );
 		t = time(NULL);
-		printf("channel %s should be %s\n", field->name, get_channel_state() );		
+		printf("channel %s should be %s\n", field->name, row[i] );		
 		for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
