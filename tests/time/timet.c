@@ -35,8 +35,8 @@ int offset(int day, int hour, int minute){
 
 char * get_channel_state(time_t t){
 
-	char 	ret[]={"on"};
-	return ret;
+	
+	return "on";
 }
 
 int main(int argc, char* argv[]) {
