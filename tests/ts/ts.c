@@ -11,9 +11,6 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-
-
-
 static void show_mysql_error(MYSQL *mysql)
 {
 	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
@@ -58,12 +55,14 @@ int main(int argc, char* argv[]) {
 	printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
 	printf("number of fields %i\n", (int)mysql_num_fields(result));
 
-	while ((row = mysql_fetch_row(result)) != NULL) {		
+	while ((row = mysql_fetch_row(result)) != NULL) {
+		printf("%s\n","**************************************************" );		
 		for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
-			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+			printf("	column %i <%s> \t%s\n", i, field->name, row[i]);
 		}
+		printf("%s\n","**************************************************" );		
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
