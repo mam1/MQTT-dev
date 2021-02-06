@@ -27,17 +27,22 @@ static void show_mysql_error(MYSQL *mysql)
 	exit(-1);
 }
 
-int offset(int day, int hour, int minute){
+int get_offset(int day, int hour, int minute){
 	int 		off;
 	off = minute + (hour*MINUTES_PER_HOUR) + (day*MINUTES_PER_DAY);
 	return off;
 }
 
-// char * get_channel_state(void){
+void update_channel_state(void){
+	time_t 			t;
+	int 			offset;
+	time(&t);
+	offset = get_offset(t->tm_wday, t->tm_hour, t->tm_min);
 
+	printf("offset = %i\n", offset );
 	
-// 	return "on";
-// }
+	return;
+}
 
 int main(int argc, char* argv[]) {
 	// MYSQL         place;
@@ -59,9 +64,6 @@ int main(int argc, char* argv[]) {
         //    int    tm_isdst Daylight Savings flag.
 
 	int                 i;
-
-	/* currtent time */
-	time_t 			t;
 
 	/* get handles  */
 	conn = mysql_init(NULL);
@@ -87,20 +89,11 @@ int main(int argc, char* argv[]) {
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
 
-
-
-
-
-
-	
-	printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
-	printf("number of fields %i\n", (int)mysql_num_fields(result));
-
 	while ((row = mysql_fetch_row(result)) != NULL) {
-		printf("%s\n","**************************************************" );
 		mysql_field_seek(result, 7);
 		field = mysql_fetch_field(result);
-		printf("channel %s \n",  row[2] );		
+		printf("channel %s \n",  row[2] );
+		update_channel_state();	
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
