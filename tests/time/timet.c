@@ -33,7 +33,7 @@ int offset(int day, int hour, int minute){
 	return off;
 }
 
-char * get_channel_state(time_t t){
+char * get_channel_state(void){
 
 	
 	return "on";
@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
 			field = mysql_fetch_field(result);
 			printf("	column %i <%s> \t%s\t", i, field->name, row[i]);
 			t = time(NULL);
-			printf("channel %s should be %s\n", field->name, get_channel_state(time_t t) );
+			printf("channel %s should be %s\n", field->name, get_channel_state() );
 
 		}
 		printf("%s\n","**************************************************" );		
