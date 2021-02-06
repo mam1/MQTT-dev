@@ -41,7 +41,7 @@ void update_channel_state(void) {
 	timeinfo = localtime ( &rawtime );
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
 	printf("day of the week %i\n", timeinfo->tm_wday);
-	printf("offset = %i\n", offset(timeinfo->tm_wday,timeinfo->hour,timeinfo->tm_min));
+	printf("offset = %i\n", offset(timeinfo->tm_wday,timeinfo->tm_hour,timeinfo->tm_min));
 
 
 
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	// MYSQL         place;
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	MYSQL_FIELD         *field;
+	// MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
 
