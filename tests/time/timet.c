@@ -27,20 +27,31 @@ static void show_mysql_error(MYSQL *mysql)
 	exit(-1);
 }
 
-int get_offset(int day, int hour, int minute){
+int get_offset(int day, int hour, int minute) {
 	int 		off;
-	off = minute + (hour*MINUTES_PER_HOUR) + (day*MINUTES_PER_DAY);
+	off = minute + (hour * MINUTES_PER_HOUR) + (day * MINUTES_PER_DAY);
 	return off;
 }
 
-void update_channel_state(void){
-	time_t 			t;
-	int 			offset;
-	time(&t);
-	offset = get_offset(t.tm_wday, t.tm_hour, t.tm_min);
+void update_channel_state(void) {
+	time_t rawtime;
+	struct tm * timeinfo;
 
-	printf("offset = %i\n", offset );
-	
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	printf ( "Current local time and date: %s", asctime (timeinfo) );
+
+
+
+
+
+	// time_t			t;
+	// int 			offset;
+	// time(&t);
+	// // offset = get_offset(t.tm_wday, t.tm_hour, t.tm_min);
+	// printf("\nThis program has been writeen at (date and time): %s", ctime(&t));
+	// printf("offset = %i\n", offset );
+
 	return;
 }
 
@@ -53,15 +64,15 @@ int main(int argc, char* argv[]) {
 
 
 
-	       // int    tm_sec   Seconds [0,60].
-        //    int    tm_min   Minutes [0,59].
-        //    int    tm_hour  Hour [0,23].
-        //    int    tm_mday  Day of month [1,31].
-        //    int    tm_mon   Month of year [0,11].
-        //    int    tm_year  Years since 1900.
-        //    int    tm_wday  Day of week [0,6] (Sunday =0).
-        //    int    tm_yday  Day of year [0,365].
-        //    int    tm_isdst Daylight Savings flag.
+	// int    tm_sec   Seconds [0,60].
+	//    int    tm_min   Minutes [0,59].
+	//    int    tm_hour  Hour [0,23].
+	//    int    tm_mday  Day of month [1,31].
+	//    int    tm_mon   Month of year [0,11].
+	//    int    tm_year  Years since 1900.
+	//    int    tm_wday  Day of week [0,6] (Sunday =0).
+	//    int    tm_yday  Day of year [0,365].
+	//    int    tm_isdst Daylight Savings flag.
 
 	int                 i;
 
@@ -93,7 +104,7 @@ int main(int argc, char* argv[]) {
 		mysql_field_seek(result, 7);
 		field = mysql_fetch_field(result);
 		printf("channel %s \n",  row[2] );
-		update_channel_state();	
+		update_channel_state();
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
