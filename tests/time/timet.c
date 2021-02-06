@@ -33,11 +33,11 @@ int offset(int day, int hour, int minute){
 	return off;
 }
 
-char * get_channel_state(void){
+// char * get_channel_state(void){
 
 	
-	return "on";
-}
+// 	return "on";
+// }
 
 int main(int argc, char* argv[]) {
 	// MYSQL         place;
@@ -98,18 +98,9 @@ int main(int argc, char* argv[]) {
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		printf("%s\n","**************************************************" );
-		mysql_field_seek(result, 7);
-		field = mysql_fetch_field(result);
-
-		printf("channel %s should be %s\n", field->name, row[7] );		
-		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
-		// 	mysql_field_seek(result, i);
-		// 	field = mysql_fetch_field(result);
-		// 	printf("	column %i <%s> \t%s\t", i, field->name, row[i]);
-			
-
-		// }
-		printf("%s\n","**************************************************" );		
+		// mysql_field_seek(result, 7);
+		// field = mysql_fetch_field(result);
+		// printf("channel %s should be %s\n", field->name, row[7] );		
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
