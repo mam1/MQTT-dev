@@ -40,7 +40,7 @@ void update_channel_state(void) {
 	time ( &rawtime );
 	timeinfo = localtime ( &rawtime );
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
-
+	printf("day of the week %i\n", timeinfo->tm_wday);
 
 
 
