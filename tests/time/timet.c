@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		printf("%s\n","**************************************************" );
-		// mysql_field_seek(result, 7);
+		mysql_field_seek(result, 7);
 		// field = mysql_fetch_field(result);
 		// printf("channel %s should be %s\n", field->name, row[7] );		
 	}
