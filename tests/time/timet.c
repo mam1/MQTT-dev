@@ -37,7 +37,7 @@ void update_channel_state(void){
 	time_t 			t;
 	int 			offset;
 	time(&t);
-	offset = get_offset(t->tm_wday, t->tm_hour, t->tm_min);
+	offset = get_offset(t.tm_wday, t.tm_hour, t.tm_min);
 
 	printf("offset = %i\n", offset );
 	
