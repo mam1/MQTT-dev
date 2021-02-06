@@ -98,14 +98,17 @@ int main(int argc, char* argv[]) {
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		printf("%s\n","**************************************************" );
-		printf("channel %s should be %s\n", field->name, row[i] );		
-		for (i = 0; i < (int)mysql_num_fields(result); i++) {
-			mysql_field_seek(result, i);
-			field = mysql_fetch_field(result);
-			printf("	column %i <%s> \t%s\t", i, field->name, row[i]);
+		mysql_field_seek(result, 7);
+		field = mysql_fetch_field(result);
+
+		printf("channel %s should be %s\n", field->name, row[7] );		
+		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
+		// 	mysql_field_seek(result, i);
+		// 	field = mysql_fetch_field(result);
+		// 	printf("	column %i <%s> \t%s\t", i, field->name, row[i]);
 			
 
-		}
+		// }
 		printf("%s\n","**************************************************" );		
 	}
 	mysql_free_result(result);
