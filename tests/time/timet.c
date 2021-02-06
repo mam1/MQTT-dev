@@ -97,13 +97,14 @@ int main(int argc, char* argv[]) {
 	printf("number of fields %i\n", (int)mysql_num_fields(result));
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
-		printf("%s\n","**************************************************" );		
+		printf("%s\n","**************************************************" );
+		t = time(NULL);
+		printf("channel %s should be %s\n", field->name, get_channel_state() );		
 		for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
 			printf("	column %i <%s> \t%s\t", i, field->name, row[i]);
-			t = time(NULL);
-			printf("channel %s should be %s\n", field->name, get_channel_state() );
+			
 
 		}
 		printf("%s\n","**************************************************" );		
