@@ -48,14 +48,13 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	if (mysql_query(conn, "SELECT * FROM Channels WHERE enabled = 'yes'"))
+	if (mysql_query(conn, "SELECT channels.*, schedules.* FROM Channels WHERE enabled = 'yes'"))
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
-	printf("number of rows effected %i\n", (int)mysql_num_rows(result) );
-	printf("number of fields %i\n", (int)mysql_num_fields(result));
+	row = mysql_fetch_row(result);
 
-	while ((row = mysql_fetch_row(result)) != NULL) {
+	while (row != NULL) {
 		printf("%s\n","**************************************************" );		
 		for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
