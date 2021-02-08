@@ -119,7 +119,9 @@ int main(int argc, char* argv[]) {
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
 		/********************************************************************/
 
-		if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
+// WHERE offset = 100
+
+		if (mysql_query(conn, "SELECT * FROM Transitions "))
 			show_mysql_error(conn);
 		result2 = mysql_store_result(conn);
 		while ((row2 = mysql_fetch_row(result)) != NULL) {
