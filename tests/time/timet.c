@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
-	if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules ON Channels.scheduleID = Schedules.scheduleID WHERE Chanels.enabled = 'yes'"))
+	if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules ON Channels.scheduleID = Schedules.scheduleID WHERE enabled = 'yes'"))
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
 
