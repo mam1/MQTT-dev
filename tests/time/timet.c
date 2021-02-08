@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	// MYSQL         place;
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	MYSQL_FIELD         *field;
+	// MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
 
@@ -105,8 +105,8 @@ int main(int argc, char* argv[]) {
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		mysql_field_seek(result, 7);
-		field = mysql_fetch_field(result);
-		printf("processing channel <%s> \n",  row[2] );
+		// field = mysql_fetch_field(result);
+		printf("processing channel <%s> using schedule <%s>\n",  row[2], row[8] );
 /********************************************************************/		
 
 
