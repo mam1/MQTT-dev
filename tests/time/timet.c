@@ -41,7 +41,7 @@ void update_channel_state(void) {
 	timeinfo = localtime ( &rawtime );
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
 	printf("day of the week %i\n", timeinfo->tm_wday);
-	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday,timeinfo->tm_hour,timeinfo->tm_min));
+	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday, timeinfo->tm_hour, timeinfo->tm_min));
 	// printf("testing channel %s offset %i ........ new state %s\n", );
 
 
@@ -60,10 +60,9 @@ int main(int argc, char* argv[]) {
 	// MYSQL         place;
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	// MYSQL_FIELD         *field;
+	MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
-
-
+ 	int 				i;
 
 	// int    tm_sec   Seconds [0,60].
 	//    int    tm_min   Minutes [0,59].
@@ -107,14 +106,19 @@ int main(int argc, char* argv[]) {
 		mysql_field_seek(result, 7);
 		// field = mysql_fetch_field(result);
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8] );
-/********************************************************************/		
+		/********************************************************************/
 		printf("we now have %i columns\n", mysql_field_count(conn));
 
 
 
+		for (i = 0; i < (int)mysql_num_fields(result); i++) {
+			mysql_field_seek(result, i);
+			field = mysql_fetch_field(result);
+			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+		}
 
 
-/********************************************************************/			
+		/********************************************************************/
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
