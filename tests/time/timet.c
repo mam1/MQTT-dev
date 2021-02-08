@@ -113,7 +113,7 @@ int main(int argc, char* argv[]) {
 		int 			test_offset = 300;
 		char 			buff[500];
 
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i OR offset > %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, test_offset, test_offset);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, test_offset);
 
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
