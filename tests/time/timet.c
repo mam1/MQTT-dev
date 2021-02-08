@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 // WHERE offset = 100
 		int 			test_offset = 110;
 
-		if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = test_offset OR offset > test_offset"))
+		if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 110 OR offset > 110"))
 			show_mysql_error(conn);
 
 		result2 = mysql_store_result(conn);
