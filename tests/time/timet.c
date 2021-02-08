@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
 		if (mysql_query(conn, "SELECT * FROM Transitions "))
 			show_mysql_error(conn);
 		result2 = mysql_store_result(conn);
-		while ((row2 = mysql_fetch_row(result)) != NULL) {
+		while ((row2 = mysql_fetch_row(result2)) != NULL) {
 			for (i = 0; i < (int)mysql_num_fields(result2); i++) {
 				mysql_field_seek(result2, i);
 				field2 = mysql_fetch_field(result2);
