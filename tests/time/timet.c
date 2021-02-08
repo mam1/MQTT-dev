@@ -42,7 +42,7 @@ void update_channel_state(void) {
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
 	printf("day of the week %i\n", timeinfo->tm_wday);
 	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday,timeinfo->tm_hour,timeinfo->tm_min));
-printf("testing channel %s offset %i ........ new state %s\n", );
+	// printf("testing channel %s offset %i ........ new state %s\n", );
 
 
 
