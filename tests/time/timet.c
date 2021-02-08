@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 	MYSQL_RES 			*result2;
 	MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
- 	int 				i;
+	int 				i;
 
 	// int    tm_sec   Seconds [0,60].
 	//    int    tm_min   Minutes [0,59].
@@ -108,17 +108,25 @@ int main(int argc, char* argv[]) {
 		// mysql_field_seek(result, 7);
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
 		/********************************************************************/
-		
-if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
-		show_mysql_error(conn);
-	result2 = mysql_store_result(conn);
 
+		if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
+			show_mysql_error(conn);
+		result2 = mysql_store_result(conn);
 
-		for (i = 0; i < (int)mysql_num_fields(result); i++) {
-			mysql_field_seek(result, i);
+		for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+			mysql_field_seek(result2, i);
 			field = mysql_fetch_field(result);
 			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
 		}
+
+		mysql_free_result(result2);
+
+
+		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
+		// 	mysql_field_seek(result, i);
+		// 	field = mysql_fetch_field(result);
+		// 	printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+		// }
 
 
 		/********************************************************************/
