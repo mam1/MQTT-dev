@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 // WHERE offset = 100
 		int 			test_offset = 110;
 
-		if (mysql_query(conn, "SELECT * FROM Transitions WHERE (scheduleID = Channels.scheduleID) AND (offset = 90 OR offset > 90) ORDER BY scheduleID ASC, offset ASC; "))
+		if (mysql_query(conn, "SELECT * FROM Transitions WHERE (scheduleID = scheduleID) AND (offset = 90 OR offset > 90) ORDER BY scheduleID ASC, offset ASC; "))
 			show_mysql_error(conn);
 
 		result2 = mysql_store_result(conn);
