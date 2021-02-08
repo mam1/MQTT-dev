@@ -88,11 +88,11 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	conn2 = mysql_init(NULL);
-	if (conn2 == NULL) {
-		printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
-		exit(1);
-	}
+	// conn2 = mysql_init(NULL);
+	// if (conn2 == NULL) {
+	// 	printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
+	// 	exit(1);
+	// }
 
 	/* initailze client library */
 	if (mysql_library_init(argc, argv, NULL)) {
@@ -119,9 +119,9 @@ int main(int argc, char* argv[]) {
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
 		/********************************************************************/
 
-		if (mysql_query(conn2, "SELECT * FROM Transitions WHERE offset = 100"))
+		if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
 			show_mysql_error(conn);
-		result2 = mysql_store_result(conn2);
+		result2 = mysql_store_result(conn);
 		while ((row2 = mysql_fetch_row(result)) != NULL) {
 			for (i = 0; i < (int)mysql_num_fields(result2); i++) {
 				mysql_field_seek(result2, i);
@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		mysql_free_result(result2);
-		mysql_close(conn2);
+		mysql_close(conn);
 
 
 
