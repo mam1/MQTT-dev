@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
 		// field = mysql_fetch_field(result);
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8] );
 /********************************************************************/		
-		printf("we now have %i columns\n", mysql_field_count(result));
+		printf("we now have %i columns\n", mysql_field_count(conn));
 
 
 
