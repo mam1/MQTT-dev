@@ -110,11 +110,11 @@ int main(int argc, char* argv[]) {
 		/********************************************************************/
 
 // WHERE offset = 100
-		int 			target_offset = 200;
+		char 			target_offset[] = 200;
 		char 			buff[500];
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (offset = %s) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
 
 
 
