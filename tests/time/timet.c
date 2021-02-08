@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	// MYSQL         place;
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	MYSQL_FIELD         *field;
+	// MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
 
