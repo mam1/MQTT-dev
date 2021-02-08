@@ -101,20 +101,21 @@ int main(int argc, char* argv[]) {
 	if (mysql_query(conn, "SELECT * FROM Channels INNER JOIN Schedules USING(scheduleID) INNER JOIN Transitions USING(scheduleID)"))
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
+	printf("we now have %i columns\n", mysql_field_count(conn));
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		// mysql_field_seek(result, 7);
-		printf("processing <%s> using schedule <%s> state is %s\n",  row[2], row[8], row[11]);
+		printf("processing <%s> using schedule <%s> state is <%s>\n",  row[2], row[8], row[11]);
 		/********************************************************************/
-		printf("we now have %i columns\n", mysql_field_count(conn));
+		
 
 
 
-		for (i = 0; i < (int)mysql_num_fields(result); i++) {
-			mysql_field_seek(result, i);
-			field = mysql_fetch_field(result);
-			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
-		}
+		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
+		// 	mysql_field_seek(result, i);
+		// 	field = mysql_fetch_field(result);
+		// 	printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+		// }
 
 
 		/********************************************************************/
