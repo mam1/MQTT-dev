@@ -109,9 +109,9 @@ int main(int argc, char* argv[]) {
 		printf("processing <%s> using schedule <%s> state is <%s>\n",  row[2], row[8], row[11]);
 		/********************************************************************/
 		
-if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
-		show_mysql_error(conn);
-	result2 = mysql_store_result(conn);
+// if (mysql_query(conn, "SELECT * FROM Transitions WHERE offset = 100"))
+// 		show_mysql_error(conn);
+// 	result2 = mysql_store_result(conn);
 
 
 		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
