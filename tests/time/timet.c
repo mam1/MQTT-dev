@@ -42,7 +42,7 @@ void update_channel_state(void) {
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
 	printf("day of the week %i\n", timeinfo->tm_wday);
 	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday,timeinfo->tm_hour,timeinfo->tm_min));
-
+printf("testing channel %s offset %i ........ new state %s\n", );
 
 
 
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	if (mysql_query(conn, "SELECT * FROM Channels WHERE enabled = 'yes'"))
+	if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels m INNER JOIN Schedules c ON USING(schedulID) WHERE m.enabled = 'yes'"))
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
 
@@ -105,7 +105,14 @@ int main(int argc, char* argv[]) {
 		mysql_field_seek(result, 7);
 		field = mysql_fetch_field(result);
 		printf("channel %s \n",  row[2] );
-		update_channel_state();
+/********************************************************************/		
+
+
+
+
+
+
+/********************************************************************/		
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
