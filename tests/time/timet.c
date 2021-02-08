@@ -98,15 +98,15 @@ int main(int argc, char* argv[]) {
 	}
 
 	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
-	// if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
-	if (mysql_query(conn, "SELECT * FROM Channels"))
+	if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
+	// if (mysql_query(conn, "SELECT * FROM Channels"))
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		mysql_field_seek(result, 7);
 		field = mysql_fetch_field(result);
-		printf("processing channel <%s> \n",  row[2] );
+		printf("processing channel <%s> \n",  row[1] );
 /********************************************************************/		
 
 
