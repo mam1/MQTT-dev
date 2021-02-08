@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 // WHERE offset = 100
 		int 			test_offset = 110;
 
-		if (mysql_query(conn, "SELECT * FROM Transitions ORDER BY offset ASC WHERE offset = 90 OR offset > 90"))
+		if (mysql_query(conn, "SELECT * FROM Transitions ORDER BY offset ASC; WHERE offset = 90 OR offset > 90"))
 			show_mysql_error(conn);
 
 		result2 = mysql_store_result(conn);
