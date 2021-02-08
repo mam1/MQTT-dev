@@ -121,6 +121,9 @@ int main(int argc, char* argv[]) {
 
 // WHERE offset = 100
 		int 			test_offset = 110;
+		char 			buff[500];
+
+		sprintf(char buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = ", ...)
 
 		if (mysql_query(conn, "SELECT * FROM Transitions WHERE (scheduleID = 2) AND (offset = 90 OR offset > 90) ORDER BY scheduleID ASC, offset ASC; "))
 			show_mysql_error(conn);
