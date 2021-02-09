@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 		char 			buff[500];
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;",row[1], target_offset);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;",row[1], target_offset);
 
 
 
