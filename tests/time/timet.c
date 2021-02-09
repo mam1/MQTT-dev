@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
 
-		printf("%i rows returned from select from Transitions\n",mysql_num_rows(conn) );
+		printf("%i rows returned from select from Transitions\n",(int)mysql_num_rows(conn) );
 
 		result2 = mysql_store_result(conn);
 		while ((row2 = mysql_fetch_row(result2)) != NULL) {
