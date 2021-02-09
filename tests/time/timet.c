@@ -72,7 +72,8 @@ int main(int argc, char* argv[]) {
 
 	/* get handles  */
 	conn = mysql_init(NULL);
-	if (conn == NULL) {
+	if (conn == NULL) 
+	{
 		printf("couldn't initialize conn: %s\n", mysql_error(conn));
 		exit(1);
 	}
@@ -84,7 +85,8 @@ int main(int argc, char* argv[]) {
 	// }
 
 	/* initailze client library */
-	if (mysql_library_init(argc, argv, NULL)) {
+	if (mysql_library_init(argc, argv, NULL)) 
+	{
 		printf("couldn't initialize MySQL client library\n");
 		exit(1);
 	}
@@ -102,14 +104,16 @@ int main(int argc, char* argv[]) {
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
-	for (i = 0; i < (int)mysql_num_fields(result); i++) {
+	for (i = 0; i < (int)mysql_num_fields(result); i++) 
+	{
 		mysql_field_seek(result, i);
 		field = mysql_fetch_field(result);
 		printf("column %i  %s\n", i, field->name);
 	}
 	printf("\n");
 
-	while ((row = mysql_fetch_row(result)) != NULL) {
+	while ((row = mysql_fetch_row(result)) != NULL) 
+	{
 		printf("processing <%s> using schedule %s - %s\n", row[2], row[7], row[8]);
 		/********************************************************************/
 
@@ -122,22 +126,25 @@ int main(int argc, char* argv[]) {
 			show_mysql_error(conn);
 		result2 = mysql_store_result(conn);
 		printf("	we now have %i  active columns\n", mysql_num_fields(result2));
-		for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+		for (i = 0; i < (int)mysql_num_fields(result2); i++) 
+		{
 			mysql_field_seek(result2, i);
 			field2 = mysql_fetch_field(result2);
 			printf("	column %i  %s\n", i, field2->name);
 		}
 		printf("\n");
 		
-		while ((row2 = mysql_fetch_row(result2)) != NULL) {
-			for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+		while ((row2 = mysql_fetch_row(result2)) != NULL) 
+		{
+			for (i = 0; i < (int)mysql_num_fields(result2); i++) 
+			{
 				mysql_field_seek(result2, i);
 				field2 = mysql_fetch_field(result2);
 				printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
 			}
 		
 		mysql_free_result(result2);
-
+		}
 	}
 	mysql_free_result(result);
 	mysql_close(conn);
