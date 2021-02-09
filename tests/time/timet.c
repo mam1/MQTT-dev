@@ -106,7 +106,7 @@ int main(int argc, char* argv[]) {
 	for (i = 0; i < (int)mysql_num_fields(result); i++) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
-			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+			// printf("column %i <%s> \t%s\n", i, field->name, row[i]);
 		}
 	printf("\n");
 
