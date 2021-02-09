@@ -108,13 +108,13 @@ int main(int argc, char* argv[]) {
 		// mysql_field_seek(result, 7);
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
 		/********************************************************************/
-
+// AND (offset = %i)
 
 		int 			target_offset = 200;
 		char 			buff[500];
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", row[1], target_offset);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s)  ORDER BY scheduleID ASC, offset ASC;", row[1], target_offset);
 
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
