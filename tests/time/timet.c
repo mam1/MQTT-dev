@@ -140,13 +140,13 @@ int main(int argc, char* argv[]) {
 			{
 				mysql_field_seek(result2, i);
 				field2 = mysql_fetch_field(result2);
-				printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
+				printf("		column %i <%s> \t%s\n", i, field2->name, row2[i]);
 			}
-		
-		mysql_free_result(result2);
+		printf("%s\n"," " );
 		}
+		mysql_free_result(result2);
 	}
 	mysql_free_result(result);
-	mysql_close(conn);
+	mysql_close(conn);	
 	printf("%s\n", "normal termination");
 }
