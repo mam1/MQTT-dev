@@ -57,6 +57,7 @@ int main(int argc, char* argv[]) {
 	MYSQL_ROW           row;
 	MYSQL_ROW           row2;
 
+	char 				buff[500];
 	int 				i;
 
 	// int    tm_sec   Seconds [0,60].
@@ -68,8 +69,6 @@ int main(int argc, char* argv[]) {
 	//    int    tm_wday  Day of week [0,6] (Sunday =0).
 	//    int    tm_yday  Day of year [0,365].
 	//    int    tm_isdst Daylight Savings flag.
-
-	// int                 i;
 
 	/* get handles  */
 	conn = mysql_init(NULL);
@@ -104,37 +103,45 @@ int main(int argc, char* argv[]) {
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
 	for (i = 0; i < (int)mysql_num_fields(result); i++) {
-			mysql_field_seek(result, i);
-			field = mysql_fetch_field(result);
-			printf("column %i  %s\n", i,field->name);
-		}
+		mysql_field_seek(result, i);
+		field = mysql_fetch_field(result);
+		printf("column %i  %s\n", i, field->name);
+	}
 	printf("\n");
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
-		printf("processing <%s> using schedule %s - %s\n", row[2],row[7],row[8]);
+		printf("processing <%s> using schedule %s - %s\n", row[2], row[7], row[8]);
 		/********************************************************************/
 
 		int 			target_offset = 200;
-		char 			buff[500];
+
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s)",row[1]);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s)", row[1]);
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
-
-		printf("%i rows returned from select from Transitions\n",(int)mysql_num_rows(conn) );
-
 		result2 = mysql_store_result(conn);
-		while ((row2 = mysql_fetch_row(result2)) != NULL) {
-			for (i = 0; i < (int)mysql_num_fields(result2); i++) {
-				mysql_field_seek(result2, i);
-				field2 = mysql_fetch_field(result2);
-				printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
-			}
+		printf("we now have %i  active columns\n", mysql_num_fields(result2));
+		for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+			mysql_field_seek(result2, i);
+			field2 = mysql_fetch_field(result2);
+			printf("column %i  %s\n", i, field2->name);
+		}
+		printf("\n");
+
+		printf("%i rows returned from select from Transitions\n", (int)mysql_num_rows(conn) );
+
+		
+		// while ((row2 = mysql_fetch_row(result2)) != NULL) {
+		// 	for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+		// 		mysql_field_seek(result2, i);
+		// 		field2 = mysql_fetch_field(result2);
+		// 		printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
+		// 	}
 		}
 		mysql_free_result(result2);
 
-		
+
 
 
 		/********************************************************************/
