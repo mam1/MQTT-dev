@@ -77,11 +77,11 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	// conn2 = mysql_init(NULL);
-	// if (conn2 == NULL) {
-	// 	printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
-	// 	exit(1);
-	// }
+	conn2 = mysql_init(NULL);
+	if (conn2 == NULL) {
+		printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
+		exit(1);
+	}
 
 	/* initailze client library */
 	if (mysql_library_init(argc, argv, NULL)) {
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
 
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s)", row[1]);
+		sprintf(buff, "SELECT * FROM Transitions");
 		if (mysql_query(conn2, buff))
 			show_mysql_error(conn2);
 		result2 = mysql_store_result(conn2);
