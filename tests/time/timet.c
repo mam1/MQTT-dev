@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
 		/********************************************************************/
 
 // WHERE offset = 100
-		char 			target_offset[] = 200;
+		char 			target_offset[] = "200"S;
 		char 			buff[500];
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
