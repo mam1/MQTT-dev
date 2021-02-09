@@ -49,7 +49,7 @@ void update_channel_state(void) {
 int main(int argc, char* argv[]) {
 	// MYSQL         place;
 	MYSQL               *conn;
-	MYSQL               *conn2;
+	// MYSQL               *conn2;
 	MYSQL_RES           *result;
 	MYSQL_RES 			*result2;
 	MYSQL_FIELD         *field;
@@ -77,11 +77,11 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	conn2 = mysql_init(NULL);
-	if (conn2 == NULL) {
-		printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
-		exit(1);
-	}
+	// conn2 = mysql_init(NULL);
+	// if (conn2 == NULL) {
+	// 	printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
+	// 	exit(1);
+	// }
 
 	/* initailze client library */
 	if (mysql_library_init(argc, argv, NULL)) {
@@ -118,9 +118,9 @@ int main(int argc, char* argv[]) {
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
 		sprintf(buff, "SELECT * FROM Transitions");
-		if (mysql_query(conn2, buff))
-			show_mysql_error(conn2);
-		result2 = mysql_store_result(conn2);
+		if (mysql_query(conn, buff))
+			show_mysql_error(conn);
+		result2 = mysql_store_result(conn);
 		printf("	we now have %i  active columns\n", mysql_num_fields(result2));
 		for (i = 0; i < (int)mysql_num_fields(result2); i++) {
 			mysql_field_seek(result2, i);
@@ -129,7 +129,7 @@ int main(int argc, char* argv[]) {
 		}
 		printf("\n");
 
-		printf("%i rows returned from select from Transitions\n", (int)mysql_num_rows(conn2) );
+		printf("%i rows returned from select from Transitions\n", (int)mysql_num_rows(conn) );
 
 		
 		// while ((row2 = mysql_fetch_row(result2)) != NULL) {
@@ -140,13 +140,9 @@ int main(int argc, char* argv[]) {
 		// 	}
 		
 		mysql_free_result(result2);
-		mysql_close(conn2);
 
-
-
-		/********************************************************************/
 	}
 	mysql_free_result(result);
-
+	mysql_close(conn);
 	printf("%s\n", "normal termination");
 }
