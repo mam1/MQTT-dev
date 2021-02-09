@@ -112,8 +112,7 @@ int main(int argc, char* argv[]) {
 
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
-		// mysql_field_seek(result, 7);
-		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
+		printf("processing <%s> using schedule %s - %s\n", row[2],row[7],row[8]);
 		/********************************************************************/
 
 		int 			target_offset = 200;
