@@ -128,16 +128,13 @@ int main(int argc, char* argv[]) {
 			printf("	column %i  %s\n", i, field2->name);
 		}
 		printf("\n");
-
-		printf("%i rows returned from select from Transitions\n", (int)mysql_num_rows(conn) );
-
 		
-		// while ((row2 = mysql_fetch_row(result2)) != NULL) {
-		// 	for (i = 0; i < (int)mysql_num_fields(result2); i++) {
-		// 		mysql_field_seek(result2, i);
-		// 		field2 = mysql_fetch_field(result2);
-		// 		printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
-		// 	}
+		while ((row2 = mysql_fetch_row(result2)) != NULL) {
+			for (i = 0; i < (int)mysql_num_fields(result2); i++) {
+				mysql_field_seek(result2, i);
+				field2 = mysql_fetch_field(result2);
+				printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
+			}
 		
 		mysql_free_result(result2);
 
