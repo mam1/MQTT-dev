@@ -110,7 +110,6 @@ int main(int argc, char* argv[]) {
 		}
 	printf("\n");
 
-
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		printf("processing <%s> using schedule %s - %s\n", row[2],row[7],row[8]);
 		/********************************************************************/
@@ -120,9 +119,10 @@ int main(int argc, char* argv[]) {
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
 		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s)",row[1]);
-
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
+
+		printf("%i rows returned from select from Transitions\n",mysql_num_rows(conn) );
 
 		result2 = mysql_store_result(conn);
 		while ((row2 = mysql_fetch_row(result2)) != NULL) {
