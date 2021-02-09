@@ -104,13 +104,14 @@ int main(int argc, char* argv[]) {
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
 	for (i = 0; i < (int)mysql_num_fields(result); i++) {
+			printf("i = %i\n", i);
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
 			// printf("column %i <%s> \t%s\n", i, field->name, row[i]);
 		}
 	printf("\n");
 
-	
+
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		// mysql_field_seek(result, 7);
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
