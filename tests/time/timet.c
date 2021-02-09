@@ -102,7 +102,12 @@ int main(int argc, char* argv[]) {
 	if (mysql_query(conn, "SELECT * FROM Channels INNER JOIN Schedules USING(scheduleID) WHERE enabled = 'yes'"))
 		show_mysql_error(conn);
 	result = mysql_store_result(conn);
-	printf("we now have %i columns\n", mysql_field_count(conn));
+	printf("we now have %i  active columns\n", mysql_field_count(conn));
+	for (i = 0; i < (int)mysql_num_fields(result); i++) {
+			mysql_field_seek(result, i);
+			field = mysql_fetch_field(result);
+			printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+		}
 
 	while ((row = mysql_fetch_row(result)) != NULL) {
 		// mysql_field_seek(result, 7);
@@ -128,11 +133,7 @@ int main(int argc, char* argv[]) {
 		}
 		mysql_free_result(result2);
 
-		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
-		// 	mysql_field_seek(result, i);
-		// 	field = mysql_fetch_field(result);
-		// 	printf("column %i <%s> \t%s\n", i, field->name, row[i]);
-		// }
+		
 
 
 		/********************************************************************/
