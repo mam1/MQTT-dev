@@ -108,6 +108,8 @@ int main(int argc, char* argv[]) {
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
 			// printf("column %i <%s> \t%s\n", i, field->name, row[i]);
+			printf("column %i <%s>\n", i, row[i]);
+
 		}
 	printf("\n");
 
