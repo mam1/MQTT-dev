@@ -109,14 +109,12 @@ int main(int argc, char* argv[]) {
 		printf("processing <%s> using schedule <%s>\n",  row[2], row[8]);
 		/********************************************************************/
 
-// WHERE offset = 100
+
 		int 			target_offset = 200;
 		char 			buff[500];
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;",row[1], target_offset);
-
-
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", row[1], target_offset);
 
 		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
@@ -130,9 +128,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		mysql_free_result(result2);
-		// mysql_close(conn);
-
-
 
 		// for (i = 0; i < (int)mysql_num_fields(result); i++) {
 		// 	mysql_field_seek(result, i);
