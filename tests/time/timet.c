@@ -134,7 +134,7 @@ int main(int argc, char* argv[]) {
 		}
 		printf("\n");
 		
-		while ((row2 = mysql_fetch_row(result2)) != NULL) 
+		while (((row2 = mysql_fetch_row(result2)) != NULL) & (row2[2] < target_offset))
 		{
 			for (i = 0; i < (int)mysql_num_fields(result2); i++) 
 			{
