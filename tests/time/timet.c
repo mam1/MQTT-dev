@@ -42,16 +42,6 @@ void update_channel_state(void) {
 	printf ( "Current local time and date: %s", asctime (timeinfo) );
 	printf("day of the week %i\n", timeinfo->tm_wday);
 	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday, timeinfo->tm_hour, timeinfo->tm_min));
-	// printf("testing channel %s offset %i ........ new state %s\n", );
-
-
-
-	// time_t			t;
-	// int 			offset;
-	// time(&t);
-	// // offset = get_offset(t.tm_wday, t.tm_hour, t.tm_min);
-	// printf("\nThis program has been writeen at (date and time): %s", ctime(&t));
-	// printf("offset = %i\n", offset );
 
 	return;
 }
@@ -120,12 +110,15 @@ int main(int argc, char* argv[]) {
 		/********************************************************************/
 
 // WHERE offset = 100
-		int 			test_offset = 110;
+		int 			target_offset = 200;
 		char 			buff[500];
 
-		sprintf(char buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = ", ...)
+		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
+		sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %s) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;",row[1], target_offset);
 
-		if (mysql_query(conn, "SELECT * FROM Transitions WHERE (scheduleID = 2) AND (offset = 90 OR offset > 90) ORDER BY scheduleID ASC, offset ASC; "))
+
+
+		if (mysql_query(conn, buff))
 			show_mysql_error(conn);
 
 		result2 = mysql_store_result(conn);
