@@ -138,7 +138,7 @@ int main(int argc, char* argv[]) {
 		// 		field2 = mysql_fetch_field(result2);
 		// 		printf("column %i <%s> \t%s\n", i, field2->name, row2[i]);
 		// 	}
-		}
+		
 		mysql_free_result(result2);
 
 
