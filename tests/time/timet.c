@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 			printf("	column %i  %s\n", i, field2->name);
 		}
 		printf("\n");
-		
+		result2 = mysql_store_result(conn);
 		while (((row2 = mysql_fetch_row(result2)) != NULL) & (row2[2] < target_offset))
 		{
 			for (i = 0; i < (int)mysql_num_fields(result2); i++) 
