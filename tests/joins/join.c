@@ -27,7 +27,8 @@ static void show_mysql_error(MYSQL *mysql)
 	exit(-1);
 }
 
-int get_offset(int day, int hour, int minute) {
+int get_offset(int day, int hour, int minute)
+{
 	int 		off;
 	off = minute + (hour * MINUTES_PER_HOUR) + (day * MINUTES_PER_DAY);
 	return off;
@@ -46,7 +47,8 @@ void update_channel_state(void) {
 	return;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 	// MYSQL         place;
 	MYSQL               *conn;
 	// MYSQL               *conn2;
@@ -56,36 +58,19 @@ int main(int argc, char* argv[]) {
 	MYSQL_FIELD         *field2;
 	MYSQL_ROW           row;
 	MYSQL_ROW           row2;
-
 	char 				buff[500];
 	int 				i;
 
-	// int    tm_sec   Seconds [0,60].
-	//    int    tm_min   Minutes [0,59].
-	//    int    tm_hour  Hour [0,23].
-	//    int    tm_mday  Day of month [1,31].
-	//    int    tm_mon   Month of year [0,11].
-	//    int    tm_year  Years since 1900.
-	//    int    tm_wday  Day of week [0,6] (Sunday =0).
-	//    int    tm_yday  Day of year [0,365].
-	//    int    tm_isdst Daylight Savings flag.
-
 	/* get handles  */
 	conn = mysql_init(NULL);
-	if (conn == NULL) 
+	if (conn == NULL)
 	{
 		printf("couldn't initialize conn: %s\n", mysql_error(conn));
 		exit(1);
 	}
 
-	// conn2 = mysql_init(NULL);
-	// if (conn2 == NULL) {
-	// 	printf("couldn't initialize conn2: %s\n", mysql_error(conn2));
-	// 	exit(1);
-	// }
-
 	/* initailze client library */
-	if (mysql_library_init(argc, argv, NULL)) 
+	if (mysql_library_init(argc, argv, NULL))
 	{
 		printf("couldn't initialize MySQL client library\n");
 		exit(1);
@@ -100,20 +85,17 @@ int main(int argc, char* argv[]) {
 
 	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
 	// if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
-	if (mysql_query(conn, "SELECT * FROM Channels JOIN Transitions USING(scheduleID)")
-		show_mysql_error(conn);
-	result = mysql_store_result(conn);
-	printf("we now have %i  active columns\n", mysql_num_fields(result));
-	for (i = 0; i < (int)mysql_num_fields(result); i++) 
+	if (mysql_query(conn, "SELECT Channels *, Transitions * FROM Channels JOIN Transitions USING(scheduleID)") show_mysql_error(conn);
+	        result = mysql_store_result(conn);
+	        printf("we now have %i  active columns\n", mysql_num_fields(result));
+	        for (i = 0; i < (int)mysql_num_fields(result); i++)
 	{
 		mysql_field_seek(result, i);
-		field = mysql_fetch_field(result);
-		printf("column %i  %s\n", i, field->name);
-	}
+			field = mysql_fetch_field(result);
+			printf("column %i  %s\n", i, field->name);
+		}
 	printf("\n");
-
-	
 	mysql_free_result(result);
-	mysql_close(conn);	
+	mysql_close(conn);
 	printf("%s\n", "normal termination");
 }
