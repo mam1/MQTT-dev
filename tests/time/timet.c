@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
 		printf("processing <%s> using schedule %s - %s\n", row[2], row[7], row[8]);
 		/********************************************************************/
 
-		char 			target_offset[] = "800";
+		char 			target_offset[] = "200";
 
 
 		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
