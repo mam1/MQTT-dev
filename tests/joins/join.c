@@ -112,40 +112,7 @@ int main(int argc, char* argv[]) {
 	}
 	printf("\n");
 
-	while ((row = mysql_fetch_row(result)) != NULL) 
-	{
-		printf("processing <%s> using schedule %s - %s\n", row[2], row[7], row[8]);
-		/********************************************************************/
-
-		char 			target_offset[] = "200";
-
-
-		// sprintf(buff, "SELECT * FROM Transitions WHERE (scheduleID = %i) AND (offset = %i) ORDER BY scheduleID ASC, offset ASC;", scheduleID, target_offset);
-		sprintf(buff, "SELECT * FROM Transitions WHERE Transitions.scheduleID = %s AND Transitions.offset = %s ORDER BY Transitions.scheduleID ASC, Transitions.offset ASC;", row[0], target_offset);
-		if (mysql_query(conn, buff))
-			show_mysql_error(conn);
-		result2 = mysql_store_result(conn);
-		printf("	we now have %i  active columns\n", mysql_num_fields(result2));
-		for (i = 0; i < (int)mysql_num_fields(result2); i++) 
-		{
-			mysql_field_seek(result2, i);
-			field2 = mysql_fetch_field(result2);
-			printf("	column %i  %s\n", i, field2->name);
-		}
-		printf("\n");
-		result2 = mysql_store_result(conn);
-		while (((row2 = mysql_fetch_row(result2)) != NULL) & (row2[2] < target_offset))
-		{
-			for (i = 0; i < (int)mysql_num_fields(result2); i++) 
-			{
-				mysql_field_seek(result2, i);
-				field2 = mysql_fetch_field(result2);
-				printf("		column %i <%s> \t%s\n", i, field2->name, row2[i]);
-			}
-		printf("%s\n"," " );
-		}
-		mysql_free_result(result2);
-	}
+	
 	mysql_free_result(result);
 	mysql_close(conn);	
 	printf("%s\n", "normal termination");

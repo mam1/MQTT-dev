@@ -25,6 +25,6 @@ export project_BINARIES := $(project_DIRECTORY)/bin
 export project_LIB := MQTT mariadbclient
 
 
-program_DIRECTORY := ~/Git/MQTT-dev/tests/joins
-program_NAME := join
+program_DIRECTORY := ~/Git/MQTT-dev/tests/time
+program_NAME := timet
 include $(project_DIRECTORY)/mastermake/Makefile
