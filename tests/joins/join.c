@@ -54,11 +54,11 @@ int main(int argc, char* argv[])
 	MYSQL               *conn;
 	// MYSQL               *conn2;
 	MYSQL_RES           *result;
-	MYSQL_RES 			*result2;
+
 	MYSQL_FIELD         *field;
-	MYSQL_FIELD         *field2;
+
 	MYSQL_ROW           row;
-	MYSQL_ROW           row2;
+
 	char 				buff[500];
 	int 				i;
 
@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 
 	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
 	// if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
-	if (mysql_query(conn, "SELECT Channels *, Transitions * FROM Channels JOIN Transitions USING(scheduleID)")) show_mysql_error(conn);
+	if (mysql_query(conn, "SELECT Channels.*, Transitions.* FROM Channels JOIN Transitions USING(scheduleID)")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
 	for (i = 0; i < (int)mysql_num_fields(result); i++)
