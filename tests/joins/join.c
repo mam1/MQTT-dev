@@ -34,7 +34,8 @@ int get_offset(int day, int hour, int minute)
 	return off;
 }
 
-void update_channel_state(void) {
+void update_channel_state(void)
+{
 	time_t rawtime;
 	struct tm * timeinfo;
 
@@ -85,15 +86,15 @@ int main(int argc, char* argv[])
 
 	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
 	// if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
-	if (mysql_query(conn, "SELECT Channels *, Transitions * FROM Channels JOIN Transitions USING(scheduleID)") show_mysql_error(conn);
-	        result = mysql_store_result(conn);
-	        printf("we now have %i  active columns\n", mysql_num_fields(result));
-	        for (i = 0; i < (int)mysql_num_fields(result); i++)
+	if (mysql_query(conn, "SELECT Channels *, Transitions * FROM Channels JOIN Transitions USING(scheduleID)")) show_mysql_error(conn);
+	result = mysql_store_result(conn);
+	printf("we now have %i  active columns\n", mysql_num_fields(result));
+	for (i = 0; i < (int)mysql_num_fields(result); i++)
 	{
 		mysql_field_seek(result, i);
-			field = mysql_fetch_field(result);
-			printf("column %i  %s\n", i, field->name);
-		}
+		field = mysql_fetch_field(result);
+		printf("column %i  %s\n", i, field->name);
+	}
 	printf("\n");
 	mysql_free_result(result);
 	mysql_close(conn);
