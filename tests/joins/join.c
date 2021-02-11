@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND (Transitions.transition_offset > 200) OR Transitions.transition_offset > 400")) show_mysql_error(conn);
+	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset > 200 AND Transitions.transition_offset > 400")) show_mysql_error(conn);
 
 	// if (mysql_query(conn, "SELECT * FROM Channels")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
