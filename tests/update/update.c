@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 {
 	char 			cnum[20];
 	char 			offset[20];
-	char 			buff[200];
+	char 			buff[2000];
 
 	/* get handles  */
 	conn = mysql_init(NULL);
