@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset = 200")) show_mysql_error(conn);
+	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset = 400")) show_mysql_error(conn);
 
 	// if (mysql_query(conn, "SELECT * FROM Channels")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 		{
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
-			printf("\tcolumn %i-%s\t<%s>\n", i, field->name, row[i]);
+			printf("  column %i \t<%s>\n", i, row[i]);
 		}
 		printf("\n");
 
