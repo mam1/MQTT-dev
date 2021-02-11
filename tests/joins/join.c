@@ -109,6 +109,7 @@ int main(int argc, char* argv[])
 		if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset < 90 ")) show_mysql_error(conn);
 		result = mysql_store_result(conn);
 		rows_returned = (int)mysql_num_rows(result);
+		printf("%i rows returned\n", rows_returned);
 		if (rows_returned == 0)
 		{
 			printf("no change to channel state\n");
