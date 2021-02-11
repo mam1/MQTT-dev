@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
 		mysql_free_result(result);
 	}
 
-	else
+	if (rows_returned > 1)
 	{
 		mysql_free_result(result);
 		if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset < 200 ")) show_mysql_error(conn);
