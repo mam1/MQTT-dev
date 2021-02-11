@@ -91,6 +91,7 @@ int main(int argc, char* argv[])
 	if (rows_returned == 0)
 	{
 		printf("%s\n", "no hit");
+		mysql_free_result(result);
 	}
 	else if (rows_returned == 1)
 	{
@@ -99,19 +100,29 @@ int main(int argc, char* argv[])
 		// field = mysql_fetch_field(result);
 		printf("hit\n");
 		printf("set channel state to %s\n", row[10]);
+		mysql_free_result(result);
 	}
 
-	else {
+	else
+	{
 		mysql_free_result(result);
 		if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset < 200 ")) show_mysql_error(conn);
 		result = mysql_store_result(conn);
 		rows_returned = (int)mysql_num_rows(result);
-
+		if (rows_returned == 0)
+		{
+			printf("no change to channel state\n");
+		}
+		else
+		{
+			row = mysql_fetch_row(result);
+			printf("set channel state to %s\n", row[10]);
+		}
 		// mysql_data_seek(result, 0);
 		// mysql_field_seek(result, 6);
 		// field = mysql_fetch_field(result);
 
-		printf("set channel state to %s\n", row[6]);
+
 
 		// printf(" %i  active columns,  ", mysql_num_fields(result));
 		// printf("%i rows returned\n", (rows_returned);
@@ -122,7 +133,7 @@ int main(int argc, char* argv[])
 		// 	printf("column %i  %s\n", i, field->name);
 		// }
 		// printf("\n");
-
+		mysql_free_result(result);
 	}
 
 
