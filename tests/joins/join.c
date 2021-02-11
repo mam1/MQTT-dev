@@ -50,16 +50,11 @@ void update_channel_state(void)
 
 int main(int argc, char* argv[])
 {
-	// MYSQL         place;
 	MYSQL               *conn;
-	// MYSQL               *conn2;
 	MYSQL_RES           *result;
-
 	MYSQL_FIELD         *field;
-
 	MYSQL_ROW           row;
-
-	char 				buff[500];
+ 				
 	int 				i;
 
 	/* get handles  */
@@ -102,8 +97,8 @@ int main(int argc, char* argv[])
 		for (i = 0; i < (int)mysql_num_fields(result); i++) 
 		{
 			mysql_field_seek(result1, i);
-			field = mysql_fetch_field(result2);
-			printf("	column %i\t%s\t%s\n", i, field2->name, row[i]);
+			field = mysql_fetch_field(result);
+			printf("	column %i\t%s\t%s\n", i, field->name, row[i]);
 		}
 		printf("\n");
 
