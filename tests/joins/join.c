@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 		printf("%s\n", "no hit");
 		mysql_free_result(result);
 	}
-	else if (rows_returned == 1)
+	if (rows_returned == 1)
 	{
 		row = mysql_fetch_row(result);
 		// mysql_field_seek(result, 6);
