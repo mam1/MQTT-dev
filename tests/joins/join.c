@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		mysql_free_result(result);
-		if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset < 410  ORDER BY Transitions.transition_offset ASC")) show_mysql_error(conn);
+		if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset < 410  ORDER BY Transitions.scheduleID ASC, Transitions.transition_offset ASC")) show_mysql_error(conn);
 		result = mysql_store_result(conn);
 		rows_returned = (int)mysql_num_rows(result);
 		printf("%i rows returned\n", rows_returned);
