@@ -96,6 +96,18 @@ int main(int argc, char* argv[])
 		printf("column %i  %s\n", i, field->name);
 	}
 	printf("\n");
+
+	while ((row = mysql_fetch_row(result)) != NULL) 
+	{
+		for (i = 0; i < (int)mysql_num_fields(result); i++) 
+		{
+			mysql_field_seek(result1, i);
+			field = mysql_fetch_field(result2);
+			printf("	column %i\t%s\t%s\n", i, field2->name, row[i]);
+		}
+		printf("\n");
+
+
 	mysql_free_result(result);
 	mysql_close(conn);
 	printf("%s\n", "normal termination");
