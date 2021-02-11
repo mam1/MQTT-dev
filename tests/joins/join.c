@@ -86,11 +86,11 @@ int main(int argc, char* argv[])
 	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset = 200")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	rows_returned = (int)mysql_num_rows(result);
-	if(rows_returned = 0)
+	if(rows_returned == 0)
 	{
 		printf("%s\n", "no hit");
 	}
-	else if (rows_returned = 1)
+	else if (rows_returned == 1)
 	{
 		printf("hit\n");
 	}
