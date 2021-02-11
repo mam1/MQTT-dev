@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
 	// 	printf("column %i  %s\n", i, field->name);
 	// }
 	// printf("\n");
-
+	mysql_data_seek(result, 0)
 	while ((row = mysql_fetch_row(result)) != NULL)
 	{
 		for (i = 0; i < (int)mysql_num_fields(result); i++)
