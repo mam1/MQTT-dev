@@ -83,14 +83,14 @@ int main(int argc, char* argv[])
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
 	printf("%i rows returned\n", mysql_num_rows(result));
-	// for (i = 0; i < (int)mysql_num_fields(result); i++)
-	// {
-	// 	mysql_field_seek(result, i);
-	// 	field = mysql_fetch_field(result);
-	// 	printf("column %i  %s\n", i, field->name);
-	// }
-	// printf("\n");
-	mysql_data_seek(result, 0)
+	for (i = 0; i < (int)mysql_num_fields(result); i++)
+	{
+		mysql_field_seek(result, i);
+		field = mysql_fetch_field(result);
+		printf("column %i  %s\n", i, field->name);
+	}
+	printf("\n");
+	mysql_data_seek(result, 0);
 	while ((row = mysql_fetch_row(result)) != NULL)
 	{
 		for (i = 0; i < (int)mysql_num_fields(result); i++)
