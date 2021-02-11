@@ -95,10 +95,10 @@ int main(int argc, char* argv[])
 	else if (rows_returned == 1)
 	{
 		row = mysql_fetch_row(result);
-		mysql_field_seek(result, 6);
-		field = mysql_fetch_field(result);
+		// mysql_field_seek(result, 6);
+		// field = mysql_fetch_field(result);
 		printf("hit\n");
-		printf("set channel state to %s\n", row[6]);
+		printf("set channel state to %s\n", row[10]);
 	}
 
 	else {
