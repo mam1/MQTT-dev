@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	MYSQL_RES           *result;
 	MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
- 				
+
 	int 				i;
 
 	/* get handles  */
@@ -79,8 +79,6 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	// if (mysql_query(conn, "SELECT Channels.*,Schedules.* FROM Channels C INNER JOIN Schedules S USING(scheduleID) WHERE C.enabled = 'yes'"))
-	// if (mysql_query(conn, "SELECT * FROM Channels  INNER JOIN Schedules USING(scheduleID) INNER JOIN Sensors USING(sensorID) INNER JOIN Transitions USING(scheduleID)"))
 	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) JOIN Schedules USING(scheduleID)")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
@@ -92,9 +90,9 @@ int main(int argc, char* argv[])
 	}
 	printf("\n");
 
-	while ((row = mysql_fetch_row(result)) != NULL) 
+	while ((row = mysql_fetch_row(result)) != NULL)
 	{
-		for (i = 0; i < (int)mysql_num_fields(result); i++) 
+		for (i = 0; i < (int)mysql_num_fields(result); i++)
 		{
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
@@ -102,7 +100,7 @@ int main(int argc, char* argv[])
 		}
 		printf("\n");
 
-
+	}
 	mysql_free_result(result);
 	mysql_close(conn);
 	printf("%s\n", "normal termination");
