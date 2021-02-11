@@ -82,6 +82,7 @@ int main(int argc, char* argv[])
 	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) JOIN Schedules USING(scheduleID)")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
+	printf("%i rows returned\n", mysql_num_rows(result));
 	// for (i = 0; i < (int)mysql_num_fields(result); i++)
 	// {
 	// 	mysql_field_seek(result, i);
