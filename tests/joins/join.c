@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* 
+	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* /
 		FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID)")) show_mysql_error(conn);
 
 	// if (mysql_query(conn, "SELECT * FROM Channels")) show_mysql_error(conn);
