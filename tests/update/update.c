@@ -91,11 +91,10 @@ int main(int argc, char* argv[])
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-
 	printf("enter channel number >");
-	fgets(cnum);
+	fgets(cnum,1,stdin);
 	printf("enter offset >");
-	fgets(offset);
+	fgets(offset,1,stdin);
 
 	sprintf(buff, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset = %s ", offset);
 	if (mysql_query(conn, buff)) show_mysql_error(conn);
