@@ -80,20 +80,15 @@ int main(int argc, char* argv[])
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	// if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset > 410  AND Transitions.transition_offset < 800")) show_mysql_error(conn);
-	// if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset > 410  AND Transitions.transition_offset < 800")) show_mysql_error(conn);
-
+	/* see if we have a hit on offset */
 	if (mysql_query(conn, "SELECT Channels.*, Transitions.*, Schedules.* FROM Channels JOIN Transitions USING(scheduleID) INNER JOIN Schedules USING(scheduleID) WHERE Channels.scheduleID = Transitions.scheduleID AND Transitions.transition_offset = 410 ")) show_mysql_error(conn);
 	result = mysql_store_result(conn);
 	rows_returned = (int)mysql_num_rows(result);
-	printf("%i rows returned\n", rows_returned);
-
+	printf("%i rows returned from = query\n", rows_returned);
 
 	if (rows_returned == 1)
 	{
 		row = mysql_fetch_row(result);
-		// mysql_field_seek(result, 6);
-		// field = mysql_fetch_field(result);
 		printf("hit\n");
 		printf("set channel state to %s\n", row[10]);
 		mysql_free_result(result);
@@ -116,39 +111,9 @@ int main(int argc, char* argv[])
 			row = mysql_fetch_row(result);
 			printf("set channel state to %s\n", row[10]);
 		}
-		// mysql_data_seek(result, 0);
-		// mysql_field_seek(result, 6);
-		// field = mysql_fetch_field(result);
-
-
-
-		// printf(" %i  active columns,  ", mysql_num_fields(result));
-		// printf("%i rows returned\n", (rows_returned);
-		// for (i = 0; i < (int)mysql_num_fields(result); i++)
-		// {
-		// 	mysql_field_seek(result, i);
-		// 	field = mysql_fetch_field(result);
-		// 	printf("column %i  %s\n", i, field->name);
-		// }
-		// printf("\n");
 		mysql_free_result(result);
 	}
 
-
-
-// mysql_data_seek(result, 0);
-// while ((row = mysql_fetch_row(result)) != NULL)
-// {
-// 	for (i = 0; i < (int)mysql_num_fields(result); i++)
-// 	{
-// 		mysql_field_seek(result, i);
-// 		field = mysql_fetch_field(result);
-// 		printf("  column %i \t<%s>\n", i, row[i]);
-// 	}
-// 	printf("\n");
-
-// }
-// mysql_free_result(result);
 mysql_close(conn);
 printf("%s\n", "normal termination");
 }
