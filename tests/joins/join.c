@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 		printf("set channel state to %s\n", row[10]);
 		mysql_free_result(result);
 	}
-
+printf("$$$$$$$$$$****************$$$$$$$$$$$$\n");
 	if (rows_returned > 1)
 	{
 		printf("$$$$$$$$$$$$$$$$$$$$$$\n");
