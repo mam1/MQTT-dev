@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 		{
 			mysql_field_seek(result, i);
 			field = mysql_fetch_field(result);
-			printf("	column %i\t\t%s\t<%s>\n", i, field->name, row[i]);
+			printf("	column %i\t%s\t\t<%s>\n", i, field->name, row[i]);
 		}
 		printf("\n");
 
