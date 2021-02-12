@@ -1,8 +1,8 @@
 #ifndef IPC_H_
 #define IPC_H_
 
-#include "shared.h"
-#include "typedefs.h"
+#include "/home/mam1/Git/MQTT-dev/include/shared.h"
+#include "/hhome/mam1/Git/MQTT-dev/include/typedefs.h"
 
 /* ipc version info */
 #define _MAJOR_VERSION_ipc    10
