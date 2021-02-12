@@ -13,9 +13,9 @@ int main(int argc, char *argv[])
 
 	printf("%s\n", "conwatcher active");
 
-	memset(linebuff, 0, sizeof(linebuff));
+	// memset(linebuff, 0, sizeof(linebuff));
 	while((c=getc(stdin)) != '\n') *buffptr++ =  c;
-	*buffptr = '\n'	
+	*buffptr = '\n';	
 	printf("%s\n", linebuff);
 
 // test for escape
