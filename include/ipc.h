@@ -7,7 +7,6 @@
 /* ipc version info */
 #define _MAJOR_VERSION_ipc    10
 #define _MINOR_VERSION_ipc   4
-#define _MINOR_REVISION_ipc   0
 
 /* ipc fuctions */
  int 	ipc_open(char *,int);
