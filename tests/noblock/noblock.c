@@ -7,14 +7,23 @@
 
 
 int main(int argc, char *argv[]) {
-  const char      file[]="conwatcher";
-  pid_t fork_pid = fork();
-  if (fork_pid == 0) {
+
+  const char        file[]="conwatcher2";
+  pid_t             fork_pid;
+
+
+  fork_pid = fork();
+
+  if (fork_pid == 0) 
+  {
     printf("Hello from the child!\n");
     execl(file,NULL,NULL);
-  } else {
+  } 
+  else 
+  {
     printf("Hello from the parent!\n");
   }
+
   return 0;
 }
 
