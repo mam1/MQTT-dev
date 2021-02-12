@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
   const char        file[]="conwatcher";
   pid_t             fork_pid;
-  char *args[]={"file,NULL}; 
+  char              *args[]={file,NULL}; 
 
 
 
