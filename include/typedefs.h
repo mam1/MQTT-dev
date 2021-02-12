@@ -21,7 +21,7 @@
 
 
 /* line queue data strcuctures  */
-typedef {int;} _offset;
+typedef int 		_offset;
 
 typedef struct {
 	int				base;
