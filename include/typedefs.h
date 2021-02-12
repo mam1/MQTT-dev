@@ -18,6 +18,9 @@
 // 	int				payload_size;
 // } _node;
 
+ /* buffer for semaphores */
+ typedef struct sembuf SEMBUF;
+
 /* system configuration data */
 typedef struct {
 	int         major_version;
