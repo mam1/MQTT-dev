@@ -2,7 +2,7 @@
 // Then the I/O can go on in the usual blocking fashion, but the data can be inserted into a queue to be processed on another thread.
 
 
-#include <unistd.h>
+#include <unistd.h>   //sleep
 #include <stdio.h>
 
 
@@ -22,8 +22,11 @@ int main(int argc, char *argv[]) {
 
   printf("Hello from the parent!\n");
   printf("%s\n", "main process running");
-  
-  
+  sleep(10);
+  printf("%s\n", "main process running");
+  sleep(100);
+  printf("%s\n", "main process running");
+
 
   return 0;
 }
