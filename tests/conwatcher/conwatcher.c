@@ -12,15 +12,28 @@ int main(int argc, char *argv[])
 	key_t           	skey = _SEM_KEY;
 	int             	semid;
 
+	/********** globals *******************************************************************/
+	_IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
+	char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
+	void           	*data;                      	// pointer to ipc data
+	int            	fd;                        		// file descriptor for ipc data file
+	int         	rtc;							// file descriptor for PCF8563 RTC
+	_tm         	tm;								// time date structure
+	key_t 			skey = _SEM_KEY;
+	int 			semid;
+
 	/* global memory mapped io variables */
-	unsigned short    semval;
+	unsigned short 	semval;
 	union semun {
-		int val;                            // used for SETVAL only
-		struct semid_ds *buf;               // for IPC_STAT and IPC_SET
-		ushort *array;                      // used for GETALL and SETALL
+		int val;              						// used for SETVAL only
+		struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
+		ushort *array;        						// used for GETALL and SETALL
 	};
-	union       semun dummy;
-	SEMBUF sb = {0, -1, 0};               // set to allocate resource
+	union 			semun dummy;
+	SEMBUF sb = {0, -1, 0};  						// set to allocate resource
+
+
+
 
 	int 			cmd_buffer_push_index, cmd_buffer_pop_index;
 	char 			cmd_buffer[_CMD_BUFFER_DEPTH][_INPUT_BUFFER_SIZE + 1]; // array to hold multiple single arrays of characters

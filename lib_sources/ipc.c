@@ -28,9 +28,10 @@
 // #include <sys/sem.h>
 // #include <semaphore.h>
 
-#include "ipc.h"
-#include "sys_dat.h"
-#include "shared.h"
+#include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/sys_dat.h"
+#include "/home/mam1/Git/MQTT-dev/include/shared.h"
+
 
 
 extern int              semid;

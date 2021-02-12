@@ -8,6 +8,24 @@
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
 
+/*********************** externals **************************/
+extern int              cmd_state, char_state;
+extern char             input_buffer[_INPUT_BUFFER_SIZE], *input_buffer_ptr;
+extern char             c_name[_CHANNEL_NAME_SIZE][_NUMBER_OF_CHANNELS];
+extern int          exit_flag;                    //exit man loop if TRUE
+extern int              trace_flag;                     //trace file is active
+extern int              bbb;                    //UART1 file descriptor
+extern _CMD_FSM_CB      cmd_fsm_cb, *cmd_fsm_cb_ptr;    //cmd_fsm control block
+extern _SYS_DAT         sdat;                           //system data structure
+extern _IPC_DAT     ipc_dat;              //ipc data
+extern void       *data;              //pointer for shared memory
+extern _IPC_DAT     *ipc_ptr;
+extern key_t      skey;
+extern int        semid;
+extern unsigned short   semval;
+extern struct sembuf  sb;
+
+
 int main(int argc, char *argv[]) {
 
   char              file[] = "conwatcher";
@@ -17,6 +35,8 @@ int main(int argc, char *argv[]) {
 
   key_t             skey = _SEM_KEY;
   int               semid;
+
+
 
   /* global memory mapped io variables */
   unsigned short    semval;
