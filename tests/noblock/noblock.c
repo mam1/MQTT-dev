@@ -8,9 +8,9 @@
 
 int main(int argc, char *argv[]) {
 
-  const char        file[]="conwatcher2";
+  const char        file[]="conwatcher";
   pid_t             fork_pid;
-  char *args[]={"./EXEC",NULL}; 
+  char *args[]={"file,NULL}; 
 
 
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   if (fork_pid == 0) 
   {
     printf("Hello from the child!\n");
-    execl(file,file," ");
+    execvp(args[0],args);
   } 
   else 
   {
