@@ -55,10 +55,8 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
-		// while (pop_cmd_q(cmd_fsm_cb.token))	// check the token queue
-
-		c = getc(stdin)						// read the keyboard
-		    switch (c)
+		c = getc(stdin);						// read the keyboard
+		switch (c)
 		{
 	/* NOCR */	case _NO_CHAR:
 			break;
