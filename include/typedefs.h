@@ -1,25 +1,6 @@
 #ifndef _TYPEDEFS_H_
 #define _TYPEDEFS_H_
 
-
-
-
-// /* schedule record */
-// typedef struct {
-// 	int			key;
-// 	int 		state;
-// 	float 		temp;
-// 	float 		humid;
-
-// } _schedule_rec;				
-
-// /* schedule  */
-// typedef struct {
-// 	char 			name[_TEMPLATE_NAME_SIZE];
-// 	int 			rcnt;
-// 	_schedule		rec[_MAX_SCHEDULE_RECS +1];
-
-
 /* line queue data strcuctures  */
 typedef int 		_offset;
 
@@ -51,8 +32,7 @@ typedef struct {
 typedef struct {
 	_CONFIG_DAT 			config;							// system configuration
 	int 					escape;
-	char 					*line_q				
-
+	char 					*line_q;			
 } _SYS_DAT;
 
 /* ipc data - memory mapped */
