@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
-#include "ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 
 int main(int argc, char *argv[])
 {

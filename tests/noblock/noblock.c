@@ -3,12 +3,14 @@
 
 #include <unistd.h>   //sleep
 #include <stdio.h>
-#include "ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+
 
 int main(int argc, char *argv[]) {
 
   char              file[] = "conwatcher";
-  pid_t             fork_pid;
+  pid_t             fork_pid;#include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+
   char              *args[] = {file, NULL};
 
   key_t             skey = _SEM_KEY;
