@@ -32,8 +32,8 @@ typedef struct {
 typedef struct {
 	_offset		 	previous;
 	_offset		 	next;
-	-offset 	 	payload;
-	int				payload_type
+	_offset 	 	payload;
+	int				payload_type;
 	int				payload_size;
 } _node;
 
