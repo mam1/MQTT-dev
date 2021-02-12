@@ -21,10 +21,12 @@ int main(int argc, char *argv[]) {
     printf("Hello from the child!\n");
     execvp(args[0],args);
   } 
-  else 
-  {
-    printf("Hello from the parent!\n");
-  }
+
+  printf("Hello from the parent!\n");
+  sleep(1000);
+  printf("%s\n", "main process running");
+  
+  
 
   return 0;
 }
