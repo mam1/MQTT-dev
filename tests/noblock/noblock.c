@@ -8,11 +8,9 @@
 
 int main(int argc, char *argv[]) {
 
-  const char        file[]="conwatcher";
+  char              file[]="conwatcher";
   pid_t             fork_pid;
   char              *args[]={file,NULL}; 
-
-
 
   fork_pid = fork();
 
@@ -23,7 +21,6 @@ int main(int argc, char *argv[]) {
   } 
 
   printf("Hello from the parent!\n");
-  sleep(1000);
   printf("%s\n", "main process running");
   
   
