@@ -4,6 +4,8 @@
 #include <unistd.h>   //sleep
 #include <stdio.h>
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
+#include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
 
 int main(int argc, char *argv[]) {
