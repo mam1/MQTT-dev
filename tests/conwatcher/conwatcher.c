@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
 	printf("%s\n", "conwatcher active");
 
-	memset(linebuff, 0, sizeof(linebuff))
-	while((c = getc(stdin) != '\n')) *buffptr++ =  c;
+	memset(linebuff, 0, sizeof(linebuff));
+	while((c=getc(stdin)) != '\n') *buffptr++ =  c;
 	*buffptr = '\n'	
 	printf("%s\n", linebuff);
 
