@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   pid_t fork_pid = fork();
   if (fork_pid == 0) {
     printf("Hello from the child!\n");
-    int execl(file);
+    int execl(file,NULL,NULL);
   } else {
     printf("Hello from the parent!\n");
   }
