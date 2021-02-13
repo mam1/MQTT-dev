@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
    /*  Initialize ncurses  */
     if ( (mainwin = initscr()) == NULL ) {
 	fprintf(stderr, "Error initialising ncurses.\n");
-	exit(EXIT_FAILURE);
+	exit(-1);
     }
  
     /*  Switch of echoing and enable keypad (for arrow keys)  */
