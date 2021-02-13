@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdint.h>		//uint_8, uint_16, uint_32, etc.
 #include <stdio.h>
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
@@ -10,7 +11,8 @@ int main(int argc, char *argv[])
 {
 	char 			linebuff[_INPUT_BUFFER_SIZE];
 	char 			*lb_in, *lb_out, *lb_ptr, *lb_end;
-	char 			c;
+	uint8_t 		c;											// character typed on keyboard
+
 
 	printf("%s\n", "conwatcher active");
 	lb_in = linebuff;
