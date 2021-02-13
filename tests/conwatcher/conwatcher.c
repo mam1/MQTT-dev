@@ -32,12 +32,16 @@ int main(int argc, char *argv[])
     /*  Switch of echoing and enable keypad (for arrow keys)  */
  
     noecho();
+    cbreak();
     keypad(mainwin, TRUE);
+
+    clear
 
 	while (1)
 	{
 		c = getch();						// read the keyboard
-		printf("switching on <%c>\n", c);
+		printf("\rswitching on <%c>\n", c);
+
 		switch (c)
 		{
 		// /* NOCR */	case _NO_CHAR:
