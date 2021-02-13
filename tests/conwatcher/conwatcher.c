@@ -25,49 +25,49 @@ int main(int argc, char *argv[])
 		// /* NOCR */	case _NO_CHAR:
 		// 		break;
 
-	// /* ESC */ 	case _ESC:
-	// 		c = getc(stdin);		// skip to next character
-	// 		c = getc(stdin);		// skip to next character
-	// 		switch (c)
-	// 		{
-	// 	/* up arrow */	case 'A':
-	// 			if (rb_out_idx > 0)
-	// 				rb_out_idx--;
-	// 			else
-	// 				rb_out_idx = rb_in_idx - 1;
-	// 			if (rb_out_idx >= rb_in_idx)
-	// 				rb_out_idx = 0;
-	// 			arrow_reprompt();
-	// 			continue;
-	// 			break;
-	// 	/* down arrow */case 'B':
-	// 			rb_out_idx++;
-	// 			if (rb_out_idx >= rb_in_idx)
-	// 				rb_out_idx = 0;
-	// 			arrow_reprompt();
-	// 			continue;
-	// 			break;
+		// /* ESC */ 	case _ESC:
+		// 		c = getc(stdin);		// skip to next character
+		// 		c = getc(stdin);		// skip to next character
+		// 		switch (c)
+		// 		{
+		// 	/* up arrow */	case 'A':
+		// 			if (rb_out_idx > 0)
+		// 				rb_out_idx--;
+		// 			else
+		// 				rb_out_idx = rb_in_idx - 1;
+		// 			if (rb_out_idx >= rb_in_idx)
+		// 				rb_out_idx = 0;
+		// 			arrow_reprompt();
+		// 			continue;
+		// 			break;
+		// 	/* down arrow */case 'B':
+		// 			rb_out_idx++;
+		// 			if (rb_out_idx >= rb_in_idx)
+		// 				rb_out_idx = 0;
+		// 			arrow_reprompt();
+		// 			continue;
+		// 			break;
 
-	// 	/* right arrow */case 'C':
-	// 			if (input_ptr < work_buffer_ptr) {
-	// 				input_ptr++;
-	// 				printf("\033[1C");	// move cursor right
-	// 			}
-	// 			continue;
-	// 			break;
-	// 	/* left arrow */case 'D':
-	// 			if (input_ptr > start_buff) {
-	// 				input_ptr--;
-	// 				printf("\033[1D");	// move cursor left
-	// 			}
-	// 			continue;
-	// 			break;
-	// 	/* ESC */		default:
-	// 			escape = true;
+		// 	/* right arrow */case 'C':
+		// 			if (input_ptr < work_buffer_ptr) {
+		// 				input_ptr++;
+		// 				printf("\033[1C");	// move cursor right
+		// 			}
+		// 			continue;
+		// 			break;
+		// 	/* left arrow */case 'D':
+		// 			if (input_ptr > start_buff) {
+		// 				input_ptr--;
+		// 				printf("\033[1D");	// move cursor left
+		// 			}
+		// 			continue;
+		// 			break;
+		// 	/* ESC */		default:
+		// 			escape = true;
 
-	// 			continue;
-	// 			break;
-			// }
+		// 			continue;
+		// 			break;
+		// }
 	/* CR */	case _CR:
 
 			// 		// if (work_buffer_ptr != start_buff) 						// skip null input lines
@@ -98,8 +98,8 @@ int main(int argc, char *argv[])
 			// // 		memset(work_buffer, '\0', sizeof(work_buffer));
 			// // 		memset(screen_buf, '\0', sizeof(screen_buf));
 			// // 		memset(&ring_buffer[rb_in_idx][0], '\0', _INPUT_BUFFER_SIZE);
-
-			// 		break;
+			return 0;
+			break;
 			// /* DEL */	case _DEL:
 			// 		if (input_ptr == start_buff)
 			// 			break;
@@ -137,10 +137,10 @@ int main(int argc, char *argv[])
 			// 				mv--;
 			// 			}
 			// 		}
-			return 0;
-			// 		break;
 
-			/* OTHER */ default:
+			break;
+
+	/* OTHER */ default:
 			if (lb_ptr <= lb_end)		// room to add character ?
 			{
 				*lb_ptr++ = c;
