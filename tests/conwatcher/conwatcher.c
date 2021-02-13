@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	uint8_t 		c;											// character typed on keyboard
 
 
-	printf("%s\n", "conwatcher active");
+	printf("%s\n", "conwatcher v-0.0 active");
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		c = getc(stdin);						// read the keyboard
+		printf("switching on <%c>\n", c);
 		switch (c)
 		{
 		// /* NOCR */	case _NO_CHAR:
