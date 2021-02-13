@@ -20,7 +20,17 @@ int main(int argc, char *argv[])
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
-	initscr();			/* Start curses mode 		  */
+
+   /*  Initialize ncurses  */
+    if ( (mainwin = initscr()) == NULL ) {
+	fprintf(stderr, "Error initialising ncurses.\n");
+	exit(EXIT_FAILURE);
+    }
+ 
+    /*  Switch of echoing and enable keypad (for arrow keys)  */
+ 
+    noecho();
+    keypad(mainwin, TRUE);
 
 	while (1)
 	{
