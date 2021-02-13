@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 	while (1)
 	{
-		c = getch(stdin);						// read the keyboard
+		c = getchar();						// read the keyboard
 		printf("switching on <%c>\n", c);
 		switch (c)
 		{
