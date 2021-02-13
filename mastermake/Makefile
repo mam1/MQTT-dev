@@ -13,7 +13,7 @@ program_OBJS :=  $(program_C_OBJS) $(program_CXX_OBJS)
 # set parameters
 CPPFLAGS += $(foreach includedir,$(project_INCLUDE_DIRS),-I$(includedir))
 LDFLAGS += $(foreach librarydir,$(project_LIBRARY_DIRS),-L$(librarydir))
-LDFLAGS += $(foreach library,$(project_LIB),-l$(library)), -l$(lncurses))
+LDFLAGS += $(foreach library,$(project_LIB),-l$(library), -l$(lncurses))
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
