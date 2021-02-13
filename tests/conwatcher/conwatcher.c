@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdint.h>		//uint_8, uint_16, uint_32, etc.
 #include <stdio.h>
+#include <curses.h>
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
@@ -19,6 +20,8 @@ int main(int argc, char *argv[])
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+	initscr();			/* Start curses mode 		  */
+
 	while (1)
 	{
 		c = getch();						// read the keyboard
@@ -193,7 +196,8 @@ int main(int argc, char *argv[])
 	}
 
 	/************************************************************************************************/
-printf("linebuffer <%s>\n", linebuff);
+	endwin();			/* End curses mode		  */
+	printf("linebuffer <%s>\n", linebuff);
 	return 0;
 }
 
