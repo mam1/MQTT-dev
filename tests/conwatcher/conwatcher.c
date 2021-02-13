@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
 			// // 		memset(work_buffer, '\0', sizeof(work_buffer));
 			// // 		memset(screen_buf, '\0', sizeof(screen_buf));
 			// // 		memset(&ring_buffer[rb_in_idx][0], '\0', _INPUT_BUFFER_SIZE);
+			priintf("got a CR\n");
 			return 0;
 			break;
 			// /* DEL */	case _DEL:
@@ -144,7 +145,7 @@ int main(int argc, char *argv[])
 			if (lb_ptr <= lb_end)		// room to add character ?
 			{
 				*lb_ptr++ = c;
-				printf("\033[1D");	// move cursor left
+				// printf("\033[1D");	// move cursor left
 			}
 
 
@@ -189,7 +190,7 @@ int main(int argc, char *argv[])
 	}
 
 	/************************************************************************************************/
-
+printf("linebuffer <%s>\n", linebuff);
 	return 0;
 }
 
