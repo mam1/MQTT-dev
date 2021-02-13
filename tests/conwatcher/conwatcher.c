@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
 	// 			continue;
 	// 			break;
-			}
+			// }
 	/* CR */	case _CR:
 
 			// 		// if (work_buffer_ptr != start_buff) 						// skip null input lines
