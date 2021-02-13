@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
 {
 	char 			linebuff[_INPUT_BUFFER_SIZE];
 	char 			*lb_in, *lb_out, *lb_ptr, *lb_end;
-	uint8_t 		c;											// character typed on keyboard
+	uint8_t 		c;
+	WINDOW * mainwin, * childwin;											// character typed on keyboard
 
 
 	printf("%s\n", "conwatcher v-0.0 active");
