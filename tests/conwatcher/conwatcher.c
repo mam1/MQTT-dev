@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdint.h>		//uint_8, uint_16, uint_32, etc.
 #include <stdio.h>
+#include <stdlib.h>
 #include <curses.h>
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
