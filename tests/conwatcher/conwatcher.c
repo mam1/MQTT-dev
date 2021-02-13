@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     cbreak();
     keypad(mainwin, TRUE);
 
-    clear
+    clear();
 
 	while (1)
 	{
