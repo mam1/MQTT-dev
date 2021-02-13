@@ -14,6 +14,7 @@ program_OBJS :=  $(program_C_OBJS) $(program_CXX_OBJS)
 CPPFLAGS += $(foreach includedir,$(project_INCLUDE_DIRS),-I$(includedir), -I/usr/include)
 LDFLAGS += $(foreach librarydir,$(project_LIBRARY_DIRS),-L$(librarydir))
 LDFLAGS += $(foreach library,$(project_LIB),-l$(library))
+LDFLAGS += -lncurses
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
