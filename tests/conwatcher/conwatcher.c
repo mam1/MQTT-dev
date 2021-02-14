@@ -14,7 +14,7 @@
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
-void disp(char *srt)
+void disp(char *str)
 {
 	wmove(mainwin, 3, 0);
 	deleteln();
