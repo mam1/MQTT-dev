@@ -10,10 +10,9 @@
 
 	WINDOW * mainwin;											// character typed on keyboard
 
-	lb_in = linebuff;
-	lb_out = linebuff;
-	lb_ptr = linebuff;
-	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+
+char 			linebuff[_INPUT_BUFFER_SIZE];
+char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *srt)
 {
@@ -29,12 +28,13 @@ void disp(char *srt)
 
 }
 
-char 			linebuff[_INPUT_BUFFER_SIZE];
-char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 int main(int argc, char *argv[])
 {
 
-
+	lb_in = linebuff;
+	lb_out = linebuff;
+	lb_ptr = linebuff;
+	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 	int		ch;
 	static char keych[2] = {0};
 
