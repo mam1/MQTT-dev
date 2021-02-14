@@ -18,12 +18,11 @@ int main(int argc, char *argv[])
 	static char keych[2] = {0};
 
 	WINDOW * mainwin;											// character typed on keyboard
-
+	memset(linebuff. '\0', sizeof(linebuff));
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
-
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -102,7 +101,13 @@ int main(int argc, char *argv[])
 				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a _CR");
-				// mvprintw(30, 0, "enter a command > ");   // Move to (y, x) then print string
+				memset(linebuff. '\0', sizeof(linebuff));
+				lb_in = linebuff;
+				lb_out = linebuff;
+				lb_ptr = linebuff;
+				lb_end = linebuff + _INPUT_BUFFER_SIZE;
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				mvprintw(3, 17, linebuff);
 				refresh();
 				return 0;
 				break;
