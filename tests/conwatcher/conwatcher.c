@@ -11,9 +11,7 @@
 int main(int argc, char *argv[])
 {
 	char 			linebuff[_INPUT_BUFFER_SIZE];
-	char 			*lb_ptr, *lb_in, *lb_end;
-	// char 			*lb_out, *lb_ptr, *lb_end;
-
+	char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 	uint8_t 		c;
 	WINDOW * mainwin;											// character typed on keyboard
