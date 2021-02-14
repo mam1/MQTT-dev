@@ -76,13 +76,13 @@ int main(int argc, char *argv[])
 				break;
 			}
 	/* CR */	case _CR:
-			mvprintw(3, 0, "got a CR\n");
+			mvprintw(3, 0, "got a _CR\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 			return 0;
 			break;
 	/* DEL */	case _DEL:
-			mvprintw(3, 0, "got a DEL\n");
+			mvprintw(3, 0, "got a _BS\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 
