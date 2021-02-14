@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
 
-	while ((c = getch()) == 'q')
+	while ((c = getch()) != 'q')
 	{
 								// read the keyboard
 		// printf("\rswitching on <%c>\n", c);
@@ -106,7 +106,8 @@ int main(int argc, char *argv[])
 
 	/************************************************************************************************/
 	endwin();			/* End curses mode		  */
-	printf("linebuffer <%s>\n", linebuff);
+	// printf("linebuffer <%s>\n", linebuff);
+	printf("%s\n", "program terminated\n");
 	return 0;
 }
 
