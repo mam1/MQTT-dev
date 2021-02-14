@@ -72,14 +72,14 @@ int main(int argc, char *argv[])
 			continue;
 			break;
 
-/* CR */	case _CR:
+/* CR */	case 0xa:
 			mvprintw(3, 0, "got a _CR\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 			return 0;
 			break;
-/* DEL */	case _DEL:
-			mvprintw(3, 0, "got a _BS\n");
+/* DEL */	case 0x14a:
+			mvprintw(3, 0, "got a DEL\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 
@@ -90,9 +90,7 @@ int main(int argc, char *argv[])
 			// {
 			// 	*lb_ptr++ = c;
 			// }
-			mvprintw(3, 0, "got a character <");
-			printw("***");
-			printw(">");
+			mvprintw(3, 0, "got a character <%c>", (char)(c));
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
