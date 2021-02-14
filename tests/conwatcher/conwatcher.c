@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		c = getch();						// read the keyboard
-		printf("\rswitching on <%c>\n", c);
+		// printf("\rswitching on <%c>\n", c);
 
 		switch (c)
 		{
@@ -68,18 +68,17 @@ int main(int argc, char *argv[])
 			continue;
 			break;
 		/* ESC */		default:
-			mvprintw(0, 3, "got a ESC\n");
-			mvprintw(0, 30, "enter a command > ");
+			mvprintw(3, 0, "got a ESC\n");
+			mvprintw(30, 0, "enter a command > ");
 			continue;
 			break;
 			}
 	/* CR */	case _CR:
-			mvprintw(0, 3, "got a CR\n");
-			mvprintw(0, 30, "enter a command > ");
+			mvprintw(3, 0, "got a CR\n");
+			mvprintw(30, 0, "enter a command > ");
 			return 0;
 			break;
 	/* DEL */	case _DEL:
-
 
 			break;
 
@@ -88,7 +87,10 @@ int main(int argc, char *argv[])
 			{
 				*lb_ptr++ = c;
 			}
+			mvprintw(3, 0, "");
+			mvprintw(30, 0, "enter a command > ");
 		}
+
 	}
 	/* do suff while waiting or the keyboard */
 
