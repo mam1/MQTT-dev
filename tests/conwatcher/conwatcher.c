@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	keypad(mainwin, TRUE);
 	clear();
 	printw("conwatcher active");
-	mvprintw(0, 04, "enter a command > ");/* Move to (y, x) then print string     */
+	mvprintw(0, 30, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
 
 	while (1)
@@ -68,12 +68,14 @@ int main(int argc, char *argv[])
 			continue;
 			break;
 		/* ESC */		default:
-			printf("got ESC\n")
+			mvprintw(0, 3, "got a ESC\n");
+			mvprintw(0, 30, "enter a command > ");
 			continue;
 			break;
 			}
 	/* CR */	case _CR:
-			printf("got a CR\n");
+			mvprintw(0, 3, "got a CR\n");
+			mvprintw(0, 30, "enter a command > ");
 			return 0;
 			break;
 	/* DEL */	case _DEL:
