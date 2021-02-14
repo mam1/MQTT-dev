@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 				*lb_ptr++ = ch;
 			}
 			*lb_ptr = '\0';
+			wmove(mainwin, 3, 0);
 			deleteln();
 
 			mvprintw(3, 0, "got a character ", (char)(ch));
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
 			{
 
 		/* ESC */	case _ESC:
+				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a ESC\n");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
@@ -95,6 +97,7 @@ int main(int argc, char *argv[])
 				break;
 
 		/* CR */	case 0xa:
+				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a _CR");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
@@ -103,6 +106,7 @@ int main(int argc, char *argv[])
 				break;
 
 		/* DEL */	case 0x14a:
+				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a DEL");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
@@ -115,6 +119,7 @@ int main(int argc, char *argv[])
 				// {
 				// 	*lb_ptr++ = c;
 				// }
+				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a problem");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
