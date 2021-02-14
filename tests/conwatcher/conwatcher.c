@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     keypad(mainwin, TRUE);
     clear();
     printw("conwatcher active");
+    mvprintw(0, 22, "enter a command > ");/* Move to (y, x) then print string     */
     refresh();
 
 	while (1)
