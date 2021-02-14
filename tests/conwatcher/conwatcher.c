@@ -69,14 +69,14 @@ mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 			continue;
 			break;
 		/* ESC */		default:
-			mvprintw(3, 0, "got a ESC\n");
-			mvprintw(30, 0, "enter a command > ");
+			mvprintw(0, 3, "got a ESC\n");
+			mvprintw(0, 30, "enter a command > ");
 			continue;
 			break;
 			}
 	/* CR */	case _CR:
-			mvprintw(3, 0, "got a CR\n");
-			mvprintw(30, 0, "enter a command > ");
+			mvprintw(0, 3, "got a CR\n");
+			mvprintw(0, 30, "enter a command > ");
 			return 0;
 			break;
 	/* DEL */	case _DEL:
@@ -88,8 +88,8 @@ mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 			{
 				*lb_ptr++ = c;
 			}
-			mvprintw(3, 0, "");
-			mvprintw(30, 0, "enter a command > ");
+			mvprintw(0, 3, "");
+			mvprintw(0, 30, "enter a command > ");
 		}
 
 	}
