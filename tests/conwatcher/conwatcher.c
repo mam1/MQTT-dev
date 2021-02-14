@@ -13,13 +13,16 @@ int main(int argc, char *argv[])
 	char 			linebuff[_INPUT_BUFFER_SIZE];
 	char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
-	int		c;
+	int		ch;
+	static char keych[2] = {0};
+
 	WINDOW * mainwin;											// character typed on keyboard
 
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -36,65 +39,76 @@ int main(int argc, char *argv[])
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
 
-	while ((c = getch()) != 'q')
+	while ((ch = getch()) != 'q')
 	{
 		// read the keyboard
-		// printf("\rswitching on <%c>\n", c);
-
-		switch (c)
+		if ( isprint(ch) && !(ch & KEY_CODE_YES)) 
 		{
 
-/* ESC */	case _ESC:
-			mvprintw(3, 0, "got a ESC\n");
-			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-			refresh();
-			continue;
-			break;
-
-/* NOCR */	case _NO_CHAR:
-			break;
-
-/* up arrow */	case 0x103:
-
-			continue;
-			break;
-/* down arrow */case  0x102:
-
-			continue;
-			break;
-
-/* right arrow */case  0x105:
-
-			continue;
-			break;
-/* left arrow */case  0x104:
-
-			continue;
-			break;
-
-/* CR */	case 0xa:
-			mvprintw(3, 0, "got a _CR\n");
-			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-			refresh();
-			return 0;
-			break;
-/* DEL */	case 0x14a:
-			mvprintw(3, 0, "got a DEL\n");
-			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-			refresh();
-
-			break;
-
-/* OTHER */ default:
-			// if (lb_ptr <= lb_end)		// room to add character ?
-			// {
-			// 	*lb_ptr++ = c;
-			// }
-			mvprintw(3, 0, "got a character <%c>", (char)(c));
+			/*  If a printable character  */
+			mvprintw(3, 0, "got a character <%c>", (char)(ch));
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
+		else 
+		{
 
+			switch (c)
+			{
+
+		/* ESC */	case _ESC:
+				mvprintw(3, 0, "got a ESC\n");
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				refresh();
+				continue;
+				break;
+
+		/* NOCR */	case _NO_CHAR:
+				break;
+
+		/* up arrow */	case 0x103:
+
+				continue;
+				break;
+		/* down arrow */case  0x102:
+
+				continue;
+				break;
+
+		/* right arrow */case  0x105:
+
+				continue;
+				break;
+		/* left arrow */case  0x104:
+
+				continue;
+				break;
+
+		/* CR */	case 0xa:
+				mvprintw(3, 0, "got a _CR\n");
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				refresh();
+				return 0;
+				break;
+
+		/* DEL */	case 0x14a:
+				mvprintw(3, 0, "got a DEL\n");
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				refresh();
+
+				break;
+
+		/* OTHER */ default:
+				// if (lb_ptr <= lb_end)		// room to add character ?
+				// {
+				// 	*lb_ptr++ = c;
+				// }
+				mvprintw(3, 0, "got a problem");
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				refresh();
+			}
+
+		}
 	}
 	/* do suff while waiting or the keyboard */
 
