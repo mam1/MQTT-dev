@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 			/*  If a printable character  */
 			if (lb_ptr <= lb_end)		// room to add character ?
 			{
-				*lb_ptr++ = c;
+				*lb_ptr++ = ch;
 			}
 			*lb_ptr = '\0';
 			mvprintw(3, 0, "got a character <%c>", (char)(ch));
