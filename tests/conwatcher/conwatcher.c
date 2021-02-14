@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
 	/*  Switch of echoing and enable keypad (for arrow keys)  */
 	noecho();
-	cbreak();
+	// cbreak();
 	keypad(mainwin, TRUE);
 	clear();
 	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
