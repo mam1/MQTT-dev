@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 	clear();
 	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+	mvprintw(0, 30, "****************");/* Move to (y, x) then print string     */
 	refresh();
 
 	while (1)
