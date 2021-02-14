@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 			{
 
 		/* ESC */	case _ESC:
-				disp("got a ESC")
+				disp("got a ESC");
 
 				break;
 
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 
 				break;
 
-		/* OTHER */ default:
+		// /* OTHER */ default:
 				// if (lb_ptr <= lb_end)		// room to add character ?
 				// {
 				// 	*lb_ptr++ = c;
