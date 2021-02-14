@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 
 		/* CR */	case 0xa:
 				disp("got a CR");
-				memset(linebuff. '\0', sizeof(linebuff));
+				memset(linebuff, '\0', sizeof(linebuff));
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
