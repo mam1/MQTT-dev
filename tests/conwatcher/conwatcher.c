@@ -9,10 +9,26 @@
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
 
+
+void disp(char *srt)
+{
+	wmove(mainwin, 3, 0);
+	deleteln();
+	mvprintw(3, 0, str);
+	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+	mvprintw(3, 17, linebuff);
+	refresh();
+
+	return;
+
+
+}
+
+char 			linebuff[_INPUT_BUFFER_SIZE];
+char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 int main(int argc, char *argv[])
 {
-	char 			linebuff[_INPUT_BUFFER_SIZE];
-	char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
+
 
 	int		ch;
 	static char keych[2] = {0};
@@ -52,13 +68,7 @@ int main(int argc, char *argv[])
 			}
 			*lb_ptr = '\0';
 
-			wmove(mainwin, 3, 0);
-			deleteln();
-			mvprintw(3, 0, "got a character ", (char)(ch));
-
-			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-			mvprintw(3, 17, linebuff);
-			refresh();
+			disp("got a character ");
 		}
 		else
 		{
@@ -67,13 +77,8 @@ int main(int argc, char *argv[])
 			{
 
 		/* ESC */	case _ESC:
-				wmove(mainwin, 3, 0);
-				deleteln();
-				mvprintw(3, 0, "got a ESC\n");
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-				mvprintw(3, 17, linebuff);
-				refresh();
-				continue;
+				disp("got a ESC")
+
 				break;
 
 		/* NOCR */	case _NO_CHAR:
@@ -81,44 +86,33 @@ int main(int argc, char *argv[])
 
 		/* up arrow */	case 0x103:
 
-				continue;
+
 				break;
 		/* down arrow */case  0x102:
 
-				continue;
+
 				break;
 
 		/* right arrow */case  0x105:
 
-				continue;
+
 				break;
 		/* left arrow */case  0x104:
 
-				continue;
+
 				break;
 
 		/* CR */	case 0xa:
-				wmove(mainwin, 3, 0);
-				deleteln();
-				mvprintw(3, 0, "got a _CR");
+				disp("got a CR");
 				memset(linebuff. '\0', sizeof(linebuff));
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
 				lb_end = linebuff + _INPUT_BUFFER_SIZE;
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-				mvprintw(3, 17, linebuff);
-				refresh();
-				return 0;
 				break;
 
 		/* DEL */	case 0x14a:
-				wmove(mainwin, 3, 0);
-				deleteln();
-				mvprintw(3, 0, "got a DEL");
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-				mvprintw(3, 17, linebuff);
-				refresh();
+				disp("got a DEL");
 
 				break;
 
@@ -127,22 +121,22 @@ int main(int argc, char *argv[])
 				// {
 				// 	*lb_ptr++ = c;
 				// }
-				wmove(mainwin, 3, 0);
-				deleteln();
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-				mvprintw(3, 17, linebuff);
-				refresh();
+				// 	wmove(mainwin, 3, 0);
+				// 	deleteln();
+				// 	mvprintw(30, 0, "enter a command > "); Move to (y, x) then print string
+				// 	mvprintw(3, 17, linebuff);
+				// 	refresh();
+				// }
+
 			}
-
 		}
+		/* do suff while waiting or the keyboard */
+
+
+		/************************************************************************************************/
+		endwin();			/* End curses mode		  */
+		printf("linebuffer <%s>\n", linebuff);
+		printf("%s\n", "program terminated\n");
+		return 0;
 	}
-	/* do suff while waiting or the keyboard */
-
-
-	/************************************************************************************************/
-	endwin();			/* End curses mode		  */
-	printf("linebuffer <%s>\n", linebuff);
-	printf("%s\n", "program terminated\n");
-	return 0;
-}
 
