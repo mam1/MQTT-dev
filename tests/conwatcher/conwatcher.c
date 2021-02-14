@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 			// 	*lb_ptr++ = c;
 			// }
 			mvprintw(3, 0, "got a character <");
-			printw(c);
+			printw("***");
 			printw(">");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
