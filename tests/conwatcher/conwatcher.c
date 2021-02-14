@@ -11,9 +11,12 @@
 int main(int argc, char *argv[])
 {
 	char 			linebuff[_INPUT_BUFFER_SIZE];
+	char 			*lb_ptr, *lb_end;
 	char 			*lb_in, *lb_out, *lb_ptr, *lb_end;
+
+
 	uint8_t 		c;
-	WINDOW * mainwin, * childwin;											// character typed on keyboard
+	WINDOW * mainwin;											// character typed on keyboard
 
 	lb_in = linebuff;
 	lb_out = linebuff;
@@ -89,7 +92,7 @@ int main(int argc, char *argv[])
 			{
 				*lb_ptr++ = c;
 			}
-			mvprintw(3, 0, c);
+			// mvprintw(3, 0, c);
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
