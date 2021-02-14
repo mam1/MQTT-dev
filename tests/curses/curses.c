@@ -1,3 +1,14 @@
+/*
+
+  CURIN1.C
+  ========
+  (c) Copyright Paul Griffiths 1999
+  Email: mail@paulgriffiths.net
+
+  Demonstrating basic ncurses single key input.
+
+*/
+
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -116,3 +127,7 @@ char * intprtkey(int ch) {
 	return keys[n].name;
     }    
     
+    return NULL;        /*  We shouldn't get here  */
+}
+
+
