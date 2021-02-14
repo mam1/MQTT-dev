@@ -16,8 +16,6 @@ int main(int argc, char *argv[])
 	uint8_t 		c;
 	WINDOW * mainwin, * childwin;											// character typed on keyboard
 
-
-	printf("%s\n", "conwatcher v-0.0 active");
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
@@ -34,8 +32,9 @@ int main(int argc, char *argv[])
     noecho();
     cbreak();
     keypad(mainwin, TRUE);
-
     clear();
+    printw("conwatcher active");
+    refresh();
 
 	while (1)
 	{
