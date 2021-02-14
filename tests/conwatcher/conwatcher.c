@@ -68,14 +68,14 @@ int main(int argc, char *argv[])
 				continue;
 				break;
 		/* ESC */		default:
-				mvprintw(0, 3, "got a ESC\n");
+				mvprintw(3, 0, "got a ESC\n");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 				refresh();
 				continue;
 				break;
 			}
 	/* CR */	case _CR:
-			mvprintw(0, 30, "got a CR\n");
+			mvprintw(3, 0, "got a CR\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 			return 0;
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 			{
 				*lb_ptr++ = c;
 			}
-			mvprintw(0, 30, "");
+			mvprintw(3, 0, c);
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
