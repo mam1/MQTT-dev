@@ -31,8 +31,7 @@ int main(int argc, char *argv[])
 	cbreak();
 	keypad(mainwin, TRUE);
 	clear();
-mvprintw(0, 0, "5555conwatcher active");/* Move to (y, x) then print string     */
-
+	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 	mvprintw(0, 30, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
 
@@ -53,30 +52,32 @@ mvprintw(0, 0, "5555conwatcher active");/* Move to (y, x) then print string     
 			{
 		/* up arrow */	case 'A':
 
-			continue;
-			break;
+				continue;
+				break;
 		/* down arrow */case 'B':
 
-			continue;
-			break;
+				continue;
+				break;
 
 		/* right arrow */case 'C':
 
-			continue;
-			break;
+				continue;
+				break;
 		/* left arrow */case 'D':
 
-			continue;
-			break;
+				continue;
+				break;
 		/* ESC */		default:
-			mvprintw(0, 3, "got a ESC\n");
-			mvprintw(0, 30, "enter a command > ");
-			continue;
-			break;
+				mvprintw(0, 3, "got a ESC\n");
+				mvprintw(0, 30, "enter a command > ");
+				refresh();
+				continue;
+				break;
 			}
 	/* CR */	case _CR:
-			mvprintw(0, 3, "got a CR\n");
+			mvprintw(0, 30, "got a CR\n");
 			mvprintw(0, 30, "enter a command > ");
+			refresh();
 			return 0;
 			break;
 	/* DEL */	case _DEL:
@@ -88,8 +89,9 @@ mvprintw(0, 0, "5555conwatcher active");/* Move to (y, x) then print string     
 			{
 				*lb_ptr++ = c;
 			}
-			mvprintw(0, 3, "");
+			mvprintw(0, 30, "");
 			mvprintw(0, 30, "enter a command > ");
+			refresh();
 		}
 
 	}
