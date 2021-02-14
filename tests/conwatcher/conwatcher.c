@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 			break;
 
 	/* ESC */ 	case _ESC:
-			c = getc(stdin);		 skip to next character
-			c = getc(stdin);		 skip to next character
+			c = getc(stdin);		 //skip to next character
+			c = getc(stdin);		 //skip to next character
 			switch (c)
 			{
 		/* up arrow */	case 'A':
