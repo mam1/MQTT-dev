@@ -8,7 +8,12 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
-
+	WINDOW * mainwin;											// character typed on keyboard
+	memset(linebuff. '\0', sizeof(linebuff));
+	lb_in = linebuff;
+	lb_out = linebuff;
+	lb_ptr = linebuff;
+	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 
 void disp(char *srt)
 {
@@ -33,12 +38,7 @@ int main(int argc, char *argv[])
 	int		ch;
 	static char keych[2] = {0};
 
-	WINDOW * mainwin;											// character typed on keyboard
-	memset(linebuff. '\0', sizeof(linebuff));
-	lb_in = linebuff;
-	lb_out = linebuff;
-	lb_ptr = linebuff;
-	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
