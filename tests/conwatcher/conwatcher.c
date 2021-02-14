@@ -82,15 +82,20 @@ int main(int argc, char *argv[])
 			return 0;
 			break;
 	/* DEL */	case _DEL:
+			mvprintw(3, 0, "got a DEL\n");
+			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+			refresh();
 
 			break;
 
 	/* OTHER */ default:
-			if (lb_ptr <= lb_end)		// room to add character ?
-			{
-				*lb_ptr++ = c;
-			}
-			mvprintw(3, 0, c);
+			// if (lb_ptr <= lb_end)		// room to add character ?
+			// {
+			// 	*lb_ptr++ = c;
+			// }
+			mvprintw(3, 0, "got a character <");
+			printw(c);
+			printw(">");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
