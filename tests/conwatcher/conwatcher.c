@@ -9,7 +9,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
 	WINDOW * mainwin;											// character typed on keyboard
-	memset(linebuff. '\0', sizeof(linebuff));
+
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
-
+	memset(linebuff, '\0', sizeof(linebuff));
 	while ((ch = getch()) != 'q')
 	{
 		// read the keyboard
