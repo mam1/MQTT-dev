@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 	refresh();
 
-	while (1)
+	while ((c = getch()) == 'q')
 	{
-		c = getch();						// read the keyboard
+								// read the keyboard
 		// printf("\rswitching on <%c>\n", c);
 
 		switch (c)
