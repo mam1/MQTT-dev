@@ -9,7 +9,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
-	WINDOW * mainwin;											// character typed on keyboard
+WINDOW * mainwin;											// character typed on keyboard
 
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 
 				break;
 
-		// /* OTHER */ default:
+				// /* OTHER */ default:
 				// if (lb_ptr <= lb_end)		// room to add character ?
 				// {
 				// 	*lb_ptr++ = c;
@@ -135,9 +135,10 @@ int main(int argc, char *argv[])
 
 
 		/************************************************************************************************/
-		endwin();			/* End curses mode		  */
-		printf("linebuffer <%s>\n", linebuff);
-		printf("%s\n", "program terminated\n");
-		return 0;
-	}
 
+	}
+	endwin();			/* End curses mode		  */
+	printf("linebuffer <%s>\n", linebuff);
+	printf("%s\n", "program terminated\n");
+	return 0;
+}
