@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
 	clear();
 	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-	mvprintw(0, 30, "****************");/* Move to (y, x) then print string     */
 	refresh();
 
 	while (1)
@@ -70,14 +69,14 @@ int main(int argc, char *argv[])
 				break;
 		/* ESC */		default:
 				mvprintw(0, 3, "got a ESC\n");
-				mvprintw(0, 30, "enter a command > ");
+				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 				refresh();
 				continue;
 				break;
 			}
 	/* CR */	case _CR:
 			mvprintw(0, 30, "got a CR\n");
-			mvprintw(0, 30, "enter a command > ");
+			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 			return 0;
 			break;
@@ -91,7 +90,7 @@ int main(int argc, char *argv[])
 				*lb_ptr++ = c;
 			}
 			mvprintw(0, 30, "");
-			mvprintw(0, 30, "enter a command > ");
+			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
 
