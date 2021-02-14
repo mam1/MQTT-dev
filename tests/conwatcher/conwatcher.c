@@ -43,15 +43,20 @@ int main(int argc, char *argv[])
 	while ((ch = getch()) != 'q')
 	{
 		// read the keyboard
-		if ( isprint(ch) && !(ch & KEY_CODE_YES)) 
+		if ( isprint(ch) && !(ch & KEY_CODE_YES))
 		{
 
 			/*  If a printable character  */
+			if (lb_ptr <= lb_end)		// room to add character ?
+			{
+				*lb_ptr++ = c;
+			}
+			*lb_ptr = '\0';
 			mvprintw(3, 0, "got a character <%c>", (char)(ch));
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 		}
-		else 
+		else
 		{
 
 			switch (ch)
@@ -116,7 +121,7 @@ int main(int argc, char *argv[])
 
 	/************************************************************************************************/
 	endwin();			/* End curses mode		  */
-	// printf("linebuffer <%s>\n", linebuff);
+	printf("linebuffer <%s>\n", linebuff);
 	printf("%s\n", "program terminated\n");
 	return 0;
 }
