@@ -43,11 +43,16 @@ int main(int argc, char *argv[])
 
 		switch (c)
 		{
-/* NOCR */	case _NO_CHAR:
+
+/* ESC */	case _ESC:
+			mvprintw(3, 0, "got a ESC\n");
+			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+			refresh();
+			continue;
 			break;
 
-/* ESC */ 	case _ESC:
-
+/* NOCR */	case _NO_CHAR:
+			break;
 
 /* up arrow */	case 0x103:
 
@@ -64,13 +69,6 @@ int main(int argc, char *argv[])
 			break;
 /* left arrow */case  0x104:
 
-			continue;
-			break;
-
-/* ESC */	case _ESC:
-			mvprintw(3, 0, "got a ESC\n");
-			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-			refresh();
 			continue;
 			break;
 
