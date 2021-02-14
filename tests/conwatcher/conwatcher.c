@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
 	/*  Switch of echoing and enable keypad (for arrow keys)  */
 	noecho();
-	// cbreak();
+	cbreak();
 	keypad(mainwin, TRUE);
 	clear();
 	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
@@ -56,8 +56,9 @@ int main(int argc, char *argv[])
 			deleteln();
 
 			mvprintw(3, 0, "got a character ", (char)(ch));
-			mvprintw(3, 17, linebuff);
+
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+			mvprintw(3, 17, linebuff);
 			refresh();
 		}
 		else
@@ -100,7 +101,7 @@ int main(int argc, char *argv[])
 				wmove(mainwin, 3, 0);
 				deleteln();
 				mvprintw(3, 0, "got a _CR");
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+				// mvprintw(30, 0, "enter a command > ");   // Move to (y, x) then print string     
 				refresh();
 				return 0;
 				break;
