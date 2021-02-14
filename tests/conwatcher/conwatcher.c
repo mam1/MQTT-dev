@@ -38,57 +38,56 @@ int main(int argc, char *argv[])
 
 	while ((c = getch()) != 'q')
 	{
-								// read the keyboard
+		// read the keyboard
 		// printf("\rswitching on <%c>\n", c);
 
 		switch (c)
 		{
-	/* NOCR */	case _NO_CHAR:
+/* NOCR */	case _NO_CHAR:
 			break;
 
-	/* ESC */ 	case _ESC:
-			c = getch();		 //skip to next character
-			c = getch();		 //skip to next character
-			switch (c)
-			{
-		/* up arrow */	case 'A':
+/* ESC */ 	case _ESC:
 
-				continue;
-				break;
-		/* down arrow */case 'B':
 
-				continue;
-				break;
+/* up arrow */	case 0x103:
 
-		/* right arrow */case 'C':
+			continue;
+			break;
+/* down arrow */case  0x102:
 
-				continue;
-				break;
-		/* left arrow */case 'D':
+			continue;
+			break;
 
-				continue;
-				break;
-		/* ESC */		default:
-				mvprintw(3, 0, "got a ESC\n");
-				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-				refresh();
-				continue;
-				break;
-			}
-	/* CR */	case _CR:
+/* right arrow */case  0x105:
+
+			continue;
+			break;
+/* left arrow */case  0x104:
+
+			continue;
+			break;
+
+/* ESC */	case _ESC
+			mvprintw(3, 0, "got a ESC\n");
+			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+			refresh();
+			continue;
+			break;
+
+/* CR */	case _CR:
 			mvprintw(3, 0, "got a _CR\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 			return 0;
 			break;
-	/* DEL */	case _DEL:
+/* DEL */	case _DEL:
 			mvprintw(3, 0, "got a _BS\n");
 			mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 			refresh();
 
 			break;
 
-	/* OTHER */ default:
+/* OTHER */ default:
 			// if (lb_ptr <= lb_end)		// room to add character ?
 			// {
 			// 	*lb_ptr++ = c;
