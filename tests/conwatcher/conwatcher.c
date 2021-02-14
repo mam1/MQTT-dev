@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		else 
 		{
 
-			switch (c)
+			switch (ch)
 			{
 
 		/* ESC */	case _ESC:
