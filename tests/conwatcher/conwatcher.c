@@ -91,14 +91,14 @@ int main(int argc, char *argv[])
 				break;
 
 		/* CR */	case 0xa:
-				mvprintw(3, 0, "got a _CR\n");
+				mvprintw(3, 0, "got a _CR");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 				refresh();
 				return 0;
 				break;
 
 		/* DEL */	case 0x14a:
-				mvprintw(3, 0, "got a DEL\n");
+				mvprintw(3, 0, "got a DEL");
 				mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 				refresh();
 
