@@ -21,8 +21,8 @@ void disp(char *str)
 	mvprintw(3, 0, str);
 	mvprintw(30, 0, "enter a command > ");
 
-	mvprintw(3, 17, linebuff);
-	wmove(mainwin, 3, 19);
+	mvprintw(30, 17, linebuff);
+	// wmove(mainwin, 3, 19);
 	refresh();
 	return;
 }
