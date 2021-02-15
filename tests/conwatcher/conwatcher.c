@@ -16,10 +16,10 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	wmove(mainwin, 3, 0);
-	deleteln();
+	// wmove(mainwin, 3, 0);
+
 	mvprintw(3, 0, str);
-	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
+	mvprintw(30, 0, "enter a command > ");
 	mvprintw(3, 17, linebuff);
 	refresh();
 	return;
@@ -59,10 +59,10 @@ int main(int argc, char *argv[])
 			if (lb_ptr <= lb_end -1)		// room to add character ?
 			{
 				*lb_ptr++ = ch;
+				*lb_ptr = '\0';
 			}
-			disp("**** line buffer overflow ****");
-			*lb_ptr = '\0';
-
+			else
+				disp("**** line buffer overflow ****");		
 			disp("got a character ");
 		}
 		else
