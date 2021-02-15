@@ -16,13 +16,12 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	//
-
+	
+	mvprintw(3,30,"                                                     ");
 	mvprintw(3, 0, str);
 	mvprintw(30, 0, "enter a command > ");
-
 	mvprintw(30, 17, linebuff);
-	// wmove(mainwin, 3, 19);
+	wmove(mainwin, 3, 19);
 	refresh();
 	return;
 }
