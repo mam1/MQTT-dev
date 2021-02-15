@@ -9,18 +9,20 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
-WINDOW * mainwin;											
+WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	// wmove(mainwin, 3, 0);
+	//
 
 	mvprintw(3, 0, str);
 	mvprintw(30, 0, "enter a command > ");
+
 	mvprintw(3, 17, linebuff);
+	wmove(mainwin, 3, 19);
 	refresh();
 	return;
 }
@@ -56,13 +58,13 @@ int main(int argc, char *argv[])
 		{
 
 			/*  If a printable character  */
-			if (lb_ptr <= lb_end -1)		// room to add character ?
+			if (lb_ptr <= lb_end - 1)		// room to add character ?
 			{
 				*lb_ptr++ = ch;
 				*lb_ptr = '\0';
 			}
 			else
-				disp("**** line buffer overflow ****");		
+				disp("**** line buffer overflow ****");
 			disp("got a character ");
 		}
 		else
