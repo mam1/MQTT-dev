@@ -9,8 +9,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
-WINDOW * mainwin;											// character typed on keyboard
-
+WINDOW * mainwin;											
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
@@ -23,23 +22,17 @@ void disp(char *str)
 	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
 	mvprintw(3, 17, linebuff);
 	refresh();
-
 	return;
-
-
 }
 
 int main(int argc, char *argv[])
 {
-
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 	int		ch;
 	static char keych[2] = {0};
-
-
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -52,10 +45,10 @@ int main(int argc, char *argv[])
 	cbreak();
 	keypad(mainwin, TRUE);
 	clear();
-	mvprintw(0, 0, "conwatcher active");/* Move to (y, x) then print string     */
-	mvprintw(30, 0, "enter a command > ");/* Move to (y, x) then print string     */
-	refresh();
+	disp("conwatcher active");
+
 	memset(linebuff, '\0', sizeof(linebuff));
+
 	while ((ch = getch()) != 'q')
 	{
 		// read the keyboard
@@ -63,10 +56,11 @@ int main(int argc, char *argv[])
 		{
 
 			/*  If a printable character  */
-			if (lb_ptr <= lb_end)		// room to add character ?
+			if (lb_ptr <= lb_end -1)		// room to add character ?
 			{
 				*lb_ptr++ = ch;
 			}
+			disp("**** line buffer overflow ****");
 			*lb_ptr = '\0';
 
 			disp("got a character ");
@@ -116,25 +110,8 @@ int main(int argc, char *argv[])
 				disp("got a DEL");
 
 				break;
-
-				// /* OTHER */ default:
-				// if (lb_ptr <= lb_end)		// room to add character ?
-				// {
-				// 	*lb_ptr++ = c;
-				// }
-				// 	wmove(mainwin, 3, 0);
-				// 	deleteln();
-				// 	mvprintw(30, 0, "enter a command > "); Move to (y, x) then print string
-				// 	mvprintw(3, 17, linebuff);
-				// 	refresh();
-				// }
-
 			}
 		}
-		/* do suff while waiting or the keyboard */
-
-
-		/************************************************************************************************/
 
 	}
 	endwin();			/* End curses mode		  */
