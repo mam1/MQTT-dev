@@ -42,22 +42,43 @@ CREATE TABLE Channels (
 );
 
 CREATE TABLE TokenQ (
-    tokenID INTEGER NOT NULL,
+    tokenID INTEGER NOT NULL AUTO_INCREMENT,
     token varchar(100) NOT NULL,
     PRIMARY KEY (tokenID)
 );
 
 DELIMITER $$ ;
-CREATE OR REPLACE PROCEDURE Push (newtoken varchar(100))
-BEGIN
-DECLARE newtokenID INTEGER;
-SELECT tokenID FROM TokenQ ORDER BY tokenID DESC LIMIT 1;
-SET newtokenID = TokenQ.tokenID;
-INSERT INTO TokenQ(tokenID, token) VALUES(newtokenID + 1,newtoken);
-END;
+CREATE OR REPLACE PROCEDURE push (IN newtoken varchar(100))
+    BEGIN
+        #DECLARE newtokenID INTEGER;
+        SELECT tokenID FROM TokenQ ORDER BY tokenID DESC LIMIT 1;
+        INSERT INTO TokenQ(token) VALUES(newtoken);
+    END;
+DELIMITER ; $$
+
+
+DELIMITER $$ ;
+#CREATE OR REPLACE PROCEDURE pop (OUT token varchar(100))
+CREATE OR REPLACE PROCEDURE pop (OUT token varchar(100))
+    BEGIN
+        #select * from TokenQ;
+        #DECLARE toke varchar(100)default " "; 
+        SELECT token INTO @toke FROM TokenQ WHERE 1 = 1 ORDER BY tokenID LIMIT 1;
+        #SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;
+        SELECT @toke;
+        #SET toke = token;
+        #SET token = "hi there";
+        SELECT CONCAT("HELLO"," ",@toke);
+    END;
 DELIMITER ; $$
 
 CALL push("test1");
 CALL push("test2");
-CALL push("test3");
+CALL push("test333");
 CALL push("test4");
+CALL push("ttttt");
+
+
+
+
+
