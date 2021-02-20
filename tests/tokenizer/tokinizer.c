@@ -113,7 +113,7 @@ char * Tpop(char * token)
 
 	printf("token is <%s>\n", row[1]);
 
-	sprintf(buff, "DELETE FROM TokenQ WHERE tokenID = %s;", row[0]);
+	sprintf(buff, "DELETE FROM 'TokenQ' WHERE 'tokenID' = '%s';", row[0]);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
