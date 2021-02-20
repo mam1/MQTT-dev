@@ -1,5 +1,5 @@
 
-#include "mysql.h"
+#include "/usr/include/mariadbmysql.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>   //sleep
