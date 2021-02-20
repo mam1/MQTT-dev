@@ -1,5 +1,5 @@
 
-#include "/usr/include/mariadb/mysql.h"
+#include "/usr/include/mariadbmysql.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>   //sleep
@@ -46,7 +46,7 @@ void update_channel_state(void) {
 	return;
 }
 
-int pushit(char * token)
+int Tpush(char * token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
@@ -63,12 +63,12 @@ int pushit(char * token)
 		exit(1);
 	}
 
-	/* initailze client library */
-	if (mysql_library_init(argc, argv, NULL))
-	{
-		printf("couldn't initialize MySQL client library\n");
-		exit(1);
-	}
+	// /* initailze client library */
+	// if (mysql_library_init(argc, argv, NULL))
+	// {
+	// 	printf("couldn't initialize MySQL client library\n");
+	// 	exit(1);
+	// }
 
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
@@ -89,7 +89,7 @@ int pushit(char * token)
 	return 1;
 }
 
-char * popit(char * token)
+char * Tpop(char * token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
@@ -104,12 +104,12 @@ char * popit(char * token)
 		exit(1);
 	}
 
-	/* initailze client library */
-	if (mysql_library_init(argc, argv, NULL))
-	{
-		printf("couldn't initialize MySQL client library\n");
-		exit(1);
-	}
+	// /* initailze client library */
+	// if (mysql_library_init(argc, argv, NULL))
+	// {
+	// 	printf("couldn't initialize MySQL client library\n");
+	// 	exit(1);
+	// }
 
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
@@ -121,6 +121,6 @@ char * popit(char * token)
 }
 int main(int argc, char* argv[]) {
 	printf("%s\n", "testing push");
-	pushit("from c");
+	Tpush("from c");
 	printf("%s\n", "normal termination");
 }
