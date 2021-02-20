@@ -70,7 +70,8 @@ char * Tpop(char * token)
 
 
 	char 				buff[500];
-	
+	int 				i;
+
 	/* get handles  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
