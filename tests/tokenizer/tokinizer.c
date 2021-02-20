@@ -108,14 +108,14 @@ char * Tpop(char * token)
 	{
 		printf("moving <%c>\n", *cptr);
 		*bptr++ = *cptr++;
-	} 
+	}
 	bptr = '\0';
 
 	printf("token is <%s>\n", row[1]);
 
-	sprintf(buff, "DELETE FROM TokenQ WHERE tokeID = %s;", row[0]);
-		if (mysql_query(conn, buff))
-			show_mysql_error(conn);
+	sprintf(buff, "DELETE FROM TokenQ WHERE tokenID = %s;", row[0]);
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
 
 	return token;
 }
@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
 	char 			tbuff[500];
 	printf("%s\n", "testing push");
 	Tpush("from c");
-	memset(tbuff,'\0', 500);
+	memset(tbuff, '\0', 500);
 	Tpop(tbuff);
 	printf("popped token <%s>\n\n", tbuff );
 	printf("%s\n", "normal termination");
