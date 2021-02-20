@@ -68,6 +68,7 @@ char * Tpop(char * token)
 	MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
+	char 				*cptr, *bptr;
 
 	char 				buff[500];
 	int 				i;
@@ -102,7 +103,11 @@ char * Tpop(char * token)
 	printf("\n");
 
 	row = mysql_fetch_row(result);
-	*token = *row[1];
+	cptr = row[1];
+	bptr = buff;
+	while (*cptr != '\0') *bptr++ = *cptr++;
+	bptr = '\0';
+
 	printf("token is <%s>\n", row[1]);
 
 
