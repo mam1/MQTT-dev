@@ -127,7 +127,12 @@ int tokenizer(char *lbuf) {
 	memset(tbuf, '\0', 500);
 	while (*lbuf_ptr != '\0') {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
-		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf_ptr++ = *lbuf_ptr++;
+		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0'))
+		{
+			*tbuf_ptr++ = *lbuf_ptr++;
+
+		}
+		lbuf_ptr++; 
 		Tpush(tbuf);
 		memset(tbuf, '\0', 500);
 	}
