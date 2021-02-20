@@ -9,6 +9,8 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
+#include "/usr/include/mariadb/mysql.h"
+
 WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
