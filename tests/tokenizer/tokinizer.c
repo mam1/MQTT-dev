@@ -61,14 +61,16 @@ int Tpush(char * token)
 		exit(1);
 	}
 
-	/* position curser at newest token */
-	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
-		show_mysql_error(conn);
+	// /* position curser at newest token */
+	// if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
+	// 	show_mysql_error(conn);
 
 	/* insert newest token */
-		printf("buff <%s>\n", buff );
+	printf("buff <%s>\n", buff );
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
+
+	mysql_close(conn);
 	return 1;
 }
 
