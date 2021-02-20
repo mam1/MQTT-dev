@@ -138,10 +138,11 @@ int tokenizer(char *lbuf) {
 
 int main(int argc, char* argv[]) {
 	char 			tbuf[500];
+	
 	tokenizer("  this is a test");
 
-	memset(tbuff, '\0', 500);
-	Tpop(tbuff);
-	printf("popped token <%s>\n\n", tbuff );
+	memset(tbuf, '\0', 500);
+	Tpop(tbuf);
+	printf("popped token <%s>\n\n", tbuf );
 	printf("%s\n", "normal termination");
 }
