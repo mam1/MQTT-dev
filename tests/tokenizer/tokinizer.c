@@ -117,13 +117,14 @@ char * Tpop(char * token)
 	return token;
 }
 int tokenizer(char * lbuf) {
-	char 			tbuf[500];
+
 	char 			*tbuf_ptr, lbuf_ptr;
+	char 			tbuf[500];
 
-	tbuf_ptr = tbuff;
-	lbuf_ptr = lbuff;
+	tbuf_ptr = tbuf;
+	lbuf_ptr = lbuf;
 
-	memset(tbuff, '\0', 500);
+	memset(tbuf, '\0', 500);
 
 
 	while (*lbuf_ptr != '\0') {
@@ -136,7 +137,7 @@ int tokenizer(char * lbuf) {
 
 
 int main(int argc, char* argv[]) {
-
+	char 			tbuf[500];
 	tokenizer("  this is a test");
 
 	memset(tbuff, '\0', 500);
