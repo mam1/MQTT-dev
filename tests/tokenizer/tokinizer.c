@@ -8,7 +8,7 @@
 
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
-#define DATABASE    "tq"
+#define DATABASE    "tokenTest"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
