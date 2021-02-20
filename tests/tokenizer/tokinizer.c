@@ -150,10 +150,9 @@ int main(int argc, char* argv[]) {
 	int 				i;
 
 
-	for (i = 0; i < 50; i++) {
-		memset(tbuf, '\0', 500);
-		Tpop(tbuf);
+	while (Tpop(tbuf) != NULL) {
 		printf("popped token <%s>\n\n", tbuf );
+		memset(tbuf, '\0', 500);
 	}
 
 	tokenizer("  this is yet   another longer test");
