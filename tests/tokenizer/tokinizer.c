@@ -31,10 +31,6 @@ static void show_mysql_error(MYSQL *mysql)
 int Tpush(char * token)
 {
 	MYSQL               *conn;
-	// MYSQL_RES           *result;
-	// MYSQL_FIELD         *field;
-	// MYSQL_ROW           row;
-
 	char 				buff[500];
 
 	/* get connection handle  */
@@ -120,10 +116,29 @@ char * Tpop(char * token)
 
 	return token;
 }
+int tokenizer(char * lbuf) {
+	char 			tbuf[500];
+	char 			*tbuf_ptr, lbuf_ptr;
+
+	tbuf_ptr = tbuff;
+	lbuf_ptr = lbuff;
+
+	memset(tbuff, '\0', 500);
+
+
+	while (*lbuf_ptr != '\0') {
+		while (*lbuf_ptr == ' ') lbuf_ptr++;
+		while (*lbuf_ptr != ' ' AND * lbuf_ptr != '\0') *tbuf++ = *lbuf_ptr++;
+		Tpush(tbuff);
+	}
+	return 1;
+}
+
+
 int main(int argc, char* argv[]) {
-	char 			tbuff[500];
-	printf("%s\n", "testing push");
-	Tpush("from c");
+
+	tokenizer("  this is a test");
+
 	memset(tbuff, '\0', 500);
 	Tpop(tbuff);
 	printf("popped token <%s>\n\n", tbuff );
