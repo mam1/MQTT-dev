@@ -31,28 +31,19 @@ static void show_mysql_error(MYSQL *mysql)
 int Tpush(char * token)
 {
 	MYSQL               *conn;
-	MYSQL_RES           *result;
-	MYSQL_FIELD         *field;
-	MYSQL_ROW           row;
+	// MYSQL_RES           *result;
+	// MYSQL_FIELD         *field;
+	// MYSQL_ROW           row;
 
 	char 				buff[500];
 
-	/* get handles  */
+	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
 	{
 		printf("couldn't initialize conn: %s\n", mysql_error(conn));
 		exit(1);
 	}
-
-	// /* initailze client library */
-	// if (mysql_library_init(argc, argv, NULL))
-	// {
-	// 	printf("couldn't initialize MySQL client library\n");
-	// 	exit(1);
-	// }
-
-	sprintf(buff, "INSERT INTO TokenQ(token) VALUES('%s');", token);
 
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
@@ -61,12 +52,8 @@ int Tpush(char * token)
 		exit(1);
 	}
 
-	// /* position curser at newest token */
-	// if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
-	// 	show_mysql_error(conn);
-
 	/* insert newest token */
-	printf("buff <%s>\n", buff );
+	sprintf(buff, "INSERT INTO TokenQ(token) VALUES('%s');", token);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -81,6 +68,8 @@ char * Tpop(char * token)
 	MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
+
+
 	/* get handles  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -88,24 +77,37 @@ char * Tpop(char * token)
 		printf("couldn't initialize conn: %s\n", mysql_error(conn));
 		exit(1);
 	}
-
-	// /* initailze client library */
-	// if (mysql_library_init(argc, argv, NULL))
-	// {
-	// 	printf("couldn't initialize MySQL client library\n");
-	// 	exit(1);
-	// }
-
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
 	{
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	return token;
+
+	/*get the oldest row */
+	sprintf(buff, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1", token);
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
+
+
+	result = mysql_store_result(conn);
+	printf("we now have %i  active columns\n", mysql_num_fields(result));
+	for (i = 0; i < (int)mysql_num_fields(result); i++)
+	{
+		mysql_field_seek(result, i);
+		field = mysql_fetch_field(result);
+		printf("column %i  %s\n", i, field->name);
+	}
+	printf("\n");
+
+
+	return "*****";
 }
 int main(int argc, char* argv[]) {
+	char 			tbuff[500];
 	printf("%s\n", "testing push");
 	Tpush("from c");
+	Tpop(tbuff);
+	printf("popped token %s\n\n", tbuff );
 	printf("%s\n", "normal termination");
 }
