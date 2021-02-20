@@ -11,6 +11,13 @@
 
 #include "/usr/include/mariadb/mysql.h"
 
+#define SERVER      "localhost"
+#define SOCKETT     "/run/mysqld/mysqld.sock"
+#define DATABASE    "tokenTest"
+#define USER        "test-sql"
+#define PSWD        "test-sql"
+
+
 WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
