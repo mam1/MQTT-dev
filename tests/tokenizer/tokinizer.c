@@ -116,9 +116,9 @@ char * Tpop(char * token)
 
 	return token;
 }
-int tokenizer(char * lbuf) {
+int tokenizer(char *lbuf) {
 
-	char 			*tbuf_ptr, lbuf_ptr;
+	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[500];
 
 	tbuf_ptr = tbuf;
