@@ -102,7 +102,7 @@ char * Tpop(char * token)
 	printf("\n");
 
 	row = mysql_fetch_row(result);
-	*token = *row[1]
+	*token = *row[1];
 	printf("token is <%s>\n", row[1]);
 
 
