@@ -91,7 +91,6 @@ char * Tpop(char * token)
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
-
 	result = mysql_store_result(conn);
 	printf("we now have %i  active columns\n", mysql_num_fields(result));
 	for (i = 0; i < (int)mysql_num_fields(result); i++)
@@ -102,8 +101,10 @@ char * Tpop(char * token)
 	}
 	printf("\n");
 
+	row = mysql_fetch_row(result);
+	printf("token is <%s>\n", row[1]);
 
-	return "*****";
+	return row[1];
 }
 int main(int argc, char* argv[]) {
 	char 			tbuff[500];
