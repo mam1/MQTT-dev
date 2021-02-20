@@ -34,6 +34,13 @@ void disp(char *str)
 	return;
 }
 
+static void show_mysql_error(MYSQL *mysql)
+{
+	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
+	       mysql_sqlstate(mysql),
+	       mysql_error(mysql));
+	exit(-1);
+}
 
 int Tpush(char * token)
 {
