@@ -88,8 +88,7 @@ char * Tpop(char * token)
 	}
 
 	/*get the oldest row */
-	sprintf(buff, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1");
-	if (mysql_query(conn, buff))
+	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT"))
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
@@ -114,6 +113,9 @@ char * Tpop(char * token)
 
 	printf("token is <%s>\n", row[1]);
 
+	sprintf(buff, "DELETE FROM TokenQ");
+		if (mysql_query(conn, buff))
+			show_mysql_error(conn);
 
 	return token;
 }
