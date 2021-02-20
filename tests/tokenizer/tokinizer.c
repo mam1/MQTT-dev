@@ -111,7 +111,6 @@ char * Tpop(char * token)
 		*bptr++ = *cptr++;
 	} 
 	bptr = '\0';
-	printf("tbuff <%s>\n", );
 
 	printf("token is <%s>\n", row[1]);
 
