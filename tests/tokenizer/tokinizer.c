@@ -82,8 +82,7 @@ char * Tpop(char * token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-	/* at least one row in the table */
-	if () return NULL;
+
 
 	/*get the oldest row */
 	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
