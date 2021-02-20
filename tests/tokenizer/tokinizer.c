@@ -146,10 +146,8 @@ int main(int argc, char* argv[]) {
 	char 			tbuf[500];
 	int 				i;
 
-	i = 49;
 
-	for (i = 0, i < 50, i++) {
-
+	for (i = 0; i < 50; i++) {
 		memset(tbuf, '\0', 500);
 		Tpop(tbuf);
 		printf("popped token <%s>\n\n", tbuf );
