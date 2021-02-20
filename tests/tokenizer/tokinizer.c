@@ -52,7 +52,7 @@ int Tpush(char * token)
 	// 	exit(1);
 	// }
 
-	sprintf(buff, "INSERT INTO TokenQ(token) VALUES(%s);", token);
+	sprintf(buff, "INSERT INTO TokenQ(token) VALUES('%s');", token);
 
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
