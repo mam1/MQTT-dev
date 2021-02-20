@@ -88,7 +88,7 @@ char * Tpop(char * token)
 	}
 
 	/*get the oldest row */
-	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT"))
+	if (mysql_query(conn, "SSELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
