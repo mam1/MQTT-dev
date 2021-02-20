@@ -27,24 +27,6 @@ static void show_mysql_error(MYSQL *mysql)
 	exit(-1);
 }
 
-int get_offset(int day, int hour, int minute) {
-	int 		off;
-	off = minute + (hour * MINUTES_PER_HOUR) + (day * MINUTES_PER_DAY);
-	return off;
-}
-
-void update_channel_state(void) {
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time ( &rawtime );
-	timeinfo = localtime ( &rawtime );
-	printf ( "Current local time and date: %s", asctime (timeinfo) );
-	printf("day of the week %i\n", timeinfo->tm_wday);
-	printf("get_offset = %i\n", get_offset(timeinfo->tm_wday, timeinfo->tm_hour, timeinfo->tm_min));
-
-	return;
-}
 
 int Tpush(char * token)
 {
@@ -83,9 +65,8 @@ int Tpush(char * token)
 
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token) VALUES(%s);", *token);
-	if (mysql_query(conn, buff))
+	// if (mysql_query(conn, buff))
 		show_mysql_error(conn);
-
 	return 1;
 }
 
