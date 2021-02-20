@@ -129,7 +129,7 @@ int tokenizer(char *lbuf) {
 
 	while (*lbuf_ptr != '\0') {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
-		while ((*lbuf_ptr != ' ') AND (*lbuf_ptr != '\0')) *tbuf++ = *lbuf_ptr++;
+		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf++ = *lbuf_ptr++;
 		Tpush(tbuff);
 	}
 	return 1;
