@@ -64,10 +64,10 @@ int Tpush(char * token)
 		show_mysql_error(conn);
 
 	/* insert newest token */
-		// printf("token = <%s>\n", *token);
+		printf("token = <%s>\n", "XXXX");
 	// sprintf(buff, "INSERT INTO TokenQ(token) VALUES(%s);", *token);
 	// if (mysql_query(conn, buff))
-		show_mysql_error(conn);
+		// show_mysql_error(conn);
 	return 1;
 }
 
