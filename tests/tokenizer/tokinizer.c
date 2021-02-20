@@ -129,7 +129,7 @@ int tokenizer(char *lbuf) {
 
 	while (*lbuf_ptr != '\0') {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
-		while (*lbuf_ptr != ' ' AND * lbuf_ptr != '\0') *tbuf++ = *lbuf_ptr++;
+		while ((*lbuf_ptr != ' ') AND (*lbuf_ptr != '\0')) *tbuf++ = *lbuf_ptr++;
 		Tpush(tbuff);
 	}
 	return 1;
@@ -138,7 +138,7 @@ int tokenizer(char *lbuf) {
 
 int main(int argc, char* argv[]) {
 	char 			tbuf[500];
-	
+
 	tokenizer("  this is a test");
 
 	memset(tbuf, '\0', 500);
