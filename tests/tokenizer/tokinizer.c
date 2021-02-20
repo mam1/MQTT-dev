@@ -129,7 +129,7 @@ int tokenizer(char *lbuf) {
 	while (*lbuf_ptr != '\0') {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
 		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf_ptr++ = *lbuf_ptr++;
-		*tbuf = '\0';
+
 		printf("lbut_ptr -> '%c'\n", *lbuf_ptr);
 		printf("tbuf <%s>\n", tbuf );
 
