@@ -129,7 +129,7 @@ int tokenizer(char *lbuf) {
 	while (*lbuf_ptr != '\0') {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
 		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf_ptr++ = *lbuf_ptr++;
-
+		*tbuf_ptr = '\0';
 		printf("lbut_ptr -> '%c'\n", *lbuf_ptr);
 		printf("tbuf <%s>\n", tbuf );
 
@@ -144,11 +144,18 @@ int tokenizer(char *lbuf) {
 
 int main(int argc, char* argv[]) {
 	char 			tbuf[500];
+	int 				i;
 
-	tokenizer("  this is a test");
+	i = 49;
 
-	memset(tbuf, '\0', 500);
-	Tpop(tbuf);
-	printf("popped token <%s>\n\n", tbuf );
-	printf("%s\n", "normal termination");
+	for (i = 0, i < 50, i++) {
+
+		memset(tbuf, '\0', 500);
+		Tpop(tbuf);
+		printf("popped token <%s>\n\n", tbuf );
+		printf("%s\n", "normal termination");
+	}
+
+	tokenizer("  this is yet   another longer test");
+
 }
