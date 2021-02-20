@@ -87,7 +87,7 @@ char * Tpop(char * token)
 	}
 
 	/*get the oldest row */
-	sprintf(buff, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1", token);
+	sprintf(buff, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
