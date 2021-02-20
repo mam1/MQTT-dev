@@ -36,7 +36,7 @@ int Tpush(char * token)
 	MYSQL_ROW           row;
 
 	char 				buff[500];
-
+	printf("token = <%s>\n", token);
 	/* get handles  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
