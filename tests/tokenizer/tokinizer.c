@@ -52,6 +52,8 @@ int Tpush(char * token)
 	// 	exit(1);
 	// }
 
+	sprintf(buff, "INSERT INTO TokenQ(token) VALUES(%s);", token);
+
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
 	{
@@ -64,7 +66,7 @@ int Tpush(char * token)
 		show_mysql_error(conn);
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token) VALUES(%s);", token);
+		printf("buff <%s>\n", buff );
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 	return 1;
