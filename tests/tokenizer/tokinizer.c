@@ -104,13 +104,14 @@ char * Tpop(char * token)
 
 	row = mysql_fetch_row(result);
 	cptr = row[1];
-	bptr = buff;
+	bptr = token;
 	while (*cptr != '\0')
 	{
 		printf("moving <%c>\n", *cptr);
 		*bptr++ = *cptr++;
-	} *bptr++ = *cptr++;
+	} 
 	bptr = '\0';
+	printf("tbuff <%s>\n", );
 
 	printf("token is <%s>\n", row[1]);
 
@@ -123,6 +124,6 @@ int main(int argc, char* argv[]) {
 	Tpush("from c");
 	memset(tbuff,'\0', 500);
 	Tpop(tbuff);
-	printf("popped token %s\n\n", tbuff );
+	printf("popped token <%s>\n\n", tbuff );
 	printf("%s\n", "normal termination");
 }
