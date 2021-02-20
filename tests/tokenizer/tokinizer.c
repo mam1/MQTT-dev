@@ -82,6 +82,8 @@ char * Tpop(char * token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
+	/* at least one row in the table */
+	if () return NULL;
 
 	/*get the oldest row */
 	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
@@ -97,7 +99,8 @@ char * Tpop(char * token)
 	}
 	printf("\n");
 
-	row = mysql_fetch_row(result);
+	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
+
 	cptr = row[1];
 	bptr = token;
 	while (*cptr != '\0')
@@ -151,9 +154,8 @@ int main(int argc, char* argv[]) {
 		memset(tbuf, '\0', 500);
 		Tpop(tbuf);
 		printf("popped token <%s>\n\n", tbuf );
-		printf("%s\n", "normal termination");
 	}
 
 	tokenizer("  this is yet   another longer test");
-
+	printf("%s\n", "normal termination");
 }
