@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
 
 		/* ESC */	case _ESC:
 				disp("got a ESC");
-
+				return 0;
 				break;
 
 		/* NOCR */	case _NO_CHAR:
