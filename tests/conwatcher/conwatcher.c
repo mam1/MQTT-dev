@@ -25,6 +25,12 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
+	char 			*ptr;
+
+	ptr = str;
+
+	while(*ptr != '\n') ptr++;
+	*ptr = '\0';
 	
 	mvprintw(3,0,"                                                     ");
 	mvprintw(3, 0, str);
