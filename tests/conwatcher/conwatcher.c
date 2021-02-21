@@ -152,7 +152,7 @@ int tokenizer(char *lbuf) {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
 		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf_ptr++ = *lbuf_ptr++;
 		*tbuf_ptr = '\0';
-?
+
 
 		Tpush(tbuf);
 		memset(tbuf, '\0', 500);
@@ -236,6 +236,7 @@ int main(int argc, char *argv[])
 
 		/* CR */	case 0xa:
 				disp("got a CR");
+
 				tokenizer(linebuff);
 				memset(linebuff, '\0', sizeof(linebuff));
 				lb_in = linebuff;
