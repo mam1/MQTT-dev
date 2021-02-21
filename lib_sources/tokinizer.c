@@ -142,18 +142,3 @@ int tokenizer(char *lbuf) {
 	}
 	return 1;
 }
-
-
-int main(int argc, char* argv[]) {
-	char 			tbuf[500];
-	int 				i;
-
-
-	while (Tpop(tbuf) != NULL) {
-		printf("popped token <%s>\n\n", tbuf );
-		memset(tbuf, '\0', 500);
-	}
-
-	tokenizer("  this is yet   another longer test");
-	printf("%s\n", "normal termination");
-}
