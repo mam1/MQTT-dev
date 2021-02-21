@@ -57,14 +57,14 @@ int Tpush(char * token)
 	conn = mysql_init(NULL);
 	if (conn == NULL)
 	{
-		printf("couldn't initialize conn: %s\n", mysql_error(conn));
+		printf("\ncouldn't initialize conn: %s\n", mysql_error(conn));
 		exit(1);
 	}
 
 	/* connect to server */
 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
 	{
-		printf("couldn't connect to database\n");
+		printf("\ncouldn't connect to database\n");
 		exit(1);
 	}
 
@@ -152,8 +152,7 @@ int tokenizer(char *lbuf) {
 		while (*lbuf_ptr == ' ') lbuf_ptr++;
 		while ((*lbuf_ptr != ' ') & (*lbuf_ptr != '\0')) *tbuf_ptr++ = *lbuf_ptr++;
 		*tbuf_ptr = '\0';
-		printf("lbut_ptr -> '%c'\n", *lbuf_ptr);
-		printf("tbuf <%s>\n", tbuf );
+?
 
 		Tpush(tbuf);
 		memset(tbuf, '\0', 500);
