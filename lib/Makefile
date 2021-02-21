@@ -25,14 +25,24 @@ CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions -fno-rtti 
 
-# set locations for basic gnu tools
-PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+
+
+
+# set host dependent locations for basic gnu tools and libraries
+HOST=$(shell hostname)
+ifeq ($(HOST),MQTT-beaglebone)
+    PREFIX := 
+else
+    PREFIX := /media/sysuts/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+endif
+
 CC  := $(PREFIX)gcc
 CXX := $(PREFIX)g++
 LD  := $(PREFIX)ld
 AS  := $(PREFIX)as
 AR  := $(PREFIX)ar
 OBJCOPY := $(PREFIX)objcopy
+
 
 # set libarary
 LIB := libMQTT.a
