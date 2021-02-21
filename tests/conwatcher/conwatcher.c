@@ -243,6 +243,7 @@ int main(int argc, char *argv[])
 				lb_out = linebuff;
 				lb_ptr = linebuff;
 				lb_end = linebuff + _INPUT_BUFFER_SIZE;
+				disp "linebuffer set to tokenizer to be processed"
 				break;
 
 		/* DEL */	case 0x14a:
