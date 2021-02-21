@@ -29,8 +29,8 @@ void disp(char *str)
 
 	ptr = str;
 
-	while(*ptr != '\n') ptr++;
-	*ptr = '\0';
+	// while(*ptr != '\n') ptr++;
+	// *ptr = '\0';
 	
 	mvprintw(3,0,"                                                     ");
 	mvprintw(3, 0, str);
@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
 
 	memset(linebuff, '\0', sizeof(linebuff));
 
-	while ((ch = getch()) != 'q')
+	while ((ch = getch()) != _ESC)
 	{
 		// read the keyboard
 		if ( isprint(ch) && !(ch & KEY_CODE_YES))
