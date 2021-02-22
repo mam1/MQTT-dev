@@ -194,7 +194,7 @@ int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	printf("Tpush called with token <%s>, type <%s>\n", token, string);
+	// printf("Tpush called with token <%s>, type <%s>\n", token, string);
 	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -290,7 +290,7 @@ int tokenizer(char *lbuf)
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-	printf("tokenizer called with lbuf <%s>\n", lbuf );
+	// printf("tokenizer called with lbuf <%s>\n", lbuf );
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while (*lbuf_ptr != '\0')
