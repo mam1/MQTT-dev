@@ -127,13 +127,15 @@ int main(int argc, char *argv[])
 				disp("got a CR");
 
 				// tokenizer(linebuff);
+				tokenizer(linebuff);
+				disp ("linebuffer set to tokenizer to be processed");
 				memset(linebuff, '\0', sizeof(linebuff));
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
 				lb_end = linebuff + _INPUT_BUFFER_SIZE;
-				disp ("linebuffer set to tokenizer to be processed");
-				tokenizer(linebuff);
+
+
 				break;
 
 		/* DEL */	case 0x14a:
