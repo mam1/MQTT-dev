@@ -307,6 +307,7 @@ int tokenizer(char *lbuf)
 			while ((*lbuf_ptr != _QUOTE) && (*lbuf_ptr != '\0')) 		// look for ending quote or end of buffer
 				*tbuf_ptr++ = *lbuf_ptr++;								// move char to temp buffer
 			*(++tbuf_ptr) = '\0';
+			lbuf_ptr++;
 			Tpush(tbuf, "string");
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
