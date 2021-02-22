@@ -37,6 +37,8 @@ void disp(char *str)
 	mvprintw(3, 0, "                                                     ");
 	mvprintw(3, 0, str);
 	mvprintw(30, 0, "enter a command > ");
+	mvprintw(30, 17, "                                                 ");
+
 	mvprintw(30, 17, linebuff);
 	refresh();
 	return;
