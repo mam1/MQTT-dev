@@ -171,15 +171,20 @@ int is_a_delimiter(char * c)
 {
 	switch (*c) {
 	case _COMMA:
-		return 0;
-	case _SPACE:
-		return 0;
-	case _COLON:
-		return 0;
-	case _SLASH:
-		return 0;
-	default:
 		return 1;
+		break;
+	case _SPACE:
+		return 1;
+		break;
+	case _COLON:
+		return 1;
+		break;
+	case _SLASH:
+		return 1;
+		break;
+	default:
+		return 0;
+		break;
 
 	}
 
