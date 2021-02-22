@@ -187,7 +187,6 @@ int Tpush(char * token, char * string)
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
 
-printf("%s\n", "Tpush called");
 	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -204,8 +203,7 @@ printf("%s\n", "Tpush called");
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT (token, type) INTO TokenQ(token) VALUES(%s,%s);", token, string);
-	printf("\n\n buff ->%s \n\n", buff);
+	sprintf(buff, "INSERT (token, type) INTO TokenQ(token) VALUES('%s','%s');", token, string);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -260,13 +258,13 @@ char * Tpop(char * token)
 	bptr = token;
 	while (*cptr != '\0')
 	{
-		printf("moving <%c>\n", *cptr);
+		// printf("moving <%c>\n", *cptr);
 		*bptr++ = *cptr++;
 	}
 	bptr = '\0';
 
-	printf("token is <%s>\n", row[1]);
-	printf("tokenID is <%s>\n", row[0]);
+	// printf("token is <%s>\n", row[1]);
+	// printf("tokenID is <%s>\n", row[0]);
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
 	if (mysql_query(conn, buff))
