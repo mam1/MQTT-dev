@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 		/* CR */	case 0xa:
 				disp("got a CR");
 
-				tokenizer(linebuff);
+				// tokenizer(linebuff);
 				memset(linebuff, '\0', sizeof(linebuff));
 				lb_in = linebuff;
 				lb_out = linebuff;
