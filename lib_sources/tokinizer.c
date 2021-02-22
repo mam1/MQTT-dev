@@ -32,22 +32,22 @@ static void show_mysql_error(MYSQL *mysql)
 }
 
 /* return character type  */
-int char_type(char c) {
-	switch (c) {
-	case _COMMA:
-	case _SPACE:
-	case _COLON:
-	case _SLASH:
-		return "delimiter";
-	case _QUOTE:
-		return "quote";
-	case _DEL:
-		return "number";
-	case _CR:
-		return "enter";
-	}
-	return 4;
-}
+// int char_type(char c) {
+// 	switch (c) {
+// 	case _COMMA:
+// 	case _SPACE:
+// 	case _COLON:
+// 	case _SLASH:
+// 		return "delimiter";
+// 	case _QUOTE:
+// 		return "quote";
+// 	case _DEL:
+// 		return "number";
+// 	case _CR:
+// 		return "enter";
+// 	}
+// 	return 4;
+// }
 
 /* return token type */
 char * (token_type)
