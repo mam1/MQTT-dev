@@ -312,7 +312,7 @@ int tokenizer(char *lbuf)
 		{
 			*tbuf_ptr++ = '\0';
 			// Tpush(tbuf, token_type(tbuf));
-			Tpush(tbuf, "string");
+			Tpush(tbuf, "string2");
 
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
@@ -323,7 +323,7 @@ int tokenizer(char *lbuf)
 		*tbuf_ptr++ = *lbuf_ptr++;
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
-	Tpush(tbuf, "string");
+	Tpush(tbuf, "string3");
 	// Tpush(tbuf, token_type(tbuf));
 return 0;
 }
