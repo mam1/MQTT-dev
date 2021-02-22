@@ -301,7 +301,10 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 		}
 
-		if (isadelimiter(lbuf_ptr))
+		if (!isadelimiter(lbuf_ptr))
+			*tbuf_ptr++ = *lbuf_ptr++;
+
+		else
 		{
 			*tbuf_ptr++ = '\0';
 			// Tpush(tbuf, token_type(tbuf));
