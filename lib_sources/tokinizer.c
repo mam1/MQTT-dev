@@ -173,9 +173,6 @@ int is_a_delimiter(char * c)
 	case _COMMA:
 		return 1;
 		break;
-	case _SPACE:
-		return 1;
-		break;
 	case _COLON:
 		return 1;
 		break;
@@ -316,7 +313,7 @@ int tokenizer(char *lbuf)
 
 
 
-		if (*lbuf_ptr == " ")
+		if (*lbuf_ptr == ' ')
 		{
 			*tbuf_ptr = '\0';
 			lbuf_ptr++;
