@@ -314,7 +314,7 @@ int tokenizer(char *lbuf)
 
 
 
-		if (is_a_delimiter(lbuf_ptr))
+		if (*lbuf_ptr == ' ')
 		{
 			*tbuf_ptr++ = '\0';
 			// Tpush(tbuf, token_type(tbuf));
