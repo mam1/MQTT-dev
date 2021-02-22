@@ -314,20 +314,20 @@ int tokenizer(char *lbuf)
 
 
 
-		if (*lbuf_ptr == ' ')
+		if (*lbuf_ptr == " ")
 		{
 			*tbuf_ptr = '\0';
 			lbuf_ptr++;
 			// Tpush(tbuf, token_type(tbuf));
 			Tpush(tbuf, "string2");
-
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
-			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
-			// 	*tbuf_ptr++ = *lbuf_ptr++;
+			
 		}
 		else 
 		{
+			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
+			// 	*tbuf_ptr++ = *lbuf_ptr++;
 			*tbuf_ptr++ = *lbuf_ptr++;
 		}
 	}
