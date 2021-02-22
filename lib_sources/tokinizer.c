@@ -56,6 +56,53 @@ static void show_mysql_error(MYSQL *mysql)
 
 // }
 
+
+
+
+/* return token type or command number */
+int token_type(char *c) {
+	int     i;
+	char    *p;
+
+	/*test for an empty command */
+	if ((*c == '\0') || (*c == ' '))
+		return _TT_NULL;
+	/* test for a quoted string*/
+	if (*c == _QUOTE)
+		return _TT_STR;
+	/* test for a integer */
+	if (is_valid_int(c))
+		return _TT_INT;
+	/* test for a keyword */
+	for (i = 0; i < 35; i++)
+	{
+		if (strlen(c) == strlen(keyword[i])) {
+			p = c;
+			while (*p != '\0') {
+				*p = tolower(*p);
+				p++;
+			};
+			if (strncmp(c, keyword[i], strlen(c)) == 0)
+				return i;
+		}
+	}
+		for (i = 38; i < _CMD_TOKENS ; i++)
+	{
+		if (strlen(c) == strlen(keyword[i])) {
+			p = c;
+			while (*p != '\0') {
+				*p = tolower(*p);
+				p++;
+			};
+			if (strncmp(c, keyword[i], strlen(c)) == 0)
+				return i;
+		}
+	}
+	/* unrecognized token */
+	return _TT_UNREC;
+}
+
+
 int isadelimiter(char * c)
 {
 	switch (*c) {
@@ -74,7 +121,7 @@ int isadelimiter(char * c)
 int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
-	char 				buff[500];
+	char 				buff[_INPUT_BUFFER_SIZE];
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -109,7 +156,7 @@ char * Tpop(char * token)
 
 	char 				*cptr, *bptr;
 
-	char 				buff[500];
+	char 				buff[_INPUT_BUFFER_SIZE];
 	int 				i;
 
 	/* get handles  */
@@ -166,13 +213,13 @@ char * Tpop(char * token)
 int tokenizer(char *lbuf) {
 
 	char 			*tbuf_ptr, *lbuf_ptr;
-	char 			tbuf[500];
+	char 			tbuf[_INPUT_BUFFER_SIZE];
 	char 			quote = 0;
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
 
-	memset(tbuf, '\0', 500);
+	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while (*lbuf_ptr != '\0')
 	{	// loop until the input buffer is empty
@@ -199,8 +246,10 @@ int tokenizer(char *lbuf) {
 
 		if (isadelimiter(lbuf_ptr))
 		{
-			tbuf_ptr++ = '\0';
-			Tpush(tbuf, token_type(tbuf));
+			*tbuf_ptr++ = '\0';
+			// Tpush(tbuf, token_type(tbuf));
+						Tpush(tbuf, "string");
+
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 			// while ((!isadelimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
@@ -210,5 +259,7 @@ int tokenizer(char *lbuf) {
 		*tbuf_ptr++ = *lbuf_ptr++;
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
-	Tpush(tbuf, token_type(tbuf))
+	Tpush(tbuf, "string");
+		// Tpush(tbuf, token_type(tbuf));
+
 }
