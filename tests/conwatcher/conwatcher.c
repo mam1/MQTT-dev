@@ -27,18 +27,11 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	char 			*ptr;
-
-	ptr = str;
-
-	// while(*ptr != '\n') ptr++;
-	// *ptr = '\0';
 
 	mvprintw(3, 0, "                                                     ");
 	mvprintw(3, 0, str);
 	mvprintw(30, 0, "enter a command > ");
-	mvprintw(30, 17, "                                                 ");
-	refresh();
+	mvprintw(30, 17, "                                                   ");
 	mvprintw(30, 17, linebuff);
 	refresh();
 	return;
@@ -51,7 +44,6 @@ static void show_mysql_error(MYSQL *mysql)
 	       mysql_error(mysql));
 	exit(-1);
 }
-
 
 
 int main(int argc, char *argv[])
@@ -130,8 +122,10 @@ int main(int argc, char *argv[])
 
 				// tokenizer(linebuff);
 				tokenizer(linebuff);
-				disp ("linebuffer set to tokenizer to be processed");
 				memset(linebuff, '\0', sizeof(linebuff));
+				disp ("linebuffer set to tokenizer to be processed");
+				
+
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
