@@ -182,6 +182,9 @@ int is_a_delimiter(char * c)
 	case _SLASH:
 		return 1;
 		break;
+	case _SPACE:
+		return 1;
+		break;
 	default:
 		return 0;
 		break;
