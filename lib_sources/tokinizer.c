@@ -325,5 +325,5 @@ int tokenizer(char *lbuf)
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, "string");
 	// Tpush(tbuf, token_type(tbuf));
-
+return 0;
 }
