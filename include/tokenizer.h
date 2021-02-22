@@ -6,9 +6,9 @@
 #define _MINOR_VERSION_tokenizer		0
 
 
-int Tpush(char * token);
+int Tpush(char * token, char * string);
 char * Tpop(char * token);
-int tokenizer(char *lbuf, char *string); 
+int tokenizer(char *lbuf); 
 
 
 
