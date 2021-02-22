@@ -187,6 +187,7 @@ int Tpush(char * token, char * string)
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
 
+printf("%s\n", "Tpush called");
 	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -264,8 +265,8 @@ char * Tpop(char * token)
 	}
 	bptr = '\0';
 
-	// printf("token is <%s>\n", row[1]);
-	// printf("tokenID is <%s>\n", row[0]);
+	printf("token is <%s>\n", row[1]);
+	printf("tokenID is <%s>\n", row[0]);
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
 	if (mysql_query(conn, buff))
@@ -288,15 +289,8 @@ int tokenizer(char *lbuf)
 
 	while (*lbuf_ptr != '\0')
 	{	// loop until the input buffer is empty
-
-		/* NULL */
-		// if (lbuf_ptr == lbuf)
-		// {
-		// 	cobtinue
-		// }
-
-		/* QUOTE */
-		if (*lbuf_ptr == _QUOTE)
+	
+		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
