@@ -282,7 +282,7 @@ int tokenizer(char *lbuf)
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-
+printf("tokenizer call with lbuf <%s>\n", );
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while (*lbuf_ptr != '\0')
