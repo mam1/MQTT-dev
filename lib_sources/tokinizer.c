@@ -50,15 +50,15 @@ static void show_mysql_error(MYSQL *mysql)
 // }
 
 /* return token type */
-char * (token_type)
-{
+// char * (token_type)
+// {
 
 
-}
+// }
 
 int isadelimiter(char * c)
 {
-	switch (c) {
+	switch (*c) {
 	case _COMMA:
 	case _SPACE:
 	case _COLON:
