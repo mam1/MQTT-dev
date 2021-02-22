@@ -24,7 +24,8 @@
 #define MINUTES_PER_DAY 		1440
 
 /* command list */
-static char    *keyword[_CMD_TOKENS] = {
+static char    *keyword[_CMD_TOKENS] = 
+{
 	/*  0 */    "temp",
 	/*  1 */    "*",
 	/*  2 */    "humid",
@@ -103,10 +104,25 @@ static void show_mysql_error(MYSQL *mysql)
 // }
 
 
-
+/* test for a valid integer */
+int is_valid_int(const char *str)
+{
+	if (*str == '-')     //negative numbers
+		++str;
+	if (!*str)           //empty string or just "-"
+		return 0;
+	while (*str)         //check for non-digit chars in the rest of the string
+	{
+		if (!isdigit(*str))
+			return 0;
+		else
+			++str;
+	}
+	return -1;
 
 /* return token type or command number */
-int token_type(char *c) {
+int token_type(char *c) 
+{
 	int     i;
 	char    *p;
 
@@ -132,7 +148,7 @@ int token_type(char *c) {
 				return i;
 		}
 	}
-		for (i = 38; i < _CMD_TOKENS ; i++)
+	for (i = 38; i < _CMD_TOKENS ; i++)
 	{
 		if (strlen(c) == strlen(keyword[i])) {
 			p = c;
@@ -256,11 +272,11 @@ char * Tpop(char * token)
 }
 
 
-int tokenizer(char *lbuf) {
+int tokenizer(char *lbuf) 
+{
 
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
-	char 			quote = 0;
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
@@ -294,7 +310,7 @@ int tokenizer(char *lbuf) {
 		{
 			*tbuf_ptr++ = '\0';
 			// Tpush(tbuf, token_type(tbuf));
-						Tpush(tbuf, "string");
+			Tpush(tbuf, "string");
 
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
@@ -306,6 +322,6 @@ int tokenizer(char *lbuf) {
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, "string");
-		// Tpush(tbuf, token_type(tbuf));
+	// Tpush(tbuf, token_type(tbuf));
 
 }
