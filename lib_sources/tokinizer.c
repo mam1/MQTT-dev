@@ -308,6 +308,7 @@ int tokenizer(char *lbuf)
 				*tbuf_ptr++ = *lbuf_ptr++;								// move char to temp buffer
 			*(++tbuf_ptr) = '\0';
 			lbuf_ptr++;
+			lbuf_ptr++;
 			Tpush(tbuf, "string");
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
@@ -323,9 +324,9 @@ int tokenizer(char *lbuf)
 			Tpush(tbuf, "string2");
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
-			
+
 		}
-		else 
+		else
 		{
 			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
 			// 	*tbuf_ptr++ = *lbuf_ptr++;
