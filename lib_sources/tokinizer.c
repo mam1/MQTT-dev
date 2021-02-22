@@ -101,6 +101,66 @@ int Tpush(char * token, char * string)
 }
 
 char * Tpop(char * token)
+{
+	MYSQL               *conn;
+	MYSQL_RES           *result;
+	MYSQL_FIELD         *field;
+	MYSQL_ROW           row;
+
+	char 				*cptr, *bptr;
+
+	char 				buff[500];
+	int 				i;
+
+	/* get handles  */
+	conn = mysql_init(NULL);
+	if (conn == NULL)
+	{
+		printf("couldn't initialize conn: %s\n", mysql_error(conn));
+		exit(1);
+	}
+	/* connect to server */
+	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
+	{
+		printf("couldn't connect to database\n");
+		exit(1);
+	}
+
+
+	/*get the oldest row */
+	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
+		show_mysql_error(conn);
+
+	result = mysql_store_result(conn);
+	printf("we now have %i  active columns\n", mysql_num_fields(result));
+	for (i = 0; i < (int)mysql_num_fields(result); i++)
+	{
+		mysql_field_seek(result, i);
+		field = mysql_fetch_field(result);
+		printf("column %i  %s\n", i, field->name);
+	}
+	printf("\n");
+
+	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
+
+	cptr = row[1];
+	bptr = token;
+	while (*cptr != '\0')
+	{
+		printf("moving <%c>\n", *cptr);
+		*bptr++ = *cptr++;
+	}
+	bptr = '\0';
+
+	// printf("token is <%s>\n", row[1]);
+	// printf("tokenID is <%s>\n", row[0]);
+
+	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
+
+	return token;
+})
 
 
 int tokenizer(char *lbuf) {
