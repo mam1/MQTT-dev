@@ -120,6 +120,8 @@ int is_valid_int(const char *str)
 	}
 	return -1;
 
+}
+
 /* return token type or command number */
 int token_type(char *c) 
 {
