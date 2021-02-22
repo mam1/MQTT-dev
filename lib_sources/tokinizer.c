@@ -160,7 +160,7 @@ char * Tpop(char * token)
 		show_mysql_error(conn);
 
 	return token;
-})
+}
 
 
 int tokenizer(char *lbuf) {
