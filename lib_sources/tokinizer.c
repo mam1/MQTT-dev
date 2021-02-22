@@ -167,16 +167,19 @@ int token_type(char *c)
 }
 
 
-int isadelimiter(char * c)
+int is_a_delimiter(char * c)
 {
 	switch (*c) {
 	case _COMMA:
+		return 0;
 	case _SPACE:
+		return 0;
 	case _COLON:
+		return 0;
 	case _SLASH:
-		return 1;
+		return 0;
 	default:
-		return -1;
+		return 1;
 
 	}
 
@@ -301,8 +304,10 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 		}
 
-		if (!isadelimiter(lbuf_ptr))
+		if (!is_a_delimiter(lbuf_ptr))
+		{
 			*tbuf_ptr++ = *lbuf_ptr++;
+		}
 
 		else
 		{
@@ -312,7 +317,7 @@ int tokenizer(char *lbuf)
 
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
-			// while ((!isadelimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
+			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
 			// 	*tbuf_ptr++ = *lbuf_ptr++;
 		}
 
