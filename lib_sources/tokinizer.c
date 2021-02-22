@@ -316,7 +316,8 @@ int tokenizer(char *lbuf)
 
 		if (*lbuf_ptr == ' ')
 		{
-			*tbuf_ptr++ = '\0';
+			*tbuf_ptr = '\0';
+			lbuf_ptr++;
 			// Tpush(tbuf, token_type(tbuf));
 			Tpush(tbuf, "string2");
 
