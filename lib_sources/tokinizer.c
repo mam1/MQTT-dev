@@ -312,12 +312,9 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 		}
 
-		if (!is_a_delimiter(lbuf_ptr))
-		{
-			*tbuf_ptr++ = *lbuf_ptr++;
-		}
 
-		else
+
+		if (!is_a_delimiter(lbuf_ptr))
 		{
 			*tbuf_ptr++ = '\0';
 			// Tpush(tbuf, token_type(tbuf));
@@ -328,8 +325,10 @@ int tokenizer(char *lbuf)
 			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
 			// 	*tbuf_ptr++ = *lbuf_ptr++;
 		}
-
-		*tbuf_ptr++ = *lbuf_ptr++;
+		else 
+		{
+			*tbuf_ptr++ = *lbuf_ptr++;
+		}
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, "string3");
