@@ -24,7 +24,7 @@
 #define MINUTES_PER_DAY 		1440
 
 /* command list */
-static char    *keyword[_CMD_TOKENS] = 
+static char    *keyword[_CMD_TOKENS] =
 {
 	/*  0 */    "temp",
 	/*  1 */    "*",
@@ -123,7 +123,7 @@ int is_valid_int(const char *str)
 }
 
 /* return token type or command number */
-int token_type(char *c) 
+int token_type(char *c)
 {
 	int     i;
 	char    *p;
@@ -186,7 +186,7 @@ int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-printf("Tpush called with token <%s>, type <%s>\n",token,string);
+	printf("Tpush called with token <%s>, type <%s>\n", token, string);
 	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -274,7 +274,7 @@ char * Tpop(char * token)
 }
 
 
-int tokenizer(char *lbuf) 
+int tokenizer(char *lbuf)
 {
 
 	char 			*tbuf_ptr, *lbuf_ptr;
@@ -282,12 +282,12 @@ int tokenizer(char *lbuf)
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-printf("tokenizer call with lbuf <%s>\n", );
+	printf("tokenizer called with lbuf <%s>\n", lbuf );
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while (*lbuf_ptr != '\0')
 	{	// loop until the input buffer is empty
-	
+
 		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
 			memset(tbuf, '\0', sizeof(tbuf));
@@ -318,5 +318,5 @@ printf("tokenizer call with lbuf <%s>\n", );
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, "string3");
 	// Tpush(tbuf, token_type(tbuf));
-return 0;
+	return 0;
 }
