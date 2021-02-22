@@ -178,10 +178,10 @@ int tokenizer(char *lbuf) {
 	{	// loop until the input buffer is empty
 
 		/* NULL */
-		if (lbuf_ptr == lbuf)
-		{
-			cobtinue
-		}
+		// if (lbuf_ptr == lbuf)
+		// {
+		// 	cobtinue
+		// }
 
 		/* QUOTE */
 		if (*lbuf_ptr == _QUOTE)
