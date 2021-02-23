@@ -167,7 +167,7 @@ char * token_type(char *c)
 
 
 	/* unrecognized token */
-	return "unrecognized;
+	return "unrecognized";
 }
 
 
