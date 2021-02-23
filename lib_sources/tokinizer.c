@@ -331,7 +331,7 @@ int tokenizer(char *lbuf)
 		}
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
-	Tpush(tbuf, "string3");
+	Tpush(tbuf, token_type(tbuf)");
 	// Tpush(tbuf, token_type(tbuf));
 	return 0;
 }
