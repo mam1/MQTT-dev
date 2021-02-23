@@ -122,21 +122,22 @@ int is_valid_int(const char *str)
 
 }
 
+
+
 /* return token type or command number */
-int token_type(char *c)
+char * token_type(char *c)
 {
 	int     i;
 	char    *p;
 
 	/*test for an empty command */
 	if ((*c == '\0') || (*c == ' '))
-		return _TT_NULL;
-	/* test for a quoted string*/
-	if (*c == _QUOTE)
-		return _TT_STR;
+		return "null";
+
 	/* test for a integer */
 	if (is_valid_int(c))
-		return _TT_INT;
+		return "integer";
+
 	/* test for a keyword */
 	for (i = 0; i < 35; i++)
 	{
@@ -147,7 +148,7 @@ int token_type(char *c)
 				p++;
 			};
 			if (strncmp(c, keyword[i], strlen(c)) == 0)
-				return i;
+				return "keyword";
 		}
 	}
 	for (i = 38; i < _CMD_TOKENS ; i++)
@@ -159,11 +160,14 @@ int token_type(char *c)
 				p++;
 			};
 			if (strncmp(c, keyword[i], strlen(c)) == 0)
-				return i;
+				return "keyword 2";
 		}
 	}
+
+
+
 	/* unrecognized token */
-	return _TT_UNREC;
+	return "unrecognized;
 }
 
 
@@ -290,7 +294,7 @@ int tokenizer(char *lbuf)
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-	// printf("tokenizer called with lbuf <%s>\n", lbuf );
+
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while (*lbuf_ptr != '\0')
@@ -302,7 +306,7 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 			lbuf_ptr++;													// skip the quote
 			while ((*lbuf_ptr != _QUOTE) && (*lbuf_ptr != '\0')) 		// look for ending quote or end of buffer
-				*tbuf_ptr++ = *lbuf_ptr++;								// move char to temp buffer
+				*tbuf_ptr++ = *lbuf_ptr++;								
 			*(++tbuf_ptr) = '\0';
 			lbuf_ptr++;
 			lbuf_ptr++;
@@ -311,22 +315,18 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 		}
 
-
-
 		if (*lbuf_ptr == ' ')
 		{
 			*tbuf_ptr = '\0';
 			lbuf_ptr++;
 			// Tpush(tbuf, token_type(tbuf));
-			Tpush(tbuf, "string2");
+			Tpush(tbuf, token_type(tbuf));
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 
 		}
 		else
 		{
-			// while ((!is_a_delimiter(*lbuf_ptr)) && (*lbuf_ptr != '\0')) 		// look for delimiter or end of buffer
-			// 	*tbuf_ptr++ = *lbuf_ptr++;
 			*tbuf_ptr++ = *lbuf_ptr++;
 		}
 	}
