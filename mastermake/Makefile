@@ -41,14 +41,13 @@ LIB=MQTT
 
 # create executable - link in project library
 all: $(program_NAME)
-
 $(program_NAME): $(program_OBJS)
-	@echo "\n rebuilding support library\n"
 	export project_DIRECTORY
+	@echo "\n rebuilding support library\n"
 	cd  $(project_DIRECTORY)/lib && $(MAKE) clean
 	cd  $(project_DIRECTORY)/lib && $(MAKE)
 	@echo ${CC}
-	@echo "\n>>>>> building $(program_NAME) "
+	@echo "\n\n>>>>> building $(program_NAME) "
 
 # 	$(CC) $(program_OBJS) -Xlinker --verbose -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 	$(CC) $(program_OBJS)  -o $(project_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
