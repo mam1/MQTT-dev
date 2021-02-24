@@ -255,14 +255,14 @@ char * Tpop(char * token)
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
-	printf("we now have %i  active columns\n", mysql_num_fields(result));
-	for (i = 0; i < (int)mysql_num_fields(result); i++)
-	{
-		mysql_field_seek(result, i);
-		field = mysql_fetch_field(result);
-		printf("column %i  %s\n", i, field->name);
-	}
-	printf("\n");
+	// printf("we now have %i  active columns\n", mysql_num_fields(result));
+	// for (i = 0; i < (int)mysql_num_fields(result); i++)
+	// {
+	// 	mysql_field_seek(result, i);
+	// 	field = mysql_fetch_field(result);
+	// 	printf("column %i  %s\n", i, field->name);
+	// }
+	// printf("\n");
 
 	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
 
