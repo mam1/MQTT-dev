@@ -43,6 +43,10 @@ LIB=MQTT
 all: $(program_NAME)
 
 $(program_NAME): $(program_OBJS)
+	@echo "\n rebuilding support library\n"
+	export project_DIRECTORY
+	cd  $(project_DIRECTORY)/lib && $(MAKE) clean
+	cd  $(project_DIRECTORY)/lib && $(MAKE)
 	@echo ${CC}
 	@echo "\n>>>>> building $(program_NAME) "
 
