@@ -7,7 +7,7 @@
 
 
 int Tpush(char * token, char * string);
-char * Tpop(char * token);
+int * Tpop(char * token);
 int tokenizer(char *lbuf); 
 
 

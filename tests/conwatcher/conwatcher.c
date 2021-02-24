@@ -142,8 +142,12 @@ int main(int argc, char *argv[])
 		}
 
 	}
+	/* clear token queue  */
+
 	endwin();			/* End curses mode		  */
-	printf("linebuffer <%s>\n", linebuff);
+
+	printf("\n\nlinebuffer <%s>\n", linebuff);
+	reset_tokenQ();
 	printf("%s\n", "program terminated\n");
 	return 0;
 }
