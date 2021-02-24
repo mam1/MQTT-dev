@@ -7,8 +7,9 @@
 
 
 int Tpush(char * token, char * string);
-int * Tpop(char * token);
-int tokenizer(char *lbuf); 
+char * Tpop(char * token);
+int tokenizer(char *lbuf);
+int reset_tokenQ(void); 
 
 
 

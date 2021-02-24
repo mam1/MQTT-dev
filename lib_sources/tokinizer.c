@@ -285,6 +285,21 @@ char * Tpop(char * token)
 	return token;
 }
 
+int reset_tokenQ(void)
+{
+	char 			*tbuf_ptr, *lbuf_ptr;
+	char 			tbuf[_INPUT_BUFFER_SIZE];
+
+	memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
+	printf("%s\n", "crearing the token queue\n");
+	while (Tpop(tbuf) != NULL)
+	{
+		printf("poped <%s>\n", tbuf);
+		memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
+	}
+	return 1;
+
+}
 
 int tokenizer(char *lbuf)
 {
@@ -306,7 +321,7 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 			lbuf_ptr++;													// skip the quote
 			while ((*lbuf_ptr != _QUOTE) && (*lbuf_ptr != '\0')) 		// look for ending quote or end of buffer
-				*tbuf_ptr++ = *lbuf_ptr++;								
+				*tbuf_ptr++ = *lbuf_ptr++;
 			*(++tbuf_ptr) = '\0';
 			lbuf_ptr++;
 			lbuf_ptr++;
