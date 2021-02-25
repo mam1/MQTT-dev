@@ -315,12 +315,8 @@ int tokenizer(char *lbuf)
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
-
-	while (*lbuf_ptr != '\0')
-	{	// loop until the input buffer is empty
-
-
-
+	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
+	{	
 		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
 			memset(tbuf, '\0', sizeof(tbuf));
@@ -328,14 +324,13 @@ int tokenizer(char *lbuf)
 			lbuf_ptr++;													// skip the quote
 			while ((*lbuf_ptr != _QUOTE) && (*lbuf_ptr != '\0')) 		// look for ending quote or end of buffer
 				*tbuf_ptr++ = *lbuf_ptr++;
-			*(++tbuf_ptr) = '\0';
+			*(tbuf_ptr) = '\0';
 			lbuf_ptr++;
 			lbuf_ptr++;
 			Tpush(tbuf, "string");
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 		}
-
 
 		if (is_a_delimiter(lbuf_ptr))
 		{
@@ -347,11 +342,9 @@ int tokenizer(char *lbuf)
 			while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++;
 		}
 		else
-		{
-			*tbuf_ptr++ = *lbuf_ptr++;
-		}
+			*tbuf_ptr++ = *lbuf_ptr++;	
 	}
-	// *tbuf_ptr++ = *lbuf_ptr++;
+	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, token_type(tbuf));
 	// Tpush(tbuf, token_type(tbuf));
 	return 0;
