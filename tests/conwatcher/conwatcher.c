@@ -30,12 +30,12 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-
-	mvprintw(1, 0, "                                                     ");
+	clear();
+	// mvprintw(1, 0, "                                                     ");
 	mvprintw(1, 0, str);
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
-	mvprintw(30, 17, "                                                   ");
+	// mvprintw(30, 17, "                                                   ");
 	mvprintw(30, 17, linebuff);
 	refresh();
 	return;
