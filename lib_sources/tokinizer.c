@@ -173,7 +173,8 @@ char * token_type(char *c)
 
 int is_a_delimiter(char * c)
 {
-	switch (*c) {
+	switch (*c)
+	{
 	case _COMMA:
 		return 1;
 		break;
@@ -198,7 +199,7 @@ int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	if(*token == ' ') return 1;
+	if (*token == ' ') return 1;
 	// printf("Tpush called with token <%s>, type <%s>\n", token, string);
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -331,15 +332,15 @@ int tokenizer(char *lbuf)
 			tbuf_ptr = tbuf;
 		}
 
-		if (*lbuf_ptr == ' ')
+
+		if (is_a_delimiter(lbuf_ptr))
 		{
 			*tbuf_ptr = '\0';
 			lbuf_ptr++;
-			// Tpush(tbuf, token_type(tbuf));
 			Tpush(tbuf, token_type(tbuf));
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
-
+			while ((is_a_delimiter(lbuf_ptr) && *lbuf_ptr != '\0')) lbuf_ptr++;
 		}
 		else
 		{
