@@ -77,6 +77,10 @@ int main(int argc, char *argv[])
 			/* clear token queue  */
 			reset_tokenQ();
 			disp("token queue reset");
+			memset(linebuff, '\0', sizeof(linebuff));
+			lb_in = linebuff;
+			lb_out = linebuff;
+			lb_ptr = linebuff;
 		}
 		else if ( isprint(ch) && !(ch & KEY_CODE_YES))
 		{
@@ -91,15 +95,13 @@ int main(int argc, char *argv[])
 			disp("got a character ");
 		}
 		else
-		{
-
 			switch (ch)
 			{
 
-		/* NOCR */	case _NO_CHAR:
+			case _NO_CHAR: 	/* NOCR */
 				break;
 
-		/* up arrow */	case 0x103:
+			case 0x103:  /* up arrow */
 
 
 				break;
@@ -135,7 +137,7 @@ int main(int argc, char *argv[])
 				return 0;
 				break;
 			}
-		}
+
 	}
 
 
