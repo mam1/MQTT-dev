@@ -114,7 +114,6 @@ int main(int argc, char *argv[])
 				break;
 		/* left arrow */case  0x104:
 
-
 				break;
 
 		/* CR */	case 0xa:
