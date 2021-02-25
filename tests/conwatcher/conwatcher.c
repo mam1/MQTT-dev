@@ -67,13 +67,20 @@ int main(int argc, char *argv[])
 	keypad(mainwin, TRUE);
 	clear();
 	disp("conwatcher active");
-
 	memset(linebuff, '\0', sizeof(linebuff));
 
 	while ((ch = getch()) != _ESC)
 	{
 		// read the keyboard
-		if ( isprint(ch) && !(ch & KEY_CODE_YES))
+		if (ch == _ESC)
+		{
+				/* clear token queue  */
+				disp("token queue reset");
+				reset_tokenQ();				
+				break;
+
+		}
+		else if ( isprint(ch) && !(ch & KEY_CODE_YES))
 		{
 			/*  If a printable character  */
 			if (lb_ptr <= lb_end - 1)		// room to add character ?
@@ -90,12 +97,6 @@ int main(int argc, char *argv[])
 
 			switch (ch)
 			{
-
-		/* ESC */	case _ESC:
-				/* clear token queue  */
-				disp("clearing the token queue");
-				reset_tokenQ();				
-				break;
 
 		/* NOCR */	case _NO_CHAR:
 				break;
@@ -119,20 +120,13 @@ int main(int argc, char *argv[])
 				break;
 
 		/* CR */	case 0xa:
-				disp("got a CR");
-
-				// tokenizer(linebuff);
 				tokenizer(linebuff);
 				memset(linebuff, '\0', sizeof(linebuff));
 				disp ("linebuffer set to tokenizer to be processed");
-
-
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
 				lb_end = linebuff + _INPUT_BUFFER_SIZE;
-
-
 				break;
 
 		/* DEL */	case 0x14a:
@@ -145,6 +139,12 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
+
+
+				/* clear token queue  */
+
+				reset_tokenQ();				
+
 
 	endwin();			/* End curses mode		  */
 	return 0;
