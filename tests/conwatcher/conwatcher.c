@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 				while (Tpop(tbuff) != NULL)
 				{
 					strcat(screenbuff, tbuff);
-					strcat(screenbuff, '\n');
+					strcat(screenbuff, "\n");
 				}
 				disp ("token queue deleted");
 				break;
