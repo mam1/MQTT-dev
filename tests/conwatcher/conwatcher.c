@@ -64,7 +64,9 @@ int main(int argc, char *argv[])
 	noecho();
 	cbreak();
 	intrflush(mainwin, FALSE);
-    keypad(mainwin, TRUE);
+	keypad(mainwin, TRUE);
+	timeout(0);
+	nocbreak();
 	clear();
 	disp("conwatcher active");
 	memset(linebuff, '\0', sizeof(linebuff));
@@ -88,7 +90,7 @@ int main(int argc, char *argv[])
 			switch (ch)
 			{
 			case _ESC:
-			ch = getch();
+				ch = getch();
 				// disp("resetting system");
 				// reset_tokenQ();
 				// memset(linebuff, '\0', sizeof(linebuff));
