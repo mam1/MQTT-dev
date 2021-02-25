@@ -23,13 +23,17 @@
 WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
+char 			screenbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
+	strcpy(screenbuff, "this is a write to the screen buffer
 
-	mvprintw(3, 0, "                                                     ");
-	mvprintw(3, 0, str);
+	       low lines neterred.")
+	mvprintw(1, 0, "                                                     ");
+	mvprintw(1, 0, str);
+	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, "                                                   ");
 	mvprintw(30, 17, linebuff);
@@ -37,13 +41,13 @@ void disp(char *str)
 	return;
 }
 
-static void show_mysql_error(MYSQL *mysql)
-{
-	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
-	       mysql_sqlstate(mysql),
-	       mysql_error(mysql));
-	exit(-1);
-}
+// static void show_mysql_error(MYSQL *mysql)
+// {
+// 	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
+// 	       mysql_sqlstate(mysql),
+// 	       mysql_error(mysql));
+// 	exit(-1);
+// }
 
 
 int main(int argc, char *argv[])
@@ -73,7 +77,7 @@ int main(int argc, char *argv[])
 
 
 
-	while ((ch = getch()) != _ESC)  // read the keyboard
+	while ((ch = getch()) != 'q')  // read the keyboard
 	{
 		if ( isprint(ch) && !(ch & KEY_CODE_YES)) /*  If a printable character  */
 		{
@@ -89,16 +93,6 @@ int main(int argc, char *argv[])
 		else
 			switch (ch)
 			{
-			case _ESC:
-				ch = getch();
-				ch = getch();
-				// disp("resetting system");
-				// reset_tokenQ();
-				// memset(linebuff, '\0', sizeof(linebuff));
-				// lb_in = linebuff;
-				// lb_out = linebuff;
-				// lb_ptr = linebuff;
-				break;
 
 			case _NO_CHAR: 	/* NOCR */
 				break;
@@ -133,20 +127,17 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				disp("got a DEL");
-				endwin();			/* End curses mode		  */
+
 				printf("\n\nlinebuffer <%s>\n", linebuff);
-				printf("%s\n", "program terminated\n");
-				return 0;
+
 				break;
 			}
 
 	}
 
-
-	/* clear token queue  */
-
-
-
+	delwin(mainwin);
 	endwin();			/* End curses mode		  */
+	refresh();
+	printf("%s\n", "program terminated\n");
 	return 0;
 }

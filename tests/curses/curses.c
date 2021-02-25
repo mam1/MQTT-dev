@@ -33,8 +33,7 @@ int main(void) {
 
 	noecho();                  /*  Turn off key echoing                 */
 	keypad(mainwin, TRUE);     /*  Enable the keypad for non-char keys  */
-	timeout(0);
-	nocbreak();
+
 
 	/*  Print a prompt and refresh() the screen  */
 
