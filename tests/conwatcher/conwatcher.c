@@ -24,13 +24,13 @@ WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			screenbuff[500];
+char 			tbuff[500];
+
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	strcpy(screenbuff, "this is a write to the screen buffer");
-	strcat(screenbuff, "\n\n");
-	strcat(screenbuff, "more data");
+
 	mvprintw(1, 0, "                                                     ");
 	mvprintw(1, 0, str);
 	mvprintw(3, 0, screenbuff);
@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
 	lb_out = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+
+	char 		*ptr;
 	int		ch;
 	// static char keych[2] = {0};
 
@@ -66,11 +68,11 @@ int main(int argc, char *argv[])
 	}
 
 	noecho();
-	cbreak();
+	// cbreak();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
-	timeout(0);
-	nocbreak();
+	// timeout(0);
+	// nocbreak();
 	clear();
 	disp("conwatcher active");
 	memset(linebuff, '\0', sizeof(linebuff));
@@ -126,10 +128,15 @@ int main(int argc, char *argv[])
 				break;
 
 		/* DEL */	case 0x14a:
-				disp("got a DEL");
+				disp("deleting token queue");
+				memset(screenbuff, '0', sizeof(screenbuff));
+				ptr = screenbuff;
 
-				printf("\n\nlinebuffer <%s>\n", linebuff);
-
+				while (Tpop(tbuff) != NULL)
+				{
+					strcat(screenbuff, tbuff);
+					strcat(screenbuff, '\n');
+				}
 				break;
 			}
 
