@@ -91,6 +91,7 @@ int main(int argc, char *argv[])
 			{
 			case _ESC:
 				ch = getch();
+				ch = getch();
 				// disp("resetting system");
 				// reset_tokenQ();
 				// memset(linebuff, '\0', sizeof(linebuff));
