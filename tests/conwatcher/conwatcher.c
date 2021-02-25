@@ -143,9 +143,11 @@ int main(int argc, char *argv[])
 				break;
 			}
 		}
-
+		/* clear token queue  */
+		disp("clearing the token queue");
+		reset_tokenQ();
 	}
-	/* clear token queue  */
-	disp("clearing the token queue");
-	reset_tokenQ();
+
+	endwin();			/* End curses mode		  */
+	return 0;
 }
