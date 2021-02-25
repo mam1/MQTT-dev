@@ -138,6 +138,7 @@ int main(int argc, char *argv[])
 
 				}
 				disp ("token queue deleted");
+				memset(linebuff, '\0', sizeof(linebuff));
 				lb_in = linebuff;
 				lb_out = linebuff;
 				lb_ptr = linebuff;
