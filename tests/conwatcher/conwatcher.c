@@ -146,6 +146,7 @@ int main(int argc, char *argv[])
 
 	}
 	/* clear token queue  */
+	disp("clearing the token queue")
 	reset_tokenQ();
 	return 0;
 }

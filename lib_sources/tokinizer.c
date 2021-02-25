@@ -293,10 +293,10 @@ int reset_tokenQ(void)
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
 	memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
-	printf("%s\n", "crearing the token queue\n");
+	// printf("%s\n", "crearing the token queue\n");
 	while (Tpop(tbuf) != NULL)
 	{
-		printf("poped <%s>\n", tbuf);
+		// printf("poped <%s>\n", tbuf);
 		memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
 	}
 	return 1;
