@@ -198,6 +198,7 @@ int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
+	if(*token == ' ') return 1;
 	// printf("Tpush called with token <%s>, type <%s>\n", token, string);
 	/* get connection handle  */
 	conn = mysql_init(NULL);
