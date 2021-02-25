@@ -314,9 +314,7 @@ int tokenizer(char *lbuf)
 
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
-	printf("\n\n is_a_delimiter = %i\n", is_a_delimiter(lbuf_ptr));
-
-	while((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0') lbuf_ptr++; // remove leading delimiters
+	while((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 
 	while (*lbuf_ptr != '\0')
 	{	// loop until the input buffer is empty
