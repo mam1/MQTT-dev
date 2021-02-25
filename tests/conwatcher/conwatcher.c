@@ -61,13 +61,17 @@ int main(int argc, char *argv[])
 		exit(-1);
 	}
 
-	/*  Switch of echoing and enable keypad (for arrow keys)  */
 	noecho();
 	cbreak();
-	keypad(mainwin, TRUE);
+
+	intrflush(mainwin, FALSE);
+    keypad(mainwin, TRUE);
+
 	clear();
 	disp("conwatcher active");
 	memset(linebuff, '\0', sizeof(linebuff));
+
+
 
 	while ((ch = getch()) != _ESC)  // read the keyboard
 	{
