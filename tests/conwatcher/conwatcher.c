@@ -74,11 +74,9 @@ int main(int argc, char *argv[])
 		// read the keyboard
 		if (ch == _ESC)
 		{
-				/* clear token queue  */
-				disp("token queue reset");
-				reset_tokenQ();				
-				break;
-
+			/* clear token queue  */
+			reset_tokenQ();
+			disp("token queue reset");
 		}
 		else if ( isprint(ch) && !(ch & KEY_CODE_YES))
 		{
@@ -141,9 +139,9 @@ int main(int argc, char *argv[])
 	}
 
 
-				/* clear token queue  */
+	/* clear token queue  */
 
-				reset_tokenQ();				
+	reset_tokenQ();
 
 
 	endwin();			/* End curses mode		  */
