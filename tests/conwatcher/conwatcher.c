@@ -28,9 +28,9 @@ char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
 
 void disp(char *str)
 {
-	strcpy(screenbuff, "this is a write to the screen buffer
-
-	       low lines neterred.")
+	strcpy(screenbuff, "this is a write to the screen buffer");
+	strcat(screenbuff, "\n\n");
+	strcat(screenbuff, "more data");
 	mvprintw(1, 0, "                                                     ");
 	mvprintw(1, 0, str);
 	mvprintw(3, 0, screenbuff);
