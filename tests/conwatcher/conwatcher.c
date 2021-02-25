@@ -86,12 +86,12 @@ int main(int argc, char *argv[])
 			switch (ch)
 			{
 			case _ESC:
-				disp("resetting system");
-				reset_tokenQ();
-				memset(linebuff, '\0', sizeof(linebuff));
-				lb_in = linebuff;
-				lb_out = linebuff;
-				lb_ptr = linebuff;
+				// disp("resetting system");
+				// reset_tokenQ();
+				// memset(linebuff, '\0', sizeof(linebuff));
+				// lb_in = linebuff;
+				// lb_out = linebuff;
+				// lb_ptr = linebuff;
 				break;
 
 			case _NO_CHAR: 	/* NOCR */
