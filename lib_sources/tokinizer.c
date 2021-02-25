@@ -346,7 +346,7 @@ int tokenizer(char *lbuf)
 			Tpush(tbuf, token_type(tbuf));
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
-			while ((is_a_delimiter(lbuf_ptr) && *lbuf_ptr != '\0')) lbuf_ptr++;
+			while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++;
 		}
 		else
 		{
