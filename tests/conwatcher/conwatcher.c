@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 	int		ch;
-	static char keych[2] = {0};
+	// static char keych[2] = {0};
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 
 	}
 	/* clear token queue  */
-	disp("clearing the token queue")
+	disp("clearing the token queue");
 	reset_tokenQ();
 	return 0;
 }
