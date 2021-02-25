@@ -69,22 +69,10 @@ int main(int argc, char *argv[])
 	disp("conwatcher active");
 	memset(linebuff, '\0', sizeof(linebuff));
 
-	while ((ch = getch()) != _ESC)
+	while ((ch = getch()) != _ESC)  // read the keyboard
 	{
-		// read the keyboard
-		if (ch == _ESC)
+		if ( isprint(ch) && !(ch & KEY_CODE_YES)) /*  If a printable character  */
 		{
-			/* clear token queue  */
-			reset_tokenQ();
-			disp("token queue reset");
-			memset(linebuff, '\0', sizeof(linebuff));
-			lb_in = linebuff;
-			lb_out = linebuff;
-			lb_ptr = linebuff;
-		}
-		else if ( isprint(ch) && !(ch & KEY_CODE_YES))
-		{
-			/*  If a printable character  */
 			if (lb_ptr <= lb_end - 1)		// room to add character ?
 			{
 				*lb_ptr++ = ch;
@@ -97,6 +85,14 @@ int main(int argc, char *argv[])
 		else
 			switch (ch)
 			{
+			case _ESC:
+				disp("resetting system");
+				reset_tokenQ();
+				memset(linebuff, '\0', sizeof(linebuff));
+				lb_in = linebuff;
+				lb_out = linebuff;
+				lb_ptr = linebuff;
+				break;
 
 			case _NO_CHAR: 	/* NOCR */
 				break;
@@ -143,7 +139,6 @@ int main(int argc, char *argv[])
 
 	/* clear token queue  */
 
-	reset_tokenQ();
 
 
 	endwin();			/* End curses mode		  */
