@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 					strcat(screenbuff, tbuff);
 					strcat(screenbuff, '\n');
 				}
-				disp ("token queue deleted")
+				disp ("token queue deleted");
 				break;
 			}
 
