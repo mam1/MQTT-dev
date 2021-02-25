@@ -92,8 +92,9 @@ int main(int argc, char *argv[])
 			{
 
 		/* ESC */	case _ESC:
-				disp("got a ESC");
-				return 0;
+				/* clear token queue  */
+				disp("clearing the token queue");
+				reset_tokenQ();				
 				break;
 
 		/* NOCR */	case _NO_CHAR:
@@ -143,9 +144,6 @@ int main(int argc, char *argv[])
 				break;
 			}
 		}
-		/* clear token queue  */
-		disp("clearing the token queue");
-		reset_tokenQ();
 	}
 
 	endwin();			/* End curses mode		  */
