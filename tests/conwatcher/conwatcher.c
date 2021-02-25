@@ -63,10 +63,8 @@ int main(int argc, char *argv[])
 
 	noecho();
 	cbreak();
-
 	intrflush(mainwin, FALSE);
     keypad(mainwin, TRUE);
-
 	clear();
 	disp("conwatcher active");
 	memset(linebuff, '\0', sizeof(linebuff));
