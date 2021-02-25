@@ -136,7 +136,10 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				disp("got a DEL");
+				endwin();
+				char XXX = ' '; 
 
+printf("test is_a_delimiter(' ') returned %i\n", is_a_delimiter(XXX));
 				break;
 			}
 		}
