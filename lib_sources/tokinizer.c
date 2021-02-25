@@ -314,8 +314,12 @@ int tokenizer(char *lbuf)
 
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
+	while((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0') lbuf_ptr++; // remove lieading delimiters
+
 	while (*lbuf_ptr != '\0')
 	{	// loop until the input buffer is empty
+
+
 
 		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
