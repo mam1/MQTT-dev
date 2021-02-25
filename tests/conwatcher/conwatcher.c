@@ -136,21 +136,16 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				disp("got a DEL");
-				endwin();
-				char XXX = ' ';
-
-				printf("test is_a_delimiter(' ') returned %i\n", is_a_delimiter(&XXX));
+				endwin();			/* End curses mode		  */
+				printf("\n\nlinebuffer <%s>\n", linebuff);
+				printf("%s\n", "program terminated\n");
+				return 0;
 				break;
 			}
 		}
 
 	}
 	/* clear token queue  */
-
-	endwin();			/* End curses mode		  */
-
-	printf("\n\nlinebuffer <%s>\n", linebuff);
 	reset_tokenQ();
-	printf("%s\n", "program terminated\n");
 	return 0;
 }
