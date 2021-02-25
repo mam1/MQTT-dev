@@ -229,13 +229,13 @@ char * Tpop(char * token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	MYSQL_FIELD         *field;
+	// MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
 
 	char 				*cptr, *bptr;
 
 	char 				buff[_INPUT_BUFFER_SIZE];
-	int 				i;
+	// int 				i;
 
 	/* get handles  */
 	conn = mysql_init(NULL);
@@ -289,12 +289,12 @@ char * Tpop(char * token)
 
 int reset_tokenQ(void)
 {
-	char 			*tbuf_ptr, *lbuf_ptr;
+	// char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
 	memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
 	// printf("%s\n", "crearing the token queue\n");
-	while (Tpop(tbuf) != NULL)
+	while (Tpop(tbuf) != NULL);;
 	{
 		// printf("poped <%s>\n", tbuf);
 		memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
