@@ -129,14 +129,13 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				disp("deleting token queue");
-				memset(screenbuff, '0', sizeof(screenbuff));
-				ptr = screenbuff;
-
+				memset(screenbuff, '\0', sizeof(screenbuff));
 				while (Tpop(tbuff) != NULL)
 				{
 					strcat(screenbuff, tbuff);
 					strcat(screenbuff, '\n');
 				}
+				disp ("token queue deleted")
 				break;
 			}
 
