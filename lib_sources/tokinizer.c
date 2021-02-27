@@ -253,7 +253,7 @@ int Tpush(char * token, char * string)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token, string, token_type(token));
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%s');", token, string, token_type(token));
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
