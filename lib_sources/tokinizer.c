@@ -253,7 +253,39 @@ int Tpush(char * token, char * string)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', %i);", token, string, token_type(token));
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token, string, token_type(token));
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
+
+	mysql_close(conn);
+	return 1;
+}
+
+int Qpush(char * token, char * string)
+{
+	MYSQL               *conn;
+	char 				buff[_INPUT_BUFFER_SIZE];
+	int 				value;
+
+	if (*token == ' ') return 1;
+
+	/* get connection handle  */
+	conn = mysql_init(NULL);
+	if (conn == NULL)
+	{
+		printf("couldn't initialize conn: %s\n", mysql_error(conn));
+		exit(1);
+	}
+
+	/* connect to server */
+	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
+	{
+		printf("couldn't connect to database\n");
+		exit(1);
+	}
+
+	/* insert newest token */
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token, string);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -363,7 +395,7 @@ int tokenizer(char *lbuf)
 			*(tbuf_ptr) = '\0';
 			lbuf_ptr++;
 			lbuf_ptr++;
-			Tpush(tbuf, "string");
+			Qpush(tbuf, "string");
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 		}
@@ -372,7 +404,7 @@ int tokenizer(char *lbuf)
 		{
 			*tbuf_ptr = '\0';
 			lbuf_ptr++;
-			Tpush(tbuf, token_type(tbuf));
+			Tpush(tbuf);
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 			while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++;
@@ -381,7 +413,7 @@ int tokenizer(char *lbuf)
 			*tbuf_ptr++ = *lbuf_ptr++;
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
-	Tpush(tbuf, token_type(tbuf));
+	Tpush(tbuf);
 	// Tpush(tbuf, token_type(tbuf));
 	return 0;
 }
