@@ -229,7 +229,7 @@ int is_a_delimiter(char * c)
 
 }
 
-int Tpush(char * token, char * string)
+int Tpush(char * token)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
@@ -253,7 +253,7 @@ int Tpush(char * token, char * string)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%s');", token, string, token_type(token));
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token, token_type(token), 999);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
