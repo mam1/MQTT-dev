@@ -131,7 +131,7 @@ char * token_type(char *c)
 	char    *p;
 
 	MYSQL               *conn;
-		MYSQL_RES           *result;
+	MYSQL_RES           *result;
 	MYSQL_ROW           row;
 	char 				buff[_INPUT_BUFFER_SIZE];
 
@@ -145,7 +145,7 @@ char * token_type(char *c)
 		return "integer";
 	/*******************************************************/
 
-/* teset for a key word */
+	/* teset for a key word */
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -162,14 +162,14 @@ char * token_type(char *c)
 		exit(1);
 	}
 
-sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *c);
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", c);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
-		result = mysql_store_result(conn);
+	result = mysql_store_result(conn);
 
-if ((row = mysql_fetch_row(result)) == NULL) return "unrecognized";
-return "keyword";
+	if ((row = mysql_fetch_row(result)) == NULL) return "unrecognized";
+	return "keyword";
 
 	/********************************************************/
 
