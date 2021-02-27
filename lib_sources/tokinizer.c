@@ -127,8 +127,8 @@ int is_valid_int(const char *str)
 /* return token type or command number */
 char * token_type(char *c)
 {
-	int     i;
-	char    *p;
+	// int     i;
+	// char    *p;
 
 	MYSQL               *conn;
 	MYSQL_RES           *result;
@@ -253,7 +253,7 @@ int Tpush(char * token, char * string)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type) VALUES('%s','%s');", token, string, value);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', %i);", token, string, token_type(token));
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
