@@ -130,6 +130,12 @@ char * token_type(char *c)
 	int     i;
 	char    *p;
 
+	MYSQL               *conn;
+		MYSQL_RES           *result;
+	MYSQL_ROW           row;
+	char 				buff[_INPUT_BUFFER_SIZE];
+
+
 	/*test for an empty command */
 	if ((*c == '\0') || (*c == ' '))
 		return "null";
@@ -137,37 +143,65 @@ char * token_type(char *c)
 	/* test for a integer */
 	if (is_valid_int(c))
 		return "integer";
+	/*******************************************************/
 
-	/* test for a keyword */
-	for (i = 0; i < 35; i++)
+/* teset for a key word */
+
+	/* get connection handle  */
+	conn = mysql_init(NULL);
+	if (conn == NULL)
 	{
-		if (strlen(c) == strlen(keyword[i])) {
-			p = c;
-			while (*p != '\0') {
-				*p = tolower(*p);
-				p++;
-			};
-			if (strncmp(c, keyword[i], strlen(c)) == 0)
-				return "keyword";
-		}
-	}
-	for (i = 38; i < _CMD_TOKENS ; i++)
-	{
-		if (strlen(c) == strlen(keyword[i])) {
-			p = c;
-			while (*p != '\0') {
-				*p = tolower(*p);
-				p++;
-			};
-			if (strncmp(c, keyword[i], strlen(c)) == 0)
-				return "keyword 2";
-		}
+		printf("couldn't initialize conn: %s\n", mysql_error(conn));
+		exit(1);
 	}
 
+	/* connect to server */
+	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
+	{
+		printf("couldn't connect to database\n");
+		exit(1);
+	}
 
+sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *c);
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
+
+		result = mysql_store_result(conn);
+
+if ((row = mysql_fetch_row(result)) == NULL) return "unrecognized";
+return "keyword";
+
+	/********************************************************/
+
+
+	// /* test for a keyword */
+	// for (i = 0; i < 35; i++)
+	// {
+	// 	if (strlen(c) == strlen(keyword[i])) {
+	// 		p = c;
+	// 		while (*p != '\0') {
+	// 			*p = tolower(*p);
+	// 			p++;
+	// 		};
+	// 		if (strncmp(c, keyword[i], strlen(c)) == 0)
+	// 			return "keyword";
+	// 	}
+	// }
+	// for (i = 38; i < _CMD_TOKENS ; i++)
+	// {
+	// 	if (strlen(c) == strlen(keyword[i])) {
+	// 		p = c;
+	// 		while (*p != '\0') {
+	// 			*p = tolower(*p);
+	// 			p++;
+	// 		};
+	// 		if (strncmp(c, keyword[i], strlen(c)) == 0)
+	// 			return "keyword 2";
+	// 	}
+	// }
 
 	/* unrecognized token */
-	return "unrecognized";
+	// return "unrecognized";
 }
 
 
@@ -199,8 +233,10 @@ int Tpush(char * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
+	int 				value;
+
 	if (*token == ' ') return 1;
-	// printf("Tpush called with token <%s>, type <%s>\n", token, string);
+
 	/* get connection handle  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -217,7 +253,7 @@ int Tpush(char * token, char * string)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type) VALUES('%s','%s');", token, string);
+	sprintf(buff, "INSERT INTO TokenQ(token, type) VALUES('%s','%s');", token, string, value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -314,9 +350,9 @@ int tokenizer(char *lbuf)
 
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
-	while((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
+	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
-	{	
+	{
 		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
 			memset(tbuf, '\0', sizeof(tbuf));
@@ -342,7 +378,7 @@ int tokenizer(char *lbuf)
 			while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++;
 		}
 		else
-			*tbuf_ptr++ = *lbuf_ptr++;	
+			*tbuf_ptr++ = *lbuf_ptr++;
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf, token_type(tbuf));
