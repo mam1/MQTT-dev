@@ -45,5 +45,12 @@ typedef	struct {
 	// _SEN_DAT		s_dat[_NUMBER_OF_SENSORS];  	// current sensor values - set by cgi
 } _IPC_DAT;
 
+typedef struct {
+	char 		 			token[_TOKEN_BUFFER_SIZE];
+	int 					value;
+	char 					type[_TOKEN_BUFFER_SIZE];
+		
+} _TOKEN;
+
 
 #endif

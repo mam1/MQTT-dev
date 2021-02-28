@@ -6,9 +6,9 @@
 #define _MINOR_VERSION_tokenizer		0
 
 
-int Tpush(char * token);
-int Qpush(char * token, char * string);
-char * Tpop(char * token);
+int Tpush(_TOKEN * token);
+int Qpush(_TOKEN * token, char * string);
+char * Tpop(_TOKEN * token);
 int tokenizer(char *lbuf);
 int reset_tokenQ(void); 
 int is_a_delimiter(char * c);

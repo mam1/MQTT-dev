@@ -44,6 +44,21 @@ CREATE TABLE Channels (
 CREATE TABLE TokenQ (
     tokenID INTEGER NOT NULL AUTO_INCREMENT,
     token varchar(100) NOT NULL,
-    type enum('command','unkown','string','int')
+    type varchar(100) NOT NULL,
+    value integer NULL,
     PRIMARY KEY (tokenID)
 );
+
+
+CREATE TABLE KeyWords (
+    keywordID INTEGER NOT NULL AUTO_INCREMENT,
+    keyword varchar(25) NOT NULL,
+    keycode INTEGER NOT NULL,
+    PRIMARY KEY (keywordID)
+);
+alter table KeyWords add UNIQUE(keyword);
+CREATE UNIQUE INDEX index_keywords ON KeyWords (keyword);
+INSERT INTO  KeyWords (keyword,keycode) VALUES ("channel", 100);
+INSERT INTO  KeyWords (keyword,keycode) VALUES ("status", 110);
+INSERT INTO  KeyWords (keyword,keycode) VALUES ("schedule", 120);
+INSERT INTO  KeyWords (keyword,keycode) VALUES ("quit", 90);

@@ -70,6 +70,7 @@ static char    *keyword[_CMD_TOKENS] =
 };
 
 
+
 static void show_mysql_error(MYSQL *mysql)
 {
 	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
@@ -125,7 +126,7 @@ int is_valid_int(const char *str)
 
 
 /* return token type or command number */
-char * token_type(char *c)
+_TOKEN * token_type(_TOKEN *c)
 {
 	// int     i;
 	// char    *p;
@@ -138,14 +139,20 @@ char * token_type(char *c)
 
 	/*test for an empty command */
 	if ((*c == '\0') || (*c == ' '))
-		return "null";
+	{
+		strcpy(c.type, "null")
+		return c;
+	}
 
 	/* test for a integer */
 	if (is_valid_int(c))
-		return "integer";
-	/*******************************************************/
+	{
+		strcpy(c.type, "integer")
+		c.value = (int) strtol(c.token, (char **)NULL, 10);
+		return c;
+	}
 
-	/* teset for a key word */
+	/* test for a key word */
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -168,8 +175,16 @@ char * token_type(char *c)
 
 	result = mysql_store_result(conn);
 
-	if ((row = mysql_fetch_row(result)) == NULL) return "unrecognized";
-	return "keyword";
+	if ((row = mysql_fetch_row(result)) == NULL){
+		strcpy(c.type, "unrecognized");
+		return c;
+	}
+
+strcpy(c.type, "keyword")
+c.value = row[2];
+
+
+	return c;
 
 	/********************************************************/
 
@@ -229,13 +244,22 @@ int is_a_delimiter(char * c)
 
 }
 
-int Tpush(char * token)
+int Tpush(char *token_buffer)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
 	int 				value;
+	_TOKEN 				token;
 
-	if (*token == ' ') return 1;
+	char 				*tptr, *bptr;
+	tptr = token.token;
+	bptr = tokenbuffer;
+
+
+	if (*token_buffer == ' ') return 1;
+
+	memset(token, '\0', sizeof(token));
+	while (*tptr != '\0') *tptr++ = *bptr++;
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -252,8 +276,10 @@ int Tpush(char * token)
 		exit(1);
 	}
 
+	token_type(token);
+
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token, token_type(token), 999);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -376,6 +402,7 @@ int tokenizer(char *lbuf)
 
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
+
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
