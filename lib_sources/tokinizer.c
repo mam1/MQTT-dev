@@ -320,7 +320,8 @@ _TOKEN * Tpop(_TOKEN *token)
 
 	result = mysql_store_result(conn);
 
-	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
+	if ((row = mysql_fetch_row(result)) == NULL)
+	 return NULL;
 
 	cptr = row[1];
 	bptr = token->token;
@@ -345,7 +346,7 @@ int reset_tokenQ(void)
 
 	memset (&tbuf, '\0', sizeof(tbuf));
 	// printf("%s\n", "crearing the token queue\n");
-	while (Tpop(tbuf.token) != NULL);
+	while (Tpop(tbuf) != NULL);
 	{
 		// printf("poped <%s>\n", tbuf);
 		memset (&tbuf, '\0', sizeof(tbuf));
