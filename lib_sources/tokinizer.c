@@ -148,7 +148,7 @@ int Tpush(char *token_buffer)
 	bptr = token_buffer;
 
 	/*test for an empty command */
-	if ((*token.token == '\0') || (*token.token == ' '))
+	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
 
 	memset(&token.token, '\0', sizeof(token.token));
