@@ -252,7 +252,7 @@ int Tpush(char *token_buffer)
 	return 1;
 }
 
-int Qpush(_TOKEN * token, char * string)
+int Qpush(char * token)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
@@ -279,7 +279,7 @@ int Qpush(_TOKEN * token, char * string)
 
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token->token, token->type);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s',"string", NULL);", token);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -380,7 +380,7 @@ int tokenizer(char *lbuf)
 			*(tbuf_ptr) = '\0';
 			lbuf_ptr++;
 			lbuf_ptr++;
-			Qpush(tbuf, "string");
+			Qpush(tbuf);
 			memset(tbuf, '\0', sizeof(tbuf));
 			tbuf_ptr = tbuf;
 		}
