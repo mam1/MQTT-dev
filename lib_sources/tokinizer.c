@@ -145,7 +145,7 @@ _TOKEN * token_type(_TOKEN *c)
 	}
 
 	/* test for a integer */
-	if (is_valid_int(c))
+	if (is_valid_int(c->token))
 	{
 		strcpy(c->type, "integer")
 		c->value = (int) strtol(c->token, (char **)NULL, 10);
