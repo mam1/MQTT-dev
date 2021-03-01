@@ -181,7 +181,7 @@ _TOKEN * token_type(_TOKEN *c)
 	}
 
 	strcpy(c->type, "keyword");
-	c->value = c->value = (int) strtol(row[2], (char **)NULL, 10);
+	c->value = (int) strtol(row[2], (char **)NULL, 10);
 
 	return c;
 }
@@ -225,7 +225,7 @@ int Tpush(char *token_buffer)
 
 	if (*token_buffer == ' ') return 1;
 
-	memset(token, '\0', sizeof(token));
+	memset(&token, '\0', sizeof(token));
 	while (*tptr != '\0') *tptr++ = *bptr++;
 
 	/* get connection handle  */
@@ -242,8 +242,6 @@ int Tpush(char *token_buffer)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-
-	token_type(token);
 
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
