@@ -143,7 +143,7 @@ int Tpush(char *token_buffer)
 	char 				*tptr, *bptr;
 	tptr = token.token;
 	bptr = token_buffer;
-
+printf("\n\n******************************** token_buffer\n\n", token_buffer);
 	/*test for an empty command */
 	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
