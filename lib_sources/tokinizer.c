@@ -276,7 +276,7 @@ int Qpush(char * token)
 	}
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','string', NULL);", *token);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token, "string");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
