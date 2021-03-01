@@ -7,7 +7,7 @@
 
 
 int Tpush(char *token_buffer);
-int Qpush(_TOKEN * token);
+int Qpush(char * token);
 _TOKEN * Tpop(_TOKEN * token);
 int tokenizer(char *lbuf);
 int reset_tokenQ(void); 
