@@ -12,7 +12,7 @@ char * Tpop(_TOKEN * token);
 int tokenizer(char *lbuf);
 int reset_tokenQ(void); 
 int is_a_delimiter(char * c);
-TOKEN * token_type(_TOKEN *c);
+_TOKEN * token_type(_TOKEN *c)
 
 
 
