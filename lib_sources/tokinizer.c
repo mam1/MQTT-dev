@@ -96,6 +96,11 @@ printf("\n\n\n*********************** token <%s> *******\n\n\n", token->token);
 
 	// sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *token->token);
 
+
+	memset(buff, '\0', sizeof(buff));
+	strcpy(buff, "SELECT * FROM KeyWords WHERE keyword = ");
+	strcat(buff, token->token);
+	strcat(buff, ";");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
