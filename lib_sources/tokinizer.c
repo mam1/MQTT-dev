@@ -171,7 +171,7 @@ _TOKEN * token_type(_TOKEN *token)
 
 
 
-	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", "test");
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *token->token);
 
 
 	if (mysql_query(conn, buff))
