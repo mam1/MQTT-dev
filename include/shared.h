@@ -50,7 +50,7 @@
 #define _UPA		124
 
 /* buffers */
-#define _INPUT_BUFFER_SIZE		200
+#define _INPUT_BUFFER_SIZE		500
 #define _TOKEN_BUFFER_SIZE		_INPUT_BUFFER_SIZE
 #define _PROMPT_BUFFER_SIZE		500
 #define _CMD_BUFFER_DEPTH 		10 
