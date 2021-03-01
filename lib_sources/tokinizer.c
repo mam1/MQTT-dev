@@ -183,40 +183,7 @@ _TOKEN * token_type(_TOKEN *c)
 	strcpy(c->type, "keyword");
 	c->value = row[2];
 
-
 	return c;
-
-	/********************************************************/
-
-
-	// /* test for a keyword */
-	// for (i = 0; i < 35; i++)
-	// {
-	// 	if (strlen(c) == strlen(keyword[i])) {
-	// 		p = c;
-	// 		while (*p != '\0') {
-	// 			*p = tolower(*p);
-	// 			p++;
-	// 		};
-	// 		if (strncmp(c, keyword[i], strlen(c)) == 0)
-	// 			return "keyword";
-	// 	}
-	// }
-	// for (i = 38; i < _CMD_TOKENS ; i++)
-	// {
-	// 	if (strlen(c) == strlen(keyword[i])) {
-	// 		p = c;
-	// 		while (*p != '\0') {
-	// 			*p = tolower(*p);
-	// 			p++;
-	// 		};
-	// 		if (strncmp(c, keyword[i], strlen(c)) == 0)
-	// 			return "keyword 2";
-	// 	}
-	// }
-
-	/* unrecognized token */
-	// return "unrecognized";
 }
 
 
