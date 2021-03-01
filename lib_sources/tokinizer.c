@@ -341,14 +341,14 @@ _TOKEN * Tpop(_TOKEN *token)
 int reset_tokenQ(void)
 {
 	// char 			*tbuf_ptr, *lbuf_ptr;
-	char 			tbuf[_INPUT_BUFFER_SIZE];
+	_TOKEN 			tbuf;
 
-	memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
+	memset (tbuf, '\0', sizeof(tbuf));
 	// printf("%s\n", "crearing the token queue\n");
-	while (Tpop(tbuf) != NULL);;
+	while (Tpop(tbuf.token) != NULL);
 	{
 		// printf("poped <%s>\n", tbuf);
-		memset (tbuf, '\0', _INPUT_BUFFER_SIZE);
+		memset (tbuf, '\0', sizeof(tbuf));
 	}
 	return 1;
 

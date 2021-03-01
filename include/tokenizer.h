@@ -8,7 +8,7 @@
 
 int Tpush(char *token_buffer);
 int Qpush(_TOKEN * token, char * string);
-char * Tpop(_TOKEN * token);
+_TOKEN * Tpop(_TOKEN * token);
 int tokenizer(char *lbuf);
 int reset_tokenQ(void); 
 int is_a_delimiter(char * c);
