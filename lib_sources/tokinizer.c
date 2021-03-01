@@ -125,32 +125,32 @@ int is_valid_int(const char *str)
 
 
 
-/* return token type or command number */
-_TOKEN * token_type(_TOKEN *token)
-{
-	// int     i;
-	// char    *p;
+// /* return token type or command number */
+// _TOKEN * token_type(_TOKEN *token)
+// {
+// 	// int     i;
+// 	// char    *p;
 
-	MYSQL               *conn;
-	MYSQL_RES           *result;
-	MYSQL_ROW           row;
-	char 				buff[_INPUT_BUFFER_SIZE];
+// 	MYSQL               *conn;
+// 	MYSQL_RES           *result;
+// 	MYSQL_ROW           row;
+// 	char 				buff[_INPUT_BUFFER_SIZE];
 
 
-	/*test for an empty command */
-	if ((*token->token == '\0') || (*token->token == ' '))
-	{
-		strcpy(token->type, "null");
-		return token;
-	}
+// 	/*test for an empty command */
+// 	if ((*token->token == '\0') || (*token->token == ' '))
+// 	{
+// 		strcpy(token->type, "null");
+// 		return token;
+// 	}
 
-	/* test for a integer */
-	if (is_valid_int(token->token))
-	{
-		strcpy(token->type, "integer");
-		token->value = (int) strtol(token->token, (char **)NULL, 10);
-		return token;
-	}
+// 	/* test for a integer */
+// 	if (is_valid_int(token->token))
+// 	{
+// 		strcpy(token->type, "integer");
+// 		token->value = (int) strtol(token->token, (char **)NULL, 10);
+// 		return token;
+// 	}
 
 	/* test for a key word */
 
@@ -170,8 +170,8 @@ _TOKEN * token_type(_TOKEN *token)
 	}
 
 
-
-	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *token->token);
+	
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", token->token);
 
 
 	if (mysql_query(conn, buff))
