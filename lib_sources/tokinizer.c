@@ -181,7 +181,7 @@ _TOKEN * token_type(_TOKEN *c)
 	}
 
 	strcpy(c->type, "keyword");
-	c->value = row[2];
+	c->value = c->value = (int) strtol(row[2]n, (char **)NULL, 10);
 
 	return c;
 }

@@ -6,7 +6,7 @@
 #define _MINOR_VERSION_tokenizer		0
 
 
-int Tpush(_TOKEN * token);
+int Tpush(char *token_buffer);
 int Qpush(_TOKEN * token, char * string);
 char * Tpop(_TOKEN * token);
 int tokenizer(char *lbuf);
