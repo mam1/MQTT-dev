@@ -126,7 +126,7 @@ int is_valid_int(const char *str)
 
 
 /* return token type or command number */
-_TOKEN * token_type(_TOKEN *c)
+_TOKEN * token_type(_TOKEN *token)
 {
 	// int     i;
 	// char    *p;
@@ -138,18 +138,18 @@ _TOKEN * token_type(_TOKEN *c)
 
 
 	/*test for an empty command */
-	if ((*c->token == '\0') || (*c->token == ' '))
+	if ((token->token == '\0') || (token->token == ' '))
 	{
-		strcpy(c->type, "null");
-		return c;
+		strcpy(token->type, "null");
+		return token;
 	}
 
 	/* test for a integer */
-	if (is_valid_int(c->token))
+	if (is_valid_int(token->token))
 	{
-		strcpy(c->type, "integer");
-		c->value = (int) strtol(c->token, (char **)NULL, 10);
-		return c;
+		strcpy(token->type, "integer");
+		token->value = (int) strtol(token->token, (char **)NULL, 10);
+		return token;
 	}
 
 	/* test for a key word */
@@ -169,7 +169,10 @@ _TOKEN * token_type(_TOKEN *c)
 		exit(1);
 	}
 
-	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *c->token);
+
+
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", token->token);
+
 
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
@@ -177,14 +180,14 @@ _TOKEN * token_type(_TOKEN *c)
 	result = mysql_store_result(conn);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
-		strcpy(c->type, "unrecognized");
-		return c;
+		strcpy(token->type, "unrecognized");
+		return token;
 	}
 
-	strcpy(c->type, "keyword");
-	c->value = (int) strtol(row[2], (char **)NULL, 10);
+	strcpy(token->type, "keyword");
+	token->value = (int) strtol(row[2], (char **)NULL, 10);
 
-	return c;
+	return token;
 }
 
 
