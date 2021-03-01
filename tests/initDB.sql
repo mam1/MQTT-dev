@@ -53,12 +53,14 @@ CREATE TABLE TokenQ (
 CREATE TABLE KeyWords (
     keywordID INTEGER NOT NULL AUTO_INCREMENT,
     keyword varchar(25) NOT NULL,
+    description varchar(100) NULL,
     keycode INTEGER NOT NULL,
     PRIMARY KEY (keywordID)
 );
+
 alter table KeyWords add UNIQUE(keyword);
+
 CREATE UNIQUE INDEX index_keywords ON KeyWords (keyword);
-INSERT INTO  KeyWords (keyword,keycode) VALUES ("channel", 100);
-INSERT INTO  KeyWords (keyword,keycode) VALUES ("status", 110);
-INSERT INTO  KeyWords (keyword,keycode) VALUES ("schedule", 120);
-INSERT INTO  KeyWords (keyword,keycode) VALUES ("quit", 90);
+
+
+
