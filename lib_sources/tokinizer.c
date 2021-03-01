@@ -140,14 +140,14 @@ _TOKEN * token_type(_TOKEN *c)
 	/*test for an empty command */
 	if ((*c->token == '\0') || (*c->token == ' '))
 	{
-		strcpy(c->type, "null")
+		strcpy(c->type, "null");
 		return c;
 	}
 
 	/* test for a integer */
 	if (is_valid_int(c->token))
 	{
-		strcpy(c->type, "integer")
+		strcpy(c->type, "integer");
 		c->value = (int) strtol(c->token, (char **)NULL, 10);
 		return c;
 	}
