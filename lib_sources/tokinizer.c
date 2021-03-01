@@ -169,19 +169,19 @@ _TOKEN * token_type(_TOKEN *c)
 		exit(1);
 	}
 
-	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", c);
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", c->token);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
 
-	if ((row = mysql_fetch_row(result)) == NULL){
+	if ((row = mysql_fetch_row(result)) == NULL) {
 		strcpy(c->type, "unrecognized");
 		return c;
 	}
 
-strcpy(c->type, "keyword")
-c->value = row[2];
+	strcpy(c->type, "keyword");
+	c->value = row[2];
 
 
 	return c;
