@@ -149,7 +149,7 @@ int Tpush(char *token_buffer)
 		return 1;
 
 	memset(&token.token, '\0', sizeof(token.token));
-	while (*tptr != '\0') *tptr++ = *bptr++;
+	while (*bptr != '\0') *tptr++ = *bptr++;
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);

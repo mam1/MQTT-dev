@@ -117,9 +117,8 @@ int main(int argc, char *argv[])
 				break;
 
 		/* CR */	case 0xa:
-memset(screenbuff, '\0', sizeof(screenbuff));
-strcpy(screenbuff,linebuff);
-
+				memset(screenbuff, '\0', sizeof(screenbuff));
+				strcpy(screenbuff, linebuff);
 				tokenizer(linebuff);
 				memset(linebuff, '\0', sizeof(linebuff));
 				disp ("linebuffer set to tokenizer to be processed");
