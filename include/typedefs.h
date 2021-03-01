@@ -1,7 +1,7 @@
 #ifndef _TYPEDEFS_H_
 #define _TYPEDEFS_H_
 
-#include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
+#include "/home/mam1/Git/MQTT-dev/include/shared.h"
 
 
  /* buffer for semaphores */
