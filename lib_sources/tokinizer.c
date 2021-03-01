@@ -343,12 +343,12 @@ int reset_tokenQ(void)
 	// char 			*tbuf_ptr, *lbuf_ptr;
 	_TOKEN 			tbuf;
 
-	memset (tbuf, '\0', sizeof(tbuf));
+	memset (&tbuf, '\0', sizeof(tbuf));
 	// printf("%s\n", "crearing the token queue\n");
 	while (Tpop(tbuf.token) != NULL);
 	{
 		// printf("poped <%s>\n", tbuf);
-		memset (tbuf, '\0', sizeof(tbuf));
+		memset (&tbuf, '\0', sizeof(tbuf));
 	}
 	return 1;
 
