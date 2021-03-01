@@ -1,22 +1,8 @@
 #ifndef _TYPEDEFS_H_
 #define _TYPEDEFS_H_
 
-// /* line queue data strcuctures  */
-// typedef int 		_offset;
+#include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 
-// typedef struct {
-// 	int				base;
-// 	_offset		 	head;
-// 	_offset		 	tail;
-// } _fifo_stack;
-
-// typedef struct {
-// 	_offset		 	previous;
-// 	_offset		 	next;
-// 	_offset 	 	payload;
-// 	int				payload_type;
-// 	int				payload_size;
-// } _node;
 
  /* buffer for semaphores */
  typedef struct sembuf SEMBUF;

@@ -138,17 +138,17 @@ _TOKEN * token_type(_TOKEN *c)
 
 
 	/*test for an empty command */
-	if ((*c == '\0') || (*c == ' '))
+	if ((*c->token == '\0') || (*c->token == ' '))
 	{
-		strcpy(c.type, "null")
+		strcpy(c->type, "null")
 		return c;
 	}
 
 	/* test for a integer */
 	if (is_valid_int(c))
 	{
-		strcpy(c.type, "integer")
-		c.value = (int) strtol(c.token, (char **)NULL, 10);
+		strcpy(c->type, "integer")
+		c->value = (int) strtol(c->token, (char **)NULL, 10);
 		return c;
 	}
 
@@ -176,12 +176,12 @@ _TOKEN * token_type(_TOKEN *c)
 	result = mysql_store_result(conn);
 
 	if ((row = mysql_fetch_row(result)) == NULL){
-		strcpy(c.type, "unrecognized");
+		strcpy(c->type, "unrecognized");
 		return c;
 	}
 
-strcpy(c.type, "keyword")
-c.value = row[2];
+strcpy(c->type, "keyword")
+c->value = row[2];
 
 
 	return c;
