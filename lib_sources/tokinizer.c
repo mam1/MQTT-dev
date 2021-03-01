@@ -138,7 +138,7 @@ _TOKEN * token_type(_TOKEN *token)
 
 
 	/*test for an empty command */
-	if ((token->*token == '\0') || (token->*token == ' '))
+	if ((*token->token == '\0') || (*token->token == ' '))
 	{
 		strcpy(token->type, "null");
 		return token;
