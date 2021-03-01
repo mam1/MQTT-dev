@@ -252,13 +252,13 @@ int Tpush(char *token_buffer)
 	return 1;
 }
 
-int Qpush(char * token, char * string)
+int Qpush(_TOKEN * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
 	int 				value;
 
-	if (*token == ' ') return 1;
+	if (*token->token == ' ') return 1;
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -275,8 +275,11 @@ int Qpush(char * token, char * string)
 		exit(1);
 	}
 
+	strcpy(token->type, "string");
+
+
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token, string);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token->token, token->type);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -284,7 +287,7 @@ int Qpush(char * token, char * string)
 	return 1;
 }
 
-char * Tpop(char * token)
+char * Tpop(_TOKEN * token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
@@ -328,13 +331,20 @@ char * Tpop(char * token)
 	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
 
 	cptr = row[1];
-	bptr = token;
+	bptr = token->token;
 	while (*cptr != '\0')
 	{
 		// printf("moving <%c>\n", *cptr);
 		*bptr++ = *cptr++;
 	}
 	bptr = '\0';
+
+	c
+
+
+
+
+
 
 	// printf("token is <%s>\n", row[1]);
 	// printf("tokenID is <%s>\n", row[0]);
