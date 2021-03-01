@@ -181,7 +181,7 @@ _TOKEN * token_type(_TOKEN *c)
 	}
 
 	strcpy(c->type, "keyword");
-	c->value = c->value = (int) strtol(row[2]n, (char **)NULL, 10);
+	c->value = c->value = (int) strtol(row[2], (char **)NULL, 10);
 
 	return c;
 }
@@ -220,7 +220,7 @@ int Tpush(char *token_buffer)
 
 	char 				*tptr, *bptr;
 	tptr = token.token;
-	bptr = tokenbuffer;
+	bptr = token_buffer;
 
 
 	if (*token_buffer == ' ') return 1;
