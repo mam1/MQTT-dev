@@ -92,7 +92,7 @@ _TOKEN * token_type(_TOKEN *token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-
+printf("\n\n\n*********************** <%s>\n\n\n", token->token);
 	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *token->token);
 
 	if (mysql_query(conn, buff))
