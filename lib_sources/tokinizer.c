@@ -258,7 +258,7 @@ int Qpush(char * token)
 	char 				buff[_INPUT_BUFFER_SIZE];
 	// int 				value;
 
-	if (token == ' ') return 1;
+	if (*token == ' ') return 1;
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
