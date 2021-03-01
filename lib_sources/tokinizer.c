@@ -215,7 +215,7 @@ int Tpush(char *token_buffer)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	int 				value;
+	// int 				value;
 	_TOKEN 				token;
 
 	char 				*tptr, *bptr;
@@ -256,7 +256,7 @@ int Qpush(_TOKEN * token, char * string)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	int 				value;
+	// int 				value;
 
 	if (*token->token == ' ') return 1;
 
@@ -319,14 +319,6 @@ char * Tpop(_TOKEN * token)
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
-	// printf("we now have %i  active columns\n", mysql_num_fields(result));
-	// for (i = 0; i < (int)mysql_num_fields(result); i++)
-	// {
-	// 	mysql_field_seek(result, i);
-	// 	field = mysql_fetch_field(result);
-	// 	printf("column %i  %s\n", i, field->name);
-	// }
-	// printf("\n");
 
 	if ((row = mysql_fetch_row(result)) == NULL) return NULL;
 
@@ -338,16 +330,6 @@ char * Tpop(_TOKEN * token)
 		*bptr++ = *cptr++;
 	}
 	bptr = '\0';
-
-	c
-
-
-
-
-
-
-	// printf("token is <%s>\n", row[1]);
-	// printf("tokenID is <%s>\n", row[0]);
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
 	if (mysql_query(conn, buff))
