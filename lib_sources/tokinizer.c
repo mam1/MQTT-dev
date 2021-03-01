@@ -287,7 +287,7 @@ int Qpush(_TOKEN * token, char * string)
 	return 1;
 }
 
-char * Tpop(_TOKEN * token)
+_TOKEN * Tpop(_TOKEN *token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
