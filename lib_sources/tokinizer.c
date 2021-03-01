@@ -92,7 +92,7 @@ _TOKEN * token_type(_TOKEN *token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-printf("\n\n\n*********************** <%s>\n\n\n", token->token);
+printf("\n\n\n*********************** token <%s> *******\n\n\n", token->token);
 	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *token->token);
 
 	if (mysql_query(conn, buff))
@@ -143,7 +143,7 @@ int Tpush(char *token_buffer)
 	char 				*tptr, *bptr;
 	tptr = token.token;
 	bptr = token_buffer;
-printf("\n\n******************************** token_buffer\n\n", token_buffer);
+printf("\n\n******************************** token_buffer <%s>\n\n", token_buffer);
 	/*test for an empty command */
 	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
