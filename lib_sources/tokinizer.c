@@ -23,53 +23,6 @@
 #define MINUTES_PER_HOUR 		60
 #define MINUTES_PER_DAY 		1440
 
-/* command list */
-static char    *keyword[_CMD_TOKENS] =
-{
-	/*  0 */    "temp",
-	/*  1 */    "*",
-	/*  2 */    "humid",
-	/*  3 */    "schedule",
-	/*  4 */    "?",
-	/*  5 */    "display",
-	/*  6 */    "yes",
-	/*  7 */    "cancel",
-	/*  8 */    "replace",
-	/*  9 */    "sedit",
-	/* 10 */    "delete",
-	/* 11 */    "active",
-	/* 12 */    "on",
-	/* 13 */    "off",
-	/* 14 */    "clear",
-	/* 15 */    "status",
-	/* 16 */    "time",
-	/* 17 */    "sensor",
-	/* 18 */    "cycle",
-	/* 19 */    "ipc",
-	/* 20 */    "show",
-	/* 21 */    "save",
-	/* 22 */    "template",
-	/* 23 */    "hide",
-	/* 24 */    "load",
-	/* 25 */    "set",
-	/* 26 */    "q",
-	/* 27 */    "done",
-	/* 28 */    "back",
-	/* 29 */    "system",
-	/* 30 */    "channel",
-	/* 31 */    "ssch",
-	/* 32 */    "wsch",
-	/* 33 */    "slib",
-	/* 34 */    "tlib",
-	/* 35 */    "INT",
-	/* 36 */    "STR",
-	/* 37 */    "OTHER",
-	/* 38 */	"slist",
-	/* 39 */	"group",
-	/* 40 */	"description"
-};
-
-
 
 static void show_mysql_error(MYSQL *mysql)
 {
@@ -78,32 +31,6 @@ static void show_mysql_error(MYSQL *mysql)
 	       mysql_error(mysql));
 	exit(-1);
 }
-
-/* return character type  */
-// int char_type(char c) {
-// 	switch (c) {
-// 	case _COMMA:
-// 	case _SPACE:
-// 	case _COLON:
-// 	case _SLASH:
-// 		return "delimiter";
-// 	case _QUOTE:
-// 		return "quote";
-// 	case _DEL:
-// 		return "number";
-// 	case _CR:
-// 		return "enter";
-// 	}
-// 	return 4;
-// }
-
-/* return token type */
-// char * (token_type)
-// {
-
-
-// }
-
 
 /* test for a valid integer */
 int is_valid_int(const char *str)
@@ -122,35 +49,32 @@ int is_valid_int(const char *str)
 	return -1;
 
 }
+/* return token type or command number */
+_TOKEN * token_type(_TOKEN *token)
+{
+	// int     i;
+	// char    *p;
+
+	MYSQL               *conn;
+	MYSQL_RES           *result;
+	MYSQL_ROW           row;
+	char 				buff[_INPUT_BUFFER_SIZE];
 
 
+	/*test for an empty command */
+	if ((*token->token == '\0') || (*token->token == ' '))
+	{
+		strcpy(token->type, "null");
+		return token;
+	}
 
-// /* return token type or command number */
-// _TOKEN * token_type(_TOKEN *token)
-// {
-// 	// int     i;
-// 	// char    *p;
-
-// 	MYSQL               *conn;
-// 	MYSQL_RES           *result;
-// 	MYSQL_ROW           row;
-// 	char 				buff[_INPUT_BUFFER_SIZE];
-
-
-// 	/*test for an empty command */
-// 	if ((*token->token == '\0') || (*token->token == ' '))
-// 	{
-// 		strcpy(token->type, "null");
-// 		return token;
-// 	}
-
-// 	/* test for a integer */
-// 	if (is_valid_int(token->token))
-// 	{
-// 		strcpy(token->type, "integer");
-// 		token->value = (int) strtol(token->token, (char **)NULL, 10);
-// 		return token;
-// 	}
+	/* test for a integer */
+	if (is_valid_int(token->token))
+	{
+		strcpy(token->type, "integer");
+		token->value = (int) strtol(token->token, (char **)NULL, 10);
+		return token;
+	}
 
 	/* test for a key word */
 
@@ -170,7 +94,7 @@ int is_valid_int(const char *str)
 	}
 
 
-	
+
 	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", token->token);
 
 
@@ -189,8 +113,6 @@ int is_valid_int(const char *str)
 
 	return token;
 }
-
-
 int is_a_delimiter(char * c)
 {
 	switch (*c)
@@ -219,17 +141,17 @@ int Tpush(char *token_buffer)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	// int 				value;
 	_TOKEN 				token;
 
 	char 				*tptr, *bptr;
 	tptr = token.token;
 	bptr = token_buffer;
 
+	/*test for an empty command */
+	if ((*token->token == '\0') || (*token->token == ' '))
+		return 1;
 
-	if (*token_buffer == ' ') return 1;
-
-	memset(&token, '\0', sizeof(token));
+	memset(&token.token, '\0', sizeof(token.token));
 	while (*tptr != '\0') *tptr++ = *bptr++;
 
 	/* get connection handle  */
@@ -247,6 +169,7 @@ int Tpush(char *token_buffer)
 		exit(1);
 	}
 
+	token_type(&token);
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
@@ -256,13 +179,13 @@ int Tpush(char *token_buffer)
 	return 1;
 }
 
-int Qpush(char * token)
+int Qpush(char * token_buffer)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
 	// int 				value;
 
-	if (*token == ' ') return 1;
+	if (*token_buffer == ' ') return 1;
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -279,8 +202,8 @@ int Qpush(char * token)
 		exit(1);
 	}
 
-	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token, "string");
+	/* insert newest token_buffer */
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token_buffer, "string");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -339,7 +262,6 @@ _TOKEN * Tpop(_TOKEN *token)
 
 	return token;
 }
-
 int reset_tokenQ(void)
 {
 	// char 			*tbuf_ptr, *lbuf_ptr;
@@ -400,6 +322,5 @@ int tokenizer(char *lbuf)
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf);
-	// Tpush(tbuf, token_type(tbuf));
 	return 0;
 }
