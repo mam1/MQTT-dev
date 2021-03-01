@@ -169,7 +169,8 @@ _TOKEN * token_type(_TOKEN *c)
 		exit(1);
 	}
 
-	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", c->token);
+	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", *c->token);
+
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
