@@ -26,7 +26,7 @@ char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			screenbuff[500];
 char 			tbuff[500];
 
-char 			*lb_ptr, *lb_in, *lb_out, *lb_end;
+char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert;
 
 void disp(char *str)
 {
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_insert = linebuff
-	            lb_ptr = linebuff;
+	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 
 	char 		*ptr, *end_toke;
