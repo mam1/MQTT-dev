@@ -113,9 +113,9 @@ _TOKEN * token_type(_TOKEN *token)
 
 // printf("\r\n\n\n*********** buff in token_type before value conversion <%s> \r\n\n\n", buff);
 
-	// token->value = (int) strtol(row[2], (char **)NULL, 10);
+	token->value = (int) strtol(row[3], (char **)NULL, 10);
 
-	token->value = 999;
+	// token->value = 999;
 
 	return token;
 }
@@ -175,7 +175,7 @@ int Tpush(char *token_buffer)
 		exit(1);
 	}
 
-	token_type(&token);
+	token_type(&token);			//set token type and value 
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
