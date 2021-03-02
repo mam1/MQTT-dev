@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
 
 	char 		*ptr, *end_toke;
 	int		ch;
+	int 			x, y;
 	// static char keych[2] = {0};
 
 	/*  Initialize ncurses  */
@@ -129,8 +130,12 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x105:		/* right arrow */
-
-
+				if (lb_ptr > linebuff )
+				{
+					lb_insert--;
+					getyx(mainwin, y, x);
+					move(mainwin, y-1, x);
+				}
 				break;
 			case 0x104:		/* left arrow */
 
