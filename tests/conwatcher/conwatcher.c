@@ -130,15 +130,15 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x105:		/* right arrow */
+
+				break;
+			case 0x104:		/* left arrow */
 				if (lb_ptr > linebuff )
 				{
 					lb_insert--;
 					getyx(mainwin, y, x);
-					move(y-1, x);
+					move(y, x - 1);
 				}
-				break;
-			case 0x104:		/* left arrow */
-
 				break;
 
 			case 0x107:		/* backspace */
