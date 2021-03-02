@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 {
 	lb_in = linebuff;
 	lb_out = linebuff;
-	lb_insert = linebuff
+	lb_insert = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 
