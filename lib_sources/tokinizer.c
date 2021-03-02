@@ -110,6 +110,9 @@ printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff)
 	}
 
 	strcpy(token->type, "keyword");
+
+printf("\r\n\n\n*********** buff in token_type before value conversion <%s> \r\n\n\n", buff);
+
 	token->value = (int) strtol(row[2], (char **)NULL, 10);
 
 	return token;
