@@ -102,6 +102,7 @@ printf("\r\n\n\n*********************** buff in token_type <%s> \r\n\n\n", buff)
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
+printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
 		strcpy(token->type, "unrecognized");
