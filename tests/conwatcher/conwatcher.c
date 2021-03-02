@@ -93,26 +93,49 @@ int main(int argc, char *argv[])
 			disp("got a character ");
 		}
 		else
+
+			// { KEY_UP,        "Up arrow"        },
+			// { KEY_DOWN,      "Down arrow"      },
+			// { KEY_LEFT,      "Left arrow"      },
+			// { KEY_RIGHT,     "Right arrow"     },
+			// { KEY_HOME,      "Home"            },
+			// { KEY_END,       "End"             },
+			// { KEY_BACKSPACE, "Backspace"       },
+			// { KEY_IC,        "Insert"          },
+			// { KEY_DC,        "Delete"          },
+			// { KEY_NPAGE,     "Page down"       },
+			// { KEY_PPAGE,     "Page up"         },
+
+
+
 			switch (ch)
 			{
 
 			case _NO_CHAR: 	/* NOCR */
 				break;
 
-			case 0x103:  /* up arrow */
+			case  0x103:  	/* up arrow */
 
 
 				break;
-		/* down arrow */case  0x102:
+			case 0x102:		/* down arrow */
 
 
 				break;
 
-		/* right arrow */case  0x105:
+			case 0x105:		/* right arrow */
 
 
 				break;
-		/* left arrow */case  0x104:
+			case 0x104:		/* left arrow */
+
+				break;
+
+			case 0x107:		/* backspace */
+
+				*--lb_ptr = '\0';
+
+
 
 				break;
 
