@@ -98,10 +98,6 @@ printf("\r\n\n\n*********************** token in token_type <%s> \r\n\n\n", toke
 
 printf("\r\n\n\n*********************** buff in token_type <%s> \r\n\n\n", buff);
 
-	memset(buff, '\0', sizeof(buff));
-	strcpy(buff, "SELECT * FROM KeyWords WHERE keyword = '");
-	strcat(buff, token->token);
-	strcat(buff, "';");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
