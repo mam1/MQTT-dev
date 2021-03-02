@@ -92,17 +92,17 @@ _TOKEN * token_type(_TOKEN *token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-printf("\r\n\n\n*********************** token in token_type <%s> \r\n\n\n", token->token);
+// printf("\r\n\n\n*********************** token in token_type <%s> \r\n\n\n", token->token);
 
 	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", token->token);
 
-printf("\r\n\n\n*********************** buff in token_type <%s> \r\n\n\n", buff);
+// printf("\r\n\n\n*********************** buff in token_type <%s> \r\n\n\n", buff);
 
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
-printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff);
+// printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
 		strcpy(token->type, "unrecognized");
@@ -111,7 +111,7 @@ printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff)
 
 	strcpy(token->type, "keyword");
 
-printf("\r\n\n\n*********** buff in token_type before value conversion <%s> \r\n\n\n", buff);
+// printf("\r\n\n\n*********** buff in token_type before value conversion <%s> \r\n\n\n", buff);
 
 	// token->value = (int) strtol(row[2], (char **)NULL, 10);
 
@@ -152,7 +152,7 @@ int Tpush(char *token_buffer)
 	char 				*tptr, *bptr;
 	tptr = token.token;
 	bptr = token_buffer;
-printf("\r\n\n************************** token_buffer in Tpush <%s>\n\n", token_buffer);
+// printf("\r\n\n************************** token_buffer in Tpush <%s>\n\n", token_buffer);
 	/*test for an empty command */
 	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
