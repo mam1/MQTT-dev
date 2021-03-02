@@ -62,5 +62,9 @@ alter table KeyWords add UNIQUE(keyword);
 
 CREATE UNIQUE INDEX index_keywords ON KeyWords (keyword);
 
-
+INSERT INTO KeyWords (keyword,keycode) VALUES("edit", 100);
+INSERT INTO KeyWords (keyword,keycode) VALUES("channel", 200);
+INSERT INTO KeyWords (keyword,keycode) VALUES("schedule", 3);
+INSERT INTO KeyWords (keyword,keycode) VALUES("save", 1);
+INSERT INTO KeyWords (keyword,keycode) VALUES("quit", 22);
 
