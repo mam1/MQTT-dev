@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 				{
 					lb_insert--;
 					getyx(mainwin, y, x);
-					move(mainwin, y-1, x);
+					move(y-1, x);
 				}
 				break;
 			case 0x104:		/* left arrow */
