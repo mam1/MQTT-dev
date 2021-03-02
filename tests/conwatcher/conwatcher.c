@@ -41,6 +41,24 @@ void disp(char *str)
 	return;
 }
 
+void insert_char(char * linebuff, char * insert, char)
+{
+	char * ptr;
+
+	if (lb_ptr <= lb_end - 1)		// room to add character ?
+	{
+		if (curser != lb_ptr)
+
+			return;
+	}
+	return;
+}
+
+void delete_char()
+{
+
+	return;
+}
 // static void show_mysql_error(MYSQL *mysql)
 // {
 // 	printf("Error(%d) [%s] \"%s\"\n", mysql_errno(mysql),
@@ -54,7 +72,8 @@ int main(int argc, char *argv[])
 {
 	lb_in = linebuff;
 	lb_out = linebuff;
-	lb_ptr = linebuff;
+	lb_insert = linebuff
+	            lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 
 	char 		*ptr;
@@ -85,8 +104,23 @@ int main(int argc, char *argv[])
 		{
 			if (lb_ptr <= lb_end - 1)		// room to add character ?
 			{
-				*lb_ptr++ = ch;
-				*lb_ptr = '\0';
+				if (lb_ptr == lb_insert)
+				{
+					*lb_ptr++ = ch;
+					lb_insert++;
+					*lb_ptr = '\0';
+				}
+				else
+				{
+					end_toke = linebuff;
+					while (*end_toke != '\0') end_toke++;
+					*end_toke++ = '\0';
+					while (end_toke > lb_insert)
+						*end_toke = *--end_toke;
+					*lb_ptr = ch;
+
+
+					}
 			}
 			else
 				disp("**** line buffer overflow ****");
