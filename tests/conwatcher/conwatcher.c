@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
 
 				*--lb_ptr = '\0';
 
+				disp("got a backspace");
 
 
 				break;
