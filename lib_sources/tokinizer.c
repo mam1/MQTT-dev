@@ -52,14 +52,10 @@ int is_valid_int(const char *str)
 /* return token type or command number */
 _TOKEN * token_type(_TOKEN *token)
 {
-	// int     i;
-	// char    *p;
-
 	MYSQL               *conn;
 	MYSQL_RES           *result;
 	MYSQL_ROW           row;
 	char 				buff[_INPUT_BUFFER_SIZE];
-
 
 	/*test for an empty command */
 	if ((*token->token == '\0') || (*token->token == ' '))
@@ -92,33 +88,21 @@ _TOKEN * token_type(_TOKEN *token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
-// printf("\r\n\n\n*********************** token in token_type <%s> \r\n\n\n", token->token);
 
 	sprintf(buff, "SELECT * FROM KeyWords WHERE keyword = '%s';", token->token);
-
-// printf("\r\n\n\n*********************** buff in token_type <%s> \r\n\n\n", buff);
-
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
-
 	result = mysql_store_result(conn);
-// printf("\r\n\n\n*********** buff in token_type after query <%s> \r\n\n\n", buff);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
 		strcpy(token->type, "unrecognized");
 		return token;
 	}
-
 	strcpy(token->type, "keyword");
-
-// printf("\r\n\n\n*********** buff in token_type before value conversion <%s> \r\n\n\n", buff);
-
 	token->value = (int) strtol(row[3], (char **)NULL, 10);
-
-	// token->value = 999;
-
 	return token;
 }
+
 int is_a_delimiter(char * c)
 {
 	switch (*c)
@@ -138,9 +122,7 @@ int is_a_delimiter(char * c)
 	default:
 		return 0;
 		break;
-
 	}
-
 }
 
 int Tpush(char *token_buffer)
@@ -152,7 +134,7 @@ int Tpush(char *token_buffer)
 	char 				*tptr, *bptr;
 	tptr = token.token;
 	bptr = token_buffer;
-// printf("\r\n\n************************** token_buffer in Tpush <%s>\n\n", token_buffer);
+
 	/*test for an empty command */
 	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
@@ -189,7 +171,6 @@ int Qpush(char * token_buffer)
 {
 	MYSQL               *conn;
 	char 				buff[_INPUT_BUFFER_SIZE];
-	// int 				value;
 
 	if (*token_buffer == ' ') return 1;
 
@@ -221,13 +202,9 @@ _TOKEN * Tpop(_TOKEN *token)
 {
 	MYSQL               *conn;
 	MYSQL_RES           *result;
-	// MYSQL_FIELD         *field;
 	MYSQL_ROW           row;
-
 	char 				*cptr, *bptr;
-
 	char 				buff[_INPUT_BUFFER_SIZE];
-	// int 				i;
 
 	/* get handles  */
 	conn = mysql_init(NULL);
@@ -243,7 +220,6 @@ _TOKEN * Tpop(_TOKEN *token)
 		exit(1);
 	}
 
-
 	/*get the oldest row */
 	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
 		show_mysql_error(conn);
@@ -257,7 +233,6 @@ _TOKEN * Tpop(_TOKEN *token)
 	bptr = token->token;
 	while (*cptr != '\0')
 	{
-		// printf("moving <%c>\n", *cptr);
 		*bptr++ = *cptr++;
 	}
 	bptr = '\0';
@@ -270,14 +245,14 @@ _TOKEN * Tpop(_TOKEN *token)
 }
 int reset_tokenQ(void)
 {
-	// char 			*tbuf_ptr, *lbuf_ptr;
+
 	_TOKEN 			tbuf;
 
 	memset (&tbuf, '\0', sizeof(tbuf));
-	// printf("%s\n", "crearing the token queue\n");
+
 	while ((char *)Tpop(&tbuf) != NULL)
 	{
-		// printf("poped <%s>\n", tbuf);
+
 		memset (&tbuf, '\0', sizeof(tbuf));
 	}
 	return 1;
