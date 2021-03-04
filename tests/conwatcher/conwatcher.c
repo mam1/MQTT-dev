@@ -25,8 +25,9 @@ WINDOW * mainwin;
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			screenbuff[500];
 char 			tbuff[500];
-
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert;
+
+
 
 void disp(char *str)
 {
@@ -41,13 +42,24 @@ void disp(char *str)
 	return;
 }
 
-int main(int argc, char *argv[])
+void reset_linebuffer(void)
 {
+
+	memset(linebuff, '\0', sizeof(linebuff));
+
 	lb_in = linebuff;
 	lb_out = linebuff;
 	lb_insert = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+
+	return;
+}
+
+
+int main(int argc, char *argv[])
+{
+	reset_linebuffer();
 
 	char 		*ptr, *end_toke;
 	int		ch;
@@ -68,7 +80,7 @@ int main(int argc, char *argv[])
 	// nocbreak();
 	clear();
 	disp("conwatcher active");
-	memset(linebuff, '\0', sizeof(linebuff));
+	reset_linebuffer();
 
 
 
@@ -157,10 +169,7 @@ int main(int argc, char *argv[])
 
 				else
 				{
-					lb_in = linebuff;
-					lb_out = linebuff;
-					lb_ptr = linebuff;
-					lb_end = linebuff + _INPUT_BUFFER_SIZE;
+					reset_linebuffer();
 				}
 				break;
 
@@ -168,12 +177,8 @@ int main(int argc, char *argv[])
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
 				tokenizer(linebuff);
-				memset(linebuff, '\0', sizeof(linebuff));
 				disp ("linebuffer set to tokenizer to be processed");
-				lb_in = linebuff;
-				lb_out = linebuff;
-				lb_ptr = linebuff;
-				lb_end = linebuff + _INPUT_BUFFER_SIZE;
+				reset_linebuffer();
 				break;
 
 		/* DEL */	case 0x14a:
@@ -185,14 +190,10 @@ int main(int argc, char *argv[])
 					strcat(screenbuff, tbuff);
 					memset(tbuff, '\0', sizeof(tbuff));
 					strcat(screenbuff, "\n");
-
 				}
 				disp ("token queue deleted");
-				memset(linebuff, '\0', sizeof(linebuff));
-				lb_in = linebuff;
-				lb_out = linebuff;
-				lb_ptr = linebuff;
-				lb_end = linebuff + _INPUT_BUFFER_SIZE;
+				reset_linebuffer();
+
 
 				break;
 			}
