@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x105:		/* right arrow */
-				if (lb_insert > lb_ptr )
+				if (lb_insert < lb_ptr )
 				{
 					lb_insert++;
 					getyx(mainwin, y, x);
