@@ -25,7 +25,7 @@ WINDOW * mainwin;
 char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			screenbuff[500];
 char 			tbuff[500];
-char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert;
+char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
 
 
 
@@ -160,14 +160,26 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x107:		/* backspace */
-
-				if (lb_ptr < linebuff )
+				if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
 				{
 					*--lb_ptr = '\0';
 					disp("got a backspace");
 				}
 
 				else
+				{
+					ripple_ptr = lb_insert;
+					while (*(ripple_ptr + 1) != '\0')
+						*ripple_ptr = *++ripple_ptr;
+					*ripple_ptr = '\0';
+
+
+				}
+
+
+
+
+
 				{
 					reset_linebuffer();
 				}
