@@ -130,6 +130,11 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x105:		/* right arrow */
+								{
+					lb_insert++;
+					getyx(mainwin, y, x);
+					move(y, x + 1);
+				}
 
 				break;
 			case 0x104:		/* left arrow */
