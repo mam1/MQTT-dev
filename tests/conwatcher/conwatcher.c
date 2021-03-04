@@ -130,7 +130,8 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0x105:		/* right arrow */
-								{
+				if (lb_insert > lb_ptr )
+				{
 					lb_insert++;
 					getyx(mainwin, y, x);
 					move(y, x + 1);
@@ -138,7 +139,7 @@ int main(int argc, char *argv[])
 
 				break;
 			case 0x104:		/* left arrow */
-				if (lb_ptr > linebuff )
+				if (lb_insert > linebuff )
 				{
 					lb_insert--;
 					getyx(mainwin, y, x);
@@ -154,6 +155,13 @@ int main(int argc, char *argv[])
 					disp("got a backspace");
 				}
 
+				else
+				{
+					lb_in = linebuff;
+					lb_out = linebuff;
+					lb_ptr = linebuff;
+					lb_end = linebuff + _INPUT_BUFFER_SIZE;
+				}
 				break;
 
 		/* CR */	case 0xa:
