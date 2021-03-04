@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 
 			case 0x107:		/* backspace */
 
-				if (lb_ptr > linebuff )
+				if (lb_ptr < linebuff )
 				{
 					*--lb_ptr = '\0';
 					disp("got a backspace");
