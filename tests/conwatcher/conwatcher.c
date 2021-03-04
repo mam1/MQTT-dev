@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
 				if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
 				{
 					*--lb_ptr = '\0';
+					lb_insert--;
 					disp("got a backspace");
 				}
 
@@ -172,6 +173,7 @@ int main(int argc, char *argv[])
 					while (*(ripple_ptr + 1) != '\0')
 						*ripple_ptr = *++ripple_ptr;
 					*ripple_ptr = '\0';
+					lb_ptr = ripple_ptr;
 
 
 				}
