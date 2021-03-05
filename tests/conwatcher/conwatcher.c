@@ -230,17 +230,16 @@ int main(int argc, char *argv[])
 		/* DEL */	case 0x14a:
 				disp("deleting token queue");
 				memset(screenbuff, '\0', sizeof(screenbuff));
-				memset(tbuff, '\0', sizeof(tbuff));
 				while (Tpop(&toke) != NULL)
 				{
 					strcat(screenbuff, " token <");
-					strcat(screenbuff, token.token);
+					strcat(screenbuff, toke.token);
 					strcat(screenbuff, ">,  type <");
-					strcat(screenbuff, token.type);
+					strcat(screenbuff, toke.type);
 					strcat(screenbuff, ">\n");
-					memset(token.token, '\0', sizeof(token.token));
-					memset(token.type, '\0', sizeof(token.token));
-					token.value = 0;
+					memset(token.token, '\0', sizeof(toke.token));
+					memset(token.type, '\0', sizeof(toke.token));
+					toke.value = 0;
 
 				}
 				disp ("token queue deleted");
