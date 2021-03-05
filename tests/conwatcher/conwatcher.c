@@ -200,9 +200,7 @@ int main(int argc, char *argv[])
 				else
 				{
 					end_toke = linebuff;			// find the end of the entered data
-					while (*end_toke != '\0') end_toke++;
-					*++end_toke = '\0';				// make room for the added character
-
+					while (*end_toke != '\0') end_toke++;				
 					ripple_down(lb_insert, end_toke);
 					disp("deleting a character");
 					x--;
