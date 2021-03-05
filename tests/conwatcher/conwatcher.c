@@ -113,7 +113,8 @@ int main(int argc, char *argv[])
 
 					*lb_insert++ = ch;
 					wmove(mainwin, 10, 10);
-					refresh();
+					disp("inserting a character ");
+					wmove(mainwin, 20, 20);
 				}
 			}
 			else
@@ -121,7 +122,7 @@ int main(int argc, char *argv[])
 				disp("**** line buffer overflow ****");
 			}
 
-			disp("got a character ");
+
 
 		}
 
