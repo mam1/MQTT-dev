@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 
 					*lb_insert++ = ch;
 					move(10, 10);
-					// refresh(mainwin);
+					refresh();
 				}
 			}
 			else
