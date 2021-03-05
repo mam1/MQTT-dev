@@ -35,7 +35,7 @@ void disp(char *str)
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
-	wmove(mainwin, y, x);
+	move(40, 0);
 	refresh();
 	return;
 }
@@ -166,7 +166,8 @@ int main(int argc, char *argv[])
 				{
 					lb_insert++;
 					getyx(mainwin, y, x);
-					move(y, x + 1);
+					x++;
+					move(y, x);
 				}
 
 				break;
@@ -175,7 +176,8 @@ int main(int argc, char *argv[])
 				{
 					lb_insert--;
 					getyx(mainwin, y, x);
-					move(y, x - 1);
+					x--;
+					move(y, x);
 				}
 				break;
 
