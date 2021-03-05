@@ -85,9 +85,9 @@ void ripple_down(char *lb_insert, char *end_toke)
 }
 int main(int argc, char *argv[])
 {
-	char 		*ptr, *end_toke;
-	int			ch;
-
+	char 			*ptr, *end_toke;
+	int				ch;
+	_TOKEN 			toke;
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -231,11 +231,17 @@ int main(int argc, char *argv[])
 				disp("deleting token queue");
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				memset(tbuff, '\0', sizeof(tbuff));
-				while (Tpop(tbuff) != NULL)
+				while (Tpop(&toke) != NULL)
 				{
-					strcat(screenbuff, tbuff);
-					memset(tbuff, '\0', sizeof(tbuff));
-					strcat(screenbuff, "\n");
+					strcat(screenbuff, " token <");
+					strcat(screenbuff, token.token);
+					strcat(screenbuff, ">,  type <");
+					strcat(screenbuff, token.type);
+					strcat(screenbuff, ">\n");
+					memset(token.token, '\0', sizeof(token.token));
+					memset(token.type, '\0', sizeof(token.token));
+					token.value = 0;
+
 				}
 				disp ("token queue deleted");
 				reset_linebuffer();
