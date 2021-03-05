@@ -85,7 +85,7 @@ void ripple_down(char *lb_insert, char *end_toke)
 }
 int main(int argc, char *argv[])
 {
-	char 			*ptr, *end_toke;
+	char 			*end_toke;
 	int				ch;
 	_TOKEN 			toke;
 
