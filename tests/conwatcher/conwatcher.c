@@ -250,6 +250,14 @@ int main(int argc, char *argv[])
 
 
 				break;
+
+			case 0x168: /* End */
+				delwin(mainwin);
+				endwin();			/* End curses mode		  */
+				refresh();
+				printf("%s\n", "program terminated\n");
+				return 0;
+				break;
 			}
 
 		}
