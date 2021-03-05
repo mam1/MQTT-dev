@@ -51,7 +51,7 @@
 
 /* buffers */
 #define _INPUT_BUFFER_SIZE		500
-#define _TOKEN_BUFFER_SIZE		_INPUT_BUFFER_SIZE
+#define _TOKEN_BUFFER_SIZE		100
 #define _PROMPT_BUFFER_SIZE		500
 #define _CMD_BUFFER_DEPTH 		10 
 #define _TRACE_BUFFER_SIZE 		128		
