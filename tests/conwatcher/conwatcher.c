@@ -49,6 +49,7 @@ void reset_linebuffer(void)
 	lb_insert = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+	disp("linebuffer reset");
 
 	return;
 }
