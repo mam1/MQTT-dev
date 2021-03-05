@@ -79,7 +79,7 @@ void ripple_down(char *lb_insert, char *end_toke)
 		*push++ = *pull++;
 	*pull = '\0';
 	lb_ptr--;
-	
+
 
 	return;
 }
@@ -207,11 +207,12 @@ int main(int argc, char *argv[])
 
 				else
 				{
-					ripple_ptr = lb_insert;
-					while (*(ripple_ptr + 1) != '\0')
-						*ripple_ptr = *++ripple_ptr;
-					*ripple_ptr = '\0';
-					lb_ptr = ripple_ptr;
+					end_toke = linebuff;			// find the end of the entered data
+					while (*end_toke != '\0') end_toke++;
+					*++end_toke = '\0';				// make room for the added character
+
+					ripple_down(lb_insert, end_toke);
+
 
 
 				}
