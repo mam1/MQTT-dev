@@ -35,7 +35,7 @@ void disp(char *str)
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
-	move(40, 0);
+	move(y, x);
 	refresh();
 	return;
 }
