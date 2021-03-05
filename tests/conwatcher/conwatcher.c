@@ -200,12 +200,16 @@ int main(int argc, char *argv[])
 				else
 				{
 					end_toke = linebuff;			// find the end of the entered data
-					while (*end_toke != '\0') end_toke++;				
-					ripple_down(--lb_insert, end_toke);
-					disp("deleting a character");
-					x--;
-					wmove(mainwin, y, x);
-
+					while (*end_toke != '\0') end_toke++;
+					if (lb_insert > linebuff)
+					{
+						lb_insert--;
+						lb_insert--;
+						ripple_down(lb_insert, end_toke);
+						disp("deleting a character");
+						x--;
+						wmove(mainwin, y, x);
+					}
 
 				}
 
