@@ -101,10 +101,11 @@ int main(int argc, char *argv[])
 				}
 				else 								// insert curser has been moved
 				{
+					getyx(mainwin, y, x);
 					end_toke = linebuff;			// find the end of the entered data
 					while (*end_toke != '\0') end_toke++;
 					*++end_toke = '\0';				// make room for the added character
-					getyx(mainwin, y, x);
+
 
 					// ripple_up(lb_insert, end_toke);
 
