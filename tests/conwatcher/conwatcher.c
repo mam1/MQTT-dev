@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 					while (*end_toke != '\0') end_toke++;
 					if (lb_insert > linebuff)
 					{
-						lb_insert--;
+
 						lb_insert--;
 						ripple_down(lb_insert, end_toke);
 						disp("deleting a character");
