@@ -35,7 +35,8 @@ void disp(char *str)
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
-	// move(y, x);
+	if (lb_ptr != lb_insert)			// insert curser has not been moved
+		move(y, x);
 	refresh();
 	return;
 }
@@ -70,10 +71,8 @@ void ripple_up(char *lb_insert, char *end_toke)
 
 int main(int argc, char *argv[])
 {
-	reset_linebuffer();
-
 	char 		*ptr, *end_toke;
-	int		ch;
+	int			ch;
 
 
 	/*  Initialize ncurses  */
@@ -115,11 +114,12 @@ int main(int argc, char *argv[])
 					// // ripple_up(lb_insert, end_toke);
 
 					*lb_insert++ = ch;
-					
+
 					// wmove(mainwin, 10, 10);
 					// refresh();
 
 					disp("inserting a character");
+					wmove(mainwin, 40, 10);
 				}
 			}
 			else
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 				disp("**** line buffer overflow ****");
 			}
 
-			
+
 
 		}
 
