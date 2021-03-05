@@ -75,7 +75,7 @@ void ripple_down(char *lb_insert, char *end_toke)
 	pull = lb_insert;
 	pull++;
 
-	while (push > lb_insert)
+	while (push > end_toke)
 		*push++ = *pull++;
 	*pull = '\0';
 	lb_ptr--;
@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
 				{
 					end_toke = linebuff;			// find the end of the entered data
 					while (*end_toke != '\0') end_toke++;				
-					ripple_down(lb_insert, end_toke);
+					ripple_down(--lb_insert, end_toke);
 					disp("deleting a character");
 					x--;
 					wmove(mainwin, y, x);
