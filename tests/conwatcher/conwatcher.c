@@ -75,9 +75,10 @@ void ripple_down(char *lb_insert, char *end_toke)
 	pull = lb_insert;
 	pull++;
 
-	while (push > end_toke)
+	while (pull < end_toke)
 		*push++ = *pull++;
 	*pull = '\0';
+	lb_insert--;
 	lb_ptr--;
 
 
