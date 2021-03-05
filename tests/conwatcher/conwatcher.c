@@ -83,6 +83,15 @@ void ripple_down(char *lb_insert, char *end_toke)
 
 	return;
 }
+
+void add_comm(char *cmd)
+{
+
+	return;
+}
+
+
+
 int main(int argc, char *argv[])
 {
 	char 			*end_toke;
@@ -141,27 +150,10 @@ int main(int argc, char *argv[])
 			{
 				disp("**** line buffer overflow ****");
 			}
-
-
-
 		}
 
 		else
 		{
-// { KEY_UP,        "Up arrow"        },
-// { KEY_DOWN,      "Down arrow"      },
-// { KEY_LEFT,      "Left arrow"      },
-// { KEY_RIGHT,     "Right arrow"     },
-// { KEY_HOME,      "Home"            },
-// { KEY_END,       "End"             },
-// { KEY_BACKSPACE, "Backspace"       },
-// { KEY_IC,        "Insert"          },
-// { KEY_DC,        "Delete"          },
-// { KEY_NPAGE,     "Page down"       },
-// { KEY_PPAGE,     "Page up"         },
-
-
-
 			switch (ch)
 			{
 
@@ -212,7 +204,9 @@ int main(int argc, char *argv[])
 					*++end_toke = '\0';				// make room for the added character
 
 					ripple_down(lb_insert, end_toke);
-
+					disp("deleting a character");
+					x--;
+					wmove(mainwin, y, x);
 
 
 				}
@@ -224,6 +218,7 @@ int main(int argc, char *argv[])
 				strcpy(screenbuff, linebuff);
 				tokenizer(linebuff);
 				disp ("linebuffer set to tokenizer to be processed");
+				add_comm(linebuff);
 				reset_linebuffer();
 				break;
 
