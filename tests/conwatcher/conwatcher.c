@@ -88,9 +88,10 @@ int main(int argc, char *argv[])
 
 	/* read the keyboard */
 	while ((ch = getch()) != 'q')
+	{
 		if ( isprint(ch) && !(ch & KEY_CODE_YES)) 	// if a printable character
 		{	if (lb_ptr <= lb_end - 1)				// room to add character ?
-			{	
+			{
 				if (lb_ptr == lb_insert)			// insert curser has not been moved
 				{
 					*lb_ptr++ = ch;					// insert character into linbuffer
@@ -120,8 +121,8 @@ int main(int argc, char *argv[])
 
 		}
 
-else 
-{
+		else
+		{
 // { KEY_UP,        "Up arrow"        },
 // { KEY_DOWN,      "Down arrow"      },
 // { KEY_LEFT,      "Left arrow"      },
@@ -136,90 +137,90 @@ else
 
 
 
-	switch (ch)
-	{
+			switch (ch)
+			{
 
-	case _NO_CHAR: 	/* NOCR */
-		break;
+			case _NO_CHAR: 	/* NOCR */
+				break;
 
-	case  0x103:  	/* up arrow */
-
-
-		break;
-	case 0x102:		/* down arrow */
+			case  0x103:  	/* up arrow */
 
 
-		break;
+				break;
+			case 0x102:		/* down arrow */
 
-	case 0x105:		/* right arrow */
-		if (lb_insert < lb_ptr )
-		{
-			lb_insert++;
-			getyx(mainwin, y, x);
-			move(y, x + 1);
+
+				break;
+
+			case 0x105:		/* right arrow */
+				if (lb_insert < lb_ptr )
+				{
+					lb_insert++;
+					getyx(mainwin, y, x);
+					move(y, x + 1);
+				}
+
+				break;
+			case 0x104:		/* left arrow */
+				if (lb_insert > linebuff )
+				{
+					lb_insert--;
+					getyx(mainwin, y, x);
+					move(y, x - 1);
+				}
+				break;
+
+			case 0x107:		/* backspace */
+				if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
+				{
+					*--lb_ptr = '\0';
+					lb_insert--;
+					disp("got a backspace");
+				}
+
+				else
+				{
+					ripple_ptr = lb_insert;
+					while (*(ripple_ptr + 1) != '\0')
+						*ripple_ptr = *++ripple_ptr;
+					*ripple_ptr = '\0';
+					lb_ptr = ripple_ptr;
+
+
+				}
+
+				break;
+
+		/* CR */	case 0xa:
+				memset(screenbuff, '\0', sizeof(screenbuff));
+				strcpy(screenbuff, linebuff);
+				tokenizer(linebuff);
+				disp ("linebuffer set to tokenizer to be processed");
+				reset_linebuffer();
+				break;
+
+		/* DEL */	case 0x14a:
+				disp("deleting token queue");
+				memset(screenbuff, '\0', sizeof(screenbuff));
+				memset(tbuff, '\0', sizeof(tbuff));
+				while (Tpop(tbuff) != NULL)
+				{
+					strcat(screenbuff, tbuff);
+					memset(tbuff, '\0', sizeof(tbuff));
+					strcat(screenbuff, "\n");
+				}
+				disp ("token queue deleted");
+				reset_linebuffer();
+
+
+				break;
+			}
+
 		}
-
-		break;
-	case 0x104:		/* left arrow */
-		if (lb_insert > linebuff )
-		{
-			lb_insert--;
-			getyx(mainwin, y, x);
-			move(y, x - 1);
-		}
-		break;
-
-	case 0x107:		/* backspace */
-		if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
-		{
-			*--lb_ptr = '\0';
-			lb_insert--;
-			disp("got a backspace");
-		}
-
-		else
-		{
-			ripple_ptr = lb_insert;
-			while (*(ripple_ptr + 1) != '\0')
-				*ripple_ptr = *++ripple_ptr;
-			*ripple_ptr = '\0';
-			lb_ptr = ripple_ptr;
-
-
-		}
-
-		break;
-
-/* CR */	case 0xa:
-		memset(screenbuff, '\0', sizeof(screenbuff));
-		strcpy(screenbuff, linebuff);
-		tokenizer(linebuff);
-		disp ("linebuffer set to tokenizer to be processed");
-		reset_linebuffer();
-		break;
-
-/* DEL */	case 0x14a:
-		disp("deleting token queue");
-		memset(screenbuff, '\0', sizeof(screenbuff));
-		memset(tbuff, '\0', sizeof(tbuff));
-		while (Tpop(tbuff) != NULL)
-		{
-			strcat(screenbuff, tbuff);
-			memset(tbuff, '\0', sizeof(tbuff));
-			strcat(screenbuff, "\n");
-		}
-		disp ("token queue deleted");
-		reset_linebuffer();
-
-
-		break;
 	}
-
-}
-
-delwin(mainwin);
-endwin();			/* End curses mode		  */
-refresh();
-printf("%s\n", "program terminated\n");
-return 0;
+	delwin(mainwin);
+	endwin();			/* End curses mode		  */
+	refresh();
+	printf("%s\n", "program terminated\n");
+	return 0;
 }
