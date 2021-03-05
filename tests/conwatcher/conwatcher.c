@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 
 					// // ripple_up(lb_insert, end_toke);
 
-					// *lb_insert++ = ch;
+					*lb_insert++ = ch;
 					// wmove(mainwin, 10, 10);
 					// refresh();
 
