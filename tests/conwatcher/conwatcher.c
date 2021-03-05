@@ -107,9 +107,6 @@ int main(int argc, char *argv[])
 
 					ripple_up(lb_insert, end_toke);
 
-					while (end_toke > lb_insert)
-						*end_toke = *--end_toke;	// ripple up the linbuffer
-
 					*lb_insert++ = ch;
 				}
 			}
