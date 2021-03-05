@@ -35,7 +35,7 @@ void disp(char *str)
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
-	move(y, x);
+	// move(y, x);
 	refresh();
 	return;
 }
@@ -115,6 +115,7 @@ int main(int argc, char *argv[])
 					// // ripple_up(lb_insert, end_toke);
 
 					*lb_insert++ = ch;
+					
 					// wmove(mainwin, 10, 10);
 					// refresh();
 
