@@ -63,7 +63,7 @@ void ripple_up(char *lb_insert, char *end_toke)
 
 	while (push > lb_insert)
 	{
-		*push++ = *pull++;
+		*push-- = *pull--;
 	}
 
 	return;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 					*++end_toke = '\0';				// make room for the added character
 
 
-					// // ripple_up(lb_insert, end_toke);
+					ripple_up(lb_insert, end_toke);
 
 					*lb_insert++ = ch;
 
