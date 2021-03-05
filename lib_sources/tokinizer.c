@@ -231,13 +231,13 @@ _TOKEN * Tpop(_TOKEN *token)
 	if ((row = mysql_fetch_row(result)) == NULL)
 		return NULL;
 
-	cptr = row[1];
-	bptr = token->token;
-	while (*cptr != '\0')
-	{
-		*bptr++ = *cptr++;
-	}
-	bptr = '\0';
+	// cptr = row[1];
+	// bptr = token->token;
+	// while (*cptr != '\0')
+	// {
+	// 	*bptr++ = *cptr++;
+	// }
+	// bptr = '\0';
 
 	cpystr(token->token, row[1])
 
