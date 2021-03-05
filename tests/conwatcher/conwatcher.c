@@ -26,6 +26,7 @@ char 			linebuff[_INPUT_BUFFER_SIZE];
 char 			screenbuff[500];
 char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
+int 			x, y;
 
 void disp(char *str)
 {
@@ -34,6 +35,7 @@ void disp(char *str)
 	mvprintw(3, 0, screenbuff);
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
+	wmove(mainwin, y, x);
 	refresh();
 	return;
 }
@@ -72,7 +74,7 @@ int main(int argc, char *argv[])
 
 	char 		*ptr, *end_toke;
 	int		ch;
-	int 			x, y;
+
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
