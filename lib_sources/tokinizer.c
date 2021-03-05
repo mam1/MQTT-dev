@@ -96,6 +96,7 @@ _TOKEN * token_type(_TOKEN *token)
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
 		strcpy(token->type, "unrecognized");
+		token->value = -1;
 		return token;
 	}
 	strcpy(token->type, "keyword");
