@@ -159,7 +159,7 @@ int Tpush(char *token_buffer)
 		exit(1);
 	}
 
-	token_type(&token);			//set token type and value 
+	token_type(&token);			//set token type and value
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
@@ -229,7 +229,7 @@ _TOKEN * Tpop(_TOKEN *token)
 	result = mysql_store_result(conn);
 
 	if ((row = mysql_fetch_row(result)) == NULL)
-	 return NULL;
+		return NULL;
 
 	cptr = row[1];
 	bptr = token->token;
@@ -238,6 +238,11 @@ _TOKEN * Tpop(_TOKEN *token)
 		*bptr++ = *cptr++;
 	}
 	bptr = '\0';
+
+	cpystr(token->token, row[1])
+
+	token->value = (int) strtol(row[2], (char **)NULL, 10);
+
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
 	if (mysql_query(conn, buff))

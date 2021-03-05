@@ -49,6 +49,12 @@ CREATE TABLE TokenQ (
     PRIMARY KEY (tokenID)
 );
 
+CREATE TABLE commandQ (
+    commandID INTEGER NOT NULL AUTO_INCREMENT,
+    command varchar(100) NOT NULL,
+    PRIMARY KEY (commandID)
+);
+
 
 CREATE TABLE KeyWords (
     keywordID INTEGER NOT NULL AUTO_INCREMENT,
@@ -62,9 +68,22 @@ alter table KeyWords add UNIQUE(keyword);
 
 CREATE UNIQUE INDEX index_keywords ON KeyWords (keyword);
 
-INSERT INTO KeyWords (keyword,keycode) VALUES("edit", 100);
-INSERT INTO KeyWords (keyword,keycode) VALUES("channel", 200);
+INSERT INTO KeyWords (keyword,keycode) VALUES("edit", 1);
+
+INSERT INTO KeyWords (keyword,keycode) VALUES("channel", 2);
+INSERT INTO KeyWords (keyword,keycode) VALUES("channels", 2);
+INSERT INTO KeyWords (keyword,keycode) VALUES("chan", 2);
+
 INSERT INTO KeyWords (keyword,keycode) VALUES("schedule", 3);
-INSERT INTO KeyWords (keyword,keycode) VALUES("save", 1);
-INSERT INTO KeyWords (keyword,keycode) VALUES("quit", 22);
+INSERT INTO KeyWords (keyword,keycode) VALUES("sch", 3);
+
+INSERT INTO KeyWords (keyword,keycode) VALUES("save", 4);
+INSERT INTO KeyWords (keyword,keycode) VALUES("quit", 5);
+
+INSERT INTO KeyWords (keyword,keycode) VALUES("create", 6);
+
+INSERT INTO KeyWords (keyword,keycode) VALUES("delete", 8);
+
+INSERT INTO KeyWords (keyword,keycode) VALUES("display", 9);
+
 
