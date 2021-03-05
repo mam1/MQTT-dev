@@ -239,7 +239,7 @@ _TOKEN * Tpop(_TOKEN *token)
 	// }
 	// bptr = '\0';
 
-	strcpy(token->token, row[1])
+	strcpy(token->token, row[1]);
 
 	token->value = (int) strtol(row[2], (char **)NULL, 10);
 
