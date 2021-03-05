@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 					lb_insert++;
 					*lb_ptr = '\0';
 				}
-				
+
 				else 								// insert curser has been moved
 				{
 					getyx(mainwin, y, x);
@@ -113,6 +113,7 @@ int main(int argc, char *argv[])
 
 					// *lb_insert++ = ch;
 					move(y, x - 3);
+					refresh(mainwin);
 				}
 			}
 			else
