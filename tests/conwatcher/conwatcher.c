@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 					// refresh();
 
 					disp("inserting a character");
-					wmove(mainwin, 40, 10);
+					wmove(mainwin, y, x);
 				}
 			}
 			else
