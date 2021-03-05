@@ -234,7 +234,12 @@ int main(int argc, char *argv[])
 					strcat(screenbuff, toke.token);
 					strcat(screenbuff, ">,  type <");
 					strcat(screenbuff, toke.type);
-					strcat(screenbuff, ">\n");
+					strcat(screenbuff, ">, value <");
+					char  b[10];
+					sprintf(b, "%i", toke.value);
+					strcat(screenbuff, b);
+					strcat(screenbuff, "> \n");
+
 					memset(toke.token, '\0', sizeof(toke.token));
 					memset(toke.type, '\0', sizeof(toke.token));
 					toke.value = 0;
