@@ -72,6 +72,9 @@ _TOKEN * token_type(_TOKEN *token)
 		return token;
 	}
 
+	
+
+/***********************************?
 	/* test for a key word */
 
 	/* get connection handle  */
