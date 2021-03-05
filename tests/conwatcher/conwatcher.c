@@ -46,16 +46,12 @@ void reset_linebuffer(void)
 {
 
 	memset(linebuff, '\0', sizeof(linebuff));
-
-	// lb_in = linebuff;
-	// lb_out = linebuff;
 	lb_insert = linebuff;
 	lb_ptr = linebuff;
 	lb_end = linebuff + _INPUT_BUFFER_SIZE;
 
 	return;
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -64,7 +60,6 @@ int main(int argc, char *argv[])
 	char 		*ptr, *end_toke;
 	int		ch;
 	int 			x, y;
-	// static char keych[2] = {0};
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -73,16 +68,11 @@ int main(int argc, char *argv[])
 	}
 
 	noecho();
-	// cbreak();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
-	// timeout(0);
-	// nocbreak();
 	clear();
 	disp("conwatcher active");
 	reset_linebuffer();
-
-
 
 	while ((ch = getch()) != 'q')  // read the keyboard
 	{
@@ -90,6 +80,7 @@ int main(int argc, char *argv[])
 		{
 			if (lb_ptr <= lb_end - 1)		// room to add character ?
 			{
+				
 				if (lb_ptr == lb_insert)
 				{
 					*lb_ptr++ = ch;
@@ -100,16 +91,25 @@ int main(int argc, char *argv[])
 				{
 					end_toke = linebuff;
 					while (*end_toke != '\0') end_toke++;
-					*end_toke++ = '\0';
+					*++end_toke = '\0';
 					while (end_toke > lb_insert)
 						*end_toke = *--end_toke;
-					*lb_ptr = ch;
+
+					*lb_insert++ = ch;
 				}
 			}
+
+
+
+
 			else
 				disp("**** line buffer overflow ****");
 			disp("got a character ");
 		}
+
+
+
+
 		else
 
 			// { KEY_UP,        "Up arrow"        },
