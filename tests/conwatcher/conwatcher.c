@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 					while (*end_toke != '\0') end_toke++;
 					*++end_toke = '\0';				// make room for the added character
 
-					ripple_up(lb_insert, end_toke);
+					// ripple_up(lb_insert, end_toke);
 
 					*lb_insert++ = ch;
 				}
