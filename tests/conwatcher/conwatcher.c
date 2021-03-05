@@ -90,7 +90,8 @@ int main(int argc, char *argv[])
 	while ((ch = getch()) != 'q')
 	{
 		if ( isprint(ch) && !(ch & KEY_CODE_YES)) 	// if a printable character
-		{	if (lb_ptr <= lb_end - 1)				// room to add character ?
+		{
+			if (lb_ptr <= lb_end - 1)				// room to add character ?
 			{
 				if (lb_ptr == lb_insert)			// insert curser has not been moved
 				{
