@@ -116,9 +116,9 @@ int main(int argc, char *argv[])
 			else
 			{
 				disp("**** line buffer overflow ****");
-
-				disp("got a character ");
 			}
+
+			disp("got a character ");
 
 		}
 
