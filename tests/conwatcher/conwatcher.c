@@ -56,19 +56,33 @@ void ripple_up(char *lb_insert, char *end_toke)
 	char 			*pull;
 	char 			*push;
 
-
 	push = end_toke;
 	pull = end_toke;
 	pull--;
 
 	while (push > lb_insert)
-	{
 		*push-- = *pull--;
-	}
 
 	return;
 }
 
+void ripple_down(char *lb_insert, char *end_toke)
+{
+	char 			*pull;
+	char 			*push;
+
+	push = lb_insert;
+	pull = lb_insert;
+	pull++;
+
+	while (push > lb_insert)
+		*push++ = *pull++;
+	*pull = '\0';
+	lb_ptr--;
+	
+
+	return;
+}
 int main(int argc, char *argv[])
 {
 	char 		*ptr, *end_toke;
