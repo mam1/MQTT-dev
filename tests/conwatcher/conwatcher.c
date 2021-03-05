@@ -237,8 +237,8 @@ int main(int argc, char *argv[])
 					strcat(screenbuff, ">,  type <");
 					strcat(screenbuff, toke.type);
 					strcat(screenbuff, ">\n");
-					memset(token.token, '\0', sizeof(toke.token));
-					memset(token.type, '\0', sizeof(toke.token));
+					memset(toke.token, '\0', sizeof(toke.token));
+					memset(toke.type, '\0', sizeof(toke.token));
 					toke.value = 0;
 
 				}
