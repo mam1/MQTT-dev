@@ -120,7 +120,8 @@ int main(int argc, char *argv[])
 
 		}
 
-
+else 
+{
 // { KEY_UP,        "Up arrow"        },
 // { KEY_DOWN,      "Down arrow"      },
 // { KEY_LEFT,      "Left arrow"      },
