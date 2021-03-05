@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
 					*lb_ptr++ = ch;					// insert character into linbuffer
 					lb_insert++;
 					*lb_ptr = '\0';
+					disp("got a printable character ");
 				}
 
 				else 								// insert curser has been moved
@@ -123,7 +124,7 @@ int main(int argc, char *argv[])
 				disp("**** line buffer overflow ****");
 			}
 
-			disp("got a character ");
+			
 
 		}
 
