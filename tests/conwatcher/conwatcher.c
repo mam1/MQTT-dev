@@ -104,10 +104,12 @@ int main(int argc, char *argv[])
 					end_toke = linebuff;			// find the end of the entered data
 					while (*end_toke != '\0') end_toke++;
 					*++end_toke = '\0';				// make room for the added character
+					getyx(mainwin, y, x);
 
 					// ripple_up(lb_insert, end_toke);
 
 					*lb_insert++ = ch;
+					move(y, x + 1);
 				}
 			}
 			else
