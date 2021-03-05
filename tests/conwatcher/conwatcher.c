@@ -102,19 +102,20 @@ int main(int argc, char *argv[])
 
 				else 								// insert curser has been moved
 				{
-					getyx(mainwin, y, x);
+					// getyx(mainwin, y, x);
 
-					end_toke = linebuff;			// find the end of the entered data
-					while (*end_toke != '\0') end_toke++;
-					*++end_toke = '\0';				// make room for the added character
+					// end_toke = linebuff;			// find the end of the entered data
+					// while (*end_toke != '\0') end_toke++;
+					// *++end_toke = '\0';				// make room for the added character
 
 
-					// ripple_up(lb_insert, end_toke);
+					// // ripple_up(lb_insert, end_toke);
 
-					*lb_insert++ = ch;
-					wmove(mainwin, 10, 10);
-					disp("inserting a character ");
-					wmove(mainwin, 20, 20);
+					// *lb_insert++ = ch;
+					// wmove(mainwin, 10, 10);
+					// refresh();
+
+					disp("inserting a character");
 				}
 			}
 			else
@@ -122,7 +123,7 @@ int main(int argc, char *argv[])
 				disp("**** line buffer overflow ****");
 			}
 
-
+			disp("got a character ");
 
 		}
 
