@@ -205,7 +205,7 @@ _TOKEN * Tpop(_TOKEN *token)
 	MYSQL               *conn;
 	MYSQL_RES           *result;
 	MYSQL_ROW           row;
-	char 				*cptr, *bptr;
+	// char 				*cptr, *bptr;
 	char 				buff[_INPUT_BUFFER_SIZE];
 
 	/* get handles  */
@@ -231,19 +231,9 @@ _TOKEN * Tpop(_TOKEN *token)
 	if ((row = mysql_fetch_row(result)) == NULL)
 		return NULL;
 
-	// cptr = row[1];
-	// bptr = token->token;
-	// while (*cptr != '\0')
-	// {
-	// 	*bptr++ = *cptr++;
-	// }
-	// bptr = '\0';
-
 	strcpy(token->token, row[1]);
 	strcpy(token->type, row[2]);
-
 	token->value = (int) strtol(row[3], (char **)NULL, 10);
-
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
 	if (mysql_query(conn, buff))
@@ -269,14 +259,11 @@ int reset_tokenQ(void)
 
 int tokenizer(char *lbuf)
 {
-
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
-
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-
 	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
 
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
