@@ -90,7 +90,7 @@ void logit(char *mess){
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(dlog,"%s - %s\n", mess);
+	fprintf(dlog,"%s - %s\n", time_now, mess);
 	fclose(dlog);
 	return;
 }
