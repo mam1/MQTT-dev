@@ -181,7 +181,7 @@ int main(void) {
 	pid_t 		pid, sid;		// process ID and Session ID
 	int 		toggle;
 	int 		h_min;
-	_tm 		t;
+	// _tm 		t;
 	int 		ipc;
 	FILE 		*pidf;
 	char 		command[120];
