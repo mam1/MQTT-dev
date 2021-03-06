@@ -31,6 +31,15 @@
 // #include "bbb.h"
 
 
+#include "/usr/include/mariadb/mysql.h"
+
+#define SERVER      "localhost"
+#define SOCKETT     "/run/mysqld/mysqld.sock"
+#define DATABASE    "tokenTest"
+#define USER        "test-sql"
+#define PSWD        "test-sql"
+
+
 /********** globals *******************************************************************/
 // _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
 // char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
@@ -60,10 +69,15 @@
 
 /* write an entry to the daemon log file */
 void logit(char *mess){
-	FILE 		*dlog;
-	_tm 		tm;
+	FILE 				*dlog;
+	_tm 				tm;
+	char 				* time_now;
+	time_t 				t;
 
-	get_tm(&tm); 		// load my time date structure from system clock
+	t=time(NULL);
+	time_now = ctime(&t);
+
+	// get_tm(&tm); 		// load my time date structure from system clock
 
 	/* Open log file */
 	dlog = fopen(_DAEMON_LOG, "a");
@@ -71,7 +85,7 @@ void logit(char *mess){
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(dlog,"%02i:%02i:%02i  %02i/%02i/%02i  %s\n",tm.tm_hour,tm.tm_min,tm.tm_sec,tm.tm_mon,tm.tm_mday,tm.tm_year, mess);
+	fprintf(dlog,"%02i:%02i:%02i  %02i/%02i/%02i  %s\n",t.tm_hour,t.tm_min,t.tm_sec,t.tm_mon,t.tm_mday,t.tm_year, mess);
 	fclose(dlog);
 	return;
 }
