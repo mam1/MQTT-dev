@@ -70,7 +70,7 @@
 /* write an entry to the daemon log file */
 void logit(char *mess){
 	FILE 				*dlog;
-	_tm 				tm;
+	// _tm 				tm;
 	char 				* time_now;
 	time_t 				t;
 
@@ -85,7 +85,7 @@ void logit(char *mess){
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(dlog,"%02i:%02i:%02i  %02i/%02i/%02i  %s\n",t.tm_hour,t.tm_min,t.tm_sec,t.tm_mon,t.tm_mday,t.tm_year, mess);
+	fprintf(dlog,"%s - %s\n", mess);
 	fclose(dlog);
 	return;
 }
@@ -226,7 +226,7 @@ int main(void) {
 	close(STDERR_FILENO);
 
 	/* Daemon-specific initializations */
-	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n",_MAJOR_VERSION_Dcon, _MINOR_VERSION_Dcon, _MINOR_REVISION_Dcon);
+	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n",0, 0, 0);
 	logit(command);
 	logit("starting initializations"); 
 
@@ -282,24 +282,20 @@ int main(void) {
 	/* The Big Loop */
 	logit("initialization complete");
 	logit("starting main loop");
-	while (1) {
-		get_tm(&t);
-		if (ipc_ptr->force_update == 1) {
-			ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
-			ipc_ptr->force_update = 0;
-			ipc_sem_free(semid, &sb);                   // free lock on shared memory
-			logit("update forced");
-			update_relays(&t, ipc_ptr);
-			continue;
-		}
-		else {
-			if (h_min != t.tm_min) {	// see if we are on a new minute
-				h_min = t.tm_min;
-				logit("update triggered by time");
-				update_relays(&t, ipc_ptr);
-				continue;
-			}
-		}
+	while (1) 
+	{
+		// get_tm(&t);
+
+		// 	continue;
+		// }
+		// else {
+		// 	if (h_min != t.tm_min) {	// see if we are on a new minute
+		// 		h_min = t.tm_min;
+		// 		logit("update triggered by time");
+		// 		// update_relays(&t, ipc_ptr);
+		// 		continue;
+		// 	}
+		// }
 		// if (toggle) {					// cycle heart beat led
 		// 	toggle = 0;
 		// 	sprintf(command, "echo 1 > /sys/class/gpio/gpio%i/value", heart[0].gpio);
@@ -322,7 +318,8 @@ int main(void) {
 		// 	sprintf(command, "echo 1 > /sys/class/gpio/gpio%i/value", heart[3].gpio);
 		// 	system(command);;
 		// }
-		// usleep(30000);
+		logit("looping");
+		usleep(30000);
 	}
 	exit(EXIT_SUCCESS);
 }
