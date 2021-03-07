@@ -5,12 +5,14 @@
 #
 #####################################
 
-echo	"checking for active processes"
+echo -e	"checking for active processes\n"
 plist=$(pidof /usr/local/sbin/cp_daemon)
 if [ "$plist" != "" ] 
 	then
 		echo "cp_daemon running"
 		echo $plist
+	else
+		echo "cp_daemon no running"
 fi
 
 exit 0
