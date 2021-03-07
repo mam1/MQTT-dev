@@ -1,18 +1,36 @@
 #!/bin/bash
 #####################################
 # 
-#	 cp_deamon  status
+#	 cp_daemon  status
 #
 #####################################
 
-echo -e	"checking for active processes\n"
+echo "checking for active processes"
+
 plist=$(pidof /usr/local/sbin/cp_daemon)
+# echo $plist
 if [ "$plist" != "" ] 
 	then
-		echo "cp_daemon running"
-		echo $plist
-	else
-		echo "cp_daemon no running"
-fi
+		hlist="there is an instance of cp_daemon active pid " 
+		hlist=$hlist$plist
+		echo $hlist
+		echo -n "  should it be killed? {y}{n} > "
+		read answr
 
-exit 0
+		# echo $answr
+
+		if [ "$answr" == "y" ] 
+			then
+				echo -n "killing process "
+				echo $plist
+				kill $plist
+		fi
+	else
+		echo -n "  there are no instances of cp_daemon active should one be started? {y}{n} > "
+		read answr
+		if [ "$answr" == "y" ]
+			then
+				echo "starting daemon"
+				cp_daemon > /home/mam1/Git/MQTT-dev/logs/cp_daemon.log &
+		fi
+fi
