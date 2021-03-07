@@ -26,5 +26,5 @@ export project_LIB := MQTT mariadbclient
 
 
 program_DIRECTORY := ~/Git/MQTT-dev/tests/daemon
-program_NAME := daemon
+program_NAME := cp_daemon
 include $(project_DIRECTORY)/mastermake/Makefile
