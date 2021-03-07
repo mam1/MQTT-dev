@@ -23,7 +23,14 @@
 WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
+
+
 char 			screenbuff[500];
+char 			screenbuff[500];
+char 			screenbuff[500];
+
+
+
 char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
 int 			x, y;
@@ -32,7 +39,10 @@ void disp(char *str)
 {
 	clear();
 	mvprintw(1, 0, str);
+
+	
 	mvprintw(3, 0, screenbuff);
+
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
 	if (lb_ptr != lb_insert)			// insert curser has not been moved
@@ -204,19 +214,16 @@ int main(int argc, char *argv[])
 					while (*end_toke != '\0') end_toke++;
 					if (lb_insert > linebuff)
 					{
-
 						lb_insert--;
 						ripple_down(lb_insert, end_toke);
 						disp("deleting a character");
 						x--;
 						wmove(mainwin, y, x);
 					}
-
 				}
-
 				break;
 
-		/* CR */	case 0xa:
+		case 0xa:		/* CR */	
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
 				tokenizer(linebuff);

@@ -111,8 +111,8 @@ int main(void) {
 	if (pid > 0) {
 		/* create pid file */
 		pidf = fopen(_PID_FILE_NAME, "w");
-		if (pidf != NULL){
-			
+		if (pidf != NULL)
+		{
 			fprintf(pidf,"%i", pid);
 			fclose(pidf);
 		}

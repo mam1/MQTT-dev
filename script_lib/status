@@ -8,7 +8,7 @@ echo "****************************************"
 echo "        MQTT-dev system status"
 echo "****************************************"
 
-echo "terminal io reinitialized"
+echo -e "\nterminal io reinitialized"
 
 
 echo -e "\nchecking for instances of cp_daemon"
