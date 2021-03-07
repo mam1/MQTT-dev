@@ -7,7 +7,7 @@
 
 echo "checking for active processes"
 
-plist=$(pidof /usr/local/sbin/cp_daemon)
+plist=$(pidof ~/Git/MQTT-dev/bin/cp_daemon)
 # echo $plist
 if [ "$plist" != "" ] 
 	then
