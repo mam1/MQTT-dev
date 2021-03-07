@@ -68,11 +68,15 @@
 /* write an entry to the daemon log file */
 void logit(char *mess){
 	FILE 				*dlog;
-	char 				* time_now;
+	char 				* time_now, *tnptr;
 	time_t 				t;
 
 	t=time(NULL);
 	time_now = ctime(&t);
+	tnptr = time_now;
+	while (*tnptr != _CR) tnptr++;
+	*tnptr = '\0';
+
 
 	/* Open log file */
 	dlog = fopen(_DAEMON_LOG, "a");
