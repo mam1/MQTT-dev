@@ -1,25 +1,25 @@
 #!/bin/bash
 # MQTT-dev system status
-
-
 echo -e \\033c		# clear the terminal screen
 stty cooked			# switch to buffered iput
 stty echo			# turn on terminal echo
-echo "terminal io reinitialized"
 
 echo "****************************************"
 echo "        MQTT-dev system status"
 echo "****************************************"
+
+echo "terminal io reinitialized"
+
 
 echo "checking for instances of cp_daemon"
 plist=$(pidof ~/Git/MQTT-dev/bin/cp_daemon)
 # echo $plist
 if [ "$plist" != "" ] 
 	then
-		hlist="there is an instance of cp_daemon active pid " 
+		hlist="\nthere is an instance of cp_daemon active pid " 
 		hlist=$hlist$plist
 		echo $hlist
-		echo -n "  should it be killed? {y}{n} > "
+		echo -n "	should it be killed? {y}{n} > "
 		read answr
 
 		# echo $answr
@@ -48,7 +48,7 @@ if [ "$plist" != "" ]
 		hlist="there is an instance of conwatcher active pid " 
 		hlist=$hlist$plist
 		echo $hlist
-		echo -n "  should it be killed? {y}{n} > "
+		echo -n "	should it be killed? {y}{n} > "
 		read answr
 
 		# echo $answr
@@ -69,88 +69,6 @@ if [ "$plist" != "" ]
 		fi
 fi
 
-# echo "searching /usr/local/sbin for Scon"
-# if [ ! -f /usr/local/sbin/Scon ]; 
-# 	then
-#     	echo "CGI binary (Scon) not active"
-#     	echo -n "  should it be enabled? {y}{n} > "
-# 		read answr
-# 		if [ "$answr" == "y" ] 
-# 			then
-# 				mv /usr/local/sbin/Scon.hold  /usr/local/sbin/Scon
-# 				echo "CGI enabled" 
-# 		fi
-#     else
-#     	echo "CGI binary (Scon) active"
-#     	echo -n "  should it be disabled? {y}{n} > "
-# 		read answr
-# 		if [ "$answr" == "y" ] 
-# 			then
-# 				mv /usr/local/sbin/Scon  /usr/local/sbin/Scon.hold
-# 				echo "CGI disabled"
-# 		fi
-# fi
 
-# echo "checking for active processes"
 
-# plist=$(pidof /usr/local/sbin/Dcon)
-# # echo $plist
-# if [ "$plist" != "" ] 
-# 	then
-# 		hlist="there is an instance of Dcon active pid " 
-# 		hlist=$hlist$plist
-# 		echo $hlist
-# 		echo -n "  should it be killed? {y}{n} > "
-# 		read answr
-
-# 		# echo $answr
-
-# 		if [ "$answr" == "y" ] 
-# 			then
-# 				echo -n "killing process "
-# 				echo $plist
-# 				kill $plist
-# 		fi
-# 	else
-# 		echo -n "  there are no instances of Dcon active should one be started? {y}{n} > "
-# 		read answr
-# 		if [ "$answr" == "y" ]
-# 			then
-# 				echo "starting daemon"
-# 				Dcon > /home/Pcon-data/Dcon.log &
-# 		fi
-# fi
-
-# # check for intances of Pcon
-
-# plist=$(pidof /usr/local/sbin/Pcon)
-
-# if [ "$plist" != "" ] 
-# 	then
-# 		hlist="there is an instance of Pcon active pid " 
-# 		hlist=$hlist$plist
-# 		echo $hlist
-# 		echo -n "should it be killed? {y}{n} > "
-# 		read answr
-
-# 		# echo $answr
-
-# 		if [ "$answr" == "y" ] 
-# 			then
-# 				echo -n "killing process "
-# 				echo $plist
-# 				kill $plist
-# 		fi
-
-# 	else
-# 		echo -n "  there are no instances of Pcon active should one be started? {y}{n} > "
-# 		read answr
-# 		if [ "$answr" == "y" ]
-# 			then
-# 				echo -e \\033c		# clear the terminal screen
-# 				echo "starting Pcon"
-# 				Pcon
-# 		fi
-# fi
-
-# exit 0
+exit 0
