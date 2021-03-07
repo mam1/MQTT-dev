@@ -9,8 +9,8 @@ echo	"checking for active processes"
 plist=$(pidof /usr/local/sbin/cp_daemon)
 if [ "$plist" != "" ] 
 	then
-		echo "cp_deamon running\n"
-		echo "$plist\n"
+		echo "cp_deamon running"
+		echo $(plist)
 fi
 
 exit 0
