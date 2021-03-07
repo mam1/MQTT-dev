@@ -11,12 +11,12 @@ echo "****************************************"
 echo "terminal io reinitialized"
 
 
-echo "checking for instances of cp_daemon"
+echo -e "\nchecking for instances of cp_daemon"
 plist=$(pidof ~/Git/MQTT-dev/bin/cp_daemon)
 # echo $plist
 if [ "$plist" != "" ] 
 	then
-		hlist="\nthere is an instance of cp_daemon active pid " 
+		hlist="there is an instance of cp_daemon active pid " 
 		hlist=$hlist$plist
 		echo -e $hlist
 		echo -n "	should it be killed? {y}{n} > "
@@ -40,7 +40,7 @@ if [ "$plist" != "" ]
 		fi
 fi
 
-echo "checking for instances of conwatcher"
+echo -e "\nchecking for instances of conwatcher"
 plist=$(pidof ~/Git/MQTT-dev/bin/conwatcher)
 # echo $plist
 if [ "$plist" != "" ] 
