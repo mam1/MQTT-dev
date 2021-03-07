@@ -152,6 +152,7 @@ void logit(char *mess){
 // 			// logit(command);
 // 			system(command);
 // 		}
+
 // 		else {
 // 			sprintf(command, "echo 0 > /sys/class/gpio/gpio%i/value", chan[channel].gpio);
 // 			// logit(command);
@@ -162,6 +163,10 @@ void logit(char *mess){
 // 	logit("end pin update");
 // 	return;
 // }
+
+
+
+
 
 // /* export gpio pin */
 // int init_gpio(int gpio)
