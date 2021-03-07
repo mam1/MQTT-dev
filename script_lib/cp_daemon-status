@@ -1,0 +1,15 @@
+#!/bin/bash
+#####################################
+# 
+#	 cp_deamon  status
+#
+#####################################
+
+#	checking for active processes - kill if found
+plist=$(pidof /usr/local/sbin/cp_daemon)
+if [ "$plist" != "" ] 
+	then
+		echo "cp_deamon running\n"
+fi
+
+exit 0
