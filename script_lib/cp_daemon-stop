@@ -1,0 +1,15 @@
+#!/bin/bash
+#####################################
+# 
+#		stop cp_deamon
+#
+#####################################
+
+#	checking for active processes - kill if found
+plist=$(pidof /usr/local/sbin/cp_daemon)
+if [ "$plist" != "" ] 
+	then
+		kill $plist
+fi
+
+exit 0
