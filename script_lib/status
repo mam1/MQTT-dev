@@ -18,7 +18,7 @@ if [ "$plist" != "" ]
 	then
 		hlist="\nthere is an instance of cp_daemon active pid " 
 		hlist=$hlist$plist
-		echo $hlist
+		echo -e $hlist
 		echo -n "	should it be killed? {y}{n} > "
 		read answr
 
