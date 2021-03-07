@@ -324,7 +324,7 @@ int main(void) {
 		// 	system(command);;
 		// }
 		logit("looping");
-		usleep(30000);
+		usleep(3000000);
 	}
 	exit(EXIT_SUCCESS);
 }
