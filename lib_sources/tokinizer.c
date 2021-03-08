@@ -26,6 +26,10 @@
 
 // struct sembuf sb = {0, -1, 0};   set to allocate resource 
 
+extern int              semid;
+extern unsigned short   semval;
+extern struct sembuf    sb;
+
 /********** globals *******************************************************************/
 _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
 char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
@@ -42,7 +46,7 @@ union semun {
 	ushort *array;        						// used for GETALL and SETALL
 };
 union 			semun dummy;
-struct sembuf sb[] = {0, -1, 0};  /* set to allocate resource */
+// struct sembuf sb[] = {0, -1, 0};  /* set to allocate resource */
 
 static void show_mysql_error(MYSQL *mysql)
 {
