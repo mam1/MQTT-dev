@@ -6,7 +6,7 @@
 #include <sys/sem.h>
 #include <sys/ipc.h>
 #include <sys/types.h>
-#include <sys/stat.h> 
+#include <sys/stat.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -58,18 +58,18 @@ union semun {
 	ushort *array;        						// used for GETALL and SETALL
 };
 union 			semun dummy;
-SEMBUF sb = {0, -1, 0};  						// set to allocate resource 
+SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
 /********** support functions *******************************************************************/
 
 /* write an entry to the daemon log file */
-void logit(char *mess){
+void logit(char *mess) {
 	FILE 				*dlog;
 	char 				* time_now, *tnptr;
 	time_t 				t;
 
-	t=time(NULL);
+	t = time(NULL);
 	time_now = ctime(&t);
 	tnptr = time_now;
 	while (*tnptr != _CR) tnptr++;
@@ -82,14 +82,14 @@ void logit(char *mess){
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(dlog,"%s - %s\n", time_now, mess);
+	fprintf(dlog, "%s - %s\n", time_now, mess);
 	fclose(dlog);
 	return;
 }
 
 
 int main(void) {
-	
+
 	pid_t 		pid, sid;		// process ID and Session ID
 	int 		toggle;
 	int 		h_min;
@@ -98,6 +98,7 @@ int main(void) {
 	FILE 		*pidf;
 	char 		command[120];
 	int 		i;
+char 			linebuff[_INPUT_BUFFER_SIZE];
 
 	/* Fork off the parent process */
 	pid = fork();
@@ -111,10 +112,10 @@ int main(void) {
 		pidf = fopen(_PID_FILE_NAME, "w");
 		if (pidf != NULL)
 		{
-			fprintf(pidf,"%i", pid);
+			fprintf(pidf, "%i", pid);
 			fclose(pidf);
 		}
-		else{
+		else {
 			printf(" can't write pid file <%s>\n", _PID_FILE_NAME);
 			exit(EXIT_FAILURE);
 		}
@@ -143,10 +144,10 @@ int main(void) {
 	close(STDERR_FILENO);
 
 	/* Daemon-specific initializations */
-	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n",0, 0, 0);
+	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n", 0, 0, 0);
 	logit(command);
-	logit("starting initializations"); 
-	
+	logit("starting initializations");
+
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
 		ipc = 1;
@@ -156,7 +157,7 @@ int main(void) {
 		ipc = 0;
 		logit("* ipc file not found");
 	}
- 
+
 	/* setup shared memory */
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
@@ -164,14 +165,17 @@ int main(void) {
 	fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
 	data = ipc_map(fd, ipc_size());           	// map file to memory
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
-    ipc_sem_free(semid, &sb);                   // free lock on shared memory
+	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	/* The Big Loop */
 	logit("initialization complete");
 	logit("starting main loop");
-	while (1) 
+	int ii = 0;
+	while (1)
 	{
-
+		ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
+		stccpy(data.linebuff, "hi from the daemon");
+		ipc_sem_free(semid, &sb);                   // free lock on shared memory
 		logit("looping");
 		usleep(3000000);
 	}
