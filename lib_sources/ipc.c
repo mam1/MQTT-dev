@@ -224,7 +224,7 @@ int ipc_sem_lock(int semid, struct sembuf *sb){
 	sb->sem_num = 0;        	// semaphore number 
     sb->sem_op = -1;         	// semaphore operation 
     sb->sem_flg = 0;        	// operation flags 
-	if (semop(semid, sb, 1) == -1) {
+	if (semop(semid, &sb, 1) == -1) {
 		perror("semop");
 		exit(1);
 	}
@@ -240,7 +240,7 @@ int ipc_sem_free(int semid, struct sembuf *sb){
 
 	sb->sem_op = 1; /* free resource */
 	
-	if (semop(semid, sb, 1) == -1) {
+	if (semop(semid, &sb, 1) == -1) {
 		perror("semop");
 		exit(1);
 	}
