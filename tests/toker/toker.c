@@ -31,7 +31,7 @@
 
 extern int              semid;
 extern unsigned short   semval;
-extern struct sembuf    sb;
+// extern struct sembuf    sb;
 
 /********** globals *******************************************************************/
 _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
@@ -42,6 +42,9 @@ key_t 			skey = _SEM_KEY;
 // int 			semid;
 
 /* global memory mapped io variables */
+_SEMBUF sb = {0, -1, 0};  						// set to allocate resource
+
+
 // unsigned short 	semval;
 union semun {
 	int val;              						// used for SETVAL only
