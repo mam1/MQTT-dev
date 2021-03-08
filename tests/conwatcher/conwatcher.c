@@ -40,7 +40,7 @@ void disp(char *str)
 	clear();
 	mvprintw(1, 0, str);
 
-	
+
 	mvprintw(3, 0, screenbuff);
 
 	mvprintw(30, 0, "enter a command > ");
@@ -105,10 +105,11 @@ void add_comm(char *cmd)
 
 int main(int argc, char *argv[])
 {
-	char 			*end_toke;
-	int				ch;
-	_TOKEN 			toke;
-
+	char 					*end_toke;
+	int						ch;
+	_TOKEN 					toke;
+	int 					tpid;
+	char 					*args[];
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
 		fprintf(stderr, "Error initialising ncurses.\n");
@@ -223,10 +224,33 @@ int main(int argc, char *argv[])
 				}
 				break;
 
-		case 0xa:		/* CR */	
+			case 0xa:		/* CR */
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
-				tokenizer(linebuff);
+
+//*************************************************
+
+				args[0] = "/usr/bin/mybins/tonenizer";
+				args[1] = linebuffer;
+				args[2] = '\0';
+
+
+				tpid = vfork();
+				if (tpid == 0) execv("/usr/bin/mybins/tonenizer", args);
+
+				if (tpid < 0)
+				{
+					/*fork creation faile*/
+					printf("fork creation failed!!!\n");
+					eixt (0);
+				}
+
+
+//****************************************
+
+
+
+				// tokenizer(linebuff);
 				disp ("linebuffer set to tokenizer to be processed");
 				add_comm(linebuff);
 				reset_linebuffer();
