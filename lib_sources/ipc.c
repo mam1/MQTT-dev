@@ -146,56 +146,56 @@ int ipc_size(void) {
 
 int ipc_save(_IPC_DAT *ipc_ptr) {
 
-    FILE        *ipc_bkup;
-    // int 		write_rtn;
+    // FILE        *ipc_bkup;
+    // // int 		write_rtn;
 
-    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"w");
+    // ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"w");
 
-    if(ipc_bkup == NULL){                     // file not found
-    	perror(_IPC_FILE_BACKUP_NAME);
-        return 1;
-    }
+    // if(ipc_bkup == NULL){                     // file not found
+    // 	// perror(_IPC_FILE_BACKUP_NAME);
+    //     return 1;
+    // }
 
-    ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
+    // ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
 
-    if(fwrite(ipc_ptr, 1, sizeof(*ipc_ptr), ipc_bkup) != sizeof(*ipc_ptr)){
-        printf("\n*** error saving ipc backup data file\r\n");
-        // perror(_IPC_FILE_BACKUP_NAME);
-        ipc_sem_free(semid, &sb);                   // free lock on shared memory
-        fclose(ipc_bkup);
+    // if(fwrite(ipc_ptr, 1, sizeof(*ipc_ptr), ipc_bkup) != sizeof(*ipc_ptr)){
+    //     printf("\n*** error saving ipc backup data file\r\n");
+    //     // perror(_IPC_FILE_BACKUP_NAME);
+    //     ipc_sem_free(semid, &sb);                   // free lock on shared memory
+    //     fclose(ipc_bkup);
 
-        return 1;
-    }
-    else
-    	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+    //     return 1;
+    // }
+    // else
+    // 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
-    fclose(ipc_bkup);
-    return 0;
+    // fclose(ipc_bkup);
+    // return 0;
 }
 
 /* load shared memory from backup */
 int ipc_load(_IPC_DAT *ipc_ptr) {
 
-    int         rtn;
-    FILE        *ipc_bkup;
+    // int         rtn;
+    // FILE        *ipc_bkup;
  
-    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"r+");
-    if(ipc_bkup == NULL){                      // file not found
-        return 1;
-    }
-    ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
-    rtn = fread(ipc_ptr, sizeof(*ipc_ptr), 1, ipc_bkup);
-    if(rtn != 1){
-        printf("\n*** error reading ipc backup data\n  fread returned %i\r\n",rtn);
-        // perror(_TRACE_FILE_NAME);
-        ipc_sem_free(semid, &sb);                   // free lock on shared memory
-        return 1;
-    }
-    else
-    	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+    // ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"r+");
+    // if(ipc_bkup == NULL){                      // file not found
+    //     return 1;
+    // }
+    // ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
+    // rtn = fread(ipc_ptr, sizeof(*ipc_ptr), 1, ipc_bkup);
+    // if(rtn != 1){
+    //     printf("\n*** error reading ipc backup data\n  fread returned %i\r\n",rtn);
+    //     // perror(_TRACE_FILE_NAME);
+    //     ipc_sem_free(semid, &sb);                   // free lock on shared memory
+    //     return 1;
+    // }
+    // else
+    // 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 
-    return 0;
+    // return 0;
 }
 
 int ipc_sem_init(void)
