@@ -5,7 +5,7 @@
 
 
 /* buffer for semaphores */
-typedef struct sembuf SEMBUF;
+typedef struct sembuf _SEMBUF;
 
 // /* system configuration data */
 // typedef struct {

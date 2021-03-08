@@ -59,7 +59,7 @@ union semun {
 	ushort *array;        						// used for GETALL and SETALL
 };
 union 			semun dummy;
-SEMBUF sb = {0, -1, 0};  						// set to allocate resource
+_SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
 /********** support functions *******************************************************************/
