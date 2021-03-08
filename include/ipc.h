@@ -14,8 +14,8 @@
  void 	ipc_close(int, void *, int);
  int 	ipc_size(void);
  int 	ipc_sem_init(void);
- int 	ipc_sem_lock(int semid, _SEMBUF *sb);
- int 	ipc_sem_free(int semid, _SEMBUF *sb);
+ int 	ipc_sem_lock(int semid, _SEMBUF &sb);
+ int 	ipc_sem_free(int semid, _SEMBUF &sb);
  int 	ipc_sem_id(int skey);
  int 	ipc_save(_IPC_DAT *ipc_ptr);
  int 	ipc_load(_IPC_DAT *ipc_ptr);
