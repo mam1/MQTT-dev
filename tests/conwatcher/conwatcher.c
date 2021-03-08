@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
 
 
 				tpid = vfork();
-				if (tpid == 0) execl("/usr/bin/mybins/tonenizer", "/usr/bin/mybins/tonenizer", (char *) 0);
+				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
 				if (tpid < 0)
 				{
