@@ -27,7 +27,7 @@
 #define MINUTES_PER_HOUR 		60
 #define MINUTES_PER_DAY 		1440
 
-// struct sembuf sb = {0, -1, 0};   set to allocate resource 
+// struct sembuf sb = {0, -1, 0};   set to allocate resource
 
 extern int              semid;
 extern unsigned short   semval;
@@ -42,8 +42,7 @@ key_t 			skey = _SEM_KEY;
 // int 			semid;
 
 /* global memory mapped io variables */
-_SEMBUF sb = {0, -1, 0};  						// set to allocate resource
-
+_SEMBUF 		sb; 						// set to allocate resource
 
 // unsigned short 	semval;
 union semun {
@@ -58,11 +57,14 @@ union 			semun dummy;
 int main(void)
 {
 
-	char lbuf[]={"this is a test"};
+	char lbuf[] = {"this is a test"};
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
 	/* setup shared memory */
+	sb.sem_num = 0; // semaphore #: 0 = first
+	sb.sem_op = -1; // semaphore operation
+	sb.sem_flg = 0; // operation flags
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
 	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
