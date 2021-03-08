@@ -160,7 +160,7 @@ int ipc_save(_IPC_DAT *ipc_ptr) {
 
     if(fwrite(ipc_ptr, 1, sizeof(*ipc_ptr), ipc_bkup) != sizeof(*ipc_ptr)){
         printf("\n*** error saving ipc backup data file\r\n");
-        perror(_IPC_FILE_BACKUP_NAME);
+        // perror(_IPC_FILE_BACKUP_NAME);
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
         fclose(ipc_bkup);
 
@@ -169,9 +169,6 @@ int ipc_save(_IPC_DAT *ipc_ptr) {
     else
     	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
-    #if defined (_ATRACE) || defined (_PTRACE)
-    trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "ipc data written to backup file\n", 0);
-    #endif
     fclose(ipc_bkup);
     return 0;
 }
@@ -190,16 +187,13 @@ int ipc_load(_IPC_DAT *ipc_ptr) {
     rtn = fread(ipc_ptr, sizeof(*ipc_ptr), 1, ipc_bkup);
     if(rtn != 1){
         printf("\n*** error reading ipc backup data\n  fread returned %i\r\n",rtn);
-        perror(_TRACE_FILE_NAME);
+        // perror(_TRACE_FILE_NAME);
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
         return 1;
     }
     else
     	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
-    #if defined (_ATRACE) || defined (_PTRACE)
-    trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "backup ipc file written to shared memory\n", 0);
-    #endif
 
     return 0;
 }
