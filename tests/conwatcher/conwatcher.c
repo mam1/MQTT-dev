@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
 	int						ch;
 	_TOKEN 					toke;
 	int 					tpid;
-	char 					*args[];
+	// char 					*args[];
 
 	/* setup shared memory */
 	ipc_sem_init();
