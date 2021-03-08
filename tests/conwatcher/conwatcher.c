@@ -5,23 +5,22 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <curses.h>
+
+/* local includes */
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
-// #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
+#include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
 
-
+/* database connection */
 #include "/usr/include/mariadb/mysql.h"
-
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
 #define DATABASE    "tokenTest"
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-extern int              semid;
-extern unsigned short   semval;
-extern struct sembuf    sb;
+
 
 /********** globals *******************************************************************/
 _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
@@ -29,10 +28,12 @@ char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
 void           	*data;                      	// pointer to ipc data
 int            	fd;                        		// file descriptor for ipc data file
 key_t 			skey = _SEM_KEY;
-int 			semid;
 
 /* global memory mapped io variables */
-unsigned short 	semval;
+extern int              semid;
+extern unsigned short   semval;
+extern struct sembuf    sb;
+
 union semun {
 	int val;              						// used for SETVAL only
 	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET

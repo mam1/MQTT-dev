@@ -1,7 +1,3 @@
-/********************************************************************/
-/*	Dcon.c - daemon updates the channel relays once a minute unless */
-/*	the user requests an immediate update							*/
-/********************************************************************/
 
 #include <sys/sem.h>
 #include <sys/ipc.h>
@@ -19,23 +15,14 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <time.h>
-// #include "Pcon.h"
-// #include "Dcon.h"
-// #include "ipc.h"
-// #include "bitlit.h"
-// #include "PCF8563.h"
-// #include "sch.h"
-// #include "trace.h"
-// #include "typedefs.h"
-// #include "sys_dat.h"
-// #include "bbb.h"
 
-// #include "/usr/include/mariadb/mysql.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
-// #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
 
+
+/* database connection */
+#include "/usr/include/mariadb/mysql.h"
 #define SERVER      "localhost"
 #define SOCKETT     "/run/mysqld/mysqld.sock"
 #define DATABASE    "tokenTest"
