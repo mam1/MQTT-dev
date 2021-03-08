@@ -170,7 +170,7 @@ int ipc_save(_IPC_DAT *ipc_ptr) {
     // 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
     // fclose(ipc_bkup);
-    // return 0;
+    return 0;
 }
 
 /* load shared memory from backup */
@@ -195,7 +195,7 @@ int ipc_load(_IPC_DAT *ipc_ptr) {
     // 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 
-    // return 0;
+    return 0;
 }
 
 int ipc_sem_init(void)

@@ -24,7 +24,7 @@
 #define MINUTES_PER_HOUR 		60
 #define MINUTES_PER_DAY 		1440
 
-struct sembuf sb = {0, -1, 0};  /* set to allocate resource */
+// struct sembuf sb = {0, -1, 0};   set to allocate resource 
 
 /********** globals *******************************************************************/
 _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
