@@ -299,15 +299,15 @@ int main(int argc, char *argv[])
 				{
 					perror("semop p"); exit(14);
 				}
-				// tpid = vfork();
-				// if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
+				tpid = vfork();
+				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
-				// if (tpid < 0)
-				// {
-				// 	/*fork creation faile*/
-				// 	printf("fork creation failed!!!\n");
-				// 	exit (1);
-				// }
+				if (tpid < 0)
+				{
+					/*fork creation faile*/
+					printf("fork creation failed!!!\n");
+					exit (1);
+				}
 
 
 //****************************************

@@ -120,6 +120,7 @@ int main(void)
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
+	printf("hi from toker\n");
 	/* setup semaphores */
 	int id = semget(KEY, 1, 0666 | IPC_CREAT);
 	if (id < 0)
