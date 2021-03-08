@@ -59,12 +59,9 @@ WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 
-
 char 			screenbuff[500];
-char 			screenbuff[500];
-char 			screenbuff[500];
-
-
+// char 			screenbuff[500];
+// char 			screenbuff[500];
 
 char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
@@ -74,10 +71,7 @@ void disp(char *str)
 {
 	clear();
 	mvprintw(1, 0, str);
-
-
 	mvprintw(3, 0, screenbuff);
-
 	mvprintw(30, 0, "enter a command > ");
 	mvprintw(30, 17, linebuff);
 	if (lb_ptr != lb_insert)			// insert curser has not been moved
@@ -126,17 +120,13 @@ void ripple_down(char *lb_insert, char *end_toke)
 	lb_insert--;
 	lb_ptr--;
 
-
 	return;
 }
 
 void add_comm(char *cmd)
 {
-
 	return;
 }
-
-
 
 int main(int argc, char *argv[])
 {

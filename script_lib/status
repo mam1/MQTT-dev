@@ -69,6 +69,34 @@ if [ "$plist" != "" ]
 		fi
 fi
 
+echo -e "\nchecking for instances of toker"
+plist=$(pidof ~/Git/MQTT-dev/bin/toker)
+# echo $plist
+if [ "$plist" != "" ] 
+	then
+		hlist="there is an instance of toker active pid " 
+		hlist=$hlist$plist
+		echo $hlist
+		echo -n "	should it be killed? {y}{n} > "
+		read answr
+
+		# echo $answr
+
+		if [ "$answr" == "y" ] 
+			then
+				echo -n "killing process "
+				echo $plist
+				kill $plist
+		fi
+	else
+		echo -n "  there are no instances of toker active should one be started? {y}{n} > "
+		read answr
+		if [ "$answr" == "y" ]
+			then
+				echo "starting daemon"
+				toker
+		fi
+fi
 
 
 exit 0
