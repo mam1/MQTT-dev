@@ -20,26 +20,35 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-
-
-/********** globals *******************************************************************/
-_IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
-char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
-void           	*data;                      	// pointer to ipc data
-int            	fd;                        		// file descriptor for ipc data file
-key_t 			skey = _SEM_KEY;
-
-/* global memory mapped io variables */
-extern int              semid;
-extern unsigned short   semval;
-extern struct sembuf    sb;
+#define KEY 0x1111
 
 union semun {
-	int val;              						// used for SETVAL only
-	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
-	ushort *array;        						// used for GETALL and SETALL
+	int val;
+	struct semid_ds *buf;
+	unsigned short  *array;
 };
-union 			semun dummy;
+
+struct sembuf p = { 0, -1, SEM_UNDO};
+struct sembuf v = { 0, +1, SEM_UNDO};
+
+/********** globals *******************************************************************/
+// _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
+// char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
+// void           	*data;                      	// pointer to ipc data
+// int            	fd;                        		// file descriptor for ipc data file
+// key_t 			skey = _SEM_KEY;
+
+//  global memory mapped io variables
+// extern int              semid;
+// extern unsigned short   semval;
+// extern struct sembuf    sb;
+
+// union semun {
+// 	int val;              						// used for SETVAL only
+// 	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
+// 	ushort *array;        						// used for GETALL and SETALL
+// };
+// union 			semun dummy;
 
 
 WINDOW * mainwin;
@@ -133,14 +142,27 @@ int main(int argc, char *argv[])
 	int 					tpid;
 	// char 					*args[];
 
+	/* setup semaphores */
+	int id = semget(KEY, 1, 0666 | IPC_CREAT);
+	if (id < 0)
+	{
+		perror("semget"); exit(11);
+	}
+	union semun u;
+	u.val = 1;
+	if (semctl(id, 0, SETVAL, u) < 0)
+	{
+		perror("semctl"); exit(12);
+	}
+
 	/* setup shared memory */
-	ipc_sem_init();
-	semid = ipc_sem_id(skey);					// get semaphore id
-	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-	fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
-	data = ipc_map(fd, ipc_size());           	// map file to memory
-	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
-	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+	// ipc_sem_init();
+	// semid = ipc_sem_id(skey);					// get semaphore id
+	// ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
+	// fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
+	// data = ipc_map(fd, ipc_size());           	// map file to memory
+	// ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
+	// ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
@@ -261,18 +283,27 @@ int main(int argc, char *argv[])
 				strcpy(screenbuff, linebuff);
 
 //*************************************************
-
-
-
-				tpid = vfork();
-				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
-
-				if (tpid < 0)
+				if (semop(id, &p, 1) < 0)
 				{
-					/*fork creation faile*/
-					printf("fork creation failed!!!\n");
-					exit (1);
+					perror("semop p"); exit(13);
 				}
+
+
+
+
+				if (semop(id, &v, 1) < 0)
+				{
+					perror("semop p"); exit(14);
+				}
+				// tpid = vfork();
+				// if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
+
+				// if (tpid < 0)
+				// {
+				// 	/*fork creation faile*/
+				// 	printf("fork creation failed!!!\n");
+				// 	exit (1);
+				// }
 
 
 //****************************************
