@@ -63,8 +63,8 @@ int main(void)
 
 	/* setup shared memory */
 	sb.sem_num = 0; // semaphore #: 0 = first
-sb.sem_op = -1; // semaphore operation
-sb.sem_flg = 0; // operation flags
+	sb.sem_op = -1; // semaphore operation
+	sb.sem_flg = 0; // operation flags
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
 	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory

@@ -35,7 +35,7 @@
 
 extern int              semid;
 extern unsigned short   semval;
-extern struct sembuf    sb;
+extern _SEMBUF          sb;
 
 union semun {
     int 				val;      	// used for SETVAL only 
