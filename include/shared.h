@@ -9,7 +9,7 @@
 // #define _SENSOR_DATA_FILE_NAME		"/media/data/sensors/sensor.dat" 		// USB drive collecting sensor readingss
 // #define _CGI_LOG_FILE_NAME			"/media/data/logs/CGI.log"				// log file name
 // // #define _SYSTEM_FILE_NAME			"/home/Pcon-data/sys.dat"			// system data file
-// #define _IPC_FILE_NAME				"/home/Pcon-data/ipc.dat"   			// memory mapped ipc file
+#define _IPC_FILE_NAME				"/home/mam1/ipc.dat"   			// memory mapped ipc file
 // #define _IPC_FILE_BACKUP_NAME		"/home/Pcon-data/ipc.bkup"   			// ipc backup file 
 // #define _TRACE_FILE_NAME			"/hmedia/data/trace/Pcon-trace.dat" 	// trace file
 #define _DAEMON_LOG 				"/home/mam1/Git/MQTT-dev/logs/cp_daemon.log" 			    // daemon log file name

@@ -230,19 +230,16 @@ int main(int argc, char *argv[])
 
 //*************************************************
 
-				args[0] = "/usr/bin/mybins/tonenizer";
-				args[1] = linebuffer;
-				args[2] = '\0';
 
 
 				tpid = vfork();
-				if (tpid == 0) execv("/usr/bin/mybins/tonenizer", args);
+				if (tpid == 0) execl("/usr/bin/mybins/tonenizer", "/usr/bin/mybins/tonenizer", (char *) 0);
 
 				if (tpid < 0)
 				{
 					/*fork creation faile*/
 					printf("fork creation failed!!!\n");
-					eixt (0);
+					exit (1);
 				}
 
 
@@ -251,7 +248,7 @@ int main(int argc, char *argv[])
 
 
 				// tokenizer(linebuff);
-				disp ("linebuffer set to tokenizer to be processed");
+				disp ("linebuffer sent to tokenizer to be processed");
 				add_comm(linebuff);
 				reset_linebuffer();
 				break;
