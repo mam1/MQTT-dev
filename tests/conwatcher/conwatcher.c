@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 					perror("semop p"); exit(13);
 				}
 
-
+		// copy linbuffer into shared memory
 
 
 				if (semop(id, &v, 1) < 0)
