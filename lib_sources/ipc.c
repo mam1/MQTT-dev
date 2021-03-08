@@ -218,7 +218,7 @@ int ipc_sem_init(void)
     return 0;
 }
 
-int ipc_sem_lock(int semid, struct sembuf *sb){
+int ipc_sem_lock(int semid, _SEMBUF * sb){
 
 	// printf(" ** %i locked\r\n",semid);
 	sb->sem_num = 0;        	// semaphore number 
@@ -236,7 +236,7 @@ int ipc_sem_lock(int semid, struct sembuf *sb){
 	return 0;
 }
 
-int ipc_sem_free(int semid, struct sembuf *sb){
+int ipc_sem_free(int semid, _SEMBUF *sb){
 
 	sb->sem_op = 1; /* free resource */
 	
