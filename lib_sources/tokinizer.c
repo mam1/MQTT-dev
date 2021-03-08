@@ -26,26 +26,26 @@
 
 // struct sembuf sb = {0, -1, 0};   set to allocate resource 
 
-extern int              semid;
-extern unsigned short   semval;
-extern struct sembuf    sb;
+// extern int              semid;
+// extern unsigned short   semval;
+// extern struct sembuf    sb;
 
-/********** globals *******************************************************************/
-_IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
-char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
-void           	*data;                      	// pointer to ipc data
-int            	fd;                        		// file descriptor for ipc data file
-key_t 			skey = _SEM_KEY;
-int 			semid;
+// /********** globals *******************************************************************/
+// _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
+// char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
+// void           	*data;                      	// pointer to ipc data
+// int            	fd;                        		// file descriptor for ipc data file
+// key_t 			skey = _SEM_KEY;
+// int 			semid;
 
 /* global memory mapped io variables */
-unsigned short 	semval;
-union semun {
-	int val;              						// used for SETVAL only
-	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
-	ushort *array;        						// used for GETALL and SETALL
-};
-union 			semun dummy;
+// unsigned short 	semval;
+// union semun {
+// 	int val;              						// used for SETVAL only
+// 	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
+// 	ushort *array;        						// used for GETALL and SETALL
+// };
+// union 			semun dummy;
 // struct sembuf sb[] = {0, -1, 0};  /* set to allocate resource */
 
 static void show_mysql_error(MYSQL *mysql)
