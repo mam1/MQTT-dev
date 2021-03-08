@@ -27,7 +27,7 @@ typedef struct sembuf SEMBUF;
 
 /* ipc data - memory mapped */
 typedef	struct {
-	char 				char 			linebuff[_INPUT_BUFFER_SIZE];
+	char 					linebuff[_INPUT_BUFFER_SIZE];
 } _IPC_DAT;
 
 /* command token data */
