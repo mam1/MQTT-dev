@@ -42,7 +42,7 @@ union semun {
 	ushort *array;        						// used for GETALL and SETALL
 };
 union 			semun dummy;
-_SEMBUF sb = {0, -1, 0};  						// set to allocate resource
+struct sembuf sb = {0, -1, 0};  /* set to allocate resource */
 
 static void show_mysql_error(MYSQL *mysql)
 {
