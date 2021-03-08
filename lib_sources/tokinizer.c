@@ -295,7 +295,6 @@ int tokenizer(char *lbuf)
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
-	printf("\n\nfrom tokenizer - shared memory dump <%s>", ipc_ptr->linebuff);
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;

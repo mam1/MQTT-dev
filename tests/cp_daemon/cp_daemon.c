@@ -175,7 +175,7 @@ char 			linebuff[_INPUT_BUFFER_SIZE];
 	while (1)
 	{
 		ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-		cpystr(ipc_ptr->linebuff, "hi from the daemon");
+		strcpy(ipc_ptr->linebuff, "hi from the daemon");
 		ipc_sem_free(semid, &sb);                   // free lock on shared memory
 		logit("looping");
 		usleep(3000000);
