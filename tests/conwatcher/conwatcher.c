@@ -136,18 +136,21 @@ int main(int argc, char *argv[])
 	// char 					*args[];
 
 	/* setup semaphores */
-	int id = semget(KEY, 1, 0666 | IPC_CREAT);
-	if (id < 0)
-	{
-		perror("semget"); exit(11);
-	}
-	union semun u;
-	u.val = 1;
-	if (semctl(id, 0, SETVAL, u) < 0)
-	{
-		perror("semctl"); exit(12);
-	}
-
+	// int id = semget(KEY, 1, 0666 | IPC_CREAT);
+	// if (id < 0)
+	// {
+	// 	perror("semget"); exit(11);
+	// }
+	// union semun u;
+	// u.val = 1;
+	// if (semctl(id, 0, SETVAL, u) < 0)
+	// {
+	// 	perror("semctl"); exit(12);
+	// }
+	/* set up file mapped shared memory for inter process communication */
+	ipc_sem_init();										// setup semaphores
+	semid = ipc_sem_id(skey);	
+	
 	/* setup shared memory */
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
