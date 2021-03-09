@@ -24,35 +24,34 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-#define KEY 0x1111
-
-union semun {
-	int val;
-	struct semid_ds *buf;
-	unsigned short  *array;
-};
-
-struct sembuf p = { 0, -1, SEM_UNDO};
-struct sembuf v = { 0, +1, SEM_UNDO};
-
-/********** globals *******************************************************************/
-// _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
-// char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
-// void           	*data;                      	// pointer to ipc data
-// int            	fd;                        		// file descriptor for ipc data file
-// key_t 			skey = _SEM_KEY;
-
-//  global memory mapped io variables
-// extern int              semid;
-// extern unsigned short   semval;
-// extern struct sembuf    sb;
+// #define KEY 0x1111
 
 // union semun {
-// 	int val;              						// used for SETVAL only
-// 	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
-// 	ushort *array;        						// used for GETALL and SETALL
+// 	int val;
+// 	struct semid_ds *buf;
+// 	unsigned short  *array;
 // };
-// union 			semun dummy;
+
+// struct sembuf p = { 0, -1, SEM_UNDO};
+// struct sembuf v = { 0, +1, SEM_UNDO};
+
+/********** globals *******************************************************************/
+_IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
+char           	ipc_file[] = {_IPC_FILE_NAME};  // name of ipc file
+void           	*data;                      	// pointer to ipc data
+int            	fd;                        		// file descriptor for ipc data file
+key_t 			skey = _SEM_KEY;
+int 			semid;
+
+/* global memory mapped io variables */
+unsigned short 	semval;
+union semun {
+	int val;              						// used for SETVAL only
+	struct semid_ds *buf; 						// for IPC_STAT and IPC_SET
+	ushort *array;        						// used for GETALL and SETALL
+};
+union 			semun dummy;
+SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
 WINDOW * mainwin;
