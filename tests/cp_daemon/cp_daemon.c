@@ -147,13 +147,13 @@ int main(void) {
 	}
 
 	/* setup shared memory */
-	ipc_sem_init();
-	semid = ipc_sem_id(skey);					// get semaphore id
-	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-	fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
-	data = ipc_map(fd, ipc_size());           	// map file to memory
-	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
-	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+	// ipc_sem_init();
+	// semid = ipc_sem_id(skey);					// get semaphore id
+	// ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
+	// fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
+	// data = ipc_map(fd, ipc_size());           	// map file to memory
+	// ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
+	// ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	/* The Big Loop */
 	logit("initialization complete");
