@@ -105,6 +105,7 @@ int main(void) {
 		}
 		else {
 			printf(" can't write pid file <%s>\n", _PID_FILE_NAME);
+			logit(" can't write pid file");
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
@@ -119,7 +120,7 @@ int main(void) {
 		/* Log the failure */
 		exit(EXIT_FAILURE);
 	}
-
+logit("  sid created");
 	/* Change the current working directory */
 	if ((chdir("/")) < 0) {
 		/* Log the failure */
