@@ -1,16 +1,11 @@
- /************************************************************************/
+/************************************************************************/
 /*                                                                      */
-/*  ipc.c - support interprocess communication                          */
+/*  ipc.c - support for interprocess communication                          */
 /*                                                                      */
 /************************************************************************/
 
-// #include <stdio.h>
-// #include <stdlib.h>
 #include <errno.h>
-// #include <sys/types.h>
-// #include <sys/ipc.h>
 #include <sys/sem.h>
-
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <errno.h>
@@ -24,32 +19,18 @@
 #include <sys/ipc.h>
 #include <errno.h>
 
-
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
-
-// #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
-
-
-// #include "trace.h"
-// #include <sys/sem.h>
-// #include <semaphore.h>
-
-// #include "sys_dat.h"
-
-
-
-
 
 extern int              semid;
 extern unsigned short   semval;
 extern struct sembuf    sb;
 
 union semun {
-    int 				val;      	// used for SETVAL only 
-    struct semid_ds 	*buf; 		// for IPC_STAT and IPC_SET
-    uint8_t 			*array;  	// used for GETALL and SETALL
+    int                 val;        // used for SETVAL only
+    struct semid_ds     *buf;       // for IPC_STAT and IPC_SET
+    uint8_t             *array;     // used for GETALL and SETALL
 };
 
 int ipc_open(char *fname, int size) {
@@ -148,25 +129,25 @@ int ipc_size(void) {
     if (pages < 1) pages = 1;
     else if (sizeof(_IPC_DAT) % page_size != 0) pages += 1;
     // printf("    2 -pages = %i\n",pages);
- //   printf("  ipc_size: system page size %i, ipc data %i, ipc data requires %i pages, %i bytes\n", (int)page_size, sizeof(IPC_DAT), pages, pages * (int)page_size);
+//   printf("  ipc_size: system page size %i, ipc data %i, ipc data requires %i pages, %i bytes\n", (int)page_size, sizeof(IPC_DAT), pages, pages * (int)page_size);
     return (pages * (int)page_size);
 }
 
 int ipc_save(_IPC_DAT *ipc_ptr) {
 
     FILE        *ipc_bkup;
-    // int 		write_rtn;
+    // int      write_rtn;
 
-    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"w");
+    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME, "w");
 
-    if(ipc_bkup == NULL){                     // file not found
-    	perror(_IPC_FILE_BACKUP_NAME);
+    if (ipc_bkup == NULL) {                   // file not found
+        perror(_IPC_FILE_BACKUP_NAME);
         return 1;
     }
 
     ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
 
-    if(fwrite(ipc_ptr, 1, sizeof(*ipc_ptr), ipc_bkup) != sizeof(*ipc_ptr)){
+    if (fwrite(ipc_ptr, 1, sizeof(*ipc_ptr), ipc_bkup) != sizeof(*ipc_ptr)) {
         printf("\n*** error saving ipc backup data file\r\n");
         perror(_IPC_FILE_BACKUP_NAME);
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
@@ -175,7 +156,7 @@ int ipc_save(_IPC_DAT *ipc_ptr) {
         return 1;
     }
     else
-    	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+        ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
     // #if defined (_ATRACE) || defined (_PTRACE)
     // trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "ipc data written to backup file\n", 0);
@@ -189,21 +170,21 @@ int ipc_load(_IPC_DAT *ipc_ptr) {
 
     int         rtn;
     FILE        *ipc_bkup;
- 
-    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME,"r+");
-    if(ipc_bkup == NULL){                      // file not found
+
+    ipc_bkup = fopen(_IPC_FILE_BACKUP_NAME, "r+");
+    if (ipc_bkup == NULL) {                    // file not found
         return 1;
     }
     ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
     rtn = fread(ipc_ptr, sizeof(*ipc_ptr), 1, ipc_bkup);
-    if(rtn != 1){
-        printf("\n*** error reading ipc backup data\n  fread returned %i\r\n",rtn);
+    if (rtn != 1) {
+        printf("\n*** error reading ipc backup data\n  fread returned %i\r\n", rtn);
         // perror(_TRACE_FILE_NAME);
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
         return 1;
     }
     else
-    	ipc_sem_free(semid, &sb);                   // free lock on shared memory
+        ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
     // #if defined (_ATRACE) || defined (_PTRACE)
     // trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "backup ipc file written to shared memory\n", 0);
@@ -214,10 +195,10 @@ int ipc_load(_IPC_DAT *ipc_ptr) {
 
 int ipc_sem_init(void)
 {
-    key_t 			key = _SEM_KEY;
-    int 			semid;
-    union semun 	arg;
- 
+    key_t           key = _SEM_KEY;
+    int             semid;
+    union semun     arg;
+
     /* create a semaphore set with 1 semaphore: */
     if ((semid = semget(key, 1, 0666 | IPC_CREAT)) == -1) {
         perror("semget");
@@ -232,45 +213,45 @@ int ipc_sem_init(void)
     return 0;
 }
 
-int ipc_sem_lock(int semid, struct sembuf *sb){
+int ipc_sem_lock(int semid, struct sembuf *sb) {
 
-	// printf(" ** %i locked\r\n",semid);
-	sb->sem_num = 0;        	// semaphore number 
-    sb->sem_op = -1;         	// semaphore operation 
-    sb->sem_flg = 0;        	// operation flags 
-	if (semop(semid, sb, 1) == -1) {
-		perror("semop");
-		exit(1);
-	}
+    // printf(" ** %i locked\r\n",semid);
+    sb->sem_num = 0;            // semaphore number
+    sb->sem_op = -1;            // semaphore operation
+    sb->sem_flg = 0;            // operation flags
+    if (semop(semid, sb, 1) == -1) {
+        perror("semop");
+        exit(1);
+    }
 
 // #if defined (_ATRACE) || defined (_FTRACE)
 //     trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "shared memory locked\n", 0);
-// #endif	
+// #endif
 
-	return 0;
+    return 0;
 }
 
-int ipc_sem_free(int semid, struct sembuf *sb){
+int ipc_sem_free(int semid, struct sembuf *sb) {
 
-	sb->sem_op = 1; /* free resource */
-	
-	if (semop(semid, sb, 1) == -1) {
-		perror("semop");
-		exit(1);
-	}
+    sb->sem_op = 1; /* free resource */
+
+    if (semop(semid, sb, 1) == -1) {
+        perror("semop");
+        exit(1);
+    }
 
 // #if defined (_ATRACE) || defined (_FTRACE)
 //     trace(_TRACE_FILE_NAME, "\nipc", 0, NULL, "shared memory unlocked\n", 0);
-// #endif  	
+// #endif
 
-	return 0;
+    return 0;
 }
 
-int ipc_sem_id(key_t skey){
-	int    			semid;
-	if ((semid = semget(skey, 1, 0)) == -1){ 	//	grab the semaphore set
-		perror("semget");
-		exit(1);
-	}
-	return semid;
+int ipc_sem_id(key_t skey) {
+    int             semid;
+    if ((semid = semget(skey, 1, 0)) == -1) {   //  grab the semaphore set
+        perror("semget");
+        exit(1);
+    }
+    return semid;
 }
