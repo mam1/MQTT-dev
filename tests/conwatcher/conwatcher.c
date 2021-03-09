@@ -149,6 +149,21 @@ int main(int argc, char *argv[])
 	// {
 	// 	perror("semctl"); exit(12);
 	// }
+	
+
+	/* check for ipc file */
+	if (access(ipc_file, F_OK) == 0) {
+		ipc = 1;
+		logit("ipc file found");
+	}
+	else {
+		ipc = 0;
+		logit("* ipc file not found");
+	}
+
+
+
+
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
 	semid = ipc_sem_id(skey);	
