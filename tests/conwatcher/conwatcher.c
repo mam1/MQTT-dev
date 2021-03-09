@@ -10,6 +10,7 @@
 #include <sys/sem.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <time.h>
 
 
 /* local includes */
