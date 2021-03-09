@@ -156,6 +156,14 @@ logit("Close out the standard file descriptors");
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
+	if(ipc==0){
+		logit("* new ipc file created and initialized" );
+		ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
+        ipc_ptr->major_version_cp_daemon = 0;
+        ipc_ptr->minor_version_cp_daemon = 0;
+  		ipc_ptr->linebuff = '\0';
+        ipc_sem_free(semid, &sb);                   // free lock on shared memory
+	}
 	/* The Big Loop */
 	logit("initialization complete");
 	logit("starting main loop");
