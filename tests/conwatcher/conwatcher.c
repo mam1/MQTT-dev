@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
 	int						ch;
 	_TOKEN 					toke;
 	int 					tpid;
+	int 					ipc;
 	// char 					*args[];
 
 	/* setup semaphores */
@@ -149,7 +150,7 @@ int main(int argc, char *argv[])
 	// {
 	// 	perror("semctl"); exit(12);
 	// }
-	
+
 
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
@@ -166,7 +167,7 @@ int main(int argc, char *argv[])
 
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
-	semid = ipc_sem_id(skey);	
+	semid = ipc_sem_id(skey);
 
 	/* setup shared memory */
 	ipc_sem_init();
@@ -301,7 +302,7 @@ int main(int argc, char *argv[])
 				// 	perror("semop p"); exit(13);
 				// }
 
-		// copy linbuffer into shared memory
+				// copy linbuffer into shared memory
 
 
 				// if (semop(id, &v, 1) < 0)
