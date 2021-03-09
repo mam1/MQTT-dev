@@ -198,7 +198,7 @@ int ipc_load(_IPC_DAT *ipc_ptr) {
     rtn = fread(ipc_ptr, sizeof(*ipc_ptr), 1, ipc_bkup);
     if(rtn != 1){
         printf("\n*** error reading ipc backup data\n  fread returned %i\r\n",rtn);
-        perror(_TRACE_FILE_NAME);
+        // perror(_TRACE_FILE_NAME);
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
         return 1;
     }
