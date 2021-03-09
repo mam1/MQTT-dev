@@ -13,6 +13,8 @@
 #define _IPC_FILE_BACKUP_NAME	"/home/mam1/ipc.bkup"   			// ipc backup file 
 // #define _TRACE_FILE_NAME			"/hmedia/data/trace/Pcon-trace.dat" 	// trace file
 #define _DAEMON_LOG 		"/home/mam1/logs/cp_daemon.log" 			    // daemon log file name
+#define _CONWATCHER_LOG 		"/home/mam1/logs/conwatcher.log" 			    // daemon log file name
+
 // #define _SENSOR_MASTER_FILE_NAME    "/media/Raid/sensor logs/master.dat"	// cumulative history of sensor readings
 #define _PID_FILE_NAME 				"/home/mam1/.cp_daemon.pid"							// daemon pid
 
