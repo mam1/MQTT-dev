@@ -3,15 +3,17 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <ctype.h>
 #include <curses.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <sys/types.h>
+#include <errno.h>
 
 
 /* local includes */
-// #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
@@ -150,7 +152,7 @@ int main(int argc, char *argv[])
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
 	semid = ipc_sem_id(skey);	
-	
+
 	/* setup shared memory */
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
