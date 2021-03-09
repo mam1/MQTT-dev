@@ -14,7 +14,7 @@
 // #define _TRACE_FILE_NAME			"/hmedia/data/trace/Pcon-trace.dat" 	// trace file
 #define _DAEMON_LOG 				"/home/mam1/Git/MQTT-dev/logs/cp_daemon.log" 			    // daemon log file name
 // #define _SENSOR_MASTER_FILE_NAME    "/media/Raid/sensor logs/master.dat"	// cumulative history of sensor readings
-#define _PID_FILE_NAME 				"/run/cp_daemon.pid"							// daemon pid
+#define _PID_FILE_NAME 				"/home/mam1/.cp_daemon.pid"							// daemon pid
 
 /* semaphore key */
 #define _SEM_KEY 				1234321
