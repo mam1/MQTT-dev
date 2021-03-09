@@ -68,6 +68,32 @@ char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
 int 			x, y;
 
+/* write an entry to the daemon log file */
+void logit(char *mess) {
+	FILE 				*dlog;
+	char 				* time_now, *tnptr;
+	time_t 				t;
+
+	t = time(NULL);
+	time_now = ctime(&t);
+	tnptr = time_now;
+	while (*tnptr != _CR) tnptr++;
+	*tnptr = '\0';
+
+
+	/* Open log file */
+	dlog = fopen(_DAEMON_LOG, "a");
+	if (dlog == NULL) {
+		exit(EXIT_FAILURE);
+	}
+
+	fprintf(dlog, "conwatcher: %s - %s\n", time_now, mess);
+	fclose(dlog);
+	return;
+}
+
+
+
 void disp(char *str)
 {
 	clear();
