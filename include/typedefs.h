@@ -5,11 +5,14 @@
 
 
 /* buffer for semaphores */
-typedef struct {
-	unsigned short int sem_num; // semaphore #: 0 = first
-	short int sem_op; // semaphore operation
-	short int sem_flg; // operation flags
-} _SEMBUF;
+// typedef struct {
+// 	unsigned short int sem_num; // semaphore #: 0 = first
+// 	short int sem_op; // semaphore operation
+// 	short int sem_flg; // operation flags
+// } _SEMBUF;
+
+/* buffer for semaphores */
+typedef struct sembuf SEMBUF;
 
 // /* system configuration data */
 // typedef struct {
