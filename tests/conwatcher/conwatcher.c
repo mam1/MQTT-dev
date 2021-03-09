@@ -276,18 +276,18 @@ int main(int argc, char *argv[])
 				strcpy(screenbuff, linebuff);
 
 //*************************************************
-				if (semop(id, &p, 1) < 0)
-				{
-					perror("semop p"); exit(13);
-				}
+				// if (semop(id, &p, 1) < 0)
+				// {
+				// 	perror("semop p"); exit(13);
+				// }
 
 		// copy linbuffer into shared memory
 
 
-				if (semop(id, &v, 1) < 0)
-				{
-					perror("semop p"); exit(14);
-				}
+				// if (semop(id, &v, 1) < 0)
+				// {
+				// 	perror("semop p"); exit(14);
+				// }
 				tpid = vfork();
 				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
