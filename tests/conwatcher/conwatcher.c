@@ -18,6 +18,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
+#include "/home/mam1/Git/MQTT-dev/include/logs.h"
 
 /* database connection */
 #include "/usr/include/mariadb/mysql.h"
@@ -68,31 +69,6 @@ char 			screenbuff[500];
 char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
 int 			x, y;
-
-/* write an entry to the daemon log file */
-void logit(char *mess) {
-	FILE 				*dlog;
-	char 				* time_now, *tnptr;
-	time_t 				t;
-
-	t = time(NULL);
-	time_now = ctime(&t);
-	tnptr = time_now;
-	while (*tnptr != _CR) tnptr++;
-	*tnptr = '\0';
-
-
-	/* Open log file */
-	dlog = fopen(_DAEMON_LOG, "a");
-	if (dlog == NULL) {
-		exit(EXIT_FAILURE);
-	}
-
-	fprintf(dlog, "conwatcher: %s - %s\n", time_now, mess);
-	fclose(dlog);
-	return;
-}
-
 
 
 void disp(char *str)
@@ -182,15 +158,12 @@ int main(int argc, char *argv[])
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
 		ipc = 1;
-		logit("ipc file found");
+		logit(_CONWATCHER_LOG, "conwatcher", "ipc file found");
 	}
 	else {
 		ipc = 0;
-		logit("* ipc file not found");
+		logit(_CONWATCHER_LOG, "conwatcher", "* ipc file not found");
 	}
-
-
-
 
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
@@ -323,7 +296,7 @@ int main(int argc, char *argv[])
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
 
-//*************************************************
+				//*************************************************
 				// if (semop(id, &p, 1) < 0)
 				// {
 				// 	perror("semop p"); exit(13);
@@ -339,7 +312,7 @@ int main(int argc, char *argv[])
 				disp(ipc_ptr->linebuff);
 				sleep(300000);
 				tpid = vfork();
-				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
+				if (tpid == 0) execl(" / usr / bin / mybins / toker", " / usr / bin / mybins / toker", (char *) 0);
 
 				if (tpid < 0)
 				{
@@ -349,7 +322,7 @@ int main(int argc, char *argv[])
 				}
 
 
-//****************************************
+				//****************************************
 
 
 
@@ -368,11 +341,11 @@ int main(int argc, char *argv[])
 					strcat(screenbuff, toke.token);
 					strcat(screenbuff, ">,  type <");
 					strcat(screenbuff, toke.type);
-					strcat(screenbuff, ">, value <");
+					strcat(screenbuff, ">, value < ");
 					char  b[10];
-					sprintf(b, "%i", toke.value);
+					sprintf(b, " % i", toke.value);
 					strcat(screenbuff, b);
-					strcat(screenbuff, "> \n");
+					strcat(screenbuff, " > \n");
 
 					memset(toke.token, '\0', sizeof(toke.token));
 					memset(toke.type, '\0', sizeof(toke.token));
@@ -389,7 +362,7 @@ int main(int argc, char *argv[])
 				delwin(mainwin);
 				endwin();			/* End curses mode		  */
 				refresh();
-				printf("%s\n", "program terminated\n");
+				printf(" % s\n", "program terminated\n");
 				return 0;
 				break;
 			}
@@ -399,6 +372,6 @@ int main(int argc, char *argv[])
 	delwin(mainwin);
 	endwin();			/* End curses mode		  */
 	refresh();
-	printf("%s\n", "program terminated\n");
+	printf(" % s\n", "program terminated\n");
 	return 0;
 }
