@@ -294,6 +294,7 @@ int main(int argc, char *argv[])
 				// 	perror("semop p"); exit(14);
 				// }
 				disp(ipc_ptr->linebuff);
+				sleep(300000000);
 				tpid = vfork();
 				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
