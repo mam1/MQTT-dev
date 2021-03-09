@@ -131,7 +131,7 @@ logit("  sid created");
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
-
+logit("Close out the standard file descriptors");
 	/* Daemon-specific initializations */
 	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n", 0, 0, 0);
 	logit(command);
