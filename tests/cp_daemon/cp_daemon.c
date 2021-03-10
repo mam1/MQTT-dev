@@ -19,6 +19,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/logs.h"
 
 
 /* database connection */
@@ -52,28 +53,28 @@ SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 /********** support functions *******************************************************************/
 
 /* write an entry to the daemon log file */
-void logit(char *mess) {
-	FILE 				*dlog;
-	char 				* time_now, *tnptr;
-	time_t 				t;
+// void logit(char *mess) {
+// 	FILE 				*dlog;
+// 	char 				* time_now, *tnptr;
+// 	time_t 				t;
 
-	t = time(NULL);
-	time_now = ctime(&t);
-	tnptr = time_now;
-	while (*tnptr != _CR) tnptr++;
-	*tnptr = '\0';
+// 	t = time(NULL);
+// 	time_now = ctime(&t);
+// 	tnptr = time_now;
+// 	while (*tnptr != _CR) tnptr++;
+// 	*tnptr = '\0';
 
 
-	/* Open log file */
-	dlog = fopen(_DAEMON_LOG, "a");
-	if (dlog == NULL) {
-		exit(EXIT_FAILURE);
-	}
+// 	/* Open log file */
+// 	dlog = fopen(_DAEMON_LOG, "a");
+// 	if (dlog == NULL) {
+// 		exit(EXIT_FAILURE);
+// 	}
 
-	fprintf(dlog, "%s - %s\n", time_now, mess);
-	fclose(dlog);
-	return;
-}
+// 	fprintf(dlog, "%s - %s\n", time_now, mess);
+// 	fclose(dlog);
+// 	return;
+// }
 
 
 int main(void) {
@@ -105,7 +106,7 @@ int main(void) {
 		}
 		else {
 			printf(" can't write pid file <%s>\n", _PID_FILE_NAME);
-			logit(" can't write pid file");
+			logit(_DAEMON_LOG, "cp_daemon", "can't write pid file");
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
@@ -135,16 +136,16 @@ int main(void) {
 	/* Daemon-specific initializations */
 	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n", 0, 0, 0);
 	logit(command);
-	logit("starting initializations");
+	logit(_DAEMON_LOG, "cp_daemon", s"tarting initializations");
 
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
 		ipc = 1;
-		logit("ipc file found");
+		logit(_DAEMON_LOG, "cp_daemon", "ipc file found");
 	}
 	else {
 		ipc = 0;
-		logit("* ipc file not found");
+		logit(_DAEMON_LOG, "cp_daemon", "* ipc file not found");
 	}
 
 	/* setup shared memory */
@@ -165,15 +166,15 @@ int main(void) {
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
 	}
 	/* The Big Loop */
-	logit("initialization complete");
-	logit("starting main loop");
+	logit(_DAEMON_LOG, "cp_daemon", "initialization complete");
+	logit(_DAEMON_LOG, "cp_daemon", "starting main loop");
 	int ii = 0;
 	while (1)
 	{
 		ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
 		strcpy(ipc_ptr->linebuff, "hi from the daemon");
 		ipc_sem_free(semid, &sb);                   // free lock on shared memory
-		logit("looping");
+		logit(_DAEMON_LOG, "cp_daemon", "looping");
 		usleep(3000000);
 	}
 	exit(EXIT_SUCCESS);
