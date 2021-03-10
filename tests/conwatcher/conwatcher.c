@@ -329,7 +329,7 @@ refresh();
 
 				// }
 				disp ("token queue deleted");
-				sleep(400);
+				sleep(10);
 				reset_linebuffer();
 
 
