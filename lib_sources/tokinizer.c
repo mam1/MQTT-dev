@@ -231,7 +231,7 @@ _TOKEN * Tpop(_TOKEN *token)
 	MYSQL_ROW           row;
 	// char 				*cptr, *bptr;
 	char 				buff[_INPUT_BUFFER_SIZE];
-
+	return NULL;
 	/* get handles  */
 	conn = mysql_init(NULL);
 	if (conn == NULL)
@@ -265,6 +265,7 @@ _TOKEN * Tpop(_TOKEN *token)
 
 	return token;
 }
+
 int reset_tokenQ(void)
 {
 
