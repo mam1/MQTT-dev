@@ -68,8 +68,7 @@ printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 	if (slog == NULL) {
 		exit(EXIT_FAILURE);
 	}
-
-	fprintf(slog, "%s: %s - %s\n",source, "time_now", mess);
+	fprintf(slog, "%s: %02d/%02d/%04d %02d:%02d:%02d - %s\n", source, tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900,tm.tm_hour, tm.tm_min, tm.tm_sec, mess);
 	fclose(slog);
 
 
