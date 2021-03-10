@@ -280,16 +280,16 @@ refresh();
 				disp(ipc_ptr->linebuff);
 
 				/* fork off a process to tokenize the line buffer */
-				tpid = vfork();
-				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
+				// tpid = vfork();
+				// if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
-				if (tpid < 0)
-				{
-					/*fork creation faile*/
-					printf("fork creation failed!!!\n");
-					logit(_CONWATCHER_LOG, "conwatcher", "fork creation failed");
-					exit (1);
-				}
+				// if (tpid < 0)
+				// {
+				// 	fork creation faile
+				// 	printf("fork creation failed!!!\n");
+				// 	logit(_CONWATCHER_LOG, "conwatcher", "fork creation failed");
+				// 	exit (1);
+				// }
 
 				disp ("linebuffer sent to tokenizer to be processed");
 				add_comm(linebuff);
