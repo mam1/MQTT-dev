@@ -69,7 +69,7 @@ printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(slog, "%s: %s - %s\n",source, time_now, mess);
+	fprintf(slog, "%s: %s - %s\n",source, "time_now", mess);
 	fclose(slog);
 
 
