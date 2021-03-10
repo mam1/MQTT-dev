@@ -325,7 +325,7 @@ refresh();
 					// strcat(screenbuff, " > \n");
 					// memset(toke.token, '\0', sizeof(toke.token));
 					// memset(toke.type, '\0', sizeof(toke.token));
-					toke.value = 0;
+					// toke.value = 0;
 
 				}
 				disp ("token queue deleted");
