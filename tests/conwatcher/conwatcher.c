@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 {
 	logit("/home/mam1/logs/conwatcher.log","conwatcher: ", "conwatcher started");
 	return 0;
-	
+
 	char 					*end_toke;
 	int						ch;
 	_TOKEN 					toke;
@@ -375,6 +375,6 @@ int main(int argc, char *argv[])
 	delwin(mainwin);
 	endwin();			/* End curses mode		  */
 	refresh();
-	printf(" % s\n", "program terminated\n");
+	printf("\n%s\n", "program terminated\n");
 	return 0;
 }
