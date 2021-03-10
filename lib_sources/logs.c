@@ -51,7 +51,7 @@ void logit(char *fname, char *source, char *mess)
 	}
 
 	memset(source_buff, ' ', sizeof(source_buff));
-	source_buff[25] = '\0'
+	source_buff[25] = '\0';
 	strcpy(source_buff, source);
 	source_buff[strlen(source)] = ' ';
 
