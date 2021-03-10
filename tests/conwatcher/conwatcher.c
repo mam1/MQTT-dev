@@ -312,8 +312,8 @@ refresh();
 		/* DEL */	case 0x14a:
 				disp("deleting token queue");
 				// memset(screenbuff, '\0', sizeof(screenbuff));
-				while (Tpop(&toke) != NULL)
-				{
+				// while (Tpop(&toke) != NULL)
+				// {
 					// strcat(screenbuff, " token <");
 					// strcat(screenbuff, toke.token);
 					// strcat(screenbuff, ">,  type <");
@@ -327,8 +327,9 @@ refresh();
 					// memset(toke.type, '\0', sizeof(toke.token));
 					// toke.value = 0;
 
-				}
+				// }
 				disp ("token queue deleted");
+				sleep(900000);
 				reset_linebuffer();
 
 
