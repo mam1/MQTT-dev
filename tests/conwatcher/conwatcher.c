@@ -48,7 +48,7 @@ union 			semun dummy;
 SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
-WINDOW * mainwin;
+WINDOW * mainwin = newwin(_LINES,_COLUMNS,1,1);
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 
@@ -159,14 +159,17 @@ int main(int argc, char *argv[])
 	/*  Initialize ncurses  */
 	if ( (mainwin = initscr()) == NULL ) {
 		fprintf(stderr, "Error initialising ncurses.\n");
+		logit(_CONWATCHER_LOG, "conwatcher", "Error initialising ncurses.");
 		exit(-1);
 	}
+// wresize(mainwin, 22, 130);
+refresh();
 	noecho();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
-	wresize(mainwin, 60, 100);
 	clear();
 	disp("conwatcher active");
+		logit(_CONWATCHER_LOG, "conwatcher", "conwatcher active");
 	reset_linebuffer();
 
 	/* read the keyboard */
