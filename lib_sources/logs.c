@@ -23,7 +23,10 @@
 
 
 /* write an entry to the daemon log file */
-void logit(char * fname, char *source, char *mess) {
+void logit(char *fname, char *source, char *mess) {
+
+	return; 
+	
 	FILE 				*dlog, *slog;
 	char 				* time_now, *tnptr;
 	time_t 				t;
@@ -51,7 +54,7 @@ void logit(char * fname, char *source, char *mess) {
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(slog, "%s - %s\n", time_now, mess);
+	fprintf(slog, "%s: %s - %s\n",source, time_now, mess);
 	fclose(slog);
 
 
