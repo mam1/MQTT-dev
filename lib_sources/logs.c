@@ -26,19 +26,19 @@
 void logit(char *fname, char *source, char *mess) {
 
 printf("%s\n", "hi there");
-return;
+// return;
 
 	FILE 				*dlog, *slog;
 	char 				* time_now, *tnptr;
 	time_t 				t;
 
-	t = time(NULL);
-	time_now = ctime(&t);
-	tnptr = time_now;
-	while (*tnptr != _CR) tnptr++;
-	*tnptr = '\0';
+// 	t = time(NULL);
+// 	time_now = ctime(&t);
+// 	tnptr = time_now;
+// 	while (*tnptr != _CR) tnptr++;
+// 	*tnptr = '\0';
 
-printf("%s\n", "got the time");
+// printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 
 return;
