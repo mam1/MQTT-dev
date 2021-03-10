@@ -349,7 +349,6 @@ int main(int argc, char *argv[])
 					sprintf(b, " % i", toke.value);
 					strcat(screenbuff, b);
 					strcat(screenbuff, " > \n");
-%s
 					memset(toke.token, '\0', sizeof(toke.token));
 					memset(toke.type, '\0', sizeof(toke.token));
 					toke.value = 0;
