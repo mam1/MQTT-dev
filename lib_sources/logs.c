@@ -26,7 +26,6 @@
 void logit(char *fname, char *source, char *mess) {
 
 printf("%s\n", "hi there");
-	return; 
 
 	FILE 				*dlog, *slog;
 	char 				* time_now, *tnptr;
@@ -37,7 +36,9 @@ printf("%s\n", "hi there");
 	tnptr = time_now;
 	while (*tnptr != _CR) tnptr++;
 	*tnptr = '\0';
-
+printf("%s\n", "got the time");
+printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
+return 0;
 
 	/* Open process log file */
 	dlog = fopen(fname, "a");
