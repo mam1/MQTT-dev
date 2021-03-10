@@ -248,13 +248,13 @@ _TOKEN * Tpop(_TOKEN *token)
 		printf("couldn't connect to database\n");
 		exit(1);
 	}
+
+	get the oldest row 
+	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
+		show_mysql_error(conn);
+
+	result = mysql_store_result(conn);
 		return NULL;
-	// get the oldest row 
-	// if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
-	// 	show_mysql_error(conn);
-
-	// result = mysql_store_result(conn);
-
 	// if ((row = mysql_fetch_row(result)) == NULL)
 	// 	return NULL;
 
