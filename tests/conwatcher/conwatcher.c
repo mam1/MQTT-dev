@@ -124,7 +124,7 @@ void add_comm(char *cmd)
 
 int main(int argc, char *argv[])
 {
-	logit(_CONWATCHER_LOG,"conwatcher", "conwatcher started");
+	logit(_CONWATCHER_LOG, "conwatcher", "conwatcher started");
 
 
 	char 					*end_toke;
@@ -274,8 +274,9 @@ int main(int argc, char *argv[])
 			case 0xa:		/* CR */
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
+				strcpy(ipc_ptr->linebuff, linebuff);
 				disp(ipc_ptr->linebuff);
-				strcpy(ipc_ptr->linebuff,)
+				
 				/* fork off a process to tokenize the line buffer */
 				tpid = vfork();
 				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
@@ -333,6 +334,6 @@ int main(int argc, char *argv[])
 	endwin();			/* End curses mode		  */
 	refresh();
 	printf("\n%s\n", "program terminated");
-	logit(_CONWATCHER_LOG,"conwatcher", "conwatcher terminated");
+	logit(_CONWATCHER_LOG, "conwatcher", "conwatcher terminated");
 	return 0;
 }
