@@ -258,8 +258,8 @@ _TOKEN * Tpop(_TOKEN *token)
 	if ((row = mysql_fetch_row(result)) == NULL)
 		return NULL;
 
-	// strcpy(token->token, row[1]);
-	// strcpy(token->type, row[2]);
+	strcpy(token->token, row[1]);
+	strcpy(token->type, row[2]);
 	// token->value = (int) strtol(row[3], (char **)NULL, 10);
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
