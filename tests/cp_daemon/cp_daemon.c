@@ -162,7 +162,7 @@ int main(void) {
 		ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
         ipc_ptr->major_version_cp_daemon = 0;
         ipc_ptr->minor_version_cp_daemon = 0;
-  		ipc_ptr->linebuff = '\0';
+  		*(ipc_ptr->linebuff) = '\0';
         ipc_sem_free(semid, &sb);                   // free lock on shared memory
 	}
 	/* The Big Loop */
