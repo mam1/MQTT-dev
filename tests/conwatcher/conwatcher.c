@@ -134,7 +134,7 @@ void add_comm(char *cmd)
 
 int main(int argc, char *argv[])
 {
-	logit("/home/mam1/logs/conwatcher.log","conwatcher: ", "conwatcher started");
+	logit(_CONWATCHER_LOG,"conwatcher:", "conwatcher started");
 
 
 	// char 					*end_toke;

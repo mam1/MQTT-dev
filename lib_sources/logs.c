@@ -28,7 +28,8 @@ void logit(char *fname, char *source, char *mess)
 
 
 	FILE 				*plog, *slog;
-	char 				*time_now, *tnptr;
+	char 				time_now[]="0:0:0";
+	char  				*tnptr;
 	time_t 				t;
 
 // 	t = time(NULL);
