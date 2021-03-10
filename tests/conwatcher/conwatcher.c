@@ -300,21 +300,16 @@ int main(int argc, char *argv[])
 				disp(ipc_ptr->linebuff);
 				sleep(300000);
 				tpid = vfork();
-				if (tpid == 0) execl(" / usr / bin / mybins / toker", " / usr / bin / mybins / toker", (char *) 0);
+				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 
 				if (tpid < 0)
 				{
 					/*fork creation faile*/
 					printf("fork creation failed!!!\n");
+					logit(_CONWATCHER_LOG, "conwatcher", "fork creation failed");
 					exit (1);
 				}
 
-
-				//****************************************
-
-
-
-				// tokenizer(linebuff);
 				disp ("linebuffer sent to tokenizer to be processed");
 				add_comm(linebuff);
 				reset_linebuffer();

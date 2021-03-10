@@ -54,6 +54,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/typedefs.h"
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
+#include "/home/mam1/Git/MQTT-dev/include/logs.h"
 // #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
 
 /* database connection */
@@ -115,8 +116,9 @@ struct sembuf v = { 0, +1, SEM_UNDO};
 
 int main(void)
 {
+logit(_TOKER_LOG, "toker", "toker started");
 
-	char lbuf[] = {"this is a test"};
+	char lbuf[] = {"abcdegf"};
 	char 			*tbuf_ptr, *lbuf_ptr;
 	char 			tbuf[_INPUT_BUFFER_SIZE];
 
@@ -195,5 +197,6 @@ int main(void)
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf);
+	logit(_TOKER_LOG, "toker", "toker terminated");
 	return 0;
 }
