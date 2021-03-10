@@ -135,7 +135,7 @@ int main(void) {
 
 	/* Daemon-specific initializations */
 	sprintf(command, "\n ************************************\n daemon %i.%i.%i started\n", 0, 0, 0);
-	logit(command);
+	logit(_DAEMON_LOG, "cp_daemon", command);
 	logit(_DAEMON_LOG, "cp_daemon", "starting initializations");
 
 	/* check for ipc file */
