@@ -6,17 +6,16 @@
 
 /* file names */
 #define _FILE_NAME_SIZE 		50
-// #define _SENSOR_DATA_FILE_NAME		"/media/data/sensors/sensor.dat" 		// USB drive collecting sensor readingss
-// #define _CGI_LOG_FILE_NAME			"/media/data/logs/CGI.log"				// log file name
-#define _SYSTEM_LOG				"/home/mam1/logs/syslog.log"			// system data file
 #define _IPC_FILE_NAME			"/home/mam1/ipc.dat"   			// memory mapped ipc file
 #define _IPC_FILE_BACKUP_NAME	"/home/mam1/ipc.bkup"   			// ipc backup file 
-// #define _TRACE_FILE_NAME			"/hmedia/data/trace/Pcon-trace.dat" 	// trace file
-#define _DAEMON_LOG 			"/home/mam1/logs/cp_daemon.log" 			    // daemon log file name
-#define _CONWATCHER_LOG 		"/home/mam1/logs/conwatcher.log" 			    // daemon log file name
 
-// #define _SENSOR_MASTER_FILE_NAME    "/media/Raid/sensor logs/master.dat"	// cumulative history of sensor readings
-#define _PID_FILE_NAME 				"/home/mam1/.cp_daemon.pid"							// daemon pid
+/* log files */
+#define _SYSTEM_LOG				"/home/mam1/logs/syslog.log"		// system log file name
+#define _DAEMON_LOG 			"/home/mam1/logs/cp_daemon.log" 	// c_daemon log file name
+#define _CONWATCHER_LOG 		"/home/mam1/logs/conwatcher.log" 	// conwatcher log file name
+#define _TOKER_LOG 				"/home/mam1/logs/conwatcher.log" 	// toker log file name
+
+#define _PID_FILE_NAME 				"/home/mam1/.cp_daemon.pid"		// daemon pid
 
 /* semaphore key */
 #define _SEM_KEY 				1234321
@@ -29,6 +28,16 @@
 #define _TT_STR					-2
 #define _TT_NULL				-3
 #define _TT_UNREC				-4
+
+/* conwatcher screens */
+#define _LINES  				60
+#define _COLUMNS				100
+#define _RLINES					58
+#define _SLINES					1
+#define _CLINES					1
+#define _SCREEN_R 				_COLUMNS * _RLINES
+#define _SCREEN_S 				_COLUMNS * _SLINES
+#define _SCREEN_C 				_COLUMNS * _CLINES
 
 /* command parser fsm */
 #define _CMD_TOKENS     		41

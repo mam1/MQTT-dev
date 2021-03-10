@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include <unistd.h>		//sleep
 #include <stdint.h>		//uint_8, uint_16, uint_32, etc.
 #include <string.h>
 #include <stdio.h>
@@ -28,16 +28,6 @@
 #define USER        "test-sql"
 #define PSWD        "test-sql"
 
-// #define KEY 0x1111
-
-// union semun {
-// 	int val;
-// 	struct semid_ds *buf;
-// 	unsigned short  *array;
-// };
-
-// struct sembuf p = { 0, -1, SEM_UNDO};
-// struct sembuf v = { 0, +1, SEM_UNDO};
 
 /********** globals *******************************************************************/
 _IPC_DAT       	ipc_dat, *ipc_ptr;              // ipc data
@@ -174,6 +164,7 @@ int main(int argc, char *argv[])
 	noecho();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
+	wresize(mainwin, _LINES, _COLUMNS);
 	clear();
 	disp("conwatcher active");
 	reset_linebuffer();
@@ -283,22 +274,9 @@ int main(int argc, char *argv[])
 			case 0xa:		/* CR */
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
-
-				//*************************************************
-				// if (semop(id, &p, 1) < 0)
-				// {
-				// 	perror("semop p"); exit(13);
-				// }
-
-				// copy linbuffer into shared memory
-
-
-				// if (semop(id, &v, 1) < 0)
-				// {
-				// 	perror("semop p"); exit(14);
-				// }
 				disp(ipc_ptr->linebuff);
-				sleep(300000);
+				strcpy(ipc_ptr->linebuff,)
+				/* fork off a process to tokenize the line buffer */
 				tpid = vfork();
 				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
 

@@ -171,10 +171,10 @@ int main(void) {
 	int ii = 0;
 	while (1)
 	{
-		ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-		strcpy(ipc_ptr->linebuff, "hi from the daemon");
-		ipc_sem_free(semid, &sb);                   // free lock on shared memory
-		logit(_DAEMON_LOG, "cp_daemon", "looping");
+		// ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
+		// strcpy(ipc_ptr->linebuff, "hi from the daemon");
+		// ipc_sem_free(semid, &sb);                   // free lock on shared memory
+		// logit(_DAEMON_LOG, "cp_daemon", "looping");
 		usleep(3000000);
 	}
 	exit(EXIT_SUCCESS);
