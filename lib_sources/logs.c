@@ -40,6 +40,7 @@ printf("%s\n", "hi there");
 printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 
+return;
 
 	/* Open process log file */
 	dlog = fopen(fname, "a");
