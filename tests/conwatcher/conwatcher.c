@@ -134,6 +134,7 @@ void add_comm(char *cmd)
 
 int main(int argc, char *argv[])
 {
+	logit(_CONWATCHER_LOG,"conwatcher: ", "conwatcher started");
 	char 					*end_toke;
 	int						ch;
 	_TOKEN 					toke;
