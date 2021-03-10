@@ -36,9 +36,10 @@ printf("%s\n", "hi there");
 	tnptr = time_now;
 	while (*tnptr != _CR) tnptr++;
 	*tnptr = '\0';
+
 printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
-return 0;
+
 
 	/* Open process log file */
 	dlog = fopen(fname, "a");
@@ -49,6 +50,7 @@ return 0;
 	fprintf(dlog, "%s - %s\n", time_now, mess);
 	fclose(dlog);
 
+return;
 
 	/* Open system log file */
 	slog = fopen(_SYSTEM_LOG, "a");
