@@ -227,13 +227,13 @@ int Qpush(char * token_buffer)
 _TOKEN * Tpop(_TOKEN *token)
 {
 
-		return NULL;
-	// MYSQL               *conn;
-	// MYSQL_RES           *result;
-	// MYSQL_ROW           row;
-	// // char 				*cptr, *bptr;
-	// char 				buff[_INPUT_BUFFER_SIZE];
 
+	MYSQL               *conn;
+	MYSQL_RES           *result;
+	MYSQL_ROW           row;
+	// char 				*cptr, *bptr;
+	char 				buff[_INPUT_BUFFER_SIZE];
+		return NULL;
 	// /* get handles  */
 	// conn = mysql_init(NULL);
 	// if (conn == NULL)
