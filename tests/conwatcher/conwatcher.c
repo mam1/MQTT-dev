@@ -323,8 +323,8 @@ refresh();
 					// sprintf(b, " % i", toke.value);
 					// strcat(screenbuff, b);
 					// strcat(screenbuff, " > \n");
-					memset(toke.token, '\0', sizeof(toke.token));
-					memset(toke.type, '\0', sizeof(toke.token));
+					// memset(toke.token, '\0', sizeof(toke.token));
+					// memset(toke.type, '\0', sizeof(toke.token));
 					toke.value = 0;
 
 				}
