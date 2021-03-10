@@ -4,6 +4,7 @@
 #include "/home/mam1/Git/MQTT-dev/include/shared.h"
 #include "/home/mam1/Git/MQTT-dev/include/tokenizer.h"
 #include "/home/mam1/Git/MQTT-dev/include/ipc.h"
+#include "/home/mam1/Git/MQTT-dev/include/logs.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -233,21 +234,21 @@ _TOKEN * Tpop(_TOKEN *token)
 	MYSQL_ROW           row;
 	// char 				*cptr, *bptr;
 	char 				buff[_INPUT_BUFFER_SIZE];
-		return NULL;
-	// /* get handles  */
-	// conn = mysql_init(NULL);
-	// if (conn == NULL)
-	// {
-	// 	printf("couldn't initialize conn: %s\n", mysql_error(conn));
-	// 	exit(1);
-	// }
-	// /* connect to server */
-	// if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
-	// {
-	// 	printf("couldn't connect to database\n");
-	// 	exit(1);
-	// }
 
+	/* get handles  */
+	conn = mysql_init(NULL);
+	if (conn == NULL)
+	{
+		printf("couldn't initialize conn: %s\n", mysql_error(conn));
+		exit(1);
+	}
+	/* connect to server */
+	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
+	{
+		printf("couldn't connect to database\n");
+		exit(1);
+	}
+		return NULL;
 	// get the oldest row 
 	// if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
 	// 	show_mysql_error(conn);
