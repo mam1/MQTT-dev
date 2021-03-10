@@ -25,6 +25,8 @@
 /* write an entry to the  log files */
 void logit(char *fname, char *source, char *mess) 
 {
+
+
 	FILE 				*plog, *slog;
 	char 				*time_now, *tnptr;
 	time_t 				t;
@@ -38,16 +40,17 @@ void logit(char *fname, char *source, char *mess)
 // printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 
+// return;
+
 	/* Open process log file */
-	plog = fopen("/home/mam1/logs/conwatcher.log", "a");
+	plog = fopen(fname, "a");
 	if (plog == NULL) {
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(plog, "%s - %s\n", "time", "mess");
+	fprintf(plog, "%s - %s\n", time_now, mess);
 	fclose(plog);
 
-return;
 
 	/* Open system log file */
 	slog = fopen(_SYSTEM_LOG, "a");
