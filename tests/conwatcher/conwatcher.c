@@ -48,7 +48,7 @@ union 			semun dummy;
 SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
-WINDOW * mainwin = newwin(60,100,10,10);
+WINDOW * mainwin;
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 
@@ -157,11 +157,12 @@ int main(int argc, char *argv[])
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	/*  Initialize ncurses  */
-	if ( (mainwin = initscr()) == NULL ) {
+	if ( (initscr()) == NULL ) {
 		fprintf(stderr, "Error initialising ncurses.\n");
 		logit(_CONWATCHER_LOG, "conwatcher", "Error initialising ncurses.");
 		exit(-1);
 	}
+	mainwin = newwin(60,100,0,0);
 // wresize(mainwin, 22, 130);
 refresh();
 	noecho();
