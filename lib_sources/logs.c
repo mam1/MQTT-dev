@@ -29,7 +29,7 @@ printf("%s\n", "hi there");
 // return;
 
 	FILE 				*dlog, *slog;
-	char 				* time_now, *tnptr;
+	char 				*time_now, *tnptr;
 	time_t 				t;
 
 // 	t = time(NULL);
@@ -41,7 +41,7 @@ printf("%s\n", "hi there");
 // printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 
-return;
+// return;
 
 	/* Open process log file */
 	dlog = fopen(fname, "a");
