@@ -48,7 +48,7 @@ union 			semun dummy;
 SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 
-WINDOW * mainwin = newwin(_LINES,_COLUMNS,1,1);
+WINDOW * mainwin = newwin(60,100,10,10);
 
 char 			linebuff[_INPUT_BUFFER_SIZE];
 
