@@ -375,5 +375,6 @@ int main(int argc, char *argv[])
 	// endwin();			/* End curses mode		  */
 	// refresh();
 	// printf("\n%s\n", "program terminated");
+	logit(_CONWATCHER_LOG,"conwatcher", "conwatcher terminated");
 	return 0;
 }
