@@ -254,19 +254,19 @@ _TOKEN * Tpop(_TOKEN *token)
 		show_mysql_error(conn);
 
 	result = mysql_store_result(conn);
+
+	if ((row = mysql_fetch_row(result)) == NULL)
 		return NULL;
-	// if ((row = mysql_fetch_row(result)) == NULL)
-	// 	return NULL;
 
 	// strcpy(token->token, row[1]);
 	// strcpy(token->type, row[2]);
 	// token->value = (int) strtol(row[3], (char **)NULL, 10);
 
-	// sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
-	// if (mysql_query(conn, buff))
-	// 	show_mysql_error(conn);
+	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
+	if (mysql_query(conn, buff))
+		show_mysql_error(conn);
 
-	// return token;
+	return NULL;
 }
 
 int reset_tokenQ(void)
