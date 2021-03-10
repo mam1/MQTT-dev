@@ -157,12 +157,11 @@ int main(int argc, char *argv[])
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	/*  Initialize ncurses  */
-	if ( (initscr()) == NULL ) {
+	if ( (mainwin = initscr()) == NULL ) {
 		fprintf(stderr, "Error initialising ncurses.\n");
 		logit(_CONWATCHER_LOG, "conwatcher", "Error initialising ncurses.");
 		exit(-1);
 	}
-	mainwin = newwin(60,100,0,0);
 // wresize(mainwin, 22, 130);
 refresh();
 	noecho();
