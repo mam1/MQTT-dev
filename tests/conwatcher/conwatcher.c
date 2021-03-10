@@ -137,244 +137,229 @@ int main(int argc, char *argv[])
 	logit(_CONWATCHER_LOG,"conwatcher", "conwatcher started");
 
 
-	// char 					*end_toke;
-	// int						ch;
-	// _TOKEN 					toke;
-	// int 					tpid;
-	// int 					ipc;
-	// // char 					*args[];
+	char 					*end_toke;
+	int						ch;
+	_TOKEN 					toke;
+	int 					tpid;
+	int 					ipc;
 
-	// /* setup semaphores */
-	// // int id = semget(KEY, 1, 0666 | IPC_CREAT);
-	// // if (id < 0)
-	// // {
-	// // 	perror("semget"); exit(11);
-	// // }
-	// // union semun u;
-	// // u.val = 1;
-	// // if (semctl(id, 0, SETVAL, u) < 0)
-	// // {
-	// // 	perror("semctl"); exit(12);
-	// // }
+	/* check for ipc file */
+	if (access(ipc_file, F_OK) == 0) {
+		ipc = 1;
+		logit(_CONWATCHER_LOG, "conwatcher", "ipc file found");
+	}
+	else {
+		ipc = 0;
+		logit(_CONWATCHER_LOG, "conwatcher", "* ipc file not found");
+	}
 
+	/* set up file mapped shared memory for inter process communication */
+	ipc_sem_init();										// setup semaphores
+	semid = ipc_sem_id(skey);
 
-	// /* check for ipc file */
-	// if (access(ipc_file, F_OK) == 0) {
-	// 	ipc = 1;
-	// 	logit(_CONWATCHER_LOG, "conwatcher", "ipc file found");
-	// }
-	// else {
-	// 	ipc = 0;
-	// 	logit(_CONWATCHER_LOG, "conwatcher", "* ipc file not found");
-	// }
+	/* setup shared memory */
+	ipc_sem_init();
+	semid = ipc_sem_id(skey);					// get semaphore id
+	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
+	fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
+	data = ipc_map(fd, ipc_size());           	// map file to memory
+	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
+	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
-	// /* set up file mapped shared memory for inter process communication */
-	// ipc_sem_init();										// setup semaphores
-	// semid = ipc_sem_id(skey);
+	/*  Initialize ncurses  */
+	if ( (mainwin = initscr()) == NULL ) {
+		fprintf(stderr, "Error initialising ncurses.\n");
+		exit(-1);
+	}
+	noecho();
+	intrflush(mainwin, FALSE);
+	keypad(mainwin, TRUE);
+	clear();
+	disp("conwatcher active");
+	reset_linebuffer();
 
-	// /* setup shared memory */
-	// ipc_sem_init();
-	// semid = ipc_sem_id(skey);					// get semaphore id
-	// ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-	// fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
-	// data = ipc_map(fd, ipc_size());           	// map file to memory
-	// ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
-	// ipc_sem_free(semid, &sb);                   // free lock on shared memory
+	/* read the keyboard */
+	while ((ch = getch()) != 'q')
+	{
+		if ( isprint(ch) && !(ch & KEY_CODE_YES)) 	// if a printable character
+		{
+			if (lb_ptr <= lb_end - 1)				// room to add character ?
+			{
+				if (lb_ptr == lb_insert)			// insert curser has not been moved
+				{
+					*lb_ptr++ = ch;					// insert character into linbuffer
+					lb_insert++;
+					*lb_ptr = '\0';
+					disp("got a printable character ");
+				}
 
-	// /*  Initialize ncurses  */
-	// if ( (mainwin = initscr()) == NULL ) {
-	// 	fprintf(stderr, "Error initialising ncurses.\n");
-	// 	exit(-1);
-	// }
-	// noecho();
-	// intrflush(mainwin, FALSE);
-	// keypad(mainwin, TRUE);
-	// clear();
-	// disp("conwatcher active");
-	// reset_linebuffer();
+				else 								// insert curser has been moved
+				{
+					// getyx(mainwin, y, x);
 
-	// /* read the keyboard */
-	// while ((ch = getch()) != 'q')
-	// {
-	// 	if ( isprint(ch) && !(ch & KEY_CODE_YES)) 	// if a printable character
-	// 	{
-	// 		if (lb_ptr <= lb_end - 1)				// room to add character ?
-	// 		{
-	// 			if (lb_ptr == lb_insert)			// insert curser has not been moved
-	// 			{
-	// 				*lb_ptr++ = ch;					// insert character into linbuffer
-	// 				lb_insert++;
-	// 				*lb_ptr = '\0';
-	// 				disp("got a printable character ");
-	// 			}
-
-	// 			else 								// insert curser has been moved
-	// 			{
-	// 				// getyx(mainwin, y, x);
-
-	// 				end_toke = linebuff;			// find the end of the entered data
-	// 				while (*end_toke != '\0') end_toke++;
-	// 				*++end_toke = '\0';				// make room for the added character
+					end_toke = linebuff;			// find the end of the entered data
+					while (*end_toke != '\0') end_toke++;
+					*++end_toke = '\0';				// make room for the added character
 
 
-	// 				ripple_up(lb_insert, end_toke);
+					ripple_up(lb_insert, end_toke);
 
-	// 				*lb_insert++ = ch;
+					*lb_insert++ = ch;
 
-	// 				// wmove(mainwin, 10, 10);
-	// 				// refresh();
+					// wmove(mainwin, 10, 10);
+					// refresh();
 
-	// 				disp("inserting a character");
-	// 				x++;
-	// 				wmove(mainwin, y, x);
-	// 			}
-	// 		}
-	// 		else
-	// 		{
-	// 			disp("**** line buffer overflow ****");
-	// 		}
-	// 	}
+					disp("inserting a character");
+					x++;
+					wmove(mainwin, y, x);
+				}
+			}
+			else
+			{
+				disp("**** line buffer overflow ****");
+			}
+		}
 
-	// 	else
-	// 	{
-	// 		switch (ch)
-	// 		{
+		else
+		{
+			switch (ch)
+			{
 
-	// 		case _NO_CHAR: 	/* NOCR */
-	// 			break;
+			case _NO_CHAR: 	/* NOCR */
+				break;
 
-	// 		case  0x103:  	/* up arrow */
-
-
-	// 			break;
-	// 		case 0x102:		/* down arrow */
+			case  0x103:  	/* up arrow */
 
 
-	// 			break;
-
-	// 		case 0x105:		/* right arrow */
-	// 			if (lb_insert < lb_ptr )
-	// 			{
-	// 				lb_insert++;
-	// 				getyx(mainwin, y, x);
-	// 				x++;
-	// 				move(y, x);
-	// 			}
-
-	// 			break;
-	// 		case 0x104:		/* left arrow */
-	// 			if (lb_insert > linebuff )
-	// 			{
-	// 				lb_insert--;
-	// 				getyx(mainwin, y, x);
-	// 				x--;
-	// 				move(y, x);
-	// 			}
-	// 			break;
-
-	// 		case 0x107:		/* backspace */
-	// 			if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
-	// 			{
-	// 				*--lb_ptr = '\0';
-	// 				lb_insert--;
-	// 				disp("got a backspace");
-	// 			}
-
-	// 			else
-	// 			{
-	// 				end_toke = linebuff;			// find the end of the entered data
-	// 				while (*end_toke != '\0') end_toke++;
-	// 				if (lb_insert > linebuff)
-	// 				{
-	// 					lb_insert--;
-	// 					ripple_down(lb_insert, end_toke);
-	// 					disp("deleting a character");
-	// 					x--;
-	// 					wmove(mainwin, y, x);
-	// 				}
-	// 			}
-	// 			break;
-
-	// 		case 0xa:		/* CR */
-	// 			memset(screenbuff, '\0', sizeof(screenbuff));
-	// 			strcpy(screenbuff, linebuff);
-
-	// 			//*************************************************
-	// 			// if (semop(id, &p, 1) < 0)
-	// 			// {
-	// 			// 	perror("semop p"); exit(13);
-	// 			// }
-
-	// 			// copy linbuffer into shared memory
+				break;
+			case 0x102:		/* down arrow */
 
 
-	// 			// if (semop(id, &v, 1) < 0)
-	// 			// {
-	// 			// 	perror("semop p"); exit(14);
-	// 			// }
-	// 			disp(ipc_ptr->linebuff);
-	// 			sleep(300000);
-	// 			tpid = vfork();
-	// 			if (tpid == 0) execl(" / usr / bin / mybins / toker", " / usr / bin / mybins / toker", (char *) 0);
+				break;
 
-	// 			if (tpid < 0)
-	// 			{
-	// 				/*fork creation faile*/
-	// 				printf("fork creation failed!!!\n");
-	// 				exit (1);
-	// 			}
+			case 0x105:		/* right arrow */
+				if (lb_insert < lb_ptr )
+				{
+					lb_insert++;
+					getyx(mainwin, y, x);
+					x++;
+					move(y, x);
+				}
+
+				break;
+			case 0x104:		/* left arrow */
+				if (lb_insert > linebuff )
+				{
+					lb_insert--;
+					getyx(mainwin, y, x);
+					x--;
+					move(y, x);
+				}
+				break;
+
+			case 0x107:		/* backspace */
+				if ((lb_insert == lb_ptr) & (lb_ptr > linebuff ))
+				{
+					*--lb_ptr = '\0';
+					lb_insert--;
+					disp("got a backspace");
+				}
+
+				else
+				{
+					end_toke = linebuff;			// find the end of the entered data
+					while (*end_toke != '\0') end_toke++;
+					if (lb_insert > linebuff)
+					{
+						lb_insert--;
+						ripple_down(lb_insert, end_toke);
+						disp("deleting a character");
+						x--;
+						wmove(mainwin, y, x);
+					}
+				}
+				break;
+
+			case 0xa:		/* CR */
+				memset(screenbuff, '\0', sizeof(screenbuff));
+				strcpy(screenbuff, linebuff);
+
+				//*************************************************
+				// if (semop(id, &p, 1) < 0)
+				// {
+				// 	perror("semop p"); exit(13);
+				// }
+
+				// copy linbuffer into shared memory
 
 
-	// 			//****************************************
+				// if (semop(id, &v, 1) < 0)
+				// {
+				// 	perror("semop p"); exit(14);
+				// }
+				disp(ipc_ptr->linebuff);
+				sleep(300000);
+				tpid = vfork();
+				if (tpid == 0) execl(" / usr / bin / mybins / toker", " / usr / bin / mybins / toker", (char *) 0);
+
+				if (tpid < 0)
+				{
+					/*fork creation faile*/
+					printf("fork creation failed!!!\n");
+					exit (1);
+				}
+
+
+				//****************************************
 
 
 
-	// 			// tokenizer(linebuff);
-	// 			disp ("linebuffer sent to tokenizer to be processed");
-	// 			add_comm(linebuff);
-	// 			reset_linebuffer();
-	// 			break;
+				// tokenizer(linebuff);
+				disp ("linebuffer sent to tokenizer to be processed");
+				add_comm(linebuff);
+				reset_linebuffer();
+				break;
 
-	// 	/* DEL */	case 0x14a:
-	// 			disp("deleting token queue");
-	// 			memset(screenbuff, '\0', sizeof(screenbuff));
-	// 			while (Tpop(&toke) != NULL)
-	// 			{
-	// 				strcat(screenbuff, " token <");
-	// 				strcat(screenbuff, toke.token);
-	// 				strcat(screenbuff, ">,  type <");
-	// 				strcat(screenbuff, toke.type);
-	// 				strcat(screenbuff, ">, value < ");
-	// 				char  b[10];
-	// 				sprintf(b, " % i", toke.value);
-	// 				strcat(screenbuff, b);
-	// 				strcat(screenbuff, " > \n");
-	// 				memset(toke.token, '\0', sizeof(toke.token));
-	// 				memset(toke.type, '\0', sizeof(toke.token));
-	// 				toke.value = 0;
+		/* DEL */	case 0x14a:
+				disp("deleting token queue");
+				memset(screenbuff, '\0', sizeof(screenbuff));
+				while (Tpop(&toke) != NULL)
+				{
+					strcat(screenbuff, " token <");
+					strcat(screenbuff, toke.token);
+					strcat(screenbuff, ">,  type <");
+					strcat(screenbuff, toke.type);
+					strcat(screenbuff, ">, value < ");
+					char  b[10];
+					sprintf(b, " % i", toke.value);
+					strcat(screenbuff, b);
+					strcat(screenbuff, " > \n");
+					memset(toke.token, '\0', sizeof(toke.token));
+					memset(toke.type, '\0', sizeof(toke.token));
+					toke.value = 0;
 
-	// 			}
-	// 			disp ("token queue deleted");
-	// 			reset_linebuffer();
+				}
+				disp ("token queue deleted");
+				reset_linebuffer();
 
 
-	// 			break;
+				break;
 
-	// 		case 0x168: /* End */
-	// 			delwin(mainwin);
-	// 			endwin();			/* End curses mode		  */
-	// 			refresh();
-	// 			printf("\n%s\n", "program terminated");
-	// 			return 0;
-	// 			break;
-	// 		}
+			case 0x168: /* End */
+				delwin(mainwin);
+				endwin();			/* End curses mode		  */
+				refresh();
+				printf("\n%s\n", "program terminated");
+				return 0;
+				break;
+			}
 
-	// 	}
-	// }
-	// delwin(mainwin);
-	// endwin();			/* End curses mode		  */
-	// refresh();
-	// printf("\n%s\n", "program terminated");
+		}
+	}
+	delwin(mainwin);
+	endwin();			/* End curses mode		  */
+	refresh();
+	printf("\n%s\n", "program terminated");
 	logit(_CONWATCHER_LOG,"conwatcher", "conwatcher terminated");
 	return 0;
 }
