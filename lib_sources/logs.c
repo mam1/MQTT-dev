@@ -22,13 +22,10 @@
 
 
 
-/* write an entry to the daemon log file */
-void logit(char *fname, char *source, char *mess) {
-
-printf("%s\n", "hi there");
-// return;
-
-	FILE 				*dlog, *slog;
+/* write an entry to the  log files */
+void logit(char *fname, char *source, char *mess) 
+{
+	FILE 				*plog, *slog;
 	char 				*time_now, *tnptr;
 	time_t 				t;
 
@@ -41,16 +38,14 @@ printf("%s\n", "hi there");
 // printf("%s\n", "got the time");
 printf("fname <%s>,  source <%s>,  mess <%s>\n", fname, source, mess );
 
-// return;
-
 	/* Open process log file */
-	dlog = fopen(fname, "a");
-	if (dlog == NULL) {
+	plog = fopen("/home/mam1/logs/conwatcher.log", "a");
+	if (plog == NULL) {
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(dlog, "%s - %s\n", time_now, mess);
-	fclose(dlog);
+	fprintf(plog, "%s - %s\n", "time", "mess");
+	fclose(plog);
 
 return;
 
