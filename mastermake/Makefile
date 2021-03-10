@@ -68,6 +68,14 @@ lib:
 	cd  $(project_DIRECTORY)/lib && $(MAKE) clean
 	cd  $(project_DIRECTORY)/lib && $(MAKE)
 
+sysbld:
+		export project_DIRECTORY
+	cd  $(project_DIRECTORY)/lib && $(MAKE) clean
+	cd  $(project_DIRECTORY)/lib && $(MAKE)
+	cd  $(project_DIRECTORY)/tests/conwatcher && $(MAKE)
+	cd  $(project_DIRECTORY)/tests/toker && $(MAKE)
+	cd  $(project_DIRECTORY)/tests/cp_daemon && $(MAKE)
+
 dump:
 	@echo hostname $(HOST)
 	@echo GNU PREFIX $(PREFIX)
