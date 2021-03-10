@@ -158,7 +158,7 @@ int main(void) {
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 
 	if(ipc==0){
-		logit("* new ipc file created and initialized" );
+		logit(_DAEMON_LOG, "cp_daemon", "* new ipc file created and initialized" );
 		ipc_sem_lock(semid, &sb);                   // wait for a lock on shared memory
         ipc_ptr->major_version_cp_daemon = 0;
         ipc_ptr->minor_version_cp_daemon = 0;
