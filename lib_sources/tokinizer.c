@@ -249,7 +249,7 @@ _TOKEN * Tpop(_TOKEN *token)
 		exit(1);
 	}
 
-	get the oldest row 
+	// get the oldest row 
 	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
 		show_mysql_error(conn);
 
