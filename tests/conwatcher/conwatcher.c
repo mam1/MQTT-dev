@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 	noecho();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
-	wresize(mainwin, _LINES, _COLUMNS);
+	wresize(mainwin, 60, 100);
 	clear();
 	disp("conwatcher active");
 	reset_linebuffer();
@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
 				strcpy(screenbuff, linebuff);
 				strcpy(ipc_ptr->linebuff, linebuff);
 				disp(ipc_ptr->linebuff);
-				
+
 				/* fork off a process to tokenize the line buffer */
 				tpid = vfork();
 				if (tpid == 0) execl("/usr/bin/mybins/toker", "/usr/bin/mybins/toker", (char *) 0);
