@@ -142,16 +142,16 @@ int main(int argc, char *argv[])
 	char 					*end_toke;
 	int						ch;
 	_TOKEN 					toke;
-	int 					tpid;
-	int 					ipc;
+	// int 					tpid;
+	// int 					ipc;
 
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
-		ipc = 1;
+		// ipc = 1;
 		logit(_CONWATCHER_LOG, "conwatcher", "ipc file found");
 	}
 	else {
-		ipc = 0;
+		// ipc = 0;
 		logit(_CONWATCHER_LOG, "conwatcher", "* ipc file not found");
 	}
 
