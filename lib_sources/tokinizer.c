@@ -226,44 +226,46 @@ int Qpush(char * token_buffer)
 
 _TOKEN * Tpop(_TOKEN *token)
 {
-	MYSQL               *conn;
-	MYSQL_RES           *result;
-	MYSQL_ROW           row;
-	// char 				*cptr, *bptr;
-	char 				buff[_INPUT_BUFFER_SIZE];
-	return NULL;
-	/* get handles  */
-	conn = mysql_init(NULL);
-	if (conn == NULL)
-	{
-		printf("couldn't initialize conn: %s\n", mysql_error(conn));
-		exit(1);
-	}
-	/* connect to server */
-	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
-	{
-		printf("couldn't connect to database\n");
-		exit(1);
-	}
 
-	/*get the oldest row */
-	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
-		show_mysql_error(conn);
-
-	result = mysql_store_result(conn);
-
-	if ((row = mysql_fetch_row(result)) == NULL)
 		return NULL;
+	// MYSQL               *conn;
+	// MYSQL_RES           *result;
+	// MYSQL_ROW           row;
+	// // char 				*cptr, *bptr;
+	// char 				buff[_INPUT_BUFFER_SIZE];
 
-	strcpy(token->token, row[1]);
-	strcpy(token->type, row[2]);
-	token->value = (int) strtol(row[3], (char **)NULL, 10);
+	// /* get handles  */
+	// conn = mysql_init(NULL);
+	// if (conn == NULL)
+	// {
+	// 	printf("couldn't initialize conn: %s\n", mysql_error(conn));
+	// 	exit(1);
+	// }
+	// /* connect to server */
+	// if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
+	// {
+	// 	printf("couldn't connect to database\n");
+	// 	exit(1);
+	// }
 
-	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
-	if (mysql_query(conn, buff))
-		show_mysql_error(conn);
+	// get the oldest row 
+	// if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
+	// 	show_mysql_error(conn);
 
-	return token;
+	// result = mysql_store_result(conn);
+
+	// if ((row = mysql_fetch_row(result)) == NULL)
+	// 	return NULL;
+
+	// strcpy(token->token, row[1]);
+	// strcpy(token->type, row[2]);
+	// token->value = (int) strtol(row[3], (char **)NULL, 10);
+
+	// sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
+	// if (mysql_query(conn, buff))
+	// 	show_mysql_error(conn);
+
+	// return token;
 }
 
 int reset_tokenQ(void)
