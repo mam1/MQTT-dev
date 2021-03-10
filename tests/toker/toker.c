@@ -57,7 +57,7 @@ SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 int main(void)
 {
-	logit(_TOKER_LOG, "toker\t\t\t", "toker started");
+	logit(_TOKER_LOG, "toker", "toker started");
 
 	char lbuf[] = {"abcdegf"};
 	char 			*tbuf_ptr, *lbuf_ptr;
@@ -67,11 +67,11 @@ int main(void)
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
 		ipc = 1;
-		logit(_TOKER_LOG, "toker\t\t\t", "ipc file found");
+		logit(_TOKER_LOG, "toker", "ipc file found");
 	}
 	else {
 		ipc = 0;
-		logit(_TOKER_LOG, "toker\t\t\t", "* ipc file not found");
+		logit(_TOKER_LOG, "toker", "* ipc file not found");
 	}
 
 	/* set up file mapped shared memory for inter process communication */
@@ -116,9 +116,13 @@ int main(void)
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
+	memset(tbuf, '\0', sizeof(tbuf));
 
-	strcpy(lbuf, ipc_ptr->linebuff);
+	ipc_sem_lock(semid, &sb);									// wait for a lock on shared memory
+	strcpy(lbuf, ipc_ptr->linebuff);							// get data from shared memory
+	memset(ipc_ptr->linebuff, '\0', sizeof(ipc_ptr->linebuff)); // erase shared memory
+	ipc_sem_free(semid, &sb);                   				// free lock on shared memory
+	
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
 	{
@@ -151,6 +155,6 @@ int main(void)
 	}
 	*tbuf_ptr++ = *lbuf_ptr++;
 	Tpush(tbuf);
-	logit(_TOKER_LOG, "toker\t\t\t", "toker terminated");
+	logit(_TOKER_LOG, "toker", "toker terminated");
 	return 0;
 }
