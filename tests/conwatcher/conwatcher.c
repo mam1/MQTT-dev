@@ -74,6 +74,19 @@ void disp(char *str)
 	return;
 }
 
+void disp2()
+{
+	clear();
+	mvprintw(1, 0, ipc_ptr->screen_s);
+	mvprintw(3, 0, ipc_ptr->screen_r);
+	mvprintw(30, 0, "enter a command > ");
+	mvprintw(30, 17, linebuff);
+	if (lb_ptr != lb_insert)			// insert curser has not been moved
+		move(y, x);
+	refresh();
+	return;
+}
+
 void reset_linebuffer(void)
 {
 	memset(linebuff, '\0', sizeof(linebuff));
