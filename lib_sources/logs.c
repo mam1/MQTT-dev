@@ -25,9 +25,15 @@
 /* write an entry to the log files */
 void logit(char *fname, char *source, char *mess) 
 {
+	// int 				size, msize;
+
+	char 				*ptr;
 	FILE 				*plog, *slog;
+	char 				source_buff[25];
     time_t T= time(NULL);
     struct  tm tm = *localtime(&T);
+
+    int 				fill;
 
 	/* Open process log file */
 	plog = fopen(fname, "a");
@@ -43,7 +49,27 @@ void logit(char *fname, char *source, char *mess)
 	if (slog == NULL) {
 		exit(EXIT_FAILURE);
 	}
-	fprintf(slog, "%s:\t%02d/%02d/%04d %02d:%02d:%02d - %s\n", source, tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900,tm.tm_hour, tm.tm_min, tm.tm_sec, mess);
+
+	memset(source_buff, ' ', sizeof(source_buff));
+	source_buff[25] = '\0'
+	strcpy(source_buff, source);
+	source_buff[strlen(source)] = ' ';
+
+
+	ptr = source;
+	i = 20;
+	fill = 0;
+	while(i-- > 0)
+	{
+		if (fill)
+			*ptr = ' '
+		else
+			if (*ptr == '\0')
+			fill = 1;
+
+	}
+
+	fprintf(slog, "%s:\t%02d/%02d/%04d %02d:%02d:%02d - %s\n", source_buff, tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900,tm.tm_hour, tm.tm_min, tm.tm_sec, mess);
 	fclose(slog);
 
 	return;
