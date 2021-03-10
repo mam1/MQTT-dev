@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 	int						ch;
 	_TOKEN 					toke;
 	int 					tpid;
-	int 					ipc;
+	// int 					ipc;
 	// char 					*args[];
 
 	/* setup semaphores */
@@ -349,7 +349,7 @@ int main(int argc, char *argv[])
 					sprintf(b, " % i", toke.value);
 					strcat(screenbuff, b);
 					strcat(screenbuff, " > \n");
-
+%s
 					memset(toke.token, '\0', sizeof(toke.token));
 					memset(toke.type, '\0', sizeof(toke.token));
 					toke.value = 0;
@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
 				delwin(mainwin);
 				endwin();			/* End curses mode		  */
 				refresh();
-				printf(" % s\n", "program terminated\n");
+				printf("\n%s\n", "program terminated");
 				return 0;
 				break;
 			}
@@ -375,6 +375,6 @@ int main(int argc, char *argv[])
 	delwin(mainwin);
 	endwin();			/* End curses mode		  */
 	refresh();
-	printf("\n%s\n", "program terminated\n");
+	printf("\n%s\n", "program terminated");
 	return 0;
 }
