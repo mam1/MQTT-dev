@@ -310,8 +310,8 @@ refresh();
 				break;
 
 		/* DEL */	case 0x14a:
-				disp("deleting token queue");
-				// memset(screenbuff, '\0', sizeof(screenbuff));
+
+				memset(screenbuff, '\0', sizeof(screenbuff));
 				// while (Tpop(&toke) != NULL)
 				// {
 				// 	strcat(screenbuff, " token <");
