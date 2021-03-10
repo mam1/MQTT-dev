@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 	int						ch;
 	_TOKEN 					toke;
 	int 					tpid;
-	// int 					ipc;
+	int 					ipc;
 	// char 					*args[];
 
 	/* setup semaphores */
