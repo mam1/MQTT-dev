@@ -26,6 +26,7 @@
 void logit(char *fname, char *source, char *mess) {
 
 printf("%s\n", "hi there");
+return;
 
 	FILE 				*dlog, *slog;
 	char 				* time_now, *tnptr;
