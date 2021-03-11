@@ -175,13 +175,13 @@ int main(int argc, char *argv[])
 		exit(-1);
 	}
 // wresize(mainwin, 22, 130);
-refresh();
+	refresh();
 	noecho();
 	intrflush(mainwin, FALSE);
 	keypad(mainwin, TRUE);
 	clear();
 	disp("conwatcher active");
-		logit(_CONWATCHER_LOG, "conwatcher", "conwatcher active");
+	logit(_CONWATCHER_LOG, "conwatcher", "conwatcher active");
 	reset_linebuffer();
 
 	/* read the keyboard */
@@ -314,18 +314,18 @@ refresh();
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				while (Tpop(&toke) != NULL)
 				{
-				// 	strcat(screenbuff, " token <");
-				// 	strcat(screenbuff, toke.token);
-				// 	strcat(screenbuff, ">,  type <");
-				// 	strcat(screenbuff, toke.type);
-				// 	strcat(screenbuff, ">, value < ");
-				// 	char  b[10];
-				// 	sprintf(b, " % i", toke.value);
-				// 	strcat(screenbuff, b);
-				// 	strcat(screenbuff, " > \n");
-				// 	memset(toke.token, '\0', sizeof(toke.token));
-				// 	memset(toke.type, '\0', sizeof(toke.token));
-				// 	toke.value = 0;
+						strcat(screenbuff, " token <");
+						strcat(screenbuff, toke.token);
+						strcat(screenbuff, ">,  type <");
+						strcat(screenbuff, toke.type);
+						strcat(screenbuff, ">, value < ");
+						char  b[10];
+						sprintf(b, " % i", toke.value);
+						strcat(screenbuff, b);
+						strcat(screenbuff, " > \n");
+						memset(toke.token, '\0', sizeof(toke.token));
+						memset(toke.type, '\0', sizeof(toke.token));
+						toke.value = 0;
 
 				}
 				disp ("token queue deleted");
