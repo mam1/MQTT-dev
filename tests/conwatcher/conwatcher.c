@@ -216,6 +216,8 @@ int main(int argc, char *argv[])
 					// refresh();
 
 					disp("inserting a character");
+									logit(_CONWATCHER_LOG, "conwatcher", "inserting a character");
+
 					x++;
 					wmove(mainwin, y, x);
 				}
@@ -287,7 +289,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0xa:		/* CR */
-								logit(_CONWATCHER_LOG, "conwatcher", "got a CR");
+				logit(_CONWATCHER_LOG, "conwatcher", "got a CR");
 
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
@@ -313,7 +315,7 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				while (Tpop(&toke) != NULL);;
-					// printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.type, toke.value);
+				// printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.type, toke.value);
 				reset_linebuffer();
 				disp ("token queue deleted");
 
