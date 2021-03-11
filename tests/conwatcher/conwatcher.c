@@ -330,7 +330,7 @@ int main(int argc, char *argv[])
 // 						toke.value = 0;
 // 				}
 
-				while (Tpop(&t) != NULL) printf("token dump:  <%s>  <%s>  <%i>\n", t.token, t.type, t.value);
+				while (Tpop(&t) != NULL) printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.type, toke.value);
 				disp ("token queue deleted");
 				// sleep(3);
 				reset_linebuffer();
