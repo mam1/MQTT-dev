@@ -1,0 +1,102 @@
+#!/bin/bash
+# MQTT-dev system status
+echo -e \\033c		# clear the terminal screen
+stty cooked			# switch to buffered iput
+stty echo			# turn on terminal echo
+
+echo "****************************************"
+echo "        MQTT-dev system status"
+echo "****************************************"
+
+echo -e "\nterminal io reinitialized"
+
+
+echo -e "\nchecking for instances of cp_daemon"
+plist=$(pidof ~/Git/MQTT-dev/bin/cp_daemon)
+# echo $plist
+if [ "$plist" != "" ] 
+	then
+		hlist="there is an instance of cp_daemon active pid " 
+		hlist=$hlist$plist
+		echo -e $hlist
+		echo -n "	should it be killed? {y}{n} > "
+		read answr
+
+		# echo $answr
+
+		if [ "$answr" == "y" ] 
+			then
+				echo -n "killing process "
+				echo $plist
+				kill $plist
+		fi
+	else
+		echo -n "  there are no instances of cp_daemon active should one be started? {y}{n} > "
+		read answr
+		if [ "$answr" == "y" ]
+			then
+				echo "starting daemon"
+				cp_daemon > /home/mam1/Git/MQTT-dev/logs/cp_daemon.log &
+		fi
+fi
+
+echo -e "\nchecking for instances of conwatcher"
+plist=$(pidof ~/Git/MQTT-dev/bin/conwatcher)
+# echo $plist
+if [ "$plist" != "" ] 
+	then
+		hlist="there is an instance of conwatcher active pid " 
+		hlist=$hlist$plist
+		echo $hlist
+		echo -n "	should it be killed? {y}{n} > "
+		read answr
+
+		# echo $answr
+
+		if [ "$answr" == "y" ] 
+			then
+				echo -n "killing process "
+				echo $plist
+				kill $plist
+		fi
+	else
+		echo -n "  there are no instances of conwatcher active should one be started? {y}{n} > "
+		read answr
+		if [ "$answr" == "y" ]
+			then
+				echo "starting daemon"
+				conwatcher
+		fi
+fi
+
+echo -e "\nchecking for instances of toker"
+plist=$(pidof ~/Git/MQTT-dev/bin/toker)
+# echo $plist
+if [ "$plist" != "" ] 
+	then
+		hlist="there is an instance of toker active pid " 
+		hlist=$hlist$plist
+		echo $hlist
+		echo -n "	should it be killed? {y}{n} > "
+		read answr
+
+		# echo $answr
+
+		if [ "$answr" == "y" ] 
+			then
+				echo -n "killing process "
+				echo $plist
+				kill $plist
+		fi
+	else
+		echo -n "  there are no instances of toker active should one be started? {y}{n} > "
+		read answr
+		if [ "$answr" == "y" ]
+			then
+				echo "starting daemon"
+				toker
+		fi
+fi
+
+
+exit 0
