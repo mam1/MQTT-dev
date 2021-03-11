@@ -287,6 +287,8 @@ int main(int argc, char *argv[])
 				break;
 
 			case 0xa:		/* CR */
+								logit(_CONWATCHER_LOG, "conwatcher", "got a CR");
+
 				memset(screenbuff, '\0', sizeof(screenbuff));
 				strcpy(screenbuff, linebuff);
 				strcpy(ipc_ptr->linebuff, linebuff);
@@ -310,28 +312,7 @@ int main(int argc, char *argv[])
 				break;
 
 		/* DEL */	case 0x14a:
-
-// 				memset(screenbuff, '\0', sizeof(screenbuff));
-// toke_ptr = NULL;
-// 				while (Tpop(&toke) != NULL)
-// 				{
-
-// 						strcat(screenbuff, " token <");
-// 						strcat(screenbuff, toke.token);
-// 						strcat(screenbuff, ">,  type <");
-// 						strcat(screenbuff, toke.type);
-// 						strcat(screenbuff, ">, value < ");
-// 						char  b[10];
-// 						sprintf(b, " % i", toke.value);
-// 						strcat(screenbuff, b);
-// 						strcat(screenbuff, " > \n");
-// 						memset(toke.token, '\0', sizeof(toke.token));
-// 						memset(toke.type, '\0', sizeof(toke.token));
-// 						toke.value = 0;
-// 				}
-
 				while (Tpop(&toke) != NULL);;
-
 					// printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.type, toke.value);
 				reset_linebuffer();
 				disp ("token queue deleted");
@@ -343,6 +324,7 @@ int main(int argc, char *argv[])
 				endwin();			/* End curses mode		  */
 				refresh();
 				printf("\n%s\n", "program terminated");
+				logit(_CONWATCHER_LOG, "conwatcher", "conwatcher terminated by command");
 				return 0;
 				break;
 			}
