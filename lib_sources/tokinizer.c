@@ -257,7 +257,7 @@ _TOKEN * Tpop(_TOKEN * t)
 		return NULL;
 	}
 
-	printf("connection id: %ld\n", mysql_thread_id(mysql));
+	// printf("connection id: %ld\n", mysql_thread_id(mysql));
 
 	/* Prepare a SELECT query to fetch data from test_table */
 	stmt = mysql_stmt_init(mysql);
@@ -381,11 +381,11 @@ _TOKEN * Tpop(_TOKEN * t)
 	}
 	
 	/* Free the prepared result metadata */
-	puts("freeing metadata\n");
+	// puts("freeing metadata\n");
 	mysql_free_result(prepare_meta_result);
 
 	/* Close the statement */
-	puts("closing statement\n");
+	// puts("closing statement\n");
 	if (mysql_stmt_close(stmt))
 	{
 		fprintf(stderr, " failed while closing the statement\n");
@@ -398,7 +398,7 @@ _TOKEN * Tpop(_TOKEN * t)
 	if (mysql_query(mysql, buff))
 		show_mysql_error(mysql);
 
-	printf("connection id: %ld\n", mysql_thread_id(mysql));
+	// printf("connection id: %ld\n", mysql_thread_id(mysql));
 	puts("closing connection\n");
 	mysql_close(mysql);
 
