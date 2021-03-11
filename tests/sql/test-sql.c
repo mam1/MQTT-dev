@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "/usr/include/mariadb/mysql.h"
+
 // #include <mysql.h>
 
 #define STRING_SIZE 50
