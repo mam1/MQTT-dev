@@ -49,9 +49,9 @@ int main(int argc, char **argv) {
   unsigned long length[4];
   int           param_count, column_count, row_count;
   short         small_data;
-  int           int_data_1,int_data_2;
+  int           int_data_1, int_data_2;
   char          str_data_1[STRING_SIZE];
-    char          str_data_2[STRING_SIZE];
+  char          str_data_2[STRING_SIZE];
   my_bool       is_null[4];
   my_bool       error[4];
   MYSQL *mysql = NULL;
@@ -175,71 +175,37 @@ int main(int argc, char **argv) {
     exit(0);
   }
 
-    /* Execute the SELECT query */
-    if (mysql_stmt_execute(stmt))
+  /* Execute the SELECT query */
+  if (mysql_stmt_execute(stmt))
+  {
+    fprintf(stderr, " mysql_stmt_execute(), failed\n");
+    fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+  } else {
+
+    /* Now buffer all results to client */
+    if (mysql_stmt_store_result(stmt))
     {
-      fprintf(stderr, " mysql_stmt_execute(), failed\n");
+      fprintf(stderr, " mysql_stmt_store_result() failed\n");
       fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-    } else {
-
-      /* Now buffer all results to client */
-      if (mysql_stmt_store_result(stmt))
-      {
-        fprintf(stderr, " mysql_stmt_store_result() failed\n");
-        fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-        exit(0);
-      }
-
-      /* Fetch all rows */
-      row_count = 0;
-      fprintf(stdout, "Fetching results ...\n");
-      while (!mysql_stmt_fetch(stmt))
-      {
-printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.type, t.value);
-
-
-
-        row_count++;
-        fprintf(stdout, "  row %d\n", row_count);
-
-        /* column 1 */
-        fprintf(stdout, "   column1 (integer)  : ");
-        if (is_null[0])
-          fprintf(stdout, " NULL\n");
-        else
-          fprintf(stdout, " %d(%ld)\n", int_data_1, length[0]);
-
-        /* column 2 */
-        fprintf(stdout, "   column2 (string)   : ");
-        if (is_null[1])
-          fprintf(stdout, " NULL\n");
-        else
-          fprintf(stdout, " %s(%ld)\n", str_data_1, length[1]);
-
-        /* column 3 */
-        fprintf(stdout, "   column2 (string)   : ");
-        if (is_null[2])
-          fprintf(stdout, " NULL\n");
-        else
-          fprintf(stdout, " %s(%ld)\n", str_data_2, length[2]);
-
-        /* column 4 */
-        fprintf(stdout, "   column1 (integer)  : ");
-        if (is_null[3])
-          fprintf(stdout, " NULL\n");
-        else
-          fprintf(stdout, " %d(%ld)\n", int_data_2, length[3]);
-        fprintf(stdout, "\n");
-      }
-
-      /* Validate rows fetched */
-      fprintf(stdout, " total rows fetched: %d\n", row_count);
-      if (row_count != 2)
-      {
-        fprintf(stderr, " MySQL failed to return all rows\n");
-        exit(0);
-      }
+      exit(0);
     }
+
+    /* Fetch all rows */
+    row_count = 0;
+    fprintf(stdout, "Fetching results ...\n");
+    while (!mysql_stmt_fetch(stmt))
+    {
+      printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.type, t.value);
+    }
+
+    /* Validate rows fetched */
+    fprintf(stdout, " total rows fetched: %d\n", row_count);
+    if (row_count != 2)
+    {
+      fprintf(stderr, " MySQL failed to return all rows\n");
+      exit(0);
+    }
+  }
   // }
 
   /* Free the prepared result metadata */

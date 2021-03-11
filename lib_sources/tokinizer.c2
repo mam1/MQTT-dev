@@ -27,7 +27,7 @@
 
 #define STRING_SIZE 50
 
-#define SELECT_SAMPLE "SELECT tokenID, token, toke_type, value FROM TokenQ WHERE !SLEEP(10)"
+#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(10)"
 
 static void show_mysql_error(MYSQL *mysql)
 {
@@ -203,7 +203,7 @@ int Tpush(char *token_buffer)
 
 	token_type(&token);			//set token type and value
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, toke_type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
