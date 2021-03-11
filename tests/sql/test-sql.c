@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mysql.h>
+// #include <mysql.h>
 
 #define STRING_SIZE 50
 
