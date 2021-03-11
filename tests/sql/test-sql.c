@@ -9,7 +9,7 @@
    GNU General Public License for more details.
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
 /*
@@ -30,7 +30,7 @@
 
 #define STRING_SIZE 50
 
-#define SELECT_SAMPLE "SELECT col1, col2, col3, col4 FROM test_table WHERE !SLEEP(10)"
+#define SELECT_SAMPLE "SELECT tokenID, token, toke_type, value FROM TokenQ WHERE !SLEEP(10)"
 
 int main(int argc, char **argv) {
   MYSQL_STMT    *stmt;
@@ -52,20 +52,20 @@ int main(int argc, char **argv) {
     fprintf(stderr, "could not initialize MySQL client library\n");
     exit(1);
   }
- 
+
   mysql = mysql_init(mysql);
-  
+
   if (!mysql) {
     puts("Init faild, out of memory?");
     return EXIT_FAILURE;
   }
-  
+
   mysql_options(mysql, MYSQL_OPT_RECONNECT, &reconnect);
 
   mysql_options(mysql, MYSQL_READ_DEFAULT_FILE, (void *)"./test.cnf");
 
   if (!mysql_real_connect(mysql,       /* MYSQL structure to use */
-                          NULL,         /* server hostname or IP address */ 
+                          NULL,         /* server hostname or IP address */
                           NULL,         /* mysql user */
                           NULL,          /* password */
                           NULL,           /* default database to use, NULL for none */
@@ -75,159 +75,157 @@ int main(int argc, char **argv) {
     puts("Connect failed\n");
     return EXIT_FAILURE;
   }
-  
+
   printf("connection id: %ld\n", mysql_thread_id(mysql));
 
   /* Prepare a SELECT query to fetch data from test_table */
   stmt = mysql_stmt_init(mysql);
   if (!stmt)
-    {
-      fprintf(stderr, " mysql_stmt_init(), out of memory\n");
-      exit(0);
-    }
+  {
+    fprintf(stderr, " mysql_stmt_init(), out of memory\n");
+    exit(0);
+  }
   if (mysql_stmt_prepare(stmt, SELECT_SAMPLE, strlen(SELECT_SAMPLE)))
-    {
-      fprintf(stderr, " mysql_stmt_prepare(), SELECT failed\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-      exit(0);
-    }
+  {
+    fprintf(stderr, " mysql_stmt_prepare(), SELECT failed\n");
+    fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+    exit(0);
+  }
   fprintf(stdout, " prepare, SELECT successful\n");
 
   /* Get the parameter count from the statement */
-  param_count= mysql_stmt_param_count(stmt);
+  param_count = mysql_stmt_param_count(stmt);
   fprintf(stdout, " total parameters in SELECT: %d\n", param_count);
 
   if (param_count != 0) /* validate parameter count */
-    {
-      fprintf(stderr, " invalid parameter count returned by MySQL\n");
-      exit(0);
-    }
+  {
+    fprintf(stderr, " invalid parameter count returned by MySQL\n");
+    exit(0);
+  }
 
   /* Fetch result set meta information */
   prepare_meta_result = mysql_stmt_result_metadata(stmt);
   if (!prepare_meta_result)
-    {
-      fprintf(stderr,
-        " mysql_stmt_result_metadata(), returned no meta information\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-      exit(0);
-    }
+  {
+    fprintf(stderr,
+            " mysql_stmt_result_metadata(), returned no meta information\n");
+    fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+    exit(0);
+  }
 
   /* Get total columns in the query */
-  column_count= mysql_num_fields(prepare_meta_result);
+  column_count = mysql_num_fields(prepare_meta_result);
   fprintf(stdout, " total columns in SELECT statement: %d\n", column_count);
 
   if (column_count != 4) /* validate column count */
-    {
-      fprintf(stderr, " invalid column count returned by MySQL\n");
-      exit(0);
-    }
+  {
+    fprintf(stderr, " invalid column count returned by MySQL\n");
+    exit(0);
+  }
 
   /* Bind the result buffers for all 4 columns before fetching them */
 
   memset(bind, 0, sizeof(bind));
 
   /* INTEGER COLUMN */
-  bind[0].buffer_type= MYSQL_TYPE_LONG;
-  bind[0].buffer= (char *)&int_data;
-  bind[0].is_null= &is_null[0];
-  bind[0].length= &length[0];
-  bind[0].error= &error[0];
+  bind[0].buffer_type = MYSQL_TYPE_LONG;
+  bind[0].buffer = (char *)&int_data;
+  bind[0].is_null = &is_null[0];
+  bind[0].length = &length[0];
+  bind[0].error = &error[0];
 
   /* STRING COLUMN */
-  bind[1].buffer_type= MYSQL_TYPE_STRING;
-  bind[1].buffer= (char *)str_data;
-  bind[1].buffer_length= STRING_SIZE;
-  bind[1].is_null= &is_null[1];
-  bind[1].length= &length[1];
-  bind[1].error= &error[1];
+  bind[1].buffer_type = MYSQL_TYPE_STRING;
+  bind[1].buffer = (char *)str_data;
+  bind[1].buffer_length = STRING_SIZE;
+  bind[1].is_null = &is_null[1];
+  bind[1].length = &length[1];
+  bind[1].error = &error[1];
 
-  /* SMALLINT COLUMN */
-  bind[2].buffer_type= MYSQL_TYPE_SHORT;
-  bind[2].buffer= (char *)&small_data;
-  bind[2].is_null= &is_null[2];
-  bind[2].length= &length[2];
-  bind[2].error= &error[2];
+  /* STRING COLUMN */
+  bind[2].buffer_type = MYSQL_TYPE_STRING;
+  bind[2].buffer = (char *)str_data;
+  bind[2].buffer_length = STRING_SIZE;
+  bind[2].is_null = &is_null[2];
+  bind[2].length = &length[2];
+  bind[2].error = &error[2];
 
-  /* TIMESTAMP COLUMN */
-  bind[3].buffer_type= MYSQL_TYPE_TIMESTAMP;
-  bind[3].buffer= (char *)&ts;
-  bind[3].is_null= &is_null[3];
-  bind[3].length= &length[3];
-  bind[3].error= &error[3];
+  /* INTEGER COLUMN */
+  bind[3].buffer_type = MYSQL_TYPE_LONG;
+  bind[3].buffer = (char *)&int_data;
+  bind[3].is_null = &is_null[3];
+  bind[3].length = &length[3];
+  bind[3].error = &error[3];
 
   /* Bind the result buffers */
   if (mysql_stmt_bind_result(stmt, bind))
-    {
-      fprintf(stderr, " mysql_stmt_bind_result() failed\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-      exit(0);
-    }
-
-  for (j=0; j<3; j++) {
-    /* Execute the SELECT query */
-    if (mysql_stmt_execute(stmt))
-      {
-        fprintf(stderr, " mysql_stmt_execute(), failed\n");
-        fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-      } else {
-
-      /* Now buffer all results to client */
-      if (mysql_stmt_store_result(stmt))
   {
-    fprintf(stderr, " mysql_stmt_store_result() failed\n");
+    fprintf(stderr, " mysql_stmt_bind_result() failed\n");
     fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
     exit(0);
   }
 
+  for (j = 0; j < 3; j++) {
+    /* Execute the SELECT query */
+    if (mysql_stmt_execute(stmt))
+    {
+      fprintf(stderr, " mysql_stmt_execute(), failed\n");
+      fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+    } else {
+
+      /* Now buffer all results to client */
+      if (mysql_stmt_store_result(stmt))
+      {
+        fprintf(stderr, " mysql_stmt_store_result() failed\n");
+        fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+        exit(0);
+      }
+
       /* Fetch all rows */
-      row_count= 0;
+      row_count = 0;
       fprintf(stdout, "Fetching results ...\n");
       while (!mysql_stmt_fetch(stmt))
-  {
-    row_count++;
-    fprintf(stdout, "  row %d\n", row_count);
+      {
+        row_count++;
+        fprintf(stdout, "  row %d\n", row_count);
 
-    /* column 1 */
-    fprintf(stdout, "   column1 (integer)  : ");
-    if (is_null[0])
-      fprintf(stdout, " NULL\n");
-    else
-      fprintf(stdout, " %d(%ld)\n", int_data, length[0]);
+        /* column 1 */
+        fprintf(stdout, "   column1 (integer)  : ");
+        if (is_null[0])
+          fprintf(stdout, " NULL\n");
+        else
+          fprintf(stdout, " %d(%ld)\n", int_data, length[0]);
 
-    /* column 2 */
-    fprintf(stdout, "   column2 (string)   : ");
-    if (is_null[1])
-      fprintf(stdout, " NULL\n");
-    else
-      fprintf(stdout, " %s(%ld)\n", str_data, length[1]);
+        /* column 2 */
+        fprintf(stdout, "   column2 (string)   : ");
+        if (is_null[1])
+          fprintf(stdout, " NULL\n");
+        else
+          fprintf(stdout, " %s(%ld)\n", str_data, length[1]);
 
-    /* column 3 */
-    fprintf(stdout, "   column3 (smallint) : ");
-    if (is_null[2])
-      fprintf(stdout, " NULL\n");
-    else
-      fprintf(stdout, " %d(%ld)\n", small_data, length[2]);
+        /* column 3 */
+        fprintf(stdout, "   column2 (string)   : ");
+        if (is_null[2])
+          fprintf(stdout, " NULL\n");
+        else
+          fprintf(stdout, " %s(%ld)\n", str_data, length[2]);
 
-    /* column 4 */
-    fprintf(stdout, "   column4 (timestamp): ");
-    if (is_null[3])
-      fprintf(stdout, " NULL\n");
-    else
-      fprintf(stdout, " %04d-%02d-%02d %02d:%02d:%02d (%ld)\n",
-        ts.year, ts.month, ts.day,
-        ts.hour, ts.minute, ts.second,
-        length[3]);
-    fprintf(stdout, "\n");
-  }
+        /* column 4 */
+        fprintf(stdout, "   column1 (integer)  : ");
+        if (is_null[3])
+          fprintf(stdout, " NULL\n");
+        else
+          fprintf(stdout, " %d(%ld)\n", int_data, length[3]);
+        fprintf(stdout, "\n");
+      }
 
       /* Validate rows fetched */
       fprintf(stdout, " total rows fetched: %d\n", row_count);
       if (row_count != 2)
-  {
-    fprintf(stderr, " MySQL failed to return all rows\n");
-    exit(0);
-  }
+      {
+        fprintf(stderr, " MySQL failed to return all rows\n");
+        exit(0);
+      }
     }
   }
 
@@ -238,18 +236,18 @@ int main(int argc, char **argv) {
   /* Close the statement */
   puts("closing statement\n");
   if (mysql_stmt_close(stmt))
-    {
-      fprintf(stderr, " failed while closing the statement\n");
-      fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-      exit(0);
-    }
+  {
+    fprintf(stderr, " failed while closing the statement\n");
+    fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+    exit(0);
+  }
 
   printf("connection id: %ld\n", mysql_thread_id(mysql));
   puts("closing connection\n");
   mysql_close(mysql);
 
   mysql_library_end();
-  
+
   return EXIT_SUCCESS;
 }
 
@@ -291,12 +289,12 @@ int main(int argc, char **argv) {
 //   const char *forenames[]= {"Monty", "David", "will be replaced by default value"};
 //   char forename_ind[]= {STMT_INDICATOR_NTS, STMT_INDICATOR_NTS, STMT_INDICATOR_DEFAULT};
 //   char id_ind[]= {STMT_INDICATOR_NULL, STMT_INDICATOR_NULL, STMT_INDICATOR_NULL};
-//   unsigned int array_size= 3; 
+//   unsigned int array_size= 3;
 
 //   mysql= mysql_init(NULL);
 
 //   /* connect to MariaDB server */
-//   if (!mysql_real_connect(mysql, "localhost", "test-sql", "test-sql", 
+//   if (!mysql_real_connect(mysql, "localhost", "test-sql", "test-sql",
 //                           "example", 0, "/run/mysqld/mysqld.sock", 0))
 //     show_mysql_error(mysql);
 
