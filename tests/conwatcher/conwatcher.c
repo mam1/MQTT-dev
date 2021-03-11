@@ -302,7 +302,7 @@ int main(int argc, char *argv[])
 
 				if (tpid < 0)
 				{
-					fork creation faile
+					
 					printf("fork creation failed!!!\n");
 					logit(_CONWATCHER_LOG, "conwatcher", "fork creation failed");
 					exit (1);
