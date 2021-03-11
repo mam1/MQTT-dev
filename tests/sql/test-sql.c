@@ -30,10 +30,13 @@
 
 #define STRING_SIZE 100
 
-// #define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ ORDER BY tokenID LIMIT 1"
-#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(1)"
+#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ ORDER BY tokenID LIMIT 1"
+// #define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(1)"
 
 int main(int argc, char **argv) {
+
+  _TOKEN        t;
+
   MYSQL_STMT    *stmt;
   MYSQL_BIND    bind[4];
   MYSQL_RES     *prepare_meta_result;
@@ -138,7 +141,7 @@ int main(int argc, char **argv) {
 
   /* STRING COLUMN */
   bind[1].buffer_type = MYSQL_TYPE_STRING;
-  bind[1].buffer = (char *)str_data_1;
+  bind[1].buffer = (char *)t.token;
   bind[1].buffer_length = STRING_SIZE;
   bind[1].is_null = &is_null[1];
   bind[1].length = &length[1];
@@ -146,7 +149,7 @@ int main(int argc, char **argv) {
 
   /* STRING COLUMN */
   bind[2].buffer_type = MYSQL_TYPE_STRING;
-  bind[2].buffer = (char *)str_data_2;
+  bind[2].buffer = (char *)t.type;
   bind[2].buffer_length = STRING_SIZE;
   bind[2].is_null = &is_null[2];
   bind[2].length = &length[2];
@@ -154,7 +157,7 @@ int main(int argc, char **argv) {
 
   /* INTEGER COLUMN */
   bind[3].buffer_type = MYSQL_TYPE_LONG;
-  bind[3].buffer = (char *)&int_data_2;
+  bind[3].buffer = (char *)&t.value;
   bind[3].is_null = &is_null[3];
   bind[3].length = &length[3];
   bind[3].error = &error[3];
@@ -167,8 +170,6 @@ int main(int argc, char **argv) {
     exit(0);
   }
 
-
-  // for (j = 0; j < 3; j++) {
     /* Execute the SELECT query */
     if (mysql_stmt_execute(stmt))
     {
@@ -189,6 +190,10 @@ int main(int argc, char **argv) {
       fprintf(stdout, "Fetching results ...\n");
       while (!mysql_stmt_fetch(stmt))
       {
+printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.type, t.value);
+
+
+
         row_count++;
         fprintf(stdout, "  row %d\n", row_count);
 
