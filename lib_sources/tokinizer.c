@@ -324,7 +324,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	/* STRING COLUMN */
 	bind[1].buffer_type = MYSQL_TYPE_STRING;
-	bind[1].buffer = (char *)t.token;
+	bind[1].buffer = (char *)t->token;
 	bind[1].buffer_length = STRING_SIZE;
 	bind[1].is_null = &is_null[1];
 	bind[1].length = &length[1];
@@ -332,7 +332,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	/* STRING COLUMN */
 	bind[2].buffer_type = MYSQL_TYPE_STRING;
-	bind[2].buffer = (char *)t.type;
+	bind[2].buffer = (char *)t->type;
 	bind[2].buffer_length = STRING_SIZE;
 	bind[2].is_null = &is_null[2];
 	bind[2].length = &length[2];
@@ -340,7 +340,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	/* INTEGER COLUMN */
 	bind[3].buffer_type = MYSQL_TYPE_LONG;
-	bind[3].buffer = (char *)&t.value;
+	bind[3].buffer = (char *)&t->value;
 	bind[3].is_null = &is_null[3];
 	bind[3].length = &length[3];
 	bind[3].error = &error[3];
