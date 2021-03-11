@@ -208,17 +208,8 @@ int Qpush(char * token_buffer)
 	return 1;
 }
 
-
-
-
-
-
-
-
-
-_TOKEN * Tpop(_TOKEN * t) {
-
-
+_TOKEN * Tpop(_TOKEN * t) 
+{
 
 	MYSQL_STMT    *stmt;
 	MYSQL_BIND    bind[4];
@@ -281,11 +272,11 @@ _TOKEN * Tpop(_TOKEN * t) {
 		fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
 		exit(0);
 	}
-	fprintf(stdout, " prepare, SELECT successful\n");
+	// fprintf(stdout, " prepare, SELECT successful\n");
 
 	/* Get the parameter count from the statement */
 	param_count = mysql_stmt_param_count(stmt);
-	fprintf(stdout, " total parameters in SELECT: %d\n", param_count);
+	// fprintf(stdout, " total parameters in SELECT: %d\n", param_count);
 
 	if (param_count != 0) /* validate parameter count */
 	{
@@ -305,7 +296,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	/* Get total columns in the query int_data*/
 	column_count = mysql_num_fields(prepare_meta_result);
-	fprintf(stdout, " total columns in SELECT statement: %d\n", column_count);
+	// fprintf(stdout, " total columns in SELECT statement: %d\n", column_count);
 
 	if (column_count != 4) /* validate column count */
 	{
@@ -370,15 +361,13 @@ _TOKEN * Tpop(_TOKEN * t) {
 			exit(0);
 		}
 
-
-
 		/* Fetch all rows */
 		row_count = 0;
 		fprintf(stdout, "Fetching results ...\n");
 		while (!mysql_stmt_fetch(stmt))
 		{
 			row_count++;
-			printf("token dump:  token<%s>, type<%s>, value<%i>\n", t->token, t->type, t->value);
+			// printf("token dump:  token<%s>, type<%s>, value<%i>\n", t->token, t->type, t->value);
 		}
 		if (row_count == 0) return NULL;
 
@@ -390,8 +379,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 			exit(0);
 		}
 	}
-	// }
-
+	
 	/* Free the prepared result metadata */
 	puts("freeing metadata\n");
 	mysql_free_result(prepare_meta_result);
@@ -418,60 +406,6 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	return t;
 }
-
-
-
-
-
-
-
-
-
-
-
-// _TOKEN * Tpop(_TOKEN *token)
-// {
-
-
-// 	MYSQL               *conn;
-// 	MYSQL_RES           *result;
-// 	MYSQL_ROW           row;
-// 	// char 				*cptr, *bptr;
-// 	char 				buff[_INPUT_BUFFER_SIZE];
-
-// 	/* get handles  */
-// 	conn = mysql_init(NULL);
-// 	if (conn == NULL)
-// 	{
-// 		printf("couldn't initialize conn: %s\n", mysql_error(conn));
-// 		exit(1);
-// 	}
-// 	/* connect to server */
-// 	if (mysql_real_connect(conn, SERVER, USER, PSWD, DATABASE, 0, SOCKETT, CLIENT_INTERACTIVE) == NULL)
-// 	{
-// 		printf("couldn't connect to database\n");
-// 		exit(1);
-// 	}
-
-// 	// get the oldest row
-// 	if (mysql_query(conn, "SELECT * FROM TokenQ ORDER BY tokenID LIMIT 1;"))
-// 		show_mysql_error(conn);
-
-// 	result = mysql_store_result(conn);
-
-// 	if ((row = mysql_fetch_row(result)) == NULL)
-// 		return NULL;
-
-// 	strcpy(token->token, row[1]);
-// 	strcpy(token->type, row[2]);
-// 	// token->value = (int) strtol(row[3], (char **)NULL, 10);
-
-// 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
-// 	if (mysql_query(conn, buff))
-// 		show_mysql_error(conn);
-
-// 	return NULL;
-// }
 
 int reset_tokenQ(void)
 {
