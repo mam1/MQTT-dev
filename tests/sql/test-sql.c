@@ -30,7 +30,8 @@
 
 #define STRING_SIZE 50
 
-#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(1)"
+#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ"
+// #define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(1)"
 
 int main(int argc, char **argv) {
   MYSQL_STMT    *stmt;
