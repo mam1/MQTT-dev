@@ -42,7 +42,7 @@ typedef	struct {
 	int 			major_version_toker;
 	char 			screen_r[_SCREEN_R];
 	char 			screen_c[_SCREEN_C];
-	char 			screen_s[_SCREEN_S];
+	char 			screen_toker[_SCREEN_S];
 	char 			linebuff[_INPUT_BUFFER_SIZE];
 } _IPC_DAT;
 

@@ -24,7 +24,6 @@ export project_DIRECTORY=~/Git/MQTT-dev
 export project_BINARIES := $(project_DIRECTORY)/bin
 export project_LIB := MQTT mariadbclient
 
-
 program_DIRECTORY := ~/Git/MQTT-dev/tests/sql
-program_NAME := test-sql
+program_NAME := sql
 include $(project_DIRECTORY)/mastermake/Makefile
