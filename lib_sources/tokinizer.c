@@ -238,7 +238,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	char 				buff[_INPUT_BUFFER_SIZE];
 
-	if (mysql_library_init(argc, argv, NULL)) {
+	if (mysql_library_init(0, NULL, NULL)) {
 		fprintf(stderr, "could not initialize MySQL client library\n");
 		exit(1);
 	}
