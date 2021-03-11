@@ -142,8 +142,8 @@ int main(int argc, char *argv[])
 	char 					*end_toke;
 	int						ch;
 	_TOKEN 					toke, *toke_ptr;
-	// int 					tpid;
-	// int 					ipc;
+	int 					tpid;
+	int 					ipc;
 
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
