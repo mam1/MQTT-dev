@@ -247,7 +247,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 
 	if (!mysql) {
 		puts("Init faild, out of memory?");
-		return EXIT_FAILURE;
+		return NULL;
 	}
 
 	mysql_options(mysql, MYSQL_OPT_RECONNECT, &reconnect);
@@ -263,7 +263,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 	                        NULL,        /* socket file or named pipe name */
 	                        CLIENT_FOUND_ROWS /* connection flags */ )) {
 		puts("Connect failed\n");
-		return EXIT_FAILURE;
+		return NULL;
 	}
 
 	printf("connection id: %ld\n", mysql_thread_id(mysql));
@@ -406,7 +406,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 	}
 
 	/* delete oldest entrty of the queue  */
-	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
+	sprintf(buff, "delete from TokenQ WHERE tokenID = '%i';", t->tokenID);
 	if (mysql_query(mysql, buff))
 		show_mysql_error(mysql);
 
