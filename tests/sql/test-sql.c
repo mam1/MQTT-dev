@@ -30,7 +30,7 @@
 
 #define STRING_SIZE 50
 
-#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(10)"
+#define SELECT_SAMPLE "SELECT tokenID, token, type, value FROM TokenQ WHERE !SLEEP(1)"
 
 int main(int argc, char **argv) {
   MYSQL_STMT    *stmt;
@@ -165,7 +165,11 @@ int main(int argc, char **argv) {
     exit(0);
   }
 
-  for (j = 0; j < 3; j++) {
+
+
+
+
+  // for (j = 0; j < 3; j++) {
     /* Execute the SELECT query */
     if (mysql_stmt_execute(stmt))
     {
@@ -227,7 +231,7 @@ int main(int argc, char **argv) {
         exit(0);
       }
     }
-  }
+  // }
 
   /* Free the prepared result metadata */
   puts("freeing metadata\n");
