@@ -236,6 +236,8 @@ _TOKEN * Tpop(_TOKEN * t) {
 	int j;
 	my_bool reconnect = 1;
 
+	char 				buff[_INPUT_BUFFER_SIZE];
+
 	if (mysql_library_init(argc, argv, NULL)) {
 		fprintf(stderr, "could not initialize MySQL client library\n");
 		exit(1);
@@ -376,9 +378,9 @@ _TOKEN * Tpop(_TOKEN * t) {
 		while (!mysql_stmt_fetch(stmt))
 		{
 			row_count++;
-			printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.type, t.value);
+			printf("token dump:  token<%s>, type<%s>, value<%i>\n", t->token, t->type, t->value);
 		}
-		if(row_count == 0) return NULL;
+		if (row_count == 0) return NULL;
 
 		/* Validate rows fetched */
 		fprintf(stdout, " total rows fetched: %d\n", row_count);
