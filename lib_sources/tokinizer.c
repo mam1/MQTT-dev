@@ -363,7 +363,7 @@ _TOKEN * Tpop(_TOKEN * t)
 
 		/* Fetch all rows */
 		row_count = 0;
-		fprintf(stdout, "Fetching results ...\n");
+		// fprintf(stdout, "Fetching results ...\n");
 		while (!mysql_stmt_fetch(stmt))
 		{
 			row_count++;
