@@ -41,8 +41,9 @@ int main(int argc, char **argv) {
   unsigned long length[4];
   int           param_count, column_count, row_count;
   short         small_data;
-  int           int_data;
-  char          str_data[STRING_SIZE];
+  int           int_data_1,int_data_2;
+  char          str_data_1[STRING_SIZE];
+    char          str_data_2[STRING_SIZE];
   my_bool       is_null[4];
   my_bool       error[4];
   MYSQL *mysql = NULL;
@@ -114,7 +115,7 @@ int main(int argc, char **argv) {
     exit(0);
   }
 
-  /* Get total columns in the query */
+  /* Get total columns in the query int_data*/
   column_count = mysql_num_fields(prepare_meta_result);
   fprintf(stdout, " total columns in SELECT statement: %d\n", column_count);
 
@@ -130,14 +131,14 @@ int main(int argc, char **argv) {
 
   /* INTEGER COLUMN */
   bind[0].buffer_type = MYSQL_TYPE_LONG;
-  bind[0].buffer = (char *)&int_data;
+  bind[0].buffer = (char *)&int_data_1;
   bind[0].is_null = &is_null[0];
   bind[0].length = &length[0];
   bind[0].error = &error[0];
 
   /* STRING COLUMN */
   bind[1].buffer_type = MYSQL_TYPE_STRING;
-  bind[1].buffer = (char *)str_data;
+  bind[1].buffer = (char *)str_data_1;
   bind[1].buffer_length = STRING_SIZE;
   bind[1].is_null = &is_null[1];
   bind[1].length = &length[1];
@@ -145,7 +146,7 @@ int main(int argc, char **argv) {
 
   /* STRING COLUMN */
   bind[2].buffer_type = MYSQL_TYPE_STRING;
-  bind[2].buffer = (char *)str_data;
+  bind[2].buffer = (char *)str_data_2;
   bind[2].buffer_length = STRING_SIZE;
   bind[2].is_null = &is_null[2];
   bind[2].length = &length[2];
@@ -153,7 +154,7 @@ int main(int argc, char **argv) {
 
   /* INTEGER COLUMN */
   bind[3].buffer_type = MYSQL_TYPE_LONG;
-  bind[3].buffer = (char *)&int_data;
+  bind[3].buffer = (char *)&int_data_2;
   bind[3].is_null = &is_null[3];
   bind[3].length = &length[3];
   bind[3].error = &error[3];
@@ -165,9 +166,6 @@ int main(int argc, char **argv) {
     fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
     exit(0);
   }
-
-
-
 
 
   // for (j = 0; j < 3; j++) {
@@ -199,28 +197,28 @@ int main(int argc, char **argv) {
         if (is_null[0])
           fprintf(stdout, " NULL\n");
         else
-          fprintf(stdout, " %d(%ld)\n", int_data, length[0]);
+          fprintf(stdout, " %d(%ld)\n", int_data_1, length[0]);
 
         /* column 2 */
         fprintf(stdout, "   column2 (string)   : ");
         if (is_null[1])
           fprintf(stdout, " NULL\n");
         else
-          fprintf(stdout, " %s(%ld)\n", str_data, length[1]);
+          fprintf(stdout, " %s(%ld)\n", str_data_1, length[1]);
 
         /* column 3 */
         fprintf(stdout, "   column2 (string)   : ");
         if (is_null[2])
           fprintf(stdout, " NULL\n");
         else
-          fprintf(stdout, " %s(%ld)\n", str_data, length[2]);
+          fprintf(stdout, " %s(%ld)\n", str_data_2, length[2]);
 
         /* column 4 */
         fprintf(stdout, "   column1 (integer)  : ");
         if (is_null[3])
           fprintf(stdout, " NULL\n");
         else
-          fprintf(stdout, " %d(%ld)\n", int_data, length[3]);
+          fprintf(stdout, " %d(%ld)\n", int_data_2, length[3]);
         fprintf(stdout, "\n");
       }
 
