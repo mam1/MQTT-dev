@@ -406,7 +406,7 @@ _TOKEN * Tpop(_TOKEN * t) {
 	}
 
 	/* delete oldest entrty of the queue  */
-	sprintf(buff, "delete from TokenQ WHERE tokenID = '%i';", t->tokenID);
+	sprintf(buff, "delete from TokenQ WHERE tokenID = '%i';", tokenID);
 	if (mysql_query(mysql, buff))
 		show_mysql_error(mysql);
 

@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
   unsigned long length[4];
   int           param_count, column_count, row_count;
   short         small_data;
-  int           int_data_1, int_data_2;
+  int           tokenID, int_data_2;
   char          str_data_1[STRING_SIZE];
   char          str_data_2[STRING_SIZE];
   my_bool       is_null[4];
@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
 
   /* INTEGER COLUMN */
   bind[0].buffer_type = MYSQL_TYPE_LONG;
-  bind[0].buffer = (char *)&int_data_1;
+  bind[0].buffer = (char *)&tokenID;
   bind[0].is_null = &is_null[0];
   bind[0].length = &length[0];
   bind[0].error = &error[0];
