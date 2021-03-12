@@ -5,13 +5,13 @@ stty cooked			# switch to buffered iput
 stty echo			# turn on terminal echo
 
 
-echo -e "\n\n        MQTT-dev system status"
+echo -e "\n        MQTT-dev system status"
 echo "****************************************"
 
-echo -e "\nterminal io reinitialized\n\n"
+echo -e "\nterminal io reinitialized\n"
 
 plist=$(pidof ~/Git/MQTT-dev/bin/cp_daemon)
-# echo $plist
+
 if [ "$plist" != "" ] 
 	then
 		echo -e "there is an instance of cp_daemon active\n" 
@@ -21,22 +21,23 @@ if [ "$plist" != "" ]
 fi
 
 plist=$(pidof ~/Git/MQTT-dev/bin/conwatcher)
-# # echo $plist
+
 if [ "$plist" != "" ] 
 	then
 		echo -e "there is an instance of conwatcher active\n" 
 	else
-		echo -e "  there are no instances of conwatcher active\n"	
+		echo -e "there are no instances of conwatcher active\n"	
 fi
 
-# echo -e "\nchecking for instances of toker"
+
 plist=$(pidof ~/Git/MQTT-dev/bin/toker)
-# # echo $plist
+
 if [ "$plist" != "" ] 
 	then
 		echo -e "there is an instance of toker active\n" 
 
 	else
+		echo -e "there are no instances of toker active\n"
 fi
 
 
