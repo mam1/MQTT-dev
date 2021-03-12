@@ -59,9 +59,9 @@ int main(void)
 {
 	logit(_TOKER_LOG, "toker", "toker started");
 
-	char            lbuf[_LINEBUFFER]
-	char 			*tbuf_ptr, *lbuf_ptr;
+	char            lbuf[_LINE_BUFFER_SIZE];
 	char 			tbuf[_LINE_BUFFER_SIZE];
+	char 			*tbuf_ptr, *lbuf_ptr;
 	int 			ipc;
 
 	/* check for ipc file */
