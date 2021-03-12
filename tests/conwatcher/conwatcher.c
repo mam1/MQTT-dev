@@ -315,7 +315,7 @@ int main(int argc, char *argv[])
 
 		/* DEL */	case 0x14a:
 				while (Tpop(&toke) != NULL);;
-				// printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.type, toke.value);
+				// printf("token dump:  <%s>  <%s>  <%i>\n", toke.token, toke.ttype, toke.value);
 				reset_linebuffer();
 				disp ("token queue deleted");
 

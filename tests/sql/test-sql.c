@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
 
   /* STRING COLUMN */
   bind[2].buffer_type = MYSQL_TYPE_STRING;
-  bind[2].buffer = (char *)t.type;
+  bind[2].buffer = (char *)t.ttype;
   bind[2].buffer_length = STRING_SIZE;
   bind[2].is_null = &is_null[2];
   bind[2].length = &length[2];
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
     fprintf(stdout, "Fetching results ...\n");
     while (!mysql_stmt_fetch(stmt))
     {
-      printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.type, t.value);
+      printf("token dump:  token<%s>, type<%s>, value<%i>\n", t.token, t.ttype, t.value);
     }
 
     /* Validate rows fetched */

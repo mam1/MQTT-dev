@@ -68,14 +68,14 @@ _TOKEN * token_type(_TOKEN *token)
 	/*test for an empty command */
 	if ((*token->token == '\0') || (*token->token == ' '))
 	{
-		strcpy(token->type, "null");
+		strcpy(token->ttype, "null");
 		return token;
 	}
 
 	/* test for a integer */
 	if (is_valid_int(token->token))
 	{
-		strcpy(token->type, "integer");
+		strcpy(token->ttype, "integer");
 		token->value = (int) strtol(token->token, (char **)NULL, 10);
 		return token;
 	}
@@ -104,11 +104,11 @@ _TOKEN * token_type(_TOKEN *token)
 	result = mysql_store_result(conn);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
-		strcpy(token->type, "unrecognized");
+		strcpy(token->ttype, "unrecognized");
 		token->value = -1;
 		return token;
 	}
-	strcpy(token->type, "keyword");
+	strcpy(token->ttype, "keyword");
 	token->value = (int) strtol(row[3], (char **)NULL, 10);
 	return token;
 }
@@ -158,7 +158,7 @@ int Tpush(char *token_buffer)
 
 	logit(_TOKER_LOG, "Tpush", "token_type called");
 	logit(_TOKER_LOG, "Tpush token", token.token);
-	logit(_TOKER_LOG, "Tpush token type", token.type);
+	logit(_TOKER_LOG, "Tpush token type", token.ttype);
 
 
 	/* get connection handle  */
@@ -180,7 +180,7 @@ int Tpush(char *token_buffer)
 
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.ttype, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -338,7 +338,7 @@ _TOKEN * Tpop(_TOKEN * t)
 
 	/* STRING COLUMN */
 	bind[2].buffer_type = MYSQL_TYPE_STRING;
-	bind[2].buffer = (char *)t->type;
+	bind[2].buffer = (char *)t->ttype;
 	bind[2].buffer_length = STRING_SIZE;
 	bind[2].is_null = &is_null[2];
 	bind[2].length = &length[2];
@@ -380,7 +380,7 @@ _TOKEN * Tpop(_TOKEN * t)
 		while (!mysql_stmt_fetch(stmt))
 		{
 			row_count++;
-			// printf("token dump:  token<%s>, type<%s>, value<%i>\n", t->token, t->type, t->value);
+			// printf("token dump:  token<%s>, type<%s>, value<%i>\n", t->token, t->ttype, t->value);
 		}
 		if (row_count == 0) return NULL;
 

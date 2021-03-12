@@ -33,7 +33,7 @@ int main(void)
 	_TOKEN 				t;
 
 
-	while (Tpop(&t) != NULL) printf("token dump:  <%s>  <%s>  <%i>\n", t.token, t.type, t.value);
+	while (Tpop(&t) != NULL) printf("token dump:  <%s>  <%s>  <%i>\n", t.token, t.ttype, t.value);
 	return 0;
 	
 }

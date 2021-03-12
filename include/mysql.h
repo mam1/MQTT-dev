@@ -97,7 +97,7 @@ extern unsigned int mariadb_deinitialize_ssl;
 #define IS_BLOB(n)	((n) & BLOB_FLAG)
 #define IS_NUM(t)	(((t) <= MYSQL_TYPE_INT24 && (t) != MYSQL_TYPE_TIMESTAMP) || (t) == MYSQL_TYPE_YEAR || (t) == MYSQL_TYPE_NEWDECIMAL)
 #define IS_NUM_FIELD(f)	 ((f)->flags & NUM_FLAG)
-#define INTERNAL_NUM_FIELD(f) (((f)->type <= MYSQL_TYPE_INT24 && ((f)->type != MYSQL_TYPE_TIMESTAMP || (f)->length == 14 || (f)->length == 8)) || (f)->type == MYSQL_TYPE_YEAR || (f)->type == MYSQL_TYPE_NEWDECIMAL || (f)->type == MYSQL_TYPE_DECIMAL)
+#define INTERNAL_NUM_FIELD(f) (((f)->ttype <= MYSQL_TYPE_INT24 && ((f)->ttype != MYSQL_TYPE_TIMESTAMP || (f)->length == 14 || (f)->length == 8)) || (f)->ttype == MYSQL_TYPE_YEAR || (f)->ttype == MYSQL_TYPE_NEWDECIMAL || (f)->ttype == MYSQL_TYPE_DECIMAL)
 
   typedef struct st_mysql_field {
     char *name;			/* Name of column */

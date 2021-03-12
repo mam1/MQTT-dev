@@ -70,14 +70,14 @@ _TOKEN * token_type(_TOKEN *token)
 	/*test for an empty command */
 	if ((*token->token == '\0') || (*token->token == ' '))
 	{
-		strcpy(token->type, "null");
+		strcpy(token->ttype, "null");
 		return token;
 	}
 
 	/* test for a integer */
 	if (is_valid_int(token->token))
 	{
-		strcpy(token->type, "integer");
+		strcpy(token->ttype, "integer");
 		token->value = (int) strtol(token->token, (char **)NULL, 10);
 		return token;
 	}
@@ -135,11 +135,11 @@ _TOKEN * token_type(_TOKEN *token)
 	result = mysql_store_result(conn);
 
 	if ((row = mysql_fetch_row(result)) == NULL) {
-		strcpy(token->type, "unrecognized");
+		strcpy(token->ttype, "unrecognized");
 		token->value = -1;
 		return token;
 	}
-	strcpy(token->type, "keyword");
+	strcpy(token->ttype, "keyword");
 	token->value = (int) strtol(row[3], (char **)NULL, 10);
 
 	mysql_close(conn);
@@ -203,7 +203,7 @@ int Tpush(char *token_buffer)
 
 	token_type(&token);			//set token type and value
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
+	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.ttype, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -276,7 +276,7 @@ _TOKEN * Tpop(_TOKEN *token)
 		return NULL;
 
 	strcpy(token->token, row[1]);
-	strcpy(token->type, row[2]);
+	strcpy(token->ttype, row[2]);
 	// token->value = (int) strtol(row[3], (char **)NULL, 10);
 
 	sprintf(buff, "delete from TokenQ WHERE tokenID = '%s';", row[0]);
