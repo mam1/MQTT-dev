@@ -5,7 +5,7 @@ stty cooked			# switch to buffered iput
 stty echo			# turn on terminal echo
 
 echo "****************************************"
-echo "        MQTT-dev system status"
+echo "        MQTT-dev system maintenance"
 echo "****************************************"
 
 echo -e "\nterminal io reinitialized"

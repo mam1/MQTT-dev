@@ -124,8 +124,10 @@ int main(void)
 	ipc_sem_free(semid, &sb);                   				// free lock on shared memory
 	
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
+	logit(_TOKER_LOG, "toker", " leading delimiters removed");
 	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
 	{
+		logit(_TOKER_LOG, "toker", "looping");
 		if (*lbuf_ptr == _QUOTE)  /* test for QUOTE */
 		{
 			memset(tbuf, '\0', sizeof(tbuf));
