@@ -157,6 +157,8 @@ int Tpush(char *token_buffer)
 	token_type(&token);			//set token type and value
 
 	logit(_TOKER_LOG, "Tpush", "token_type called");
+	logit(_TOKER_LOG, "Tpush token", token.token);
+	logit(_TOKER_LOG, "Tpush token type", token.type);
 
 
 	/* get connection handle  */
