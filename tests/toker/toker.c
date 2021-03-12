@@ -73,7 +73,7 @@ int main(void)
 		ipc = 0;
 		logit(_TOKER_LOG, "toker", "* ipc file not found");
 	}
-logit(_TOKER_LOG, "toker", "init sem");
+	logit(_TOKER_LOG, "toker", "init sem");
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
 	semid = ipc_sem_id(skey);
@@ -87,18 +87,20 @@ logit(_TOKER_LOG, "toker", "init sem");
 	data = ipc_map(fd, ipc_size());           	// map file to memory
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
-logit(_TOKER_LOG, "toker", "shared memory set up");
+	logit(_TOKER_LOG, "toker", "shared memory set up");
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
 	memset(tbuf, '\0', sizeof(tbuf));
 
 	ipc_sem_lock(semid, &sb);									// wait for a lock on shared memory
-	logit(_TOKER_LOG, "toker linbuff", ipc_ptr->linebuff);
+	logit(_TOKER_LOG, "toker shared linbuff", ipc_ptr->linebuff);
 	strcpy(lbuf, ipc_ptr->linebuff);							// get data from shared memory
 	memset(ipc_ptr->linebuff, '\0', sizeof(ipc_ptr->linebuff)); // erase shared memory
-	ipc_sem_free(semid, &sb);                   				// free lock on shared memory
-	
+	ipc_sem_free(semid, &sb);
+	logit(_TOKER_LOG, "toker local linbuff", lbuf);
+	// free lock on shared memory
+
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 	logit(_TOKER_LOG, "toker", " leading delimiters removed");
 	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
