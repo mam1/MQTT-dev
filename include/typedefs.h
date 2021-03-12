@@ -29,7 +29,7 @@ typedef struct sembuf SEMBUF;
 // 	// _CONFIG_DAT 			config;					// system configuration
 // 	// int 					escape;
 // 	// char 					*line_q;
-// 	char 				char 			linebuff[_INPUT_BUFFER_SIZE];
+// 	char 				char 			linebuff[_LINE_BUFFER_SIZE];
 // } _SYS_DAT;
 
 /* ipc data - memory mapped */
@@ -43,7 +43,7 @@ typedef	struct {
 	char 			screen_r[_SCREEN_R];
 	char 			screen_c[_SCREEN_C];
 	char 			screen_toker[_SCREEN_S];
-	char 			linebuff[_INPUT_BUFFER_SIZE];
+	char 			linebuff[_LINE_BUFFER_SIZE];
 } _IPC_DAT;
 
 /* command token data */

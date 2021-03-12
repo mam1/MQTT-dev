@@ -10,7 +10,7 @@
 
 /*********************** externals **************************/
 extern int              cmd_state, char_state;
-extern char             input_buffer[_INPUT_BUFFER_SIZE], *input_buffer_ptr;
+extern char             input_buffer[_LINE_BUFFER_SIZE], *input_buffer_ptr;
 extern char             c_name[_CHANNEL_NAME_SIZE][_NUMBER_OF_CHANNELS];
 extern int          exit_flag;                    //exit man loop if TRUE
 extern int              trace_flag;                     //trace file is active

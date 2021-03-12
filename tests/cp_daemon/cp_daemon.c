@@ -87,7 +87,7 @@ int main(void) {
 	FILE 		*pidf;
 	char 		command[120];
 	int 		i;
-	char 			linebuff[_INPUT_BUFFER_SIZE];
+	char 			linebuff[_LINE_BUFFER_SIZE];
 
 	/* Fork off the parent process */
 	pid = fork();

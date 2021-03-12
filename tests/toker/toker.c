@@ -59,10 +59,10 @@ int main(void)
 {
 	logit(_TOKER_LOG, "toker", "toker started");
 
-	char lbuf[] = {"abcdegf"};
+	char            lbuf[_LINEBUFFER]
 	char 			*tbuf_ptr, *lbuf_ptr;
-	char 			tbuf[_INPUT_BUFFER_SIZE];
-	int 					ipc;
+	char 			tbuf[_LINE_BUFFER_SIZE];
+	int 			ipc;
 
 	/* check for ipc file */
 	if (access(ipc_file, F_OK) == 0) {
@@ -93,6 +93,7 @@ int main(void)
 	lbuf_ptr = lbuf;
 	memset(tbuf, '\0', sizeof(tbuf));
 
+	memset(lbuf, '\0', sizeof(lbuf));
 	ipc_sem_lock(semid, &sb);									// wait for a lock on shared memory
 	logit(_TOKER_LOG, "toker shared linbuff", ipc_ptr->linebuff);
 	strcpy(lbuf, ipc_ptr->linebuff);							// get data from shared memory
@@ -100,6 +101,7 @@ int main(void)
 	ipc_sem_free(semid, &sb);
 	logit(_TOKER_LOG, "toker local linbuff", lbuf);
 	// free lock on shared memory
+
 
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 	logit(_TOKER_LOG, "toker", " leading delimiters removed");

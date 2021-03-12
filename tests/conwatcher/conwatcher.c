@@ -50,7 +50,7 @@ SEMBUF sb = {0, -1, 0};  						// set to allocate resource
 
 WINDOW * mainwin;
 
-char 			linebuff[_INPUT_BUFFER_SIZE];
+char 			linebuff[_LINE_BUFFER_SIZE];
 
 char 			screenbuff[500];
 // char 			screenbuff[500];
@@ -92,7 +92,7 @@ void reset_linebuffer(void)
 	memset(linebuff, '\0', sizeof(linebuff));
 	lb_insert = linebuff;
 	lb_ptr = linebuff;
-	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+	lb_end = linebuff + _LINE_BUFFER_SIZE;
 	disp("linebuffer reset");
 	return;
 }

@@ -22,7 +22,7 @@
 
 WINDOW * mainwin;
 
-char 			linebuff[_INPUT_BUFFER_SIZE];
+char 			linebuff[_LINE_BUFFER_SIZE];
 char 			screenbuff[500];
 char 			tbuff[500];
 char 			*lb_ptr, *lb_in, *lb_out, *lb_end, *lb_insert, *ripple_ptr;
@@ -46,7 +46,7 @@ void reset_linebuffer(void)
 	memset(linebuff, '\0', sizeof(linebuff));
 	lb_insert = linebuff;
 	lb_ptr = linebuff;
-	lb_end = linebuff + _INPUT_BUFFER_SIZE;
+	lb_end = linebuff + _LINE_BUFFER_SIZE;
 	disp("linebuffer reset");
 	return;
 }

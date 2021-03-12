@@ -63,7 +63,7 @@ _TOKEN * token_type(_TOKEN *token)
 	MYSQL               *conn;
 	MYSQL_RES           *result;
 	MYSQL_ROW           row;
-	char 				buff[_INPUT_BUFFER_SIZE];
+	char 				buff[_LINE_BUFFER_SIZE];
 
 	/*test for an empty command */
 	if ((*token->token == '\0') || (*token->token == ' '))
@@ -138,7 +138,7 @@ int is_a_delimiter(char * c)
 int Tpush(char *token_buffer)
 {
 	MYSQL               *conn;
-	char 				buff[_INPUT_BUFFER_SIZE];
+	char 				buff[_LINE_BUFFER_SIZE];
 	_TOKEN 				token;
 
 	char 				*tptr, *bptr;
@@ -180,7 +180,7 @@ int Tpush(char *token_buffer)
 int Qpush(char * token_buffer)
 {
 	MYSQL               *conn;
-	char 				buff[_INPUT_BUFFER_SIZE];
+	char 				buff[_LINE_BUFFER_SIZE];
 
 	if (*token_buffer == ' ') return 1;
 
@@ -227,7 +227,7 @@ _TOKEN * Tpop(_TOKEN * t)
 	int j;
 	my_bool reconnect = 1;
 
-	char 				buff[_INPUT_BUFFER_SIZE];
+	char 				buff[_LINE_BUFFER_SIZE];
 
 	if (mysql_library_init(0, NULL, NULL)) {
 		fprintf(stderr, "could not initialize MySQL client library\n");
@@ -426,12 +426,12 @@ int reset_tokenQ(void)
 int tokenizer(char *lbuf)
 {
 	char 			*tbuf_ptr, *lbuf_ptr;
-	char 			tbuf[_INPUT_BUFFER_SIZE];
+	char 			tbuf[_LINE_BUFFER_SIZE];
 
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
-	memset(tbuf, '\0', _INPUT_BUFFER_SIZE);
+	memset(tbuf, '\0', _LINE_BUFFER_SIZE);
 
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
 	while (*lbuf_ptr != '\0')  // loop until the line buffer is empty
