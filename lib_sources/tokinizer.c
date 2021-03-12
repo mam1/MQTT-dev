@@ -180,7 +180,7 @@ int Tpush(char *token_buffer)
 
 
 	/* insert newest token */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.ttype, token.value);
+	sprintf(buff, "INSERT INTO TokenQ(token, ttype, value) VALUES('%s','%s', '%i');", token.token, token.ttype, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
@@ -213,7 +213,7 @@ int Qpush(char * token_buffer)
 	}
 
 	/* insert newest token_buffer */
-	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', NULL);", token_buffer, "string");
+	sprintf(buff, "INSERT INTO TokenQ(token, ttype, value) VALUES('%s','%s', NULL);", token_buffer, "string");
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
