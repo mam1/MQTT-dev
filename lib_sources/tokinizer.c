@@ -145,12 +145,19 @@ int Tpush(char *token_buffer)
 	tptr = token.token;
 	bptr = token_buffer;
 
+	logit(_TOKER_LOG, "Tpush", "started");
+
+
 	/*test for an empty command */
 	if ((*token_buffer == '\0') || (*token_buffer == ' '))
 		return 1;
 
 	memset(&token.token, '\0', sizeof(token.token));
-	while (*bptr != '\0') *tptr++ = *bptr++;
+	strcpy(token.token, token_buffer);
+	token_type(&token);			//set token type and value
+
+	logit(_TOKER_LOG, "Tpush", "token_type called");
+
 
 	/* get connection handle  */
 	conn = mysql_init(NULL);
@@ -167,13 +174,17 @@ int Tpush(char *token_buffer)
 		exit(1);
 	}
 
-	token_type(&token);			//set token type and value
+
+
+
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, type, value) VALUES('%s','%s', '%i');", token.token, token.type, token.value);
 	if (mysql_query(conn, buff))
 		show_mysql_error(conn);
 
 	mysql_close(conn);
+
+
 	return 1;
 }
 
@@ -208,7 +219,7 @@ int Qpush(char * token_buffer)
 	return 1;
 }
 
-_TOKEN * Tpop(_TOKEN * t) 
+_TOKEN * Tpop(_TOKEN * t)
 {
 
 	MYSQL_STMT    *stmt;
@@ -379,7 +390,7 @@ _TOKEN * Tpop(_TOKEN * t)
 			exit(0);
 		}
 	}
-	
+
 	/* Free the prepared result metadata */
 	// puts("freeing metadata\n");
 	mysql_free_result(prepare_meta_result);

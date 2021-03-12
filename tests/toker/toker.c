@@ -74,7 +74,7 @@ int main(void)
 		logit(_TOKER_LOG, "toker", "* ipc file not found");
 	}
 	logit(_TOKER_LOG, "toker", "init sem");
-	
+
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
 	semid = ipc_sem_id(skey);
@@ -99,9 +99,9 @@ int main(void)
 	logit(_TOKER_LOG, "toker shared linbuff", ipc_ptr->linebuff);
 	strcpy(lbuf, ipc_ptr->linebuff);							// get data from shared memory
 	memset(ipc_ptr->linebuff, '\0', sizeof(ipc_ptr->linebuff)); // erase shared memory
-	ipc_sem_free(semid, &sb);
+	ipc_sem_free(semid, &sb);									// free lock on shared memory
 	logit(_TOKER_LOG, "toker local linbuff", lbuf);
-	// free lock on shared memory
+	
 
 
 	while ((is_a_delimiter(lbuf_ptr)) && (*lbuf_ptr != '\0')) lbuf_ptr++; // remove leading delimiters
