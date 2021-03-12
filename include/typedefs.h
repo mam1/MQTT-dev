@@ -50,7 +50,7 @@ typedef	struct {
 typedef struct {
 	char 		 			token[_TOKEN_BUFFER_SIZE];
 	int 					value;
-	char 					type[_TOKEN_BUFFER_SIZE];
+	char 					ttype[_TOKEN_BUFFER_SIZE];
 
 } _TOKEN;
 
