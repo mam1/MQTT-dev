@@ -79,6 +79,7 @@ int main(void)
 	semid = ipc_sem_id(skey);
 
 	/* setup shared memory */
+	logit(_TOKER_LOG, "toker", "trying for a lock on shared memory");
 	ipc_sem_init();
 	semid = ipc_sem_id(skey);					// get semaphore id
 	ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
