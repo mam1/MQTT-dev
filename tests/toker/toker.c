@@ -74,6 +74,7 @@ int main(void)
 		logit(_TOKER_LOG, "toker", "* ipc file not found");
 	}
 	logit(_TOKER_LOG, "toker", "init sem");
+	
 	/* set up file mapped shared memory for inter process communication */
 	ipc_sem_init();										// setup semaphores
 	semid = ipc_sem_id(skey);
