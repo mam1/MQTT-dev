@@ -88,38 +88,13 @@ logit(_TOKER_LOG, "toker", "init sem");
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
 logit(_TOKER_LOG, "toker", "shared memory set up");
-	// printf("hi from toker\n");
-	// /* setup semaphores */
-	// int id = semget(KEY, 1, 0666 | IPC_CREAT);
-	// if (id < 0)
-	// {
-	// 	perror("semget"); exit(11);
-	// }
-	// union semun u;
-	// u.val = 1;
-	// if (semctl(id, 0, SETVAL, u) < 0)
-	// {
-	// 	perror("semctl"); exit(12);
-	// }
-
-	/* setup shared memory */
-	// sb.sem_num = 0; // semaphore #: 0 = first
-	// sb.sem_op = -1; // semaphore operation
-	// sb.sem_flg = 0; // operation flags
-	// ipc_sem_init();
-	// semid = ipc_sem_id(skey);					// get semaphore id
-	// ipc_sem_lock(semid, &sb);					// wait for a lock on shared memory
-	// fd = ipc_open(ipc_file, ipc_size());      	// create/open ipc file
-	// data = ipc_map(fd, ipc_size());           	// map file to memory
-	// ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
-	// ipc_sem_free(semid, &sb);                   // free lock on shared memory
-
 
 	tbuf_ptr = tbuf;
 	lbuf_ptr = lbuf;
 	memset(tbuf, '\0', sizeof(tbuf));
 
 	ipc_sem_lock(semid, &sb);									// wait for a lock on shared memory
+	logit(_TOKER_LOG, "toker linbuff", ipc_ptr->linebuff);
 	strcpy(lbuf, ipc_ptr->linebuff);							// get data from shared memory
 	memset(ipc_ptr->linebuff, '\0', sizeof(ipc_ptr->linebuff)); // erase shared memory
 	ipc_sem_free(semid, &sb);                   				// free lock on shared memory
