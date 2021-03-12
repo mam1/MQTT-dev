@@ -86,7 +86,7 @@ int main(void)
 	data = ipc_map(fd, ipc_size());           	// map file to memory
 	ipc_ptr = (_IPC_DAT *)data;					// overlay ipc data structure on shared memory
 	ipc_sem_free(semid, &sb);                   // free lock on shared memory
-
+logit(_TOKER_LOG, "toker", "shared memory set up");
 	// printf("hi from toker\n");
 	// /* setup semaphores */
 	// int id = semget(KEY, 1, 0666 | IPC_CREAT);
