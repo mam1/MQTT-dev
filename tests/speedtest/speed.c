@@ -31,7 +31,7 @@ int main(void)
 
 	for (i = 0; i < 10; i++)
 	{
-		printf("field %i value <%s>\n", i, value[i][0]);
+		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
 	printf("%s\n", "normal termination");
