@@ -10,13 +10,13 @@ int main(void)
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed";
 	FILE 			*tempfile;
 	char 			*filename = "/home/mam1/temp_speed";
-	char 			value[10][100];
-
+	char 			value[10][50];
 	int 			i;
 
 
 	/* run speedtest */
 	system(speedtest);
+	printf("%s\n", "speed test comleted");
 
 	/* parse string return from speetest.net  */
 	tempfile = fopen(filename, "r");
@@ -34,6 +34,7 @@ int main(void)
 		printf("field %i value <%s>\n", i, value[i][0]);
 	}
 
+	printf("%s\n", "normal termination");
 	return (0);
 }
 
