@@ -35,7 +35,7 @@ int main(void)
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
-	printf("%s\n", "normal termination");
+	printf("%s\n", "abnormal termination");
 	return (0);
 }
 
