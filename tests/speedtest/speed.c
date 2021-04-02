@@ -9,7 +9,8 @@ int main(void)
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed";
 	FILE 			*tempfile;
-	char 			filename = "/home/mam1/temp_speed";
+	char 			*filename = "/home/mam1/temp_speed";
+	char 			value[10][100];
 
 	int 			i;
 
