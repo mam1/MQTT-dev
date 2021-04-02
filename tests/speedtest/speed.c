@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
 int main(void)
 {
 
@@ -12,7 +9,6 @@ int main(void)
 	char 			*filename = "/home/mam1/temp_speed";
 	char 			value[10][50];
 	int 			i;
-
 
 	/* run speedtest */
 	system(speedtest);
