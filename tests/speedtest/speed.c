@@ -4,11 +4,11 @@
 #define _QUOTE      34
 
 
-int tokenizer(char *lbuf)
+int main(void)
 {
-	char 			*tbuf_ptr, *lbuf_ptr;
-	char 			tbuf[_LINE_BUFFER_SIZE];
-	int 			fnum;
+	// char 			*tbuf_ptr, *lbuf_ptr;
+	// char 			tbuf[_LINE_BUFFER_SIZE];
+	// int 			fnum;
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed";
 	FILE 			*tempfile;
 	char 			filename = "/home/mam1/temp_speed";
@@ -17,10 +17,10 @@ int tokenizer(char *lbuf)
 
 
 
-	tbuf_ptr = tbuf;
-	lbuf_ptr = lbuf;
-	memset(tbuf, '\0', _LINE_BUFFER_SIZE);
-	fnum = 0;
+	// tbuf_ptr = tbuf;
+	// lbuf_ptr = lbuf;
+	// memset(tbuf, '\0', _LINE_BUFFER_SIZE);
+	// fnum = 0;
 
 
 	/* run speedtest */
