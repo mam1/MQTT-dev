@@ -178,8 +178,6 @@ int xTpush(char *token_buffer)
 		exit(1);
 	}
 
-INTO CourseDemo(CourseId, StudentName, CourseName)" + "VALUES (?, ?, ?)";
-
 
 	/* insert newest token */
 	sprintf(buff, "INSERT INTO TokenQ(token, ttype, value) VALUES(?, ?, ?);");
