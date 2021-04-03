@@ -10,7 +10,8 @@ UUID=c6c8993a-a36e-4c3b-af1b-4ca1dd9e5d85 /               ext4    errors=remount
 # /boot/efi was on /dev/sda1 during installation
 UUID=5ED9-2EE3  /boot/efi       vfat    umask=0077      0       1
 /swapfile                                 none            swap    sw              0       0
-192.168.132.200:/media/sysuts              /media/sysuts      nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
-192.168.132.200:/media/BlackHole           /media/BlackHole   nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
-192.168.132.200:/media/Caldera              /media/Caldera      nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
-192.168.132.200:/media/Video           /media/Video   nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
+
+192.168.132.200:/media/sysuts          /media/sysuts       nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
+192.168.132.200:/media/BlackHole       /media/BlackHole    nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
+192.168.132.200:/media/Caldera         /media/Caldera      nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0
+192.168.132.200:/media/Video           /media/Video        nfs   rw,hard,intr,rsize=8192,wsize=8192,timeo=14   0 0

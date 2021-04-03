@@ -27,7 +27,7 @@ int main(void)
 		exit(1);
 	}
 	rewind(tempfile);
-	fscanf(tempfile, "%s %s %s %s %s %s %s %s %s %s", value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9]);
+	fscanf(tempfile, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s", value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9]);
 	fclose(tempfile);
 
 	for (i = 0; i < 10; i++)
