@@ -10,7 +10,7 @@
 int main(void)
 {
 
-	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed";
+	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
 	FILE 			*tempfile;
 	char 			*filename = "/home/mam1/temp_speed.csv";
 	char 			value[10][50];
@@ -26,7 +26,7 @@ FILE *fp;
 long lSize;
 char *buffer;
 
-fp = fopen ( filename, "rb" );
+fp = fopen (filename, "rb" );
 if( !fp )
 {
 	printf("%s\n", "error on file open");
