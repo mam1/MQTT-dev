@@ -26,7 +26,7 @@ FILE *fp;
 long lSize;
 char *buffer;
 
-fp = fopen ( "filename" , "rb" );
+fp = fopen ( filename, "rb" );
 if( !fp )
 {
 	printf("%s\n", "error on file open");
