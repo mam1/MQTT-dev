@@ -27,7 +27,11 @@ long lSize;
 char *buffer;
 
 fp = fopen ( "filename" , "rb" );
-// if( !fp ) pinerror("blah.txt"),exit(1);
+if( !fp )
+{
+	printf("%s\n", "error on file open");
+	exit (1);
+} 
 
 fseek( fp , 0L , SEEK_END);
 lSize = ftell( fp );
