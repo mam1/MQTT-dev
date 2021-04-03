@@ -66,14 +66,14 @@ int 			qon;
 	{
 		if(*bptr == _QUOTE)
 		{
-		qon = TRUE;
+		qon = 1;
 		vptr = &value[fnum++][0];
 		}
-		while((qon == TRUE) & (*bptr != '\0'))
+		while((qon == 1) & (*bptr != '\0'))
 		{
 			if(*bptr == _QUOTE)
 			{
-				qon = FALSE;
+				qon = 0;
 				bptr++;
 			}
 			else
