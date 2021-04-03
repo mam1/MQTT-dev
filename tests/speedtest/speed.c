@@ -69,6 +69,7 @@ int main(void)
 			*vptr++ = *bptr++;
 		}
 		*vptr = '\0';
+		bptr++;
 	}
 
 	printf("buffer <%s>\n", buffer);
