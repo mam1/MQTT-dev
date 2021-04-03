@@ -54,7 +54,7 @@ int main(void)
 	fnum = 0;
 	memset(value, '\0', sizeof(value));
 
-	for (i = 0; i < 9; i++)
+	for (i = 0; i < 10; i++)
 	{
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
@@ -62,9 +62,9 @@ int main(void)
 
 	while (*bptr != '\0')
 	{
-		while (*bptr == _QUOTE) bptr++;
+		while ((*bptr == _QUOTE) & (*bptr != '\0')) bptr++;
 		vptr = &value[fnum++][0];
-		while (*bptr != _QUOTE)
+		while ((*bptr != _QUOTE) & (*bptr != '\0'))
 		{
 			*vptr++ = *bptr++;
 		}
