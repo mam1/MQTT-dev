@@ -1,8 +1,10 @@
+#include <unistd.h>		//sleep
+#include <stdint.h>		//uint_8, uint_16, uint_32, etc.
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-
-
+#include <fcntl.h>
+#include <ctype.h>
 
 int main(void)
 {
@@ -12,7 +14,6 @@ int main(void)
 	char 			*filename = "/home/mam1/temp_speed";
 	char 			value[10][50];
 	int 			i;
-
 
 	/* run speedtest */
 	system(speedtest);
@@ -31,10 +32,10 @@ int main(void)
 
 	for (i = 0; i < 10; i++)
 	{
-		printf("field %i value <%s>\n", i, value[i][0]);
+		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
-	printf("%s\n", "normal termination");
+	printf("%s\n", "abnormal termination");
 	return (0);
 }
 
