@@ -11,46 +11,61 @@ int main(void)
 {
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
-	FILE 			*tempfile;
 	char 			*filename = "/home/mam1/temp_speed.csv";
 	char 			value[10][50];
 	int 			i;
+
+	FILE 			*fp;
+	long 			lSize;
+	char 			*buffer, *bptr, vptr;
+	int 			fnum;
+
 
 	/* run speedtest */
 	system(speedtest);
 	printf("%s\n", "speed test comleted");
 
-	/* parse string return from speetest.net  */
 
-FILE *fp;
-long lSize;
-char *buffer;
 
-fp = fopen (filename, "rb" );
-if( !fp )
-{
-	printf("%s\n", "error on file open");
-	exit (1);
-} 
+	fp = fopen (filename, "rb" );
+	if ( !fp )
+	{
+		printf("%s\n", "error on file open");
+		exit (1);
+	}
 
-fseek( fp , 0L , SEEK_END);
-lSize = ftell( fp );
-rewind( fp );
+	fseek( fp , 0L , SEEK_END);
+	lSize = ftell( fp );
+	rewind( fp );
 
-/* allocate memory for entire content */
-buffer = calloc( 1, lSize+1 );
-if( !buffer ) fclose(fp),fputs("memory alloc fails",stderr),exit(1);
+	/* allocate memory for entire content */
+	buffer = calloc( 1, lSize + 1 );
+	if ( !buffer ) fclose(fp), fputs("memory alloc fails", stderr), exit(1);
 
-/* copy the file into the buffer */
-if( 1!=fread( buffer , lSize, 1 , fp) )
-  fclose(fp),free(buffer),fputs("entire read fails",stderr),exit(1);
+	/* copy the file into the buffer */
+	if ( 1 != fread( buffer , lSize, 1 , fp) )
+		fclose(fp), free(buffer), fputs("entire read fails", stderr), exit(1);
 
-/* do your work here, buffer is a string contains the whole text */
+	/* do your work here, buffer is a string contains the whole text */
 
-printf("buffer <%s>\n", buffer);
+	bptr = buffer;
+	fnum = 0;
+	memset(value, '\0', sizeof(value));
+	while (*bptr != '\0')
+	{
+		while (*bptr == '"') bptr++;
+		vptr = &value[fnum++][0];
+		while (*bptr != '"')
+		{
+			*vptr++ = *bptr++;
+		}
+		*vptr = '\0';
+	}
 
-fclose(fp);
-free(buffer);
+	printf("buffer <%s>\n", buffer);
+
+	fclose(fp);
+	free(buffer);
 
 
 
@@ -80,7 +95,7 @@ free(buffer);
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
-	printf("%s\n", "abnormal termination");
+	printf("%s\n", "normal termination");
 	return (0);
 }
 
