@@ -64,10 +64,10 @@ int main(void)
 	{
 		while ((*bptr == _QUOTE) & (*bptr != '\0')) bptr++;
 		vptr = &value[fnum++][0];
-		while ((*bptr != _QUOTE) & (*bptr != '\0'))
-		{
-			*vptr++ = *bptr++;
-		}
+		// while ((*bptr != _QUOTE) & (*bptr != '\0'))
+		// {
+		// 	*vptr++ = *bptr++;
+		// }
 		*vptr = '\0';
 		bptr++;
 	}
