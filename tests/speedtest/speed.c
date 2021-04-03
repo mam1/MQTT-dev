@@ -7,6 +7,8 @@
 #include <ctype.h>
 #include <errno.h>
 
+#define _QUOTE      34
+
 int main(void)
 {
 
@@ -51,11 +53,18 @@ int main(void)
 	bptr = buffer;
 	fnum = 0;
 	memset(value, '\0', sizeof(value));
+
+	for (i = 0; i < 10; i++)
+	{
+		printf("field %i value <%s>\n", i, &value[i][0]);
+	}
+
+
 	while (*bptr != '\0')
 	{
-		while (*bptr == '"') bptr++;
+		while (*bptr == _QUOTE) bptr++;
 		vptr = &value[fnum++][0];
-		while (*bptr != '"')
+		while (*bptr != _QUOTE)
 		{
 			*vptr++ = *bptr++;
 		}
