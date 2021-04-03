@@ -59,9 +59,27 @@ int main(void)
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
+int 			qon;
+
 
 	while (*bptr != '\0')
 	{
+		if(*bptr == _QUOTE)
+		{
+		qon = TRUE;
+		vptr = &value[fnum++][0];
+		}
+		while((qon == TRUE) & (*bptr != '\0'))
+		{
+			if(*bptr == _QUOTE)
+			{
+				qon = FALSE;
+				bptr++;
+			}
+			else
+			*vptr++ = *bptr++;
+
+		}
 		// while ((*bptr == _QUOTE) & (*bptr != '\0')) bptr++;
 		// vptr = &value[fnum++][0];
 		// while ((*bptr != _QUOTE) & (*bptr != '\0'))
