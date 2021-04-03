@@ -12,12 +12,12 @@ int main(void)
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
 	char 			*filename = "/home/mam1/temp_speed.csv";
-	char 			value[10][50];
+	char 			value[10][100];
 	int 			i;
 
 	FILE 			*fp;
 	long 			lSize;
-	char 			*buffer, *bptr, vptr;
+	char 			*buffer, *bptr, *vptr;
 	int 			fnum;
 
 
