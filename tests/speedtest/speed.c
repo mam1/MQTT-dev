@@ -27,7 +27,7 @@ int main(void)
 	int 			fnum = 0;
 
 	time_t 			rawtime;
-	struct tm 		*tm_hourt;
+	struct tm 		*t;
 
 	char *host = "beaglebone";
 
@@ -35,7 +35,7 @@ int main(void)
 
 	/* get local time */
 	time(&rawtime);
-	timeinfo = localtime(&rawtime);
+	t = localtime(&rawtime);
 	sprintf(timebuff, "%s:%s:%s\n", t.tm_hour, t.tm_min, t.tm_sec);
 	strcpy (&value[fnum++][0], timebuff);
 
