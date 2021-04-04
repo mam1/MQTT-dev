@@ -10,7 +10,7 @@
 
 #define _QUOTE      34
 
-int main(char *host)
+int main(void)
 {
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
@@ -26,11 +26,10 @@ int main(char *host)
 	time_t rawtime;
 	struct tm * timeinfo;
 
-	/* get local time */
-	time_t rawtime;
-	struct tm * timeinfo;
+	char *host="beaglebone";
 
-	time ( &rawtime );
+	/* get local time */
+	time (&rawtime);
 	timeinfo = localtime ( &rawtime );
 	strcpy (value[fnum++][0], asctime (timeinfo));
 
