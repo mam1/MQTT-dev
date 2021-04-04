@@ -6,10 +6,11 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <errno.h>
+#include <time.h>
 
 #define _QUOTE      34
 
-int main(void)
+int main(char *host)
 {
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
@@ -22,6 +23,19 @@ int main(void)
 	char 			*buffer, *bptr, *vptr;
 	int 			fnum;
 
+	time_t rawtime;
+	struct tm * timeinfo;
+
+	/* get local time */
+	time_t rawtime;
+	struct tm * timeinfo;
+
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	strcpy (value[fnum++][0], asctime (timeinfo));
+
+	/* set host */
+	strcpy (value[fnum++][0], host);
 
 	/* run speedtest */
 	system(speedtest);
@@ -51,15 +65,17 @@ int main(void)
 	/* do your work here, buffer is a string contains the whole text */
 
 	bptr = buffer;
-	fnum = 0;
+
 	memset(value, '\0', sizeof(value));
 
-	for (i = 0; i < 10; i++)
+	for (i = 2; i < 12; i++)
 	{
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
 
 	int 			qon;
+
+
 
 
 	while (*bptr != '\0')
@@ -81,13 +97,7 @@ int main(void)
 				*vptr++ = *bptr++;
 			*vptr = '\0';
 		}
-		// while ((*bptr == _QUOTE) & (*bptr != '\0')) bptr++;
-		// vptr = &value[fnum++][0];
-		// while ((*bptr != _QUOTE) & (*bptr != '\0'))
-		// {
-		// 	*vptr++ = *bptr++;
-		// }
-		// *vptr = '\0';
+
 		bptr++;
 	}
 
