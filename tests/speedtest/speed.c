@@ -49,7 +49,7 @@ int main(void)
 	fp = fopen (filename, "rb" );
 	if ( !fp )
 	{
-		printf("%s\n", "error on file
+		printf("%s\n", "error on file open");
 		       exit (1);
 	       }
 
