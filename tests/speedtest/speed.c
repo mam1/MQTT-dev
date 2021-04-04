@@ -17,16 +17,19 @@ int main(void)
 	char 			*filename = "/home/mam1/temp_speed.csv";
 	char 			value[12][100];
 	int 			i;
+	int 			qon;
 
 	FILE 			*fp;
 	long 			lSize;
 	char 			*buffer, *bptr, *vptr;
-	int 			fnum =0;
+	int 			fnum = 0;
 
 	time_t rawtime;
 	struct tm * timeinfo;
 
-	char *host="beaglebone";
+	char *host = "beaglebone";
+
+	memset(value, '\0', sizeof(value));
 
 	/* get local time */
 	time (&rawtime);
@@ -65,16 +68,6 @@ int main(void)
 
 	bptr = buffer;
 
-	memset(value, '\0', sizeof(value));
-
-	for (i = 0; i < 12; i++)
-	{
-		printf("field %i value <%s>\n", i, &value[i][0]);
-	}
-
-	int 			qon;
-
-
 
 
 	while (*bptr != '\0')
@@ -106,29 +99,7 @@ int main(void)
 	free(buffer);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	// tempfile = fopen(filename, "r");
-	// if (tempfile == NULL)
-	// {
-	// 	printf("Error!");
-	// 	exit(1);
-	// }
-	// rewind(tempfile);
-	// fscanf(tempfile, "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s", value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9]);
-	// fclose(tempfile);
-
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 12; i++)
 	{
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
