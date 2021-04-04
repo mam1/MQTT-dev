@@ -36,7 +36,7 @@ int main(void)
 	/* get local time */
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	sprintf(timebuff,"", );
+	sprintf(timebuff, "%s:%s:%s\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
 	strcpy (&value[fnum++][0], timebuff);
 
 	/* set host */
@@ -44,68 +44,68 @@ int main(void)
 
 	/* run speedtest */
 	system(speedtest);
-	printf("%s:%s:%s\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
 
+	/* process result */
 	fp = fopen (filename, "rb" );
 	if ( !fp )
 	{
-		printf("%s\n", "error on file 
-		exit (1);
-	}
+		printf("%s\n", "error on file
+		       exit (1);
+	       }
 
-	fseek( fp , 0L , SEEK_END);
-	lSize = ftell( fp );
-	rewind( fp );
+		       fseek( fp , 0L , SEEK_END);
+		       lSize = ftell( fp );
+		       rewind( fp );
 
-	/* allocate memory for entire content */
-	buffer = calloc( 1, lSize + 1 );
-	if ( !buffer ) fclose(fp), fputs("memory alloc fails", stderr), exit(1);
+		       /* allocate memory for entire content */
+		       buffer = calloc( 1, lSize + 1 );
+		       if ( !buffer ) fclose(fp), fputs("memory alloc fails", stderr), exit(1);
 
-	/* copy the file into the buffer */
-	if ( 1 != fread( buffer , lSize, 1 , fp) )
-		fclose(fp), free(buffer), fputs("entire read fails", stderr), exit(1);
+		       /* copy the file into the buffer */
+		       if ( 1 != fread( buffer , lSize, 1 , fp) )
+		       fclose(fp), free(buffer), fputs("entire read fails", stderr), exit(1);
 
-	/* do your work here, buffer is a string contains the whole text */
+		       /* do your work here, buffer is a string contains the whole text */
 
-	bptr = buffer;
-
-
-
-	while (*bptr != '\0')
-	{
-		if (*bptr == _QUOTE)
-		{
-			qon = 1;
-			vptr = &value[fnum++][0];
-			bptr++;
-		}
-		while ((qon == 1) & (*bptr != '\0'))
-		{
-			if (*bptr == _QUOTE)
-			{
-				qon = 0;
-				bptr++;
-			}
-			else
-				*vptr++ = *bptr++;
-			*vptr = '\0';
-		}
-
-		bptr++;
-	}
-
-	printf("buffer <%s>\n", buffer);
-
-	fclose(fp);
-	free(buffer);
+		       bptr = buffer;
 
 
-	for (i = 0; i < 12; i++)
-	{
-		printf("field %i value <%s>\n", i, &value[i][0]);
-	}
 
-	printf("%s\n", "normal termination");
-	return (0);
-}
+		       while (*bptr != '\0')
+	       {
+		       if (*bptr == _QUOTE)
+	       {
+		       qon = 1;
+		       vptr = &value[fnum++][0];
+		       bptr++;
+	       }
+		       while ((qon == 1) & (*bptr != '\0'))
+	       {
+		       if (*bptr == _QUOTE)
+	       {
+		       qon = 0;
+		       bptr++;
+	       }
+		       else
+		       *vptr++ = *bptr++;
+		       *vptr = '\0';
+	       }
+
+		       bptr++;
+	       }
+
+		       printf("buffer < % s > \n", buffer);
+
+		       fclose(fp);
+		       free(buffer);
+
+
+		       for (i = 0; i < 12; i++)
+	       {
+		       printf("field % i value < % s > \n", i, &value[i][0]);
+	       }
+
+		       printf(" % s\n", "normal termination");
+		       return (0);
+	       }
 
