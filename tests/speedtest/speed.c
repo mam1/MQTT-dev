@@ -27,7 +27,7 @@ int main(void)
 	int 			fnum = 0;
 
 	time_t 			rawtime;
-	struct tm 		*t;
+	struct tm 		t;
 
 	char *host = "beaglebone";
 
