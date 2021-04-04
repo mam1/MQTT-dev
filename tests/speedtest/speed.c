@@ -16,8 +16,10 @@ int main(void)
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
 	char 			*filename = "/home/mam1/temp_speed.csv";
 	char 			value[12][100];
+	char 			timebuff[100], *ptr;
 	int 			i;
 	int 			qon;
+
 
 	FILE 			*fp;
 	long 			lSize;
@@ -32,23 +34,22 @@ int main(void)
 	memset(value, '\0', sizeof(value));
 
 	/* get local time */
-	time (&rawtime);
-	timeinfo = localtime ( &rawtime );
-	strcpy (&value[fnum++][0], asctime (timeinfo));
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	sprintf(timebuff,"", );
+	strcpy (&value[fnum++][0], timebuff);
 
 	/* set host */
 	strcpy (&value[fnum++][0], host);
 
 	/* run speedtest */
 	system(speedtest);
-	printf("%s\n", "speed test comleted");
-
-
+	printf("%s:%s:%s\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
 
 	fp = fopen (filename, "rb" );
 	if ( !fp )
 	{
-		printf("%s\n", "error on file open");
+		printf("%s\n", "error on file 
 		exit (1);
 	}
 
