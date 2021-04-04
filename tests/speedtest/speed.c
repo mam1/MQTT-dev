@@ -21,7 +21,7 @@ int main(void)
 	FILE 			*fp;
 	long 			lSize;
 	char 			*buffer, *bptr, *vptr;
-	int 			fnum;
+	int 			fnum =0;
 
 	time_t rawtime;
 	struct tm * timeinfo;
