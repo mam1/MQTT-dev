@@ -31,10 +31,10 @@ int main(void)
 	/* get local time */
 	time (&rawtime);
 	timeinfo = localtime ( &rawtime );
-	strcpy (value[fnum++][0], asctime (timeinfo));
+	strcpy (&value[fnum++][0], asctime (timeinfo));
 
 	/* set host */
-	strcpy (value[fnum++][0], host);
+	strcpy (&value[fnum++][0], host);
 
 	/* run speedtest */
 	system(speedtest);
