@@ -15,7 +15,7 @@ int main(void)
 
 	char 			*speedtest = "speedtest --format=csv > /home/mam1/temp_speed.csv";
 	char 			*filename = "/home/mam1/temp_speed.csv";
-	char 			value[10][100];
+	char 			value[12][100];
 	int 			i;
 
 	FILE 			*fp;
@@ -67,7 +67,7 @@ int main(void)
 
 	memset(value, '\0', sizeof(value));
 
-	for (i = 2; i < 12; i++)
+	for (i = 0; i < 12; i++)
 	{
 		printf("field %i value <%s>\n", i, &value[i][0]);
 	}
