@@ -36,7 +36,7 @@ int main(void)
 	/* get local time */
 	time(&rawtime);
 	t = localtime(&rawtime);
-	sprintf(timebuff, "%i:%i:%i\n", t->tm_hour, t->tm_min, t->tm_sec);
+	sprintf(timebuff, "%i:%i:%i", t->tm_hour, t->tm_min, t->tm_sec);
 	strcpy (&value[fnum++][0], timebuff);
 
 	/* set host */
@@ -94,7 +94,7 @@ int main(void)
 		       bptr++;
 	       }
 
-		       printf("buffer < % s > \n", buffer);
+		       printf("buffer <%s> \n", buffer);
 
 		       fclose(fp);
 		       free(buffer);
